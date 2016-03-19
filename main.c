@@ -1,6 +1,6 @@
 /* 
  * File:   main.c
- * Author: larsg
+ * Author: Nick de Visser
  *
  * Created on 19 maart 2016, 16:38
  */
@@ -14,6 +14,7 @@
  */
 void delaySeconds(int numberOfSeconds);
 void on(unsigned char row, unsigned char column);
+void pongAlgorithm(void);
 
 
 void main(void) {
@@ -35,11 +36,17 @@ void delaySeconds(int numberOfSeconds)
         __delay_ms(10);
 }
 
-void on(unsigned char row, unsigned char column) {
+void on(unsigned char row, unsigned char column) 
+{
     
 }
 
-void off(unsigned char row, unsigned char column) {
+void off(unsigned char row, unsigned char column) 
+{
     
 }
 
+void pongAlgorithm(void)
+{
+    
+}
