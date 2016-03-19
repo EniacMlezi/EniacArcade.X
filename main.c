@@ -1,6 +1,7 @@
 /* 
  * File:   main.c
- * Author: Nick de Visser
+ * Author: Lars Gardien
+ * Co-author: Nick de Visser
  *
  * Created on 19 maart 2016, 16:38
  */
