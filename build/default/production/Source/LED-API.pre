@@ -1,5 +1,5 @@
 
-# 1 "main.c"
+# 1 "Source/LED-API.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.36\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -3951,82 +3951,57 @@ extern __nonreentrant void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __nonreentrant void _delay3(unsigned char);
 
-
-# 12 "Header/config.h"
-#pragma config OSC = INTIO67
-#pragma config FCMEN = OFF
-#pragma config IESO = OFF
-
-
-#pragma config PWRT = OFF
-#pragma config BOREN = OFF
-#pragma config BORV = 3
-
-
-#pragma config WDT = OFF
-#pragma config WDTPS = 32768
-
-
-#pragma config CCP2MX = PORTC
-#pragma config PBADEN = OFF
-#pragma config LPT1OSC = OFF
-#pragma config MCLRE = ON
-
-
-#pragma config STVREN = ON
-#pragma config LVP = OFF
-#pragma config XINST = OFF
-
-
-#pragma config CP0 = OFF
-#pragma config CP1 = OFF
-#pragma config CP2 = OFF
-#pragma config CP3 = OFF
-
-
-#pragma config CPB = OFF
-#pragma config CPD = OFF
-
-
-#pragma config WRT0 = OFF
-#pragma config WRT1 = OFF
-#pragma config WRT2 = OFF
-#pragma config WRT3 = OFF
-
-
-#pragma config WRTC = OFF
-#pragma config WRTB = OFF
-#pragma config WRTD = OFF
-
-
-#pragma config EBTR0 = OFF
-#pragma config EBTR1 = OFF
-#pragma config EBTR2 = OFF
-#pragma config EBTR3 = OFF
-
-
-#pragma config EBTRB = OFF
-
-# 13 "Header/LED-API.h"
+# 13 "Header\LED-API.h"
 extern void on(unsigned char row, unsigned char column);
 extern void off(unsigned char row, unsigned char column);
 extern void refresh();
 
-# 13 "main.c"
-void delaySeconds(int numberOfSeconds)
+# 22 "Source/LED-API.c"
+unsigned char columns[1];
+unsigned char rows[1];
+
+void initializeLED() {
+TRISA = 0b00000000;
+TRISC = 0b00000000;
+LATC = 0b00000000;
+LATA = 0b00000000;
+
+
+columns[0] = 0;
+rows[0] = 0;
+}
+
+void on(unsigned char row, unsigned char column) {
+if (row < 0 || row > 7)
+return;
+if (column < 0 || column > 7)
+return;
+
+(columns[column/8] |= (1 << (column%8));
+(rows[row/8] |= (1 << (row%8));
+}
+
+void off(unsigned char row, unsigned char column) {
+if (row < 0 || row > 7)
+return;
+if (column < 0 || column > 7)
+return;
+
+(columns[column/8] &= ~(1 << (column%8)));
+(rows[row/8] &= ~(1 << (row%8)));
+}
+
+void refresh() {
+for(unsigned char theRow = 0; theRow < 8; theRow++)
 {
-for(int i = 0; i < numberOfSeconds * 100; i++)
-_delay((unsigned long)((10)*(1000000/4000.0)));
+(LATC |= (1 << theRow));
+for (unsigned char theCol = 0; theCol < 8; theCol++) {
+if (( (columns[theCol/8] & (1 << (theCol%8) )) != 0) && ( (rows[theRow/8] & (1 << (theRow%8) )) != 0))
+(LATA |= (1 << theCol));
+else
+(LATA = (LATA & (1 << theCol)) ? LATA ^ (1 << theCol) : LATA);
+}
+(LATC = (LATC & (1 << theRow)) ? LATC ^ (1 << theRow) : LATC);
 }
 
-void main(void) {
-initializeLED();
-
-on(5, 6);
-on(3, 2);
-while(1)
-{
-refresh();
 }
-}
-

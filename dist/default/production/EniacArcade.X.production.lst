@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.36 build -262312587 
-                                                                                               Sat Mar 19 21:49:27 2016
+                                                                                               Sun Mar 20 17:54:53 2016
 
 Microchip Technology Omniscient Code Generator v1.36 (Free mode) build 201601150325
      1                           	processor	18F4520
@@ -9,327 +9,783 @@ Microchip Technology Omniscient Code Generator v1.36 (Free mode) build 201601150
      3                           	opt	pw 120
      4                           	opt	lm
      5                           	psect	cinit,global,reloc=2,class=CODE,delta=1
-     6                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1
-     7                           	psect	text0,global,reloc=2,class=CODE,delta=1
-     8                           	psect	text1,global,reloc=2,class=CODE,delta=1
-     9                           	psect	text2,global,reloc=2,class=CODE,delta=1
-    10                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1
-    11                           	psect	rparam,global,class=COMRAM,space=1,delta=1
-    12  0000                     _LATA	set	3977
-    13  0000                     _LATC	set	3979
-    14  0000                     _TRISA	set	3986
-    15  0000                     _TRISC	set	3988
-    16                           
-    17                           ; #config settings
-    18  0000                     
-    19                           	psect	cinit
-    20  007F4A                     __pcinit:
-    21                           	opt stack 0
-    22  007F4A                     start_initialization:
-    23                           	opt stack 0
-    24  007F4A                     __initialization:
-    25                           	opt stack 0
-    26  007F4A                     end_of_initialization:
-    27                           	opt stack 0
-    28  007F4A                     __end_of__initialization:
-    29                           	opt stack 0
-    30  007F4A  0100               	movlb	0
-    31  007F4C  EFBB  F03F         	goto	_main	;jump to C main() function
-    32                           
-    33                           	psect	cstackCOMRAM
-    34  000001                     __pcstackCOMRAM:
-    35                           	opt stack 0
-    36  000001                     ?___wmul:
-    37                           	opt stack 0
-    38  000001                     ___wmul@multiplier:
-    39                           	opt stack 0
-    40                           
-    41                           ; 2 bytes @ 0x0
-    42  000001                     	ds	2
-    43  000003                     ___wmul@multiplicand:
+     6                           	psect	bssCOMRAM,global,class=COMRAM,space=1,delta=1
+     7                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1
+     8                           	psect	text0,global,reloc=2,class=CODE,delta=1
+     9                           	psect	text1,global,reloc=2,class=CODE,delta=1
+    10                           	psect	text2,global,reloc=2,class=CODE,delta=1
+    11                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    12                           	psect	text4,global,reloc=2,class=CODE,delta=1
+    13                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1
+    14                           	psect	rparam,global,class=COMRAM,space=1,delta=1
+    15  0000                     _LATA	set	3977
+    16  0000                     _LATC	set	3979
+    17  0000                     _TRISA	set	3986
+    18  0000                     _TRISC	set	3988
+    19                           
+    20                           ; #config settings
+    21  0000                     
+    22                           	psect	cinit
+    23  007D2C                     __pcinit:
+    24                           	opt stack 0
+    25  007D2C                     start_initialization:
+    26                           	opt stack 0
+    27  007D2C                     __initialization:
+    28                           	opt stack 0
+    29                           
+    30                           ; Clear objects allocated to COMRAM (2 bytes)
+    31  007D2C  6A15               	clrf	(__pbssCOMRAM+1)& (0+255),c
+    32  007D2E  6A14               	clrf	__pbssCOMRAM& (0+255),c
+    33  007D30                     end_of_initialization:
+    34                           	opt stack 0
+    35  007D30                     __end_of__initialization:
+    36                           	opt stack 0
+    37  007D30  0100               	movlb	0
+    38  007D32  EFA8  F03E         	goto	_main	;jump to C main() function
+    39                           
+    40                           	psect	bssCOMRAM
+    41  000014                     __pbssCOMRAM:
+    42                           	opt stack 0
+    43  000014                     _columns:
     44                           	opt stack 0
-    45                           
-    46                           ; 2 bytes @ 0x2
-    47  000003                     	ds	2
-    48  000005                     ___wmul@product:
-    49                           	opt stack 0
-    50                           
-    51                           ; 2 bytes @ 0x4
-    52  000005                     	ds	2
-    53  000007                     delaySeconds@numberOfSeconds:
+    45  000014                     	ds	1
+    46  000015                     _rows:
+    47                           	opt stack 0
+    48  000015                     	ds	1
+    49                           
+    50                           	psect	cstackCOMRAM
+    51  000001                     __pcstackCOMRAM:
+    52                           	opt stack 0
+    53  000001                     ?___awdiv:
     54                           	opt stack 0
-    55                           
-    56                           ; 2 bytes @ 0x6
-    57  000007                     	ds	2
-    58  000009                     ??_delaySeconds:
-    59                           
-    60                           ; 1 bytes @ 0x8
-    61  000009                     	ds	1
-    62  00000A                     delaySeconds@i:
-    63                           	opt stack 0
-    64                           
-    65                           ; 2 bytes @ 0x9
-    66  00000A                     	ds	2
-    67  00000C                     main@i:
-    68                           	opt stack 0
-    69                           
-    70                           ; 2 bytes @ 0xB
-    71  00000C                     	ds	2
+    55  000001                     ___awdiv@dividend:
+    56                           	opt stack 0
+    57                           
+    58                           ; 2 bytes @ 0x0
+    59  000001                     	ds	2
+    60  000003                     ___awdiv@divisor:
+    61                           	opt stack 0
+    62                           
+    63                           ; 2 bytes @ 0x2
+    64  000003                     	ds	2
+    65  000005                     ___awdiv@counter:
+    66                           	opt stack 0
+    67                           
+    68                           ; 1 bytes @ 0x4
+    69  000005                     	ds	1
+    70  000006                     ___awdiv@sign:
+    71                           	opt stack 0
     72                           
-    73 ;;
-    74 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
-    75 ;;
-    76 ;; *************** function _main *****************
-    77 ;; Defined at:
-    78 ;;		line 19 in file "main.c"
-    79 ;; Parameters:    Size  Location     Type
-    80 ;;		None
-    81 ;; Auto vars:     Size  Location     Type
-    82 ;;  i               2   11[COMRAM] int 
-    83 ;; Return value:  Size  Location     Type
-    84 ;;                  1    wreg      void 
-    85 ;; Registers used:
-    86 ;;		wreg, status,2, status,0, prodl, prodh, cstack
-    87 ;; Tracked objects:
-    88 ;;		On entry : 0/0
-    89 ;;		On exit  : 0/0
-    90 ;;		Unchanged: 0/0
-    91 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
-    92 ;;      Params:         0       0       0       0       0       0       0
-    93 ;;      Locals:         2       0       0       0       0       0       0
-    94 ;;      Temps:          0       0       0       0       0       0       0
-    95 ;;      Totals:         2       0       0       0       0       0       0
-    96 ;;Total ram usage:        2 bytes
-    97 ;; Hardware stack levels required when called:    2
-    98 ;; This function calls:
-    99 ;;		_delaySeconds
-   100 ;; This function is called by:
-   101 ;;		Startup code after reset
-   102 ;; This function uses a non-reentrant model
-   103 ;;
-   104                           
-   105                           	psect	text0
-   106  007F76                     __ptext0:
-   107                           	opt stack 0
-   108  007F76                     _main:
-   109                           	opt stack 29
-   110                           
-   111                           ;main.c: 20: TRISA = 0b00000000;
+    73                           ; 1 bytes @ 0x5
+    74  000006                     	ds	1
+    75  000007                     ___awdiv@quotient:
+    76                           	opt stack 0
+    77                           
+    78                           ; 2 bytes @ 0x6
+    79  000007                     	ds	2
+    80  000009                     ??_refresh:
+    81  000009                     on@column:
+    82                           	opt stack 0
+    83                           
+    84                           ; 1 bytes @ 0x8
+    85  000009                     	ds	1
+    86  00000A                     ??_on:
+    87                           
+    88                           ; 1 bytes @ 0x9
+    89  00000A                     	ds	2
+    90  00000C                     on@row:
+    91                           	opt stack 0
+    92                           
+    93                           ; 1 bytes @ 0xB
+    94  00000C                     	ds	2
+    95  00000E                     _refresh$61:
+    96                           	opt stack 0
+    97                           
+    98                           ; 2 bytes @ 0xD
+    99  00000E                     	ds	2
+   100  000010                     _refresh$62:
+   101                           	opt stack 0
+   102                           
+   103                           ; 2 bytes @ 0xF
+   104  000010                     	ds	2
+   105  000012                     refresh@theRow:
+   106                           	opt stack 0
+   107                           
+   108                           ; 1 bytes @ 0x11
+   109  000012                     	ds	1
+   110  000013                     refresh@theCol:
+   111                           	opt stack 0
    112                           
-   113                           ;incstack = 0
-   114  007F76  0E00               	movlw	0
-   115  007F78  6E92               	movwf	3986,c	;volatile
-   116                           
-   117                           ;main.c: 21: TRISC = 0b00000000;
-   118  007F7A  0E00               	movlw	0
-   119  007F7C  6E94               	movwf	3988,c	;volatile
-   120                           
-   121                           ;main.c: 23: LATA = 0b11111111;
-   122  007F7E  6889               	setf	3977,c	;volatile
-   123                           
-   124                           ;main.c: 24: LATC = 0b00000001;
-   125  007F80  0E01               	movlw	1
-   126  007F82  6E8B               	movwf	3979,c	;volatile
-   127                           
-   128                           ;main.c: 25: for(int i = 0; i <= 7; i++)
-   129  007F84  0E00               	movlw	0
-   130  007F86  6E0D               	movwf	main@i+1,c
-   131  007F88  0E00               	movlw	0
-   132  007F8A  6E0C               	movwf	main@i,c
-   133  007F8C                     l675:
-   134  007F8C  BE0D               	btfsc	main@i+1,7,c
-   135  007F8E  D007               	goto	l679
-   136  007F90  500D               	movf	main@i+1,w,c
-   137  007F92  E111               	bnz	l17
-   138  007F94  0E08               	movlw	8
-   139  007F96  5C0C               	subwf	main@i,w,c
-   140  007F98  B0D8               	btfsc	status,0,c
-   141  007F9A  EF00  F000         	goto	start
-   142  007F9E                     l679:
-   143                           
-   144                           ;main.c: 26: {
-   145                           ;main.c: 27: delaySeconds(5);
-   146  007F9E  0E00               	movlw	0
-   147  007FA0  6E08               	movwf	delaySeconds@numberOfSeconds+1,c
-   148  007FA2  0E05               	movlw	5
-   149  007FA4  6E07               	movwf	delaySeconds@numberOfSeconds,c
-   150  007FA6  ECDD  F03F         	call	_delaySeconds	;wreg free
-   151                           
-   152                           ;main.c: 28: LATC = LATC << 1;
-   153  007FAA  508B               	movf	3979,w,c	;volatile
-   154  007FAC  248B               	addwf	3979,w,c	;volatile
-   155  007FAE  6E8B               	movwf	3979,c	;volatile
-   156  007FB0  4A0C               	infsnz	main@i,f,c
-   157  007FB2  2A0D               	incf	main@i+1,f,c
-   158  007FB4  D7EB               	goto	l675
-   159  007FB6                     l17:
-   160  007FB6  EF00  F000         	goto	start
-   161  007FBA                     __end_of_main:
-   162                           	opt stack 0
-   163                           status	equ	0xFD8
-   164                           
-   165 ;; *************** function _delaySeconds *****************
-   166 ;; Defined at:
-   167 ;;		line 32 in file "main.c"
-   168 ;; Parameters:    Size  Location     Type
-   169 ;;  numberOfSeco    2    6[COMRAM] int 
-   170 ;; Auto vars:     Size  Location     Type
-   171 ;;  i               2    9[COMRAM] int 
-   172 ;; Return value:  Size  Location     Type
-   173 ;;                  1    wreg      void 
-   174 ;; Registers used:
-   175 ;;		wreg, status,2, status,0, prodl, prodh, cstack
-   176 ;; Tracked objects:
-   177 ;;		On entry : 0/0
-   178 ;;		On exit  : 0/0
-   179 ;;		Unchanged: 0/0
-   180 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
-   181 ;;      Params:         2       0       0       0       0       0       0
-   182 ;;      Locals:         2       0       0       0       0       0       0
-   183 ;;      Temps:          1       0       0       0       0       0       0
-   184 ;;      Totals:         5       0       0       0       0       0       0
-   185 ;;Total ram usage:        5 bytes
-   186 ;; Hardware stack levels used:    1
-   187 ;; Hardware stack levels required when called:    1
-   188 ;; This function calls:
-   189 ;;		___wmul
-   190 ;; This function is called by:
-   191 ;;		_main
-   192 ;; This function uses a non-reentrant model
-   193 ;;
-   194                           
-   195                           	psect	text1
-   196  007FBA                     __ptext1:
-   197                           	opt stack 0
-   198  007FBA                     _delaySeconds:
-   199                           	opt stack 29
-   200                           
-   201                           ;main.c: 34: for(int i = 0; i < numberOfSeconds * 100; i++)
-   202                           
-   203                           ;incstack = 0
-   204  007FBA  0E00               	movlw	0
-   205  007FBC  6E0B               	movwf	delaySeconds@i+1,c
-   206  007FBE  0E00               	movlw	0
-   207  007FC0  6E0A               	movwf	delaySeconds@i,c
-   208  007FC2  D009               	goto	l669
-   209  007FC4                     l665:
-   210                           
-   211                           ;main.c: 35: _delay((unsigned long)((10)*(1000000/4000.0)));
-   212  007FC4  0E04               	movlw	4
-   213  007FC6  6E09               	movwf	??_delaySeconds& (0+255),c
-   214  007FC8  0E3E               	movlw	62
-   215  007FCA                     u77:
-   216  007FCA  2EE8               	decfsz	wreg,f,c
-   217  007FCC  D7FE               	goto	u77
-   218  007FCE  2E09               	decfsz	??_delaySeconds& (0+255),f,c
-   219  007FD0  D7FC               	goto	u77
-   220  007FD2  4A0A               	infsnz	delaySeconds@i,f,c
-   221  007FD4  2A0B               	incf	delaySeconds@i+1,f,c
-   222  007FD6                     l669:
-   223  007FD6  C007  F001         	movff	delaySeconds@numberOfSeconds,___wmul@multiplier
-   224  007FDA  C008  F002         	movff	delaySeconds@numberOfSeconds+1,___wmul@multiplier+1
-   225  007FDE  0E00               	movlw	0
-   226  007FE0  6E04               	movwf	___wmul@multiplicand+1,c
-   227  007FE2  0E64               	movlw	100
-   228  007FE4  6E03               	movwf	___wmul@multiplicand,c
-   229  007FE6  ECA8  F03F         	call	___wmul	;wreg free
-   230  007FEA  5001               	movf	?___wmul,w,c
-   231  007FEC  5C0A               	subwf	delaySeconds@i,w,c
-   232  007FEE  500B               	movf	delaySeconds@i+1,w,c
-   233  007FF0  0A80               	xorlw	128
-   234  007FF2  6E09               	movwf	??_delaySeconds& (0+255),c
-   235  007FF4  5002               	movf	?___wmul+1,w,c
-   236  007FF6  0A80               	xorlw	128
-   237  007FF8  5809               	subwfb	??_delaySeconds& (0+255),w,c
-   238  007FFA  B0D8               	btfsc	status,0,c
-   239  007FFC  0012               	return	
-   240  007FFE  D7E2               	goto	l665
-   241  008000                     __end_of_delaySeconds:
-   242                           	opt stack 0
-   243                           wreg	equ	0xFE8
-   244                           status	equ	0xFD8
-   245                           
-   246 ;; *************** function ___wmul *****************
-   247 ;; Defined at:
-   248 ;;		line 15 in file "C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\Umul16.c"
-   249 ;; Parameters:    Size  Location     Type
-   250 ;;  multiplier      2    0[COMRAM] unsigned int 
-   251 ;;  multiplicand    2    2[COMRAM] unsigned int 
-   252 ;; Auto vars:     Size  Location     Type
-   253 ;;  product         2    4[COMRAM] unsigned int 
-   254 ;; Return value:  Size  Location     Type
-   255 ;;                  2    0[COMRAM] unsigned int 
-   256 ;; Registers used:
-   257 ;;		wreg, status,2, status,0, prodl, prodh
-   258 ;; Tracked objects:
-   259 ;;		On entry : 0/0
-   260 ;;		On exit  : 0/0
-   261 ;;		Unchanged: 0/0
-   262 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
-   263 ;;      Params:         4       0       0       0       0       0       0
-   264 ;;      Locals:         2       0       0       0       0       0       0
-   265 ;;      Temps:          0       0       0       0       0       0       0
-   266 ;;      Totals:         6       0       0       0       0       0       0
-   267 ;;Total ram usage:        6 bytes
-   268 ;; Hardware stack levels used:    1
-   269 ;; This function calls:
-   270 ;;		Nothing
-   271 ;; This function is called by:
-   272 ;;		_delaySeconds
-   273 ;; This function uses a non-reentrant model
-   274 ;;
-   275                           
-   276                           	psect	text2
-   277  007F50                     __ptext2:
-   278                           	opt stack 0
-   279  007F50                     ___wmul:
-   280                           	opt stack 29
-   281                           
-   282                           ;incstack = 0
-   283  007F50  5001               	movf	___wmul@multiplier,w,c
-   284  007F52  0203               	mulwf	___wmul@multiplicand,c
-   285  007F54  CFF3 F005          	movff	prodl,___wmul@product
-   286  007F58  CFF4 F006          	movff	prodh,___wmul@product+1
-   287  007F5C  5001               	movf	___wmul@multiplier,w,c
-   288  007F5E  0204               	mulwf	___wmul@multiplicand+1,c
-   289  007F60  50F3               	movf	prodl,w,c
-   290  007F62  2606               	addwf	___wmul@product+1,f,c
-   291  007F64  5002               	movf	___wmul@multiplier+1,w,c
-   292  007F66  0203               	mulwf	___wmul@multiplicand,c
-   293  007F68  50F3               	movf	prodl,w,c
-   294  007F6A  2606               	addwf	___wmul@product+1,f,c
-   295  007F6C  C005  F001         	movff	___wmul@product,?___wmul
-   296  007F70  C006  F002         	movff	___wmul@product+1,?___wmul+1
-   297  007F74  0012               	return	
-   298  007F76                     __end_of___wmul:
-   299                           	opt stack 0
-   300  0000                     prodh	equ	0xFF4
-   301                           prodl	equ	0xFF3
-   302                           wreg	equ	0xFE8
-   303                           status	equ	0xFD8
-   304                           prodh	equ	0xFF4
-   305                           prodl	equ	0xFF3
-   306                           wreg	equ	0xFE8
-   307                           status	equ	0xFD8
-   308                           
-   309                           	psect	rparam
-   310  0000                     prodh	equ	0xFF4
-   311                           prodl	equ	0xFF3
-   312                           wreg	equ	0xFE8
-   313                           status	equ	0xFD8
+   113                           ; 1 bytes @ 0x12
+   114  000013                     	ds	1
+   115  000014                     
+   116                           ; 1 bytes @ 0x13
+   117 ;;
+   118 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   119 ;;
+   120 ;; *************** function _main *****************
+   121 ;; Defined at:
+   122 ;;		line 19 in file "main.c"
+   123 ;; Parameters:    Size  Location     Type
+   124 ;;		None
+   125 ;; Auto vars:     Size  Location     Type
+   126 ;;		None
+   127 ;; Return value:  Size  Location     Type
+   128 ;;                  1    wreg      void 
+   129 ;; Registers used:
+   130 ;;		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+   131 ;; Tracked objects:
+   132 ;;		On entry : 0/0
+   133 ;;		On exit  : 0/0
+   134 ;;		Unchanged: 0/0
+   135 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   136 ;;      Params:         0       0       0       0       0       0       0
+   137 ;;      Locals:         0       0       0       0       0       0       0
+   138 ;;      Temps:          0       0       0       0       0       0       0
+   139 ;;      Totals:         0       0       0       0       0       0       0
+   140 ;;Total ram usage:        0 bytes
+   141 ;; Hardware stack levels required when called:    2
+   142 ;; This function calls:
+   143 ;;		_initializeLED
+   144 ;;		_on
+   145 ;;		_refresh
+   146 ;; This function is called by:
+   147 ;;		Startup code after reset
+   148 ;; This function uses a non-reentrant model
+   149 ;;
+   150                           
+   151                           	psect	text0
+   152  007D50                     __ptext0:
+   153                           	opt stack 0
+   154  007D50                     _main:
+   155                           	opt stack 29
+   156                           
+   157                           ;main.c: 20: initializeLED();
+   158                           
+   159                           ;incstack = 0
+   160  007D50  EC9B  F03E         	call	_initializeLED	;wreg free
+   161                           
+   162                           ;main.c: 22: on(5, 6);
+   163  007D54  0E06               	movlw	6
+   164  007D56  6E09               	movwf	on@column,c
+   165  007D58  0E05               	movlw	5
+   166  007D5A  ECF9  F03E         	call	_on
+   167                           
+   168                           ;main.c: 23: on(3, 2);
+   169  007D5E  0E02               	movlw	2
+   170  007D60  6E09               	movwf	on@column,c
+   171  007D62  0E03               	movlw	3
+   172  007D64  ECF9  F03E         	call	_on
+   173  007D68                     l890:
+   174                           
+   175                           ;main.c: 25: {
+   176                           ;main.c: 26: refresh();
+   177  007D68  EC3D  F03F         	call	_refresh	;wreg free
+   178  007D6C  D7FD               	goto	l890
+   179  007D6E                     __end_of_main:
+   180                           	opt stack 0
+   181                           
+   182 ;; *************** function _refresh *****************
+   183 ;; Defined at:
+   184 ;;		line 56 in file "Source/LED-API.c"
+   185 ;; Parameters:    Size  Location     Type
+   186 ;;		None
+   187 ;; Auto vars:     Size  Location     Type
+   188 ;;  theCol          1   18[COMRAM] unsigned char 
+   189 ;;  theRow          1   17[COMRAM] unsigned char 
+   190 ;; Return value:  Size  Location     Type
+   191 ;;                  1    wreg      void 
+   192 ;; Registers used:
+   193 ;;		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+   194 ;; Tracked objects:
+   195 ;;		On entry : 0/0
+   196 ;;		On exit  : 0/0
+   197 ;;		Unchanged: 0/0
+   198 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   199 ;;      Params:         0       0       0       0       0       0       0
+   200 ;;      Locals:         6       0       0       0       0       0       0
+   201 ;;      Temps:          5       0       0       0       0       0       0
+   202 ;;      Totals:        11       0       0       0       0       0       0
+   203 ;;Total ram usage:       11 bytes
+   204 ;; Hardware stack levels used:    1
+   205 ;; Hardware stack levels required when called:    1
+   206 ;; This function calls:
+   207 ;;		___awdiv
+   208 ;; This function is called by:
+   209 ;;		_main
+   210 ;; This function uses a non-reentrant model
+   211 ;;
+   212                           
+   213                           	psect	text1
+   214  007E7A                     __ptext1:
+   215                           	opt stack 0
+   216  007E7A                     _refresh:
+   217                           	opt stack 29
+   218                           
+   219                           ;LED-API.c: 57: for(unsigned char theRow = 0; theRow < 8; theRow++)
+   220                           
+   221                           ;incstack = 0
+   222  007E7A  0E00               	movlw	0
+   223  007E7C  6E12               	movwf	refresh@theRow,c
+   224  007E7E                     l842:
+   225  007E7E  0E07               	movlw	7
+   226  007E80  6412               	cpfsgt	refresh@theRow,c
+   227  007E82  D001               	goto	l846
+   228  007E84  0012               	return	
+   229  007E86                     l846:
+   230                           
+   231                           ;LED-API.c: 58: {
+   232                           ;LED-API.c: 59: (LATC |= (1 << theRow));
+   233  007E86  C012  F009         	movff	refresh@theRow,??_refresh
+   234  007E8A  0E01               	movlw	1
+   235  007E8C  6E0A               	movwf	(??_refresh+1)& (0+255),c
+   236  007E8E  2A09               	incf	??_refresh,f,c
+   237  007E90  D002               	goto	u434
+   238  007E92                     u435:
+   239  007E92  90D8               	bcf	status,0,c
+   240  007E94  360A               	rlcf	??_refresh+1,f,c
+   241  007E96                     u434:
+   242  007E96  2E09               	decfsz	??_refresh,f,c
+   243  007E98  D7FC               	goto	u435
+   244  007E9A  500A               	movf	??_refresh+1,w,c
+   245  007E9C  128B               	iorwf	3979,f,c	;volatile
+   246                           
+   247                           ;LED-API.c: 60: for (unsigned char theCol = 0; theCol < 8; theCol++) {
+   248  007E9E  0E00               	movlw	0
+   249  007EA0  6E13               	movwf	refresh@theCol,c
+   250  007EA2                     l850:
+   251  007EA2  0E07               	movlw	7
+   252  007EA4  6413               	cpfsgt	refresh@theCol,c
+   253  007EA6  D001               	goto	l854
+   254  007EA8  D07E               	goto	l872
+   255  007EAA                     l854:
+   256                           
+   257                           ;LED-API.c: 61: if (( (columns[theCol/8] & (1 << (theCol%8) )) != 0) && ( (rows[theRow/8
+      +                          ] & (1 << (theRow%8) )) != 0))
+   258  007EAA  C013  F001         	movff	refresh@theCol,___awdiv@dividend
+   259  007EAE  6A02               	clrf	___awdiv@dividend+1,c
+   260  007EB0  0E00               	movlw	0
+   261  007EB2  6E04               	movwf	___awdiv@divisor+1,c
+   262  007EB4  0E08               	movlw	8
+   263  007EB6  6E03               	movwf	___awdiv@divisor,c
+   264  007EB8  ECB7  F03E         	call	___awdiv	;wreg free
+   265  007EBC  0E14               	movlw	low _columns
+   266  007EBE  2401               	addwf	?___awdiv,w,c
+   267  007EC0  6ED9               	movwf	fsr2l,c
+   268  007EC2  0E00               	movlw	high _columns
+   269  007EC4  2002               	addwfc	?___awdiv+1,w,c
+   270  007EC6  6EDA               	movwf	fsr2h,c
+   271  007EC8  50DF               	movf	indf2,w,c
+   272  007ECA  6E09               	movwf	??_refresh& (0+255),c
+   273  007ECC  C013  F00A         	movff	refresh@theCol,??_refresh+1
+   274  007ED0  0E07               	movlw	7
+   275  007ED2  160A               	andwf	??_refresh+1,f,c
+   276  007ED4  0E01               	movlw	1
+   277  007ED6  6E0B               	movwf	(??_refresh+2)& (0+255),c
+   278  007ED8  2A0A               	incf	??_refresh+1,f,c
+   279  007EDA  D002               	goto	u454
+   280  007EDC                     u455:
+   281  007EDC  90D8               	bcf	status,0,c
+   282  007EDE  360B               	rlcf	??_refresh+2,f,c
+   283  007EE0                     u454:
+   284  007EE0  2E0A               	decfsz	??_refresh+1,f,c
+   285  007EE2  D7FC               	goto	u455
+   286  007EE4  500B               	movf	??_refresh+2,w,c
+   287  007EE6  1409               	andwf	??_refresh,w,c
+   288  007EE8  0900               	iorlw	0
+   289  007EEA  B4D8               	btfsc	status,2,c
+   290  007EEC  D02F               	goto	l860
+   291  007EEE  C012  F001         	movff	refresh@theRow,___awdiv@dividend
+   292  007EF2  6A02               	clrf	___awdiv@dividend+1,c
+   293  007EF4  0E00               	movlw	0
+   294  007EF6  6E04               	movwf	___awdiv@divisor+1,c
+   295  007EF8  0E08               	movlw	8
+   296  007EFA  6E03               	movwf	___awdiv@divisor,c
+   297  007EFC  ECB7  F03E         	call	___awdiv	;wreg free
+   298  007F00  0E15               	movlw	low _rows
+   299  007F02  2401               	addwf	?___awdiv,w,c
+   300  007F04  6ED9               	movwf	fsr2l,c
+   301  007F06  0E00               	movlw	high _rows
+   302  007F08  2002               	addwfc	?___awdiv+1,w,c
+   303  007F0A  6EDA               	movwf	fsr2h,c
+   304  007F0C  50DF               	movf	indf2,w,c
+   305  007F0E  6E09               	movwf	??_refresh& (0+255),c
+   306  007F10  C012  F00A         	movff	refresh@theRow,??_refresh+1
+   307  007F14  0E07               	movlw	7
+   308  007F16  160A               	andwf	??_refresh+1,f,c
+   309  007F18  0E01               	movlw	1
+   310  007F1A  6E0B               	movwf	(??_refresh+2)& (0+255),c
+   311  007F1C  2A0A               	incf	??_refresh+1,f,c
+   312  007F1E  D002               	goto	u474
+   313  007F20                     u475:
+   314  007F20  90D8               	bcf	status,0,c
+   315  007F22  360B               	rlcf	??_refresh+2,f,c
+   316  007F24                     u474:
+   317  007F24  2E0A               	decfsz	??_refresh+1,f,c
+   318  007F26  D7FC               	goto	u475
+   319  007F28  500B               	movf	??_refresh+2,w,c
+   320  007F2A  1409               	andwf	??_refresh,w,c
+   321  007F2C  0900               	iorlw	0
+   322  007F2E  B4D8               	btfsc	status,2,c
+   323  007F30  D00D               	goto	l860
+   324                           
+   325                           ;LED-API.c: 62: (LATA |= (1 << theCol));
+   326  007F32  C013  F009         	movff	refresh@theCol,??_refresh
+   327  007F36  0E01               	movlw	1
+   328  007F38  6E0A               	movwf	(??_refresh+1)& (0+255),c
+   329  007F3A  2A09               	incf	??_refresh,f,c
+   330  007F3C  D002               	goto	u494
+   331  007F3E                     u495:
+   332  007F3E  90D8               	bcf	status,0,c
+   333  007F40  360A               	rlcf	??_refresh+1,f,c
+   334  007F42                     u494:
+   335  007F42  2E09               	decfsz	??_refresh,f,c
+   336  007F44  D7FC               	goto	u495
+   337  007F46  500A               	movf	??_refresh+1,w,c
+   338  007F48  1289               	iorwf	3977,f,c	;volatile
+   339  007F4A  D02B               	goto	l868
+   340  007F4C                     l860:
+   341                           
+   342                           ;LED-API.c: 63: else
+   343                           ;LED-API.c: 64: (LATA = (LATA & (1 << theCol)) ? LATA ^ (1 << theCol) : LATA);
+   344  007F4C  C013  F009         	movff	refresh@theCol,??_refresh
+   345  007F50  0E01               	movlw	1
+   346  007F52  6E0A               	movwf	(??_refresh+1)& (0+255),c
+   347  007F54  2A09               	incf	??_refresh,f,c
+   348  007F56  D002               	goto	u504
+   349  007F58                     u505:
+   350  007F58  90D8               	bcf	status,0,c
+   351  007F5A  360A               	rlcf	??_refresh+1,f,c
+   352  007F5C                     u504:
+   353  007F5C  2E09               	decfsz	??_refresh,f,c
+   354  007F5E  D7FC               	goto	u505
+   355  007F60  500A               	movf	??_refresh+1,w,c
+   356  007F62  1489               	andwf	3977,w,c	;volatile
+   357  007F64  0900               	iorlw	0
+   358  007F66  A4D8               	btfss	status,2,c
+   359  007F68  D004               	goto	l864
+   360  007F6A  CF89 F00E          	movff	3977,_refresh$61	;volatile
+   361  007F6E  6A0F               	clrf	_refresh$61+1,c
+   362  007F70  D016               	goto	l866
+   363  007F72                     l864:
+   364  007F72  C013  F009         	movff	refresh@theCol,??_refresh
+   365  007F76  0E01               	movlw	1
+   366  007F78  6E0A               	movwf	(??_refresh+1)& (0+255),c
+   367  007F7A  0E00               	movlw	0
+   368  007F7C  6E0B               	movwf	(??_refresh+2)& (0+255),c
+   369  007F7E  2A09               	incf	??_refresh,f,c
+   370  007F80  D003               	goto	u524
+   371  007F82                     u525:
+   372  007F82  90D8               	bcf	status,0,c
+   373  007F84  360A               	rlcf	??_refresh+1,f,c
+   374  007F86  360B               	rlcf	??_refresh+2,f,c
+   375  007F88                     u524:
+   376  007F88  2E09               	decfsz	??_refresh,f,c
+   377  007F8A  D7FB               	goto	u525
+   378  007F8C  5089               	movf	3977,w,c	;volatile
+   379  007F8E  6E0C               	movwf	(??_refresh+3)& (0+255),c
+   380  007F90  6A0D               	clrf	(??_refresh+4)& (0+255),c
+   381  007F92  500A               	movf	??_refresh+1,w,c
+   382  007F94  180C               	xorwf	??_refresh+3,w,c
+   383  007F96  6E0E               	movwf	_refresh$61,c
+   384  007F98  500B               	movf	??_refresh+2,w,c
+   385  007F9A  180D               	xorwf	??_refresh+4,w,c
+   386  007F9C  6E0F               	movwf	_refresh$61+1,c
+   387  007F9E                     l866:
+   388  007F9E  C00E  FF89         	movff	_refresh$61,3977	;volatile
+   389  007FA2                     l868:
+   390  007FA2  2A13               	incf	refresh@theCol,f,c
+   391  007FA4  D77E               	goto	l850
+   392  007FA6                     l872:
+   393                           
+   394                           ;LED-API.c: 65: }
+   395                           ;LED-API.c: 66: (LATC = (LATC & (1 << theRow)) ? LATC ^ (1 << theRow) : LATC);
+   396  007FA6  C012  F009         	movff	refresh@theRow,??_refresh
+   397  007FAA  0E01               	movlw	1
+   398  007FAC  6E0A               	movwf	(??_refresh+1)& (0+255),c
+   399  007FAE  2A09               	incf	??_refresh,f,c
+   400  007FB0  D002               	goto	u544
+   401  007FB2                     u545:
+   402  007FB2  90D8               	bcf	status,0,c
+   403  007FB4  360A               	rlcf	??_refresh+1,f,c
+   404  007FB6                     u544:
+   405  007FB6  2E09               	decfsz	??_refresh,f,c
+   406  007FB8  D7FC               	goto	u545
+   407  007FBA  500A               	movf	??_refresh+1,w,c
+   408  007FBC  148B               	andwf	3979,w,c	;volatile
+   409  007FBE  0900               	iorlw	0
+   410  007FC0  A4D8               	btfss	status,2,c
+   411  007FC2  D004               	goto	l876
+   412  007FC4  CF8B F010          	movff	3979,_refresh$62	;volatile
+   413  007FC8  6A11               	clrf	_refresh$62+1,c
+   414  007FCA  D016               	goto	l878
+   415  007FCC                     l876:
+   416  007FCC  C012  F009         	movff	refresh@theRow,??_refresh
+   417  007FD0  0E01               	movlw	1
+   418  007FD2  6E0A               	movwf	(??_refresh+1)& (0+255),c
+   419  007FD4  0E00               	movlw	0
+   420  007FD6  6E0B               	movwf	(??_refresh+2)& (0+255),c
+   421  007FD8  2A09               	incf	??_refresh,f,c
+   422  007FDA  D003               	goto	u564
+   423  007FDC                     u565:
+   424  007FDC  90D8               	bcf	status,0,c
+   425  007FDE  360A               	rlcf	??_refresh+1,f,c
+   426  007FE0  360B               	rlcf	??_refresh+2,f,c
+   427  007FE2                     u564:
+   428  007FE2  2E09               	decfsz	??_refresh,f,c
+   429  007FE4  D7FB               	goto	u565
+   430  007FE6  508B               	movf	3979,w,c	;volatile
+   431  007FE8  6E0C               	movwf	(??_refresh+3)& (0+255),c
+   432  007FEA  6A0D               	clrf	(??_refresh+4)& (0+255),c
+   433  007FEC  500A               	movf	??_refresh+1,w,c
+   434  007FEE  180C               	xorwf	??_refresh+3,w,c
+   435  007FF0  6E10               	movwf	_refresh$62,c
+   436  007FF2  500B               	movf	??_refresh+2,w,c
+   437  007FF4  180D               	xorwf	??_refresh+4,w,c
+   438  007FF6  6E11               	movwf	_refresh$62+1,c
+   439  007FF8                     l878:
+   440  007FF8  C010  FF8B         	movff	_refresh$62,3979	;volatile
+   441  007FFC  2A12               	incf	refresh@theRow,f,c
+   442  007FFE  D73F               	goto	l842
+   443  008000                     __end_of_refresh:
+   444                           	opt stack 0
+   445                           indf2	equ	0xFDF
+   446                           fsr2h	equ	0xFDA
+   447                           fsr2l	equ	0xFD9
+   448                           status	equ	0xFD8
+   449                           
+   450 ;; *************** function _on *****************
+   451 ;; Defined at:
+   452 ;;		line 36 in file "Source/LED-API.c"
+   453 ;; Parameters:    Size  Location     Type
+   454 ;;  row             1    wreg     unsigned char 
+   455 ;;  column          1    8[COMRAM] unsigned char 
+   456 ;; Auto vars:     Size  Location     Type
+   457 ;;  row             1   11[COMRAM] unsigned char 
+   458 ;; Return value:  Size  Location     Type
+   459 ;;                  1    wreg      void 
+   460 ;; Registers used:
+   461 ;;		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+   462 ;; Tracked objects:
+   463 ;;		On entry : 0/0
+   464 ;;		On exit  : 0/0
+   465 ;;		Unchanged: 0/0
+   466 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   467 ;;      Params:         1       0       0       0       0       0       0
+   468 ;;      Locals:         1       0       0       0       0       0       0
+   469 ;;      Temps:          2       0       0       0       0       0       0
+   470 ;;      Totals:         4       0       0       0       0       0       0
+   471 ;;Total ram usage:        4 bytes
+   472 ;; Hardware stack levels used:    1
+   473 ;; Hardware stack levels required when called:    1
+   474 ;; This function calls:
+   475 ;;		___awdiv
+   476 ;; This function is called by:
+   477 ;;		_main
+   478 ;; This function uses a non-reentrant model
+   479 ;;
+   480                           
+   481                           	psect	text2
+   482  007DF2                     __ptext2:
+   483                           	opt stack 0
+   484  007DF2                     _on:
+   485                           	opt stack 29
+   486                           
+   487                           ;incstack = 0
+   488                           ;on@row stored from wreg
+   489  007DF2  6E0C               	movwf	on@row,c
+   490                           
+   491                           ;LED-API.c: 37: if (row < 0 || row > 7)
+   492  007DF4  0E07               	movlw	7
+   493  007DF6  640C               	cpfsgt	on@row,c
+   494  007DF8  D001               	goto	l834
+   495  007DFA  0012               	return	
+   496  007DFC                     l834:
+   497                           
+   498                           ;LED-API.c: 39: if (column < 0 || column > 7)
+   499  007DFC  0E07               	movlw	7
+   500  007DFE  6409               	cpfsgt	on@column,c
+   501  007E00  D001               	goto	l838
+   502  007E02  0012               	return	
+   503  007E04                     l838:
+   504                           
+   505                           ;LED-API.c: 42: (columns[column/8] |= (1 << (column%8));
+   506  007E04  C009  F00A         	movff	on@column,??_on
+   507  007E08  0E07               	movlw	7
+   508  007E0A  160A               	andwf	??_on,f,c
+   509  007E0C  0E01               	movlw	1
+   510  007E0E  6E0B               	movwf	(??_on+1)& (0+255),c
+   511  007E10  2A0A               	incf	??_on,f,c
+   512  007E12  D002               	goto	u404
+   513  007E14                     u405:
+   514  007E14  90D8               	bcf	status,0,c
+   515  007E16  360B               	rlcf	??_on+1,f,c
+   516  007E18                     u404:
+   517  007E18  2E0A               	decfsz	??_on,f,c
+   518  007E1A  D7FC               	goto	u405
+   519  007E1C  C009  F001         	movff	on@column,___awdiv@dividend
+   520  007E20  6A02               	clrf	___awdiv@dividend+1,c
+   521  007E22  0E00               	movlw	0
+   522  007E24  6E04               	movwf	___awdiv@divisor+1,c
+   523  007E26  0E08               	movlw	8
+   524  007E28  6E03               	movwf	___awdiv@divisor,c
+   525  007E2A  ECB7  F03E         	call	___awdiv	;wreg free
+   526  007E2E  0E14               	movlw	low _columns
+   527  007E30  2401               	addwf	?___awdiv,w,c
+   528  007E32  6ED9               	movwf	fsr2l,c
+   529  007E34  0E00               	movlw	high _columns
+   530  007E36  2002               	addwfc	?___awdiv+1,w,c
+   531  007E38  6EDA               	movwf	fsr2h,c
+   532  007E3A  500B               	movf	??_on+1,w,c
+   533  007E3C  12DF               	iorwf	indf2,f,c
+   534                           
+   535                           ;LED-API.c: 43: (rows[row/8] |= (1 << (row%8));
+   536  007E3E  C00C  F00A         	movff	on@row,??_on
+   537  007E42  0E07               	movlw	7
+   538  007E44  160A               	andwf	??_on,f,c
+   539  007E46  0E01               	movlw	1
+   540  007E48  6E0B               	movwf	(??_on+1)& (0+255),c
+   541  007E4A  2A0A               	incf	??_on,f,c
+   542  007E4C  D002               	goto	u414
+   543  007E4E                     u415:
+   544  007E4E  90D8               	bcf	status,0,c
+   545  007E50  360B               	rlcf	??_on+1,f,c
+   546  007E52                     u414:
+   547  007E52  2E0A               	decfsz	??_on,f,c
+   548  007E54  D7FC               	goto	u415
+   549  007E56  C00C  F001         	movff	on@row,___awdiv@dividend
+   550  007E5A  6A02               	clrf	___awdiv@dividend+1,c
+   551  007E5C  0E00               	movlw	0
+   552  007E5E  6E04               	movwf	___awdiv@divisor+1,c
+   553  007E60  0E08               	movlw	8
+   554  007E62  6E03               	movwf	___awdiv@divisor,c
+   555  007E64  ECB7  F03E         	call	___awdiv	;wreg free
+   556  007E68  0E15               	movlw	low _rows
+   557  007E6A  2401               	addwf	?___awdiv,w,c
+   558  007E6C  6ED9               	movwf	fsr2l,c
+   559  007E6E  0E00               	movlw	high _rows
+   560  007E70  2002               	addwfc	?___awdiv+1,w,c
+   561  007E72  6EDA               	movwf	fsr2h,c
+   562  007E74  500B               	movf	??_on+1,w,c
+   563  007E76  12DF               	iorwf	indf2,f,c
+   564  007E78  0012               	return		;funcret
+   565  007E7A                     __end_of_on:
+   566                           	opt stack 0
+   567                           indf2	equ	0xFDF
+   568                           fsr2h	equ	0xFDA
+   569                           fsr2l	equ	0xFD9
+   570                           status	equ	0xFD8
+   571                           
+   572 ;; *************** function ___awdiv *****************
+   573 ;; Defined at:
+   574 ;;		line 8 in file "C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\awdiv.c"
+   575 ;; Parameters:    Size  Location     Type
+   576 ;;  dividend        2    0[COMRAM] int 
+   577 ;;  divisor         2    2[COMRAM] int 
+   578 ;; Auto vars:     Size  Location     Type
+   579 ;;  quotient        2    6[COMRAM] int 
+   580 ;;  sign            1    5[COMRAM] unsigned char 
+   581 ;;  counter         1    4[COMRAM] unsigned char 
+   582 ;; Return value:  Size  Location     Type
+   583 ;;                  2    0[COMRAM] int 
+   584 ;; Registers used:
+   585 ;;		wreg, status,2, status,0
+   586 ;; Tracked objects:
+   587 ;;		On entry : 0/0
+   588 ;;		On exit  : 0/0
+   589 ;;		Unchanged: 0/0
+   590 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   591 ;;      Params:         4       0       0       0       0       0       0
+   592 ;;      Locals:         4       0       0       0       0       0       0
+   593 ;;      Temps:          0       0       0       0       0       0       0
+   594 ;;      Totals:         8       0       0       0       0       0       0
+   595 ;;Total ram usage:        8 bytes
+   596 ;; Hardware stack levels used:    1
+   597 ;; This function calls:
+   598 ;;		Nothing
+   599 ;; This function is called by:
+   600 ;;		_on
+   601 ;;		_refresh
+   602 ;;		_off
+   603 ;; This function uses a non-reentrant model
+   604 ;;
+   605                           
+   606                           	psect	text3
+   607  007D6E                     __ptext3:
+   608                           	opt stack 0
+   609  007D6E                     ___awdiv:
+   610                           	opt stack 29
+   611                           
+   612                           ;incstack = 0
+   613  007D6E  0E00               	movlw	0
+   614  007D70  6E06               	movwf	___awdiv@sign,c
+   615  007D72  AE04               	btfss	___awdiv@divisor+1,7,c
+   616  007D74  D006               	goto	l794
+   617  007D76  6C03               	negf	___awdiv@divisor,c
+   618  007D78  1E04               	comf	___awdiv@divisor+1,f,c
+   619  007D7A  B0D8               	btfsc	status,0,c
+   620  007D7C  2A04               	incf	___awdiv@divisor+1,f,c
+   621  007D7E  0E01               	movlw	1
+   622  007D80  6E06               	movwf	___awdiv@sign,c
+   623  007D82                     l794:
+   624  007D82  AE02               	btfss	___awdiv@dividend+1,7,c
+   625  007D84  D006               	goto	l800
+   626  007D86  6C01               	negf	___awdiv@dividend,c
+   627  007D88  1E02               	comf	___awdiv@dividend+1,f,c
+   628  007D8A  B0D8               	btfsc	status,0,c
+   629  007D8C  2A02               	incf	___awdiv@dividend+1,f,c
+   630  007D8E  0E01               	movlw	1
+   631  007D90  1A06               	xorwf	___awdiv@sign,f,c
+   632  007D92                     l800:
+   633  007D92  0E00               	movlw	0
+   634  007D94  6E08               	movwf	___awdiv@quotient+1,c
+   635  007D96  0E00               	movlw	0
+   636  007D98  6E07               	movwf	___awdiv@quotient,c
+   637  007D9A  5003               	movf	___awdiv@divisor,w,c
+   638  007D9C  1004               	iorwf	___awdiv@divisor+1,w,c
+   639  007D9E  B4D8               	btfsc	status,2,c
+   640  007DA0  D01C               	goto	l822
+   641  007DA2  0E01               	movlw	1
+   642  007DA4  6E05               	movwf	___awdiv@counter,c
+   643  007DA6  D004               	goto	l808
+   644  007DA8                     l806:
+   645  007DA8  90D8               	bcf	status,0,c
+   646  007DAA  3603               	rlcf	___awdiv@divisor,f,c
+   647  007DAC  3604               	rlcf	___awdiv@divisor+1,f,c
+   648  007DAE  2A05               	incf	___awdiv@counter,f,c
+   649  007DB0                     l808:
+   650  007DB0  AE04               	btfss	___awdiv@divisor+1,7,c
+   651  007DB2  D7FA               	goto	l806
+   652  007DB4                     l810:
+   653  007DB4  90D8               	bcf	status,0,c
+   654  007DB6  3607               	rlcf	___awdiv@quotient,f,c
+   655  007DB8  3608               	rlcf	___awdiv@quotient+1,f,c
+   656  007DBA  5003               	movf	___awdiv@divisor,w,c
+   657  007DBC  5C01               	subwf	___awdiv@dividend,w,c
+   658  007DBE  5004               	movf	___awdiv@divisor+1,w,c
+   659  007DC0  5802               	subwfb	___awdiv@dividend+1,w,c
+   660  007DC2  A0D8               	btfss	status,0,c
+   661  007DC4  D005               	goto	l818
+   662  007DC6  5003               	movf	___awdiv@divisor,w,c
+   663  007DC8  5E01               	subwf	___awdiv@dividend,f,c
+   664  007DCA  5004               	movf	___awdiv@divisor+1,w,c
+   665  007DCC  5A02               	subwfb	___awdiv@dividend+1,f,c
+   666  007DCE  8007               	bsf	___awdiv@quotient,0,c
+   667  007DD0                     l818:
+   668  007DD0  90D8               	bcf	status,0,c
+   669  007DD2  3204               	rrcf	___awdiv@divisor+1,f,c
+   670  007DD4  3203               	rrcf	___awdiv@divisor,f,c
+   671  007DD6  2E05               	decfsz	___awdiv@counter,f,c
+   672  007DD8  D7ED               	goto	l810
+   673  007DDA                     l822:
+   674  007DDA  5006               	movf	___awdiv@sign,w,c
+   675  007DDC  B4D8               	btfsc	status,2,c
+   676  007DDE  D004               	goto	l826
+   677  007DE0  6C07               	negf	___awdiv@quotient,c
+   678  007DE2  1E08               	comf	___awdiv@quotient+1,f,c
+   679  007DE4  B0D8               	btfsc	status,0,c
+   680  007DE6  2A08               	incf	___awdiv@quotient+1,f,c
+   681  007DE8                     l826:
+   682  007DE8  C007  F001         	movff	___awdiv@quotient,?___awdiv
+   683  007DEC  C008  F002         	movff	___awdiv@quotient+1,?___awdiv+1
+   684  007DF0  0012               	return	
+   685  007DF2                     __end_of___awdiv:
+   686                           	opt stack 0
+   687                           indf2	equ	0xFDF
+   688                           fsr2h	equ	0xFDA
+   689                           fsr2l	equ	0xFD9
+   690                           status	equ	0xFD8
+   691                           
+   692 ;; *************** function _initializeLED *****************
+   693 ;; Defined at:
+   694 ;;		line 25 in file "Source/LED-API.c"
+   695 ;; Parameters:    Size  Location     Type
+   696 ;;		None
+   697 ;; Auto vars:     Size  Location     Type
+   698 ;;		None
+   699 ;; Return value:  Size  Location     Type
+   700 ;;                  2    4[None  ] int 
+   701 ;; Registers used:
+   702 ;;		wreg, status,2
+   703 ;; Tracked objects:
+   704 ;;		On entry : 0/0
+   705 ;;		On exit  : 0/0
+   706 ;;		Unchanged: 0/0
+   707 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   708 ;;      Params:         0       0       0       0       0       0       0
+   709 ;;      Locals:         0       0       0       0       0       0       0
+   710 ;;      Temps:          0       0       0       0       0       0       0
+   711 ;;      Totals:         0       0       0       0       0       0       0
+   712 ;;Total ram usage:        0 bytes
+   713 ;; Hardware stack levels used:    1
+   714 ;; This function calls:
+   715 ;;		Nothing
+   716 ;; This function is called by:
+   717 ;;		_main
+   718 ;; This function uses a non-reentrant model
+   719 ;;
+   720                           
+   721                           	psect	text4
+   722  007D36                     __ptext4:
+   723                           	opt stack 0
+   724  007D36                     _initializeLED:
+   725                           	opt stack 30
+   726                           
+   727                           ;LED-API.c: 26: TRISA = 0b00000000;
+   728                           
+   729                           ;incstack = 0
+   730  007D36  0E00               	movlw	0
+   731  007D38  6E92               	movwf	3986,c	;volatile
+   732                           
+   733                           ;LED-API.c: 27: TRISC = 0b00000000;
+   734  007D3A  0E00               	movlw	0
+   735  007D3C  6E94               	movwf	3988,c	;volatile
+   736                           
+   737                           ;LED-API.c: 28: LATC = 0b00000000;
+   738  007D3E  0E00               	movlw	0
+   739  007D40  6E8B               	movwf	3979,c	;volatile
+   740                           
+   741                           ;LED-API.c: 29: LATA = 0b00000000;
+   742  007D42  0E00               	movlw	0
+   743  007D44  6E89               	movwf	3977,c	;volatile
+   744                           
+   745                           ;LED-API.c: 32: columns[0] = 0;
+   746  007D46  0E00               	movlw	0
+   747  007D48  6E14               	movwf	_columns,c
+   748                           
+   749                           ;LED-API.c: 33: rows[0] = 0;
+   750  007D4A  0E00               	movlw	0
+   751  007D4C  6E15               	movwf	_rows,c
+   752  007D4E  0012               	return		;funcret
+   753  007D50                     __end_of_initializeLED:
+   754                           	opt stack 0
+   755  0000                     indf2	equ	0xFDF
+   756                           fsr2h	equ	0xFDA
+   757                           fsr2l	equ	0xFD9
+   758                           status	equ	0xFD8
+   759                           indf2	equ	0xFDF
+   760                           fsr2h	equ	0xFDA
+   761                           fsr2l	equ	0xFD9
+   762                           status	equ	0xFD8
+   763                           
+   764                           	psect	rparam
+   765  0000                     indf2	equ	0xFDF
+   766                           fsr2h	equ	0xFDA
+   767                           fsr2l	equ	0xFD9
+   768                           status	equ	0xFD8
 
 
 Data Sizes:
     Strings     0
     Constant    0
     Data        0
-    BSS         0
+    BSS         2
     Persistent  0
     Stack       0
 
 Auto Spaces:
     Space          Size  Autos    Used
-    COMRAM          127     13      13
+    COMRAM          127     19      21
     BANK0           128      0       0
     BANK1           256      0       0
     BANK2           256      0       0
@@ -343,8 +799,9 @@ Pointer List with Targets:
 
 Critical Paths under _main in COMRAM
 
-    _main->_delaySeconds
-    _delaySeconds->___wmul
+    _main->_refresh
+    _refresh->___awdiv
+    _on->___awdiv
 
 Critical Paths under _main in BANK0
 
@@ -375,16 +832,23 @@ Call Graph Tables:
  ---------------------------------------------------------------------------------
  (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
  ---------------------------------------------------------------------------------
- (0) _main                                                 2     2      0     380
-                                             11 COMRAM     2     2      0
-                       _delaySeconds
+ (0) _main                                                 0     0      0    2210
+                      _initializeLED
+                                 _on
+                            _refresh
  ---------------------------------------------------------------------------------
- (1) _delaySeconds                                         5     3      2     334
-                                              6 COMRAM     5     3      2
-                             ___wmul
+ (1) _refresh                                             11    11      0    1176
+                                              8 COMRAM    11    11      0
+                            ___awdiv
  ---------------------------------------------------------------------------------
- (2) ___wmul                                               6     2      4     245
-                                              0 COMRAM     6     2      4
+ (1) _on                                                   4     3      1    1034
+                                              8 COMRAM     4     3      1
+                            ___awdiv
+ ---------------------------------------------------------------------------------
+ (2) ___awdiv                                              8     4      4     816
+                                              0 COMRAM     8     4      4
+ ---------------------------------------------------------------------------------
+ (1) _initializeLED                                        0     0      0       0
  ---------------------------------------------------------------------------------
  Estimated maximum stack depth 2
  ---------------------------------------------------------------------------------
@@ -392,65 +856,87 @@ Call Graph Tables:
  Call Graph Graphs:
 
  _main (ROOT)
-   _delaySeconds
-     ___wmul
+   _initializeLED
+   _on
+     ___awdiv
+   _refresh
+     ___awdiv
 
  Address spaces:
 Name               Size   Autos  Total    Cost      Usage
-BITCOMRAM           7F      0       0       0        0.0%
+BIGRAM             5FF      0       0      17        0.0%
 EEDATA             100      0       0       0        0.0%
-NULL                 0      0       0       0        0.0%
-CODE                 0      0       0       0        0.0%
-COMRAM              7F      D       D       1       10.2%
-STACK                0      0       0       2        0.0%
-DATA                 0      0       0       3        0.0%
-BITBANK0            80      0       0       4        0.0%
-BANK0               80      0       0       5        0.0%
-BITBANK1           100      0       0       6        0.0%
-BANK1              100      0       0       7        0.0%
-BITBANK2           100      0       0       8        0.0%
-BANK2              100      0       0       9        0.0%
-BITBANK3           100      0       0      10        0.0%
-BANK3              100      0       0      11        0.0%
+BITBANK5           100      0       0      16        0.0%
+BANK5              100      0       0      14        0.0%
 BITBANK4           100      0       0      12        0.0%
 BANK4              100      0       0      13        0.0%
-BANK5              100      0       0      14        0.0%
-ABS                  0      0       0      15        0.0%
-BITBANK5           100      0       0      16        0.0%
-BIGRAM             5FF      0       0      17        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK0            80      0       0       4        0.0%
+BANK0               80      0       0       5        0.0%
+BITCOMRAM           7F      0       0       0        0.0%
+COMRAM              7F     13      15       1       16.5%
 BITSFR               0      0       0      40        0.0%
 SFR                  0      0       0      40        0.0%
+STACK                0      0       0       2        0.0%
+NULL                 0      0       0       0        0.0%
+ABS                  0      0      15      15        0.0%
+DATA                 0      0      15       3        0.0%
+CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.36 build -262312587 
-Symbol Table                                                                                   Sat Mar 19 21:49:27 2016
+Symbol Table                                                                                   Sun Mar 20 17:54:53 2016
 
-                         l17 7FB6                           u77 7FCA          ___wmul@multiplicand 0003  
-                __CFG_BORV$3 000000                 __CFG_CP0$OFF 000000                 __CFG_CP1$OFF 000000  
-               __CFG_CP2$OFF 000000                 __CFG_CP3$OFF 000000                          l665 7FC4  
-                        l675 7F8C                          l669 7FD6                          l679 7F9E  
-               __CFG_CPB$OFF 000000                 __CFG_CPD$OFF 000000                          wreg 000FE8  
-               __CFG_LVP$OFF 000000                 __CFG_WDT$OFF 000000                         _LATA 000F89  
-                       _LATC 000F8B                         _main 7F76                         prodh 000FF4  
-                       prodl 000FF3                         start 0000                __CFG_IESO$OFF 000000  
-              __CFG_MCLRE$ON 000000                 ___param_bank 000010         __end_of_delaySeconds 8000  
-                      ?_main 0001                        _TRISA 000F92                        _TRISC 000F94  
-              __CFG_PWRT$OFF 000000                __CFG_WRT0$OFF 000000                __CFG_WRT1$OFF 000000  
-              __CFG_WRT2$OFF 000000                __CFG_WRT3$OFF 000000               __CFG_EBTR0$OFF 000000  
-             __CFG_FCMEN$OFF 000000               __CFG_EBTR1$OFF 000000               __CFG_EBTR2$OFF 000000  
-             __CFG_EBTR3$OFF 000000                __CFG_WRTB$OFF 000000                __CFG_WRTC$OFF 000000  
-              __CFG_WRTD$OFF 000000               __CFG_EBTRB$OFF 000000                        main@i 000C  
-             __CFG_BOREN$OFF 000000                        status 000FD8              __initialization 7F4A  
-               __end_of_main 7FBA                       ??_main 000C                __activetblptr 000000  
-             __CFG_XINST$OFF 000000                       ___wmul 7F50               __CFG_STVREN$ON 000000  
-                 __accesstop 0080      __end_of__initialization 7F4A              __CFG_PBADEN$OFF 000000  
-      __size_of_delaySeconds 0046                ___rparam_used 000001               __pcstackCOMRAM 0001  
-               _delaySeconds 7FBA                      ?___wmul 0001  delaySeconds@numberOfSeconds 0007  
-                    __Hparam 0000                      __Lparam 0000              __size_of___wmul 0026  
-                    __pcinit 7F4A                      __ramtop 0600                      __ptext0 7F76  
-                    __ptext1 7FBA                      __ptext2 7F50         end_of_initialization 7F4A  
-              delaySeconds@i 000A               __end_of___wmul 7F76          start_initialization 7F4A  
-           __CFG_OSC$INTIO67 000000                     ??___wmul 0005             __CFG_LPT1OSC$OFF 000000  
-          __CFG_CCP2MX$PORTC 000000               ___wmul@product 0005             __CFG_WDTPS$32768 000000  
-          ___wmul@multiplier 0001                     __Hrparam 0000                     __Lrparam 0000  
-              ?_delaySeconds 0007                __size_of_main 0044               ??_delaySeconds 0009  
+           ___awdiv@sign 0006                       _on 7DF2              __CFG_BORV$3 000000  
+           __CFG_CP0$OFF 000000             __CFG_CP1$OFF 000000             __CFG_CP2$OFF 000000  
+           __CFG_CP3$OFF 000000                      ?_on 0009                      l800 7D92  
+                    l810 7DB4                      l806 7DA8                      l822 7DDA  
+                    l808 7DB0                      l826 7DE8                      l818 7DD0  
+                    l834 7DFC                      l850 7EA2                      l842 7E7E  
+                    l860 7F4C                      l838 7E04                      l854 7EAA  
+                    l846 7E86                      l864 7F72                      l872 7FA6  
+                    l794 7D82                      l866 7F9E                      l890 7D68  
+                    l876 7FCC                      l868 7FA2                      l878 7FF8  
+           __CFG_CPB$OFF 000000                      u404 7E18                      u405 7E14  
+                    u414 7E52                      u415 7E4E                      u504 7F5C  
+                    u505 7F58                      u434 7E96             __CFG_CPD$OFF 000000  
+                    u435 7E92                      u524 7F88                      u525 7F82  
+                    u454 7EE0                      u455 7EDC                      u544 7FB6  
+                    u545 7FB2                      u474 7F24                      u475 7F20  
+                    u564 7FE2                      u565 7FDC                      u494 7F42  
+                    u495 7F3E                     ??_on 000A             __CFG_LVP$OFF 000000  
+           __CFG_WDT$OFF 000000                     _LATA 000F89                     _LATC 000F8B  
+                   _main 7D50                     indf2 000FDF                     fsr2l 000FD9  
+                   _rows 0015                     start 0000            __CFG_IESO$OFF 000000  
+          __CFG_MCLRE$ON 000000             ___param_bank 000010                    ?_main 0001  
+        __end_of___awdiv 7DF2          ___awdiv@divisor 0003          ___awdiv@counter 0005  
+                  _TRISA 000F92                    _TRISC 000F94            __CFG_PWRT$OFF 000000  
+          __CFG_WRT0$OFF 000000            __CFG_WRT1$OFF 000000            __CFG_WRT2$OFF 000000  
+          __CFG_WRT3$OFF 000000           __CFG_EBTR0$OFF 000000           __CFG_FCMEN$OFF 000000  
+         __CFG_EBTR1$OFF 000000           __CFG_EBTR2$OFF 000000           __CFG_EBTR3$OFF 000000  
+          __CFG_WRTB$OFF 000000            __CFG_WRTC$OFF 000000            __CFG_WRTD$OFF 000000  
+         __CFG_EBTRB$OFF 000000          __end_of_refresh 8000                    on@row 000C  
+         __CFG_BOREN$OFF 000000                    status 000FD8          __initialization 7D2C  
+           __end_of_main 7D6E                   ??_main 0014            __activetblptr 000000  
+       ___awdiv@dividend 0001           __CFG_XINST$OFF 000000                ??___awdiv 0005  
+         __CFG_STVREN$ON 000000         ___awdiv@quotient 0007                ??_refresh 0009  
+ __size_of_initializeLED 001A               __accesstop 0080  __end_of__initialization 7D30  
+        __CFG_PBADEN$OFF 000000            ___rparam_used 000001           __pcstackCOMRAM 0001  
+             __end_of_on 7E7A            _initializeLED 7D36           ?_initializeLED 0001  
+                __Hparam 0000                  __Lparam 0000            refresh@theCol 0013  
+          refresh@theRow 0012                  ___awdiv 7D6E                  __pcinit 7D2C  
+                __ramtop 0600                  __ptext0 7D50                  __ptext1 7E7A  
+                __ptext2 7DF2                  __ptext3 7D6E                  __ptext4 7D36  
+                _columns 0014                  _refresh 7E7A               _refresh$61 000E  
+             _refresh$62 0010     end_of_initialization 7D30          ??_initializeLED 0001  
+    start_initialization 7D2C         __CFG_OSC$INTIO67 000000         __CFG_LPT1OSC$OFF 000000  
+            __pbssCOMRAM 0014        __CFG_CCP2MX$PORTC 000000                 ?___awdiv 0001  
+               ?_refresh 0001              __size_of_on 0088         __CFG_WDTPS$32768 000000  
+               __Hrparam 0000                 __Lrparam 0000         __size_of___awdiv 0084  
+       __size_of_refresh 0186            __size_of_main 001E    __end_of_initializeLED 7D50  
+               on@column 0009  

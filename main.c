@@ -7,27 +7,8 @@
 #define _XTAL_FREQ 1000000
 
 #include <xc.h>
-#include "config.h"
-
-/*
- * 
- */
-void delaySeconds(int numberOfSeconds);
-void on(unsigned char row, unsigned char column);
-
-
-void main(void) {
-    TRISA = 0b00000000;
-    TRISC = 0b00000000;
-    
-    LATA = 0b11111111;
-    LATC = 0b00000001;
-    for(int i = 0; i <= 7; i++)
-    {
-        delaySeconds(5);
-        LATC = LATC << 1;
-    } 
-}
+#include "Header/config.h"
+#include "Header/LED-API.h"
 
 void delaySeconds(int numberOfSeconds)
 {
@@ -35,11 +16,15 @@ void delaySeconds(int numberOfSeconds)
         __delay_ms(10);
 }
 
-void on(unsigned char row, unsigned char column) {
-    
+void main(void) { 
+    initializeLED();
+   
+    on(5, 6);
+    on(3, 2);
+    while(1)
+    {
+        refresh();
+    }
 }
 
-void off(unsigned char row, unsigned char column) {
-    
-}
 
