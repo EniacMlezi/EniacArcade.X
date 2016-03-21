@@ -3957,7 +3957,7 @@ extern void off(unsigned char row, unsigned char column);
 extern void initializeLED();
 extern void refresh();
 
-# 18 "Source/LED-API.c"
+# 17 "Source/LED-API.c"
 unsigned char pixels[8][8];
 
 void setColHigh(unsigned char column)
@@ -3978,6 +3978,12 @@ void setRowLow(unsigned char row)
 {
 if(LATC & (1 << row))
 LATC &= ~(1 << row);
+}
+
+void allOff()
+{
+LATA = 0;
+LATC = 0;
 }
 
 void initializeLED() {
@@ -4017,15 +4023,17 @@ pixels[column][row] = 0;
 }
 
 void refresh() {
+while(1)
+{
 for(unsigned char theCol = 0; theCol < 8; theCol++)
 {
-setColHigh(theCol);
+allOff();
 for (unsigned char theRow = 0; theRow < 8; theRow++) {
 if (pixels[theCol][theRow] == 1)
 setRowHigh(theRow);
-else
-setRowLow(theRow);
 }
-setColLow(theCol);
+setColHigh(theCol);
+_delay((unsigned long)((1)*(1000000/4000.0)));
+}
 }
 }

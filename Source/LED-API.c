@@ -8,7 +8,10 @@
 #define COLUMNS 8
 #define ROWS 8
 
+#define _XTAL_FREQ 1000000
+
 #include "LED-API.h"
+
 
 //array which will hold the columns and rows to pull high on next refresh
 unsigned char pixels[COLUMNS][ROWS];
@@ -33,6 +36,12 @@ void setRowLow(unsigned char row)
         LATC &= ~(1 << row);   
 }
 
+void allOff()
+{
+    LATA = 0;
+    LATC = 0;
+}
+
 void initializeLED() {
     TRISA = 0b00000000; // configure all pins as output
     TRISC = 0b00000000; // configure all pins as outpur
@@ -47,8 +56,6 @@ void initializeLED() {
             pixels[i][j] = 0;
         }
     }
-    
-    
 }
 
 void on(unsigned char row, unsigned char column) {
@@ -72,15 +79,17 @@ void off(unsigned char row, unsigned char column) {
 }
 
 void refresh() {
-    for(unsigned char theCol = 0; theCol < COLUMNS; theCol++)
+    while(1)
     {
-        setColHigh(theCol);
-        for (unsigned char theRow = 0; theRow < ROWS; theRow++) {
+        for(unsigned char theCol = 0; theCol < COLUMNS; theCol++)
+        {     
+            allOff();
+            for (unsigned char theRow = 0; theRow < ROWS; theRow++) {
             if (pixels[theCol][theRow] == 1)
-                setRowHigh(theRow);
-            else
-                setRowLow(theRow);        
+                setRowHigh(theRow);     
+            }         
+            setColHigh(theCol);
+            __delay_ms(1);
         }
-        setColLow(theCol);
-    }  
+    }
 }

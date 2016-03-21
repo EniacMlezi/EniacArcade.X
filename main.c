@@ -22,7 +22,8 @@ void main(void) {
     on(5, 6);
     on(3, 2);
     on(0, 0);
-    on(7, 7);
+    on(4, 5);
+    on(7, 6);
     
     while(1)
     {

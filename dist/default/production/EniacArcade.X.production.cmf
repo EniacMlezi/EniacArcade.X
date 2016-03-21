@@ -11,20 +11,19 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\larsg\AppData\Local\Temp\s3r4.obj
+$C:\Users\larsg\AppData\Local\Temp\s6gg.obj
 idloc IDLOC 0 200000 200000 8 1
 end_init CODE 0 0 0 4 1
 config CONFIG 0 300000 300000 E 1
 $dist/default/production\EniacArcade.X.production.obj
-cinit CODE 0 7E1C 7E1C 12 1
-text0 CODE 0 7E66 7E66 32 1
-text1 CODE 0 7F9C 7F9C 64 1
-text2 CODE 0 7F10 7F10 3C 1
-text3 CODE 0 7E4A 7E4A 1C 1
-text4 CODE 0 7ED4 7ED4 3C 1
-text5 CODE 0 7E2E 7E2E 1C 1
-text6 CODE 0 7E98 7E98 3C 1
-text7 CODE 0 7F4C 7F4C 50 1
+cinit CODE 0 7E8C 7E8C 12 1
+text0 CODE 0 7F12 7F12 3C 1
+text1 CODE 0 7F9E 7F9E 62 1
+text2 CODE 0 7EBA 7EBA 1C 1
+text3 CODE 0 7E9E 7E9E 1C 1
+text4 CODE 0 7E82 7E82 A 1
+text5 CODE 0 7ED6 7ED6 3C 1
+text6 CODE 0 7F4E 7F4E 50 1
 cstackCOMRAM COMRAM 1 41 41 8 1
 bssCOMRAM COMRAM 1 1 1 40 1
 # %UNUSED Section
@@ -41,14 +40,14 @@ BANK2 200-2FF 1
 BANK3 300-3FF 1
 BANK4 400-4FF 1
 BANK5 500-5FF 1
-CONST 4-7E1B 1
+CONST 4-7E81 1
 STACK 80-5FF 1
-SMALLCONST 600-7E1B 1
-CODE 4-7E1B 1
+SMALLCONST 600-7E81 1
+CODE 4-7E81 1
 BIGRAM 49-5FF 1
 COMRAM 49-7F 1
 EEDATA F00000-F000FF 1
-MEDIUMCONST 600-7E1B 1
+MEDIUMCONST 600-7E81 1
 # %LINETAB Section
 # This section enumerates the file/line to address mappings.
 # The beginning of the section is indicated by %LINETAB.
@@ -63,64 +62,63 @@ MEDIUMCONST 600-7E1B 1
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\EniacArcade.X.production.obj
-7F4C text7 CODE >40:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7F4C text7 CODE >41:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7F50 text7 CODE >42:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7F54 text7 CODE >43:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7F58 text7 CODE >44:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7F5C text7 CODE >47:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7F64 text7 CODE >49:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7F6C text7 CODE >51:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7F94 text7 CODE >49:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7F98 text7 CODE >47:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7E98 text6 CODE >56:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7E9A text6 CODE >58:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7EA2 text6 CODE >60:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7EAA text6 CODE >63:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7ED2 text6 CODE >64:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7E2E text5 CODE >20:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7E30 text5 CODE >22:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7E48 text5 CODE >23:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7ED4 text4 CODE >24:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7ED6 text4 CODE >26:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7EF4 text4 CODE >27:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7E4A text3 CODE >30:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7E4C text3 CODE >32:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7E64 text3 CODE >33:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7F10 text2 CODE >34:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7F12 text2 CODE >36:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7F30 text2 CODE >37:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7F9C text1 CODE >76:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7F9C text1 CODE >77:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7FA8 text1 CODE >79:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7FAE text1 CODE >80:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7FBA text1 CODE >81:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7FE4 text1 CODE >82:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7FEC text1 CODE >84:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7FF2 text1 CODE >80:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7FF6 text1 CODE >86:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7FFC text1 CODE >77:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-7E66 text0 CODE >19:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
-7E66 text0 CODE >20:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
-7E6A text0 CODE >22:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
-7E74 text0 CODE >23:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
-7E7E text0 CODE >24:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
-7E88 text0 CODE >25:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
-7E92 text0 CODE >26:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
-7E92 text0 CODE >28:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
-7E96 text0 CODE >26:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
-7E1C cinit CODE >787:C:\Users\larsg\AppData\Local\Temp\s3r4.
-7E1C cinit CODE >789:C:\Users\larsg\AppData\Local\Temp\s3r4.
-7E1C cinit CODE >792:C:\Users\larsg\AppData\Local\Temp\s3r4.
-7E1C cinit CODE >804:C:\Users\larsg\AppData\Local\Temp\s3r4.
-7E20 cinit CODE >805:C:\Users\larsg\AppData\Local\Temp\s3r4.
-7E22 cinit CODE >806:C:\Users\larsg\AppData\Local\Temp\s3r4.
-7E22 cinit CODE >807:C:\Users\larsg\AppData\Local\Temp\s3r4.
-7E24 cinit CODE >808:C:\Users\larsg\AppData\Local\Temp\s3r4.
-7E26 cinit CODE >809:C:\Users\larsg\AppData\Local\Temp\s3r4.
-7E28 cinit CODE >815:C:\Users\larsg\AppData\Local\Temp\s3r4.
-7E28 cinit CODE >817:C:\Users\larsg\AppData\Local\Temp\s3r4.
-7E2A cinit CODE >818:C:\Users\larsg\AppData\Local\Temp\s3r4.
+7F4E text6 CODE >45:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7F4E text6 CODE >46:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7F52 text6 CODE >47:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7F56 text6 CODE >48:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7F5A text6 CODE >49:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7F5E text6 CODE >52:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7F66 text6 CODE >54:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7F6E text6 CODE >56:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7F96 text6 CODE >54:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7F9A text6 CODE >52:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7ED6 text5 CODE >61:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7ED8 text5 CODE >63:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7EE0 text5 CODE >65:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7EE8 text5 CODE >68:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7F10 text5 CODE >69:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7E82 text4 CODE >39:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7E82 text4 CODE >41:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7E86 text4 CODE >42:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7E8A text4 CODE >43:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7E9E text3 CODE >19:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7EA0 text3 CODE >21:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7EB8 text3 CODE >22:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7EBA text2 CODE >29:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7EBC text2 CODE >31:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7ED4 text2 CODE >32:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7F9E text1 CODE >81:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7F9E text1 CODE >84:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7FAA text1 CODE >86:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7FAE text1 CODE >87:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7FBA text1 CODE >88:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7FE4 text1 CODE >89:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7FEA text1 CODE >87:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7FEE text1 CODE >91:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7FF4 text1 CODE >92:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7FFC text1 CODE >84:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+7F12 text0 CODE >19:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
+7F12 text0 CODE >20:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
+7F16 text0 CODE >22:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
+7F20 text0 CODE >23:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
+7F2A text0 CODE >24:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
+7F34 text0 CODE >25:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
+7F3E text0 CODE >26:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
+7F48 text0 CODE >28:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
+7F48 text0 CODE >30:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
+7F4C text0 CODE >28:C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
+7E8C cinit CODE >786:C:\Users\larsg\AppData\Local\Temp\s6gg.
+7E8C cinit CODE >788:C:\Users\larsg\AppData\Local\Temp\s6gg.
+7E8C cinit CODE >791:C:\Users\larsg\AppData\Local\Temp\s6gg.
+7E8C cinit CODE >803:C:\Users\larsg\AppData\Local\Temp\s6gg.
+7E90 cinit CODE >804:C:\Users\larsg\AppData\Local\Temp\s6gg.
+7E92 cinit CODE >805:C:\Users\larsg\AppData\Local\Temp\s6gg.
+7E92 cinit CODE >806:C:\Users\larsg\AppData\Local\Temp\s6gg.
+7E94 cinit CODE >807:C:\Users\larsg\AppData\Local\Temp\s6gg.
+7E96 cinit CODE >808:C:\Users\larsg\AppData\Local\Temp\s6gg.
+7E98 cinit CODE >814:C:\Users\larsg\AppData\Local\Temp\s6gg.
+7E98 cinit CODE >816:C:\Users\larsg\AppData\Local\Temp\s6gg.
+7E9A cinit CODE >817:C:\Users\larsg\AppData\Local\Temp\s6gg.
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -140,28 +138,28 @@ __Hspace_2 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __CFG_IESO$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __end_of_refresh 8000 0 CODE 0 text1 dist/default/production\EniacArcade.X.production.obj
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\EniacArcade.X.production.obj
-__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\larsg\AppData\Local\Temp\s3r4.obj
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\larsg\AppData\Local\Temp\s6gg.obj
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\EniacArcade.X.production.obj
 __CFG_MCLRE$ON 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
-_on 7E98 0 CODE 0 text6 dist/default/production\EniacArcade.X.production.obj
+_on 7ED6 0 CODE 0 text5 dist/default/production\EniacArcade.X.production.obj
 __Lsmallconst 0 0 SMALLCONST 0 smallconst dist/default/production\EniacArcade.X.production.obj
 _LATA F89 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 _LATC F8B 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
-___sp 0 0 STACK 2 stack C:\Users\larsg\AppData\Local\Temp\s3r4.obj
-_main 7E66 0 CODE 0 text0 dist/default/production\EniacArcade.X.production.obj
-start 0 0 CODE 0 init C:\Users\larsg\AppData\Local\Temp\s3r4.obj
+___sp 0 0 STACK 2 stack C:\Users\larsg\AppData\Local\Temp\s6gg.obj
+_main 7F12 0 CODE 0 text0 dist/default/production\EniacArcade.X.production.obj
+start 0 0 CODE 0 init C:\Users\larsg\AppData\Local\Temp\s6gg.obj
 __CFG_BOREN$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __size_of_main 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
-__end_of_setRowHigh 7E66 0 CODE 0 text3 dist/default/production\EniacArcade.X.production.obj
+__end_of_setRowHigh 7ED6 0 CODE 0 text2 dist/default/production\EniacArcade.X.production.obj
 on@row 44 0 COMRAM 1 cstackCOMRAM dist/default/production\EniacArcade.X.production.obj
 __HbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\EniacArcade.X.production.obj
 __Hpowerup 0 0 CODE 0 powerup dist/default/production\EniacArcade.X.production.obj
 __size_of_initializeLED 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
-__accesstop 80 0 ABS 0 - C:\Users\larsg\AppData\Local\Temp\s3r4.obj
-intlevel0 0 0 CODE 0 text C:\Users\larsg\AppData\Local\Temp\s3r4.obj
-intlevel1 0 0 CODE 0 text C:\Users\larsg\AppData\Local\Temp\s3r4.obj
-intlevel2 0 0 CODE 0 text C:\Users\larsg\AppData\Local\Temp\s3r4.obj
-intlevel3 0 0 CODE 0 text C:\Users\larsg\AppData\Local\Temp\s3r4.obj
+__accesstop 80 0 ABS 0 - C:\Users\larsg\AppData\Local\Temp\s6gg.obj
+intlevel0 0 0 CODE 0 text C:\Users\larsg\AppData\Local\Temp\s6gg.obj
+intlevel1 0 0 CODE 0 text C:\Users\larsg\AppData\Local\Temp\s6gg.obj
+intlevel2 0 0 CODE 0 text C:\Users\larsg\AppData\Local\Temp\s6gg.obj
+intlevel3 0 0 CODE 0 text C:\Users\larsg\AppData\Local\Temp\s6gg.obj
 __LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\EniacArcade.X.production.obj
 __LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\EniacArcade.X.production.obj
 __CFG_EBTR0$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
@@ -172,23 +170,23 @@ __CFG_EBTR3$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __CFG_EBTRB$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __Hifardata 0 0 CODE 0 ifardata dist/default/production\EniacArcade.X.production.obj
 __Hclrtext 0 0 ABS 0 clrtext dist/default/production\EniacArcade.X.production.obj
-__end_of_initializeLED 7F9C 0 CODE 0 text7 dist/default/production\EniacArcade.X.production.obj
-___inthi_sp 0 0 STACK 2 stack C:\Users\larsg\AppData\Local\Temp\s3r4.obj
-___intlo_sp 0 0 STACK 2 stack C:\Users\larsg\AppData\Local\Temp\s3r4.obj
+__end_of_initializeLED 7F9E 0 CODE 0 text6 dist/default/production\EniacArcade.X.production.obj
+___inthi_sp 0 0 STACK 2 stack C:\Users\larsg\AppData\Local\Temp\s6gg.obj
+___intlo_sp 0 0 STACK 2 stack C:\Users\larsg\AppData\Local\Temp\s6gg.obj
 __Hintcode_body 0 0 ABS 0 intcode_body dist/default/production\EniacArcade.X.production.obj
 __Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/production\EniacArcade.X.production.obj
+__end_of_allOff 7E8C 0 CODE 0 text4 dist/default/production\EniacArcade.X.production.obj
 __Hmediumconst 0 0 MEDIUMCONST 0 mediumconst dist/default/production\EniacArcade.X.production.obj
 __Hintcodelo 0 0 CODE 0 intcodelo dist/default/production\EniacArcade.X.production.obj
 __Lintcodelo 0 0 CODE 0 intcodelo dist/default/production\EniacArcade.X.production.obj
 __CFG_FCMEN$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
-start_initialization 7E1C 0 CODE 0 cinit dist/default/production\EniacArcade.X.production.obj
+start_initialization 7E8C 0 CODE 0 cinit dist/default/production\EniacArcade.X.production.obj
 __HnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/production\EniacArcade.X.production.obj
 ___rparam_used 1 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
-setRowLow@row 43 0 COMRAM 1 cstackCOMRAM dist/default/production\EniacArcade.X.production.obj
-__end_of_on 7ED4 0 CODE 0 text6 dist/default/production\EniacArcade.X.production.obj
+__end_of_on 7F12 0 CODE 0 text5 dist/default/production\EniacArcade.X.production.obj
 __CFG_WDTPS$32768 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __size_of_setRowHigh 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
-_refresh 7F9C 0 CODE 0 text1 dist/default/production\EniacArcade.X.production.obj
+_refresh 7F9E 0 CODE 0 text1 dist/default/production\EniacArcade.X.production.obj
 __Hbank0 0 0 ABS 0 bank0 dist/default/production\EniacArcade.X.production.obj
 __Hbank1 0 0 ABS 0 bank1 dist/default/production\EniacArcade.X.production.obj
 __Hbank2 0 0 ABS 0 bank2 dist/default/production\EniacArcade.X.production.obj
@@ -210,11 +208,10 @@ __Htext3 0 0 ABS 0 text3 dist/default/production\EniacArcade.X.production.obj
 __Htext4 0 0 ABS 0 text4 dist/default/production\EniacArcade.X.production.obj
 __Htext5 0 0 ABS 0 text5 dist/default/production\EniacArcade.X.production.obj
 __Htext6 0 0 ABS 0 text6 dist/default/production\EniacArcade.X.production.obj
-__Htext7 0 0 ABS 0 text7 dist/default/production\EniacArcade.X.production.obj
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\EniacArcade.X.production.obj
 __Hbigram 0 0 ABS 0 bigram dist/default/production\EniacArcade.X.production.obj
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\larsg\AppData\Local\Temp\s3r4.obj
-_setColHigh 7E2E 0 CODE 0 text5 dist/default/production\EniacArcade.X.production.obj
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\larsg\AppData\Local\Temp\s6gg.obj
+_setColHigh 7E9E 0 CODE 0 text3 dist/default/production\EniacArcade.X.production.obj
 __Hcomram 0 0 ABS 0 comram dist/default/production\EniacArcade.X.production.obj
 __Hconfig 30000E 0 CONFIG 0 config dist/default/production\EniacArcade.X.production.obj
 __CFG_LPT1OSC$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
@@ -239,11 +236,9 @@ __Ltext3 0 0 ABS 0 text3 dist/default/production\EniacArcade.X.production.obj
 __Ltext4 0 0 ABS 0 text4 dist/default/production\EniacArcade.X.production.obj
 __Ltext5 0 0 ABS 0 text5 dist/default/production\EniacArcade.X.production.obj
 __Ltext6 0 0 ABS 0 text6 dist/default/production\EniacArcade.X.production.obj
-__Ltext7 0 0 ABS 0 text7 dist/default/production\EniacArcade.X.production.obj
 __size_of_on 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __Hfarbss 0 0 FARRAM 0 farbss dist/default/production\EniacArcade.X.production.obj
 __Lintcode_body 0 0 ABS 0 intcode_body dist/default/production\EniacArcade.X.production.obj
-setColLow@column 43 0 COMRAM 1 cstackCOMRAM dist/default/production\EniacArcade.X.production.obj
 __CFG_OSC$INTIO67 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __Habs1 0 0 ABS 0 abs1 dist/default/production\EniacArcade.X.production.obj
 __Hdata 0 0 ABS 0 data dist/default/production\EniacArcade.X.production.obj
@@ -266,16 +261,18 @@ __Hirdata 0 0 CODE 0 irdata dist/default/production\EniacArcade.X.production.obj
 __S0 30000E 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __S1 49 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __S2 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
+_allOff 7E82 0 CODE 0 text4 dist/default/production\EniacArcade.X.production.obj
 __CFG_PBADEN$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __Lbigdata 0 0 BIGRAM 1 bigdata dist/default/production\EniacArcade.X.production.obj
 __Hnvrram 0 0 COMRAM 1 nvrram dist/default/production\EniacArcade.X.production.obj
 __CFG_CCP2MX$PORTC 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __Lintentry 0 0 ABS 0 intentry dist/default/production\EniacArcade.X.production.obj
-__end_of_setColHigh 7E4A 0 CODE 0 text5 dist/default/production\EniacArcade.X.production.obj
+__end_of_setColHigh 7EBA 0 CODE 0 text3 dist/default/production\EniacArcade.X.production.obj
 __Hramtop 600 0 RAM 0 ramtop dist/default/production\EniacArcade.X.production.obj
 __Hrparam 0 0 COMRAM 1 rparam dist/default/production\EniacArcade.X.production.obj
 __activetblptr 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __Hstruct 0 0 COMRAM 1 struct dist/default/production\EniacArcade.X.production.obj
+__size_of_allOff 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __Lbigbss 0 0 BIGRAM 1 bigbss dist/default/production\EniacArcade.X.production.obj
 __Lbigram 0 0 ABS 0 bigram dist/default/production\EniacArcade.X.production.obj
 __CFG_BORV$3 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
@@ -286,8 +283,8 @@ __Lfarbss 0 0 FARRAM 0 farbss dist/default/production\EniacArcade.X.production.o
 __Lfardata 0 0 FARRAM 0 fardata dist/default/production\EniacArcade.X.production.obj
 initializeLED@i 43 0 COMRAM 1 cstackCOMRAM dist/default/production\EniacArcade.X.production.obj
 initializeLED@j 44 0 COMRAM 1 cstackCOMRAM dist/default/production\EniacArcade.X.production.obj
-stackhi 5FF 0 ABS 0 - C:\Users\larsg\AppData\Local\Temp\s3r4.obj
-stacklo 80 0 ABS 0 - C:\Users\larsg\AppData\Local\Temp\s3r4.obj
+stackhi 5FF 0 ABS 0 - C:\Users\larsg\AppData\Local\Temp\s6gg.obj
+stacklo 80 0 ABS 0 - C:\Users\larsg\AppData\Local\Temp\s6gg.obj
 __Lintcode 0 0 CODE 0 intcode dist/default/production\EniacArcade.X.production.obj
 __Lintret 0 0 ABS 0 intret dist/default/production\EniacArcade.X.production.obj
 __Lirdata 0 0 CODE 0 irdata dist/default/production\EniacArcade.X.production.obj
@@ -296,11 +293,9 @@ __Lspace_0 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __Lspace_1 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __Lspace_2 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __pbssCOMRAM 1 0 COMRAM 1 bssCOMRAM dist/default/production\EniacArcade.X.production.obj
-__end_of_setColLow 7F10 0 CODE 0 text4 dist/default/production\EniacArcade.X.production.obj
 __Lend_init 0 0 CODE 0 end_init dist/default/production\EniacArcade.X.production.obj
 __LcstackCOMRAM 0 0 ABS 0 cstackCOMRAM dist/default/production\EniacArcade.X.production.obj
-__size_of_setColLow 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
-end_of_initialization 7E28 0 CODE 0 cinit dist/default/production\EniacArcade.X.production.obj
+end_of_initialization 7E98 0 CODE 0 cinit dist/default/production\EniacArcade.X.production.obj
 __Lnvrram 0 0 COMRAM 1 nvrram dist/default/production\EniacArcade.X.production.obj
 __Hintentry 0 0 ABS 0 intentry dist/default/production\EniacArcade.X.production.obj
 __CFG_STVREN$ON 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
@@ -308,18 +303,16 @@ __Hreset_vec 0 0 CODE 0 reset_vec dist/default/production\EniacArcade.X.producti
 __Lramtop 600 0 RAM 0 ramtop dist/default/production\EniacArcade.X.production.obj
 setRowHigh@row 43 0 COMRAM 1 cstackCOMRAM dist/default/production\EniacArcade.X.production.obj
 __Lrparam 0 0 COMRAM 1 rparam dist/default/production\EniacArcade.X.production.obj
-_setColLow 7ED4 0 CODE 0 text4 dist/default/production\EniacArcade.X.production.obj
-__pcinit 7E1C 0 CODE 0 cinit dist/default/production\EniacArcade.X.production.obj
-__ptext0 7E66 0 CODE 0 text0 dist/default/production\EniacArcade.X.production.obj
-__ptext1 7F9C 0 CODE 0 text1 dist/default/production\EniacArcade.X.production.obj
-__ptext2 7F10 0 CODE 0 text2 dist/default/production\EniacArcade.X.production.obj
-__ptext3 7E4A 0 CODE 0 text3 dist/default/production\EniacArcade.X.production.obj
-__ptext4 7ED4 0 CODE 0 text4 dist/default/production\EniacArcade.X.production.obj
-__ptext5 7E2E 0 CODE 0 text5 dist/default/production\EniacArcade.X.production.obj
-__ptext6 7E98 0 CODE 0 text6 dist/default/production\EniacArcade.X.production.obj
-__ptext7 7F4C 0 CODE 0 text7 dist/default/production\EniacArcade.X.production.obj
+__pcinit 7E8C 0 CODE 0 cinit dist/default/production\EniacArcade.X.production.obj
+__ptext0 7F12 0 CODE 0 text0 dist/default/production\EniacArcade.X.production.obj
+__ptext1 7F9E 0 CODE 0 text1 dist/default/production\EniacArcade.X.production.obj
+__ptext2 7EBA 0 CODE 0 text2 dist/default/production\EniacArcade.X.production.obj
+__ptext3 7E9E 0 CODE 0 text3 dist/default/production\EniacArcade.X.production.obj
+__ptext4 7E82 0 CODE 0 text4 dist/default/production\EniacArcade.X.production.obj
+__ptext5 7ED6 0 CODE 0 text5 dist/default/production\EniacArcade.X.production.obj
+__ptext6 7F4E 0 CODE 0 text6 dist/default/production\EniacArcade.X.production.obj
 __Lstruct 0 0 COMRAM 1 struct dist/default/production\EniacArcade.X.production.obj
-__ramtop 600 0 RAM 0 ramtop C:\Users\larsg\AppData\Local\Temp\s3r4.obj
+__ramtop 600 0 RAM 0 ramtop C:\Users\larsg\AppData\Local\Temp\s6gg.obj
 __Lpowerup 0 0 CODE 0 powerup dist/default/production\EniacArcade.X.production.obj
 __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\EniacArcade.X.production.obj
 __Lreset_vec 0 0 CODE 0 reset_vec dist/default/production\EniacArcade.X.production.obj
@@ -327,7 +320,7 @@ __size_of_refresh 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.o
 ___param_bank 10 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __CFG_WDT$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __Hbigdata 0 0 BIGRAM 1 bigdata dist/default/production\EniacArcade.X.production.obj
-__end_of__initialization 7E28 0 CODE 0 cinit dist/default/production\EniacArcade.X.production.obj
+__end_of__initialization 7E98 0 CODE 0 cinit dist/default/production\EniacArcade.X.production.obj
 __CFG_WRT0$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __CFG_WRT1$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __CFG_WRT2$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
@@ -336,8 +329,6 @@ __CFG_WRTB$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __Libigdata 0 0 CODE 0 ibigdata dist/default/production\EniacArcade.X.production.obj
 __CFG_WRTC$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __CFG_WRTD$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
-__end_of_setRowLow 7F4C 0 CODE 0 text2 dist/default/production\EniacArcade.X.production.obj
-__size_of_setRowLow 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __Lclrtext 0 0 ABS 0 clrtext dist/default/production\EniacArcade.X.production.obj
 __size_of_setColHigh 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 refresh@theCol 47 0 COMRAM 1 cstackCOMRAM dist/default/production\EniacArcade.X.production.obj
@@ -345,9 +336,8 @@ refresh@theRow 48 0 COMRAM 1 cstackCOMRAM dist/default/production\EniacArcade.X.
 __CFG_PWRT$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __pcstackCOMRAM 41 0 COMRAM 1 cstackCOMRAM dist/default/production\EniacArcade.X.production.obj
 __Hend_init 4 0 CODE 0 end_init dist/default/production\EniacArcade.X.production.obj
-__end_of_main 7E98 0 CODE 0 text0 dist/default/production\EniacArcade.X.production.obj
-_setRowLow 7F10 0 CODE 0 text2 dist/default/production\EniacArcade.X.production.obj
-_initializeLED 7F4C 0 CODE 0 text7 dist/default/production\EniacArcade.X.production.obj
+__end_of_main 7F4E 0 CODE 0 text0 dist/default/production\EniacArcade.X.production.obj
+_initializeLED 7F4E 0 CODE 0 text6 dist/default/production\EniacArcade.X.production.obj
 _TRISA F92 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 _TRISC F94 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __CFG_CP0$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
@@ -364,8 +354,8 @@ __CFG_CP2$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __CFG_CP3$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __CFG_CPB$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
 __CFG_CPD$OFF 0 0 ABS 0 - dist/default/production\EniacArcade.X.production.obj
-_setRowHigh 7E4A 0 CODE 0 text3 dist/default/production\EniacArcade.X.production.obj
-__initialization 7E1C 0 CODE 0 cinit dist/default/production\EniacArcade.X.production.obj
+_setRowHigh 7EBA 0 CODE 0 text2 dist/default/production\EniacArcade.X.production.obj
+__initialization 7E8C 0 CODE 0 cinit dist/default/production\EniacArcade.X.production.obj
 __Hfardata 0 0 FARRAM 0 fardata dist/default/production\EniacArcade.X.production.obj
 __Hsmallconst 0 0 SMALLCONST 0 smallconst dist/default/production\EniacArcade.X.production.obj
 __Lifardata 0 0 CODE 0 ifardata dist/default/production\EniacArcade.X.production.obj
@@ -396,16 +386,15 @@ setColHigh@column 43 0 COMRAM 1 cstackCOMRAM dist/default/production\EniacArcade
 # and size are in units of delta. The file address is in units of bytes.
 # All other numeric quantities are in decimal.
 %SEGMENTS
-cinit 0 7E1C 7E1C 12 1
+cinit 0 7E8C 7E8C 12 1
 idloc 0 200000 200000 8 1
-text0 0 7E66 7E66 32 1
-text1 0 7F9C 7F9C 64 1
-text2 0 7F10 7F10 3C 1
-text3 0 7E4A 7E4A 1C 1
-text4 0 7ED4 7ED4 3C 1
-text5 0 7E2E 7E2E 1C 1
-text6 0 7E98 7E98 3C 1
-text7 0 7F4C 7F4C 50 1
+text0 0 7F12 7F12 3C 1
+text1 0 7F9E 7F9E 62 1
+text2 0 7EBA 7EBA 1C 1
+text3 0 7E9E 7E9E 1C 1
+text4 0 7E82 7E82 A 1
+text5 0 7ED6 7ED6 3C 1
+text6 0 7F4E 7F4E 50 1
 reset_vec 0 0 0 4 1
 bssCOMRAM 1 1 1 48 1
 config 0 300000 300000 E 1

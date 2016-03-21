@@ -27,19 +27,17 @@
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "19 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"20 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+"19 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
 [v _setColHigh setColHigh `(v  1 e 1 0 ]
-"24
-[v _setColLow setColLow `(v  1 e 1 0 ]
-"30
+"29
 [v _setRowHigh setRowHigh `(v  1 e 1 0 ]
-"34
-[v _setRowLow setRowLow `(v  1 e 1 0 ]
-"40
+"39
+[v _allOff allOff `(v  1 e 1 0 ]
+"45
 [v _initializeLED initializeLED `(v  1 e 1 0 ]
-"56
+"61
 [v _on on `(v  1 e 1 0 ]
-"76
+"81
 [v _refresh refresh `(v  1 e 1 0 ]
 "992 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f4520.h
 [v _LATA LATA `VEuc  1 e 1 @3977 ]
@@ -49,74 +47,61 @@
 [v _TRISA TRISA `VEuc  1 e 1 @3986 ]
 "2019
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
-"18 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+"17 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
 [v _pixels pixels `[8][8]uc  1 e 64 0 ]
 "19 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"30
+"32
 } 0
-"76 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+"81 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
 [v _refresh refresh `(v  1 e 1 0 ]
 {
-"80
+"87
 [v refresh@theRow theRow `uc  1 a 1 7 ]
-"77
+"84
 [v refresh@theCol theCol `uc  1 a 1 6 ]
-"88
+"95
 } 0
-"34
-[v _setRowLow setRowLow `(v  1 e 1 0 ]
-{
-[v setRowLow@row row `uc  1 a 1 wreg ]
-[v setRowLow@row row `uc  1 a 1 wreg ]
-"36
-[v setRowLow@row row `uc  1 a 1 2 ]
-"38
-} 0
-"30
+"29
 [v _setRowHigh setRowHigh `(v  1 e 1 0 ]
 {
 [v setRowHigh@row row `uc  1 a 1 wreg ]
 [v setRowHigh@row row `uc  1 a 1 wreg ]
-"32
+"31
 [v setRowHigh@row row `uc  1 a 1 2 ]
-"33
+"32
 } 0
-"24
-[v _setColLow setColLow `(v  1 e 1 0 ]
-{
-[v setColLow@column column `uc  1 a 1 wreg ]
-[v setColLow@column column `uc  1 a 1 wreg ]
-"26
-[v setColLow@column column `uc  1 a 1 2 ]
-"28
-} 0
-"20
+"19
 [v _setColHigh setColHigh `(v  1 e 1 0 ]
 {
 [v setColHigh@column column `uc  1 a 1 wreg ]
 [v setColHigh@column column `uc  1 a 1 wreg ]
-"22
+"21
 [v setColHigh@column column `uc  1 a 1 2 ]
-"23
+"22
 } 0
-"56
+"39
+[v _allOff allOff `(v  1 e 1 0 ]
+{
+"43
+} 0
+"61
 [v _on on `(v  1 e 1 0 ]
 {
 [v on@row row `uc  1 a 1 wreg ]
 [v on@row row `uc  1 a 1 wreg ]
 [v on@column column `uc  1 p 1 0 ]
-"58
+"63
 [v on@row row `uc  1 a 1 3 ]
-"64
+"69
 } 0
-"40
+"45
 [v _initializeLED initializeLED `(v  1 e 1 0 ]
 {
-"49
-[v initializeLED@j j `uc  1 a 1 3 ]
-"47
-[v initializeLED@i i `uc  1 a 1 2 ]
 "54
+[v initializeLED@j j `uc  1 a 1 3 ]
+"52
+[v initializeLED@i i `uc  1 a 1 2 ]
+"59
 } 0
