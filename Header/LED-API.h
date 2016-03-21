@@ -9,9 +9,11 @@
 #define	LED_API_H
 
 #include <xc.h>
+#include <pthread.h>
 
 extern void on(unsigned char row, unsigned char column);
 extern void off(unsigned char row, unsigned char column);
+extern void initializeLED();
 extern void refresh();
 
 #endif	/* LED_API_H */

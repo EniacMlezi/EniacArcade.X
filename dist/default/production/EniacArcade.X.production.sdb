@@ -3,8 +3,6 @@
 [d edition pro ]
 [d chip 18F4520 ]
 [d frameptr 4065 ]
-"8 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\awdiv.c
-[v ___awdiv __awdiv `(i  1 e 2 0 ]
 "62 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\float.c
 [v ___ftpack __ftpack `(f  1 e 3 0 ]
 "86 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\ftadd.c
@@ -29,11 +27,19 @@
 [v ___lmul __lmul `(ul  1 e 4 0 ]
 "19 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"25 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-[v _initializeLED initializeLED `(i  1 e 2 0 ]
-"36
-[v _on on `(v  1 e 1 0 ]
+"20 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+[v _setColHigh setColHigh `(v  1 e 1 0 ]
+"24
+[v _setColLow setColLow `(v  1 e 1 0 ]
+"30
+[v _setRowHigh setRowHigh `(v  1 e 1 0 ]
+"34
+[v _setRowLow setRowLow `(v  1 e 1 0 ]
+"40
+[v _initializeLED initializeLED `(v  1 e 1 0 ]
 "56
+[v _on on `(v  1 e 1 0 ]
+"76
 [v _refresh refresh `(v  1 e 1 0 ]
 "992 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f4520.h
 [v _LATA LATA `VEuc  1 e 1 @3977 ]
@@ -43,48 +49,74 @@
 [v _TRISA TRISA `VEuc  1 e 1 @3986 ]
 "2019
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
-"22 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-[v _columns columns `[1]uc  1 e 1 0 ]
-"23
-[v _rows rows `[1]uc  1 e 1 0 ]
+"18 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+[v _pixels pixels `[8][8]uc  1 e 64 0 ]
 "19 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"28
+"30
 } 0
-"56 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+"76 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
 [v _refresh refresh `(v  1 e 1 0 ]
 {
-"60
-[v refresh@theCol theCol `uc  1 a 1 18 ]
-"57
-[v refresh@theRow theRow `uc  1 a 1 17 ]
-"69
+"80
+[v refresh@theRow theRow `uc  1 a 1 7 ]
+"77
+[v refresh@theCol theCol `uc  1 a 1 6 ]
+"88
 } 0
+"34
+[v _setRowLow setRowLow `(v  1 e 1 0 ]
+{
+[v setRowLow@row row `uc  1 a 1 wreg ]
+[v setRowLow@row row `uc  1 a 1 wreg ]
 "36
+[v setRowLow@row row `uc  1 a 1 2 ]
+"38
+} 0
+"30
+[v _setRowHigh setRowHigh `(v  1 e 1 0 ]
+{
+[v setRowHigh@row row `uc  1 a 1 wreg ]
+[v setRowHigh@row row `uc  1 a 1 wreg ]
+"32
+[v setRowHigh@row row `uc  1 a 1 2 ]
+"33
+} 0
+"24
+[v _setColLow setColLow `(v  1 e 1 0 ]
+{
+[v setColLow@column column `uc  1 a 1 wreg ]
+[v setColLow@column column `uc  1 a 1 wreg ]
+"26
+[v setColLow@column column `uc  1 a 1 2 ]
+"28
+} 0
+"20
+[v _setColHigh setColHigh `(v  1 e 1 0 ]
+{
+[v setColHigh@column column `uc  1 a 1 wreg ]
+[v setColHigh@column column `uc  1 a 1 wreg ]
+"22
+[v setColHigh@column column `uc  1 a 1 2 ]
+"23
+} 0
+"56
 [v _on on `(v  1 e 1 0 ]
 {
 [v on@row row `uc  1 a 1 wreg ]
 [v on@row row `uc  1 a 1 wreg ]
-[v on@column column `uc  1 p 1 8 ]
-[v on@row row `uc  1 a 1 11 ]
-"44
+[v on@column column `uc  1 p 1 0 ]
+"58
+[v on@row row `uc  1 a 1 3 ]
+"64
 } 0
-"8 C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\awdiv.c
-[v ___awdiv __awdiv `(i  1 e 2 0 ]
+"40
+[v _initializeLED initializeLED `(v  1 e 1 0 ]
 {
-"11
-[v ___awdiv@quotient quotient `i  1 a 2 6 ]
-"12
-[v ___awdiv@sign sign `uc  1 a 1 5 ]
-[v ___awdiv@counter counter `uc  1 a 1 4 ]
-"8
-[v ___awdiv@dividend dividend `i  1 p 2 0 ]
-[v ___awdiv@divisor divisor `i  1 p 2 2 ]
-"42
-} 0
-"25 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-[v _initializeLED initializeLED `(i  1 e 2 0 ]
-{
-"34
+"49
+[v initializeLED@j j `uc  1 a 1 3 ]
+"47
+[v initializeLED@i i `uc  1 a 1 2 ]
+"54
 } 0

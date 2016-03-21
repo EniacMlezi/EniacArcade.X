@@ -5,21 +5,33 @@
  * Created on 20 maart 2016, 9:36
  */
 
-#define setColHigh(column) (LATA |= (1 << column))
-// if bit on n# 'column' in LAT register is high, modify. else don't modify. 
-#define setColLow(column) (LATA = (LATA & (1 << column)) ? LATA ^ (1 << column) : LATA)
-
-#define setRowHigh(row) (LATC |= (1 << row))
-// if bit on n# 'column' in LAT register is high, modify. else don't modify.
-#define setRowLow(row) (LATC = (LATC & (1 << row)) ? LATC ^ (1 << row) : LATC)
-
 #define COLUMNS 8
-#define ROWS 16
+#define ROWS 8
 
 #include "LED-API.h"
 
 //array which will hold the columns and rows to pull high on next refresh
 unsigned char pixels[COLUMNS][ROWS];
+
+void setColHigh(unsigned char column)
+{
+    LATA |= (1 << column);
+}
+void setColLow(unsigned char column)
+{
+    if(LATA & (1 << column))
+        LATA &= ~(1 << column);   
+}
+
+void setRowHigh(unsigned char row)
+{
+    LATC |= (1 << row);
+}
+void setRowLow(unsigned char row)
+{
+   if(LATC & (1 << row))
+        LATC &= ~(1 << row);   
+}
 
 void initializeLED() {
     TRISA = 0b00000000; // configure all pins as output
@@ -28,13 +40,15 @@ void initializeLED() {
     LATA = 0b00000000; // write 0 to all pins
 
     //write 0 to the pixels array
-    for(unsigned short i; i < COLUMNS; i++)
+    for(unsigned char i; i < COLUMNS; i++)
     {
-        for (unsigned short j; j < ROWS; j++)
+        for (unsigned char j; j < ROWS; j++)
         {
             pixels[i][j] = 0;
         }
     }
+    
+    
 }
 
 void on(unsigned char row, unsigned char column) {
@@ -57,16 +71,16 @@ void off(unsigned char row, unsigned char column) {
     pixels[column][row] = 0;
 }
 
-void refresh() {   
-    for(unsigned char theRow = 0; theRow < ROWS; theRow++)
+void refresh() {
+    for(unsigned char theCol = 0; theCol < COLUMNS; theCol++)
     {
-        setRowHigh(theRow);
-        for (unsigned char theCol = 0; theCol < COLUMNS; theCol++) {
+        setColHigh(theCol);
+        for (unsigned char theRow = 0; theRow < ROWS; theRow++) {
             if (pixels[theCol][theRow] == 1)
-                setColHigh(theCol);
+                setRowHigh(theRow);
             else
-                setColLow(theCol);        
+                setRowLow(theRow);        
         }
-        setRowLow(theRow);
+        setColLow(theCol);
     }  
 }

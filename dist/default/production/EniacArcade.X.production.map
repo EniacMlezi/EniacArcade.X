@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files (x86)\Microchip\xc8\v1.36\dat\en_msgs.txt -cs \
   -h+dist/default/production\EniacArcade.X.production.sym \
   --cmf=dist/default/production\EniacArcade.X.production.cmf -z -Q18F4520 \
-  -oC:\Users\larsg\AppData\Local\Temp\s274.2 \
+  -oC:\Users\larsg\AppData\Local\Temp\s3r4.2 \
   -Mdist/default/production/EniacArcade.X.production.map -E1 -ver=XC8 \
   -ASTACK=080h-05ffh -pstack=STACK -ACODE=00h-07FFFh -ACONST=00h-07FFFh \
   -ASMALLCONST=0600h-06FFhx122 -AMEDIUMCONST=0600h-07FFFh -ACOMRAM=01h-07Fh \
@@ -21,7 +21,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\larsg\AppData\Local\Temp\s274.obj \
+  C:\Users\larsg\AppData\Local\Temp\s3r4.obj \
   dist/default/production\EniacArcade.X.production.obj 
 
 Object code version is 3.11
@@ -34,31 +34,37 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\larsg\AppData\Local\Temp\s274.obj
+C:\Users\larsg\AppData\Local\Temp\s3r4.obj
                 end_init                              0        0        4        0       0
                 idloc                            200000   200000        8   200000       0
                 config                           300000   300000        E   300000       0
 dist/default/production\EniacArcade.X.production.obj
-                text4                              7D36     7D36       1A     3E9B       0
-                text3                              7D6E     7D6E       84     3EB7       0
-                text2                              7DF2     7DF2       88     3EF9       0
-                text1                              7E7A     7E7A      186     3F3D       0
-                text0                              7D50     7D50       1E     3EA8       0
-                cstackCOMRAM                          1        1       13        1       1
-                bssCOMRAM                            14       14        2        1       1
-                cinit                              7D2C     7D2C        A     3E96       0
+                text7                              7F4C     7F4C       50     3FA6       0
+                text6                              7E98     7E98       3C     3F4C       0
+                text5                              7E2E     7E2E       1C     3F17       0
+                text4                              7ED4     7ED4       3C     3F6A       0
+                text3                              7E4A     7E4A       1C     3F25       0
+                text2                              7F10     7F10       3C     3F88       0
+                text1                              7F9C     7F9C       64     3FCE       0
+                text0                              7E66     7E66       32     3F33       0
+                cstackCOMRAM                         41       41        8        1       1
+                bssCOMRAM                             1        1       40        1       1
+                cinit                              7E1C     7E1C       12     3F0E       0
 
 TOTAL           Name                               Link     Load   Length     Space
         CLASS   STACK          
 
         CLASS   CODE           
                 end_init                              0        0        4         0
-                text4                              7D36     7D36       1A         0
-                text3                              7D6E     7D6E       84         0
-                text2                              7DF2     7DF2       88         0
-                text1                              7E7A     7E7A      186         0
-                text0                              7D50     7D50       1E         0
-                cinit                              7D2C     7D2C        A         0
+                text7                              7F4C     7F4C       50         0
+                text6                              7E98     7E98       3C         0
+                text5                              7E2E     7E2E       1C         0
+                text4                              7ED4     7ED4       3C         0
+                text3                              7E4A     7E4A       1C         0
+                text2                              7F10     7F10       3C         0
+                text1                              7F9C     7F9C       64         0
+                text0                              7E66     7E66       32         0
+                cinit                              7E1C     7E1C       12         0
 
         CLASS   CONST          
 
@@ -67,8 +73,8 @@ TOTAL           Name                               Link     Load   Length     Sp
         CLASS   MEDIUMCONST    
 
         CLASS   COMRAM         
-                cstackCOMRAM                          1        1       13         1
-                bssCOMRAM                            14       14        2         1
+                cstackCOMRAM                         41       41        8         1
+                bssCOMRAM                             1        1       40         1
 
         CLASS   ABS1           
 
@@ -105,13 +111,16 @@ TOTAL           Name                               Link     Load   Length     Sp
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class
 
                 reset_vec                      000000  000004  000004         0       0  CODE    
-                cstackCOMRAM                   000001  000015  000016         1       1  COMRAM  
-                cinit                          007D2C  00000A  007D36      3E96       0  CODE    
-                text4                          007D36  00001A  007D50      3E9B       0  CODE    
-                text0                          007D50  00001E  007D6E      3EA8       0  CODE    
-                text3                          007D6E  000084  007DF2      3EB7       0  CODE    
-                text2                          007DF2  000088  007E7A      3EF9       0  CODE    
-                text1                          007E7A  000186  008000      3F3D       0  CODE    
+                bssCOMRAM                      000001  000048  000049         1       1  COMRAM  
+                cinit                          007E1C  000012  007E2E      3F0E       0  CODE    
+                text5                          007E2E  00001C  007E4A      3F17       0  CODE    
+                text3                          007E4A  00001C  007E66      3F25       0  CODE    
+                text0                          007E66  000032  007E98      3F33       0  CODE    
+                text6                          007E98  00003C  007ED4      3F4C       0  CODE    
+                text4                          007ED4  00003C  007F10      3F6A       0  CODE    
+                text2                          007F10  00003C  007F4C      3F88       0  CODE    
+                text7                          007F4C  000050  007F9C      3FA6       0  CODE    
+                text1                          007F9C  000064  008000      3FCE       0  CODE    
                 idloc                          200000  000008  200008    200000       0  IDLOC   
                 config                         300000  00000E  30000E    300000       0  CONFIG  
 
@@ -125,20 +134,19 @@ UNUSED ADDRESS RANGES
         BANK3            000300-0003FF              100
         BANK4            000400-0004FF              100
         BANK5            000500-0005FF              100
-        BIGRAM           000016-0005FF              5EA
-        CODE             000004-007D2B             7D28
-        COMRAM           000016-00007F               6A
-        CONST            000004-007D2B             7D28
+        BIGRAM           000049-0005FF              5B7
+        CODE             000004-007E1B             7E18
+        COMRAM           000049-00007F               37
+        CONST            000004-007E1B             7E18
         EEDATA           F00000-F000FF              100
-        MEDIUMCONST      000600-007D2B             772C
+        MEDIUMCONST      000600-007E1B             781C
         RAM              000080-0005FF              100
         SFR              000F80-000FFF               80
-        SMALLCONST       000600-007D2B              100
+        SMALLCONST       000600-007E1B              100
         STACK            000080-0005FF              580
 
                                   Symbol Table
 
-?___awdiv                cstackCOMRAM 000001
 _LATA                    (abs)        000F89
 _LATC                    (abs)        000F8B
 _TRISA                   (abs)        000F92
@@ -228,7 +236,7 @@ __Hrparam                rparam       000000
 __Hsfr                   sfr          000000
 __Hsmallconst            smallconst   000000
 __Hspace_0               (abs)        30000E
-__Hspace_1               (abs)        000016
+__Hspace_1               (abs)        000049
 __Hspace_2               (abs)        000000
 __Hstack                 stack        000000
 __Hstruct                struct       000000
@@ -239,6 +247,9 @@ __Htext1                 text1        000000
 __Htext2                 text2        000000
 __Htext3                 text3        000000
 __Htext4                 text4        000000
+__Htext5                 text5        000000
+__Htext6                 text6        000000
+__Htext7                 text7        000000
 __LRAM                   (abs)        000001
 __Labs1                  abs1         000000
 __Lbank0                 bank0        000000
@@ -302,15 +313,12 @@ __Ltext1                 text1        000000
 __Ltext2                 text2        000000
 __Ltext3                 text3        000000
 __Ltext4                 text4        000000
+__Ltext5                 text5        000000
+__Ltext6                 text6        000000
+__Ltext7                 text7        000000
 __S0                     (abs)        30000E
-__S1                     (abs)        000016
+__S1                     (abs)        000049
 __S2                     (abs)        000000
-___awdiv                 text3        007D6E
-___awdiv@counter         cstackCOMRAM 000005
-___awdiv@dividend        cstackCOMRAM 000001
-___awdiv@divisor         cstackCOMRAM 000003
-___awdiv@quotient        cstackCOMRAM 000007
-___awdiv@sign            cstackCOMRAM 000006
 ___inthi_sp              stack        000000
 ___intlo_sp              stack        000000
 ___param_bank            (abs)        000010
@@ -318,50 +326,66 @@ ___rparam_used           (abs)        000001
 ___sp                    stack        000000
 __accesstop              (abs)        000080
 __activetblptr           (abs)        000000
-__end_of___awdiv         text3        007DF2
-__end_of__initialization cinit        007D30
-__end_of_initializeLED   text4        007D50
-__end_of_main            text0        007D6E
-__end_of_on              text2        007E7A
+__end_of__initialization cinit        007E28
+__end_of_initializeLED   text7        007F9C
+__end_of_main            text0        007E98
+__end_of_on              text6        007ED4
 __end_of_refresh         text1        008000
-__initialization         cinit        007D2C
+__end_of_setColHigh      text5        007E4A
+__end_of_setColLow       text4        007F10
+__end_of_setRowHigh      text3        007E66
+__end_of_setRowLow       text2        007F4C
+__initialization         cinit        007E1C
 __mediumconst            mediumconst  000000
-__pbssCOMRAM             bssCOMRAM    000014
-__pcinit                 cinit        007D2C
-__pcstackCOMRAM          cstackCOMRAM 000001
-__ptext0                 text0        007D50
-__ptext1                 text1        007E7A
-__ptext2                 text2        007DF2
-__ptext3                 text3        007D6E
-__ptext4                 text4        007D36
+__pbssCOMRAM             bssCOMRAM    000001
+__pcinit                 cinit        007E1C
+__pcstackCOMRAM          cstackCOMRAM 000041
+__ptext0                 text0        007E66
+__ptext1                 text1        007F9C
+__ptext2                 text2        007F10
+__ptext3                 text3        007E4A
+__ptext4                 text4        007ED4
+__ptext5                 text5        007E2E
+__ptext6                 text6        007E98
+__ptext7                 text7        007F4C
 __ramtop                 ramtop       000600
-__size_of___awdiv        (abs)        000000
 __size_of_initializeLED  (abs)        000000
 __size_of_main           (abs)        000000
 __size_of_on             (abs)        000000
 __size_of_refresh        (abs)        000000
+__size_of_setColHigh     (abs)        000000
+__size_of_setColLow      (abs)        000000
+__size_of_setRowHigh     (abs)        000000
+__size_of_setRowLow      (abs)        000000
 __smallconst             smallconst   000000
-_columns                 bssCOMRAM    000014
-_initializeLED           text4        007D36
-_main                    text0        007D50
-_on                      text2        007DF2
-_refresh                 text1        007E7A
-_refresh$61              cstackCOMRAM 00000E
-_refresh$62              cstackCOMRAM 000010
-_rows                    bssCOMRAM    000015
-end_of_initialization    cinit        007D30
+_initializeLED           text7        007F4C
+_main                    text0        007E66
+_on                      text6        007E98
+_pixels                  bssCOMRAM    000001
+_refresh                 text1        007F9C
+_setColHigh              text5        007E2E
+_setColLow               text4        007ED4
+_setRowHigh              text3        007E4A
+_setRowLow               text2        007F10
+end_of_initialization    cinit        007E28
+initializeLED@i          cstackCOMRAM 000043
+initializeLED@j          cstackCOMRAM 000044
 intlevel0                text         000000
 intlevel1                text         000000
 intlevel2                text         000000
 intlevel3                text         000000
-on@column                cstackCOMRAM 000009
-on@row                   cstackCOMRAM 00000C
-refresh@theCol           cstackCOMRAM 000013
-refresh@theRow           cstackCOMRAM 000012
+on@column                cstackCOMRAM 000041
+on@row                   cstackCOMRAM 000044
+refresh@theCol           cstackCOMRAM 000047
+refresh@theRow           cstackCOMRAM 000048
+setColHigh@column        cstackCOMRAM 000043
+setColLow@column         cstackCOMRAM 000043
+setRowHigh@row           cstackCOMRAM 000043
+setRowLow@row            cstackCOMRAM 000043
 stackhi                  (abs)        0005FF
 stacklo                  (abs)        000080
 start                    init         000000
-start_initialization     cinit        007D2C
+start_initialization     cinit        007E1C
 
 
 FUNCTION INFORMATION:
@@ -376,7 +400,7 @@ FUNCTION INFORMATION:
  Return value:  Size  Location     Type
                   1    wreg      void 
  Registers used:
-		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
  Tracked objects:
 		On entry : 
 		On exit  : 
@@ -399,47 +423,166 @@ Total ram usage:        0 bytes
 
  *************** function _refresh *****************
  Defined at:
-		line 56 in file "Source/LED-API.c"
+		line 76 in file "Source/LED-API.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
-  theCol          1   18[COMRAM] unsigned char 
-  theRow          1   17[COMRAM] unsigned char 
+  theRow          1    7[COMRAM] unsigned char 
+  theCol          1    6[COMRAM] unsigned char 
  Return value:  Size  Location     Type
                   1    wreg      void 
  Registers used:
-		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
  Tracked objects:
 		On entry : 
 		On exit  : 
 		Unchanged: 
  Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
       Params:         0       0       0       0       0       0       0
-      Locals:         6       0       0       0       0       0       0
-      Temps:          5       0       0       0       0       0       0
-      Totals:        11       0       0       0       0       0       0
-Total ram usage:       11 bytes
+      Locals:         2       0       0       0       0       0       0
+      Temps:          3       0       0       0       0       0       0
+      Totals:         5       0       0       0       0       0       0
+Total ram usage:        5 bytes
  Hardware stack levels used:    1
  Hardware stack levels required when called:    1
  This function calls:
-		___awdiv
+		_setColHigh
+		_setColLow
+		_setRowHigh
+		_setRowLow
  This function is called by:
 		_main
  This function uses a non-reentrant model
 
 
- *************** function _on *****************
+ *************** function _setRowLow *****************
  Defined at:
-		line 36 in file "Source/LED-API.c"
+		line 34 in file "Source/LED-API.c"
  Parameters:    Size  Location     Type
   row             1    wreg     unsigned char 
-  column          1    8[COMRAM] unsigned char 
  Auto vars:     Size  Location     Type
-  row             1   11[COMRAM] unsigned char 
+  row             1    2[COMRAM] unsigned char 
  Return value:  Size  Location     Type
                   1    wreg      void 
  Registers used:
-		wreg, fsr2l, fsr2h, status,2, status,0, cstack
+		wreg, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+      Params:         0       0       0       0       0       0       0
+      Locals:         1       0       0       0       0       0       0
+      Temps:          2       0       0       0       0       0       0
+      Totals:         3       0       0       0       0       0       0
+Total ram usage:        3 bytes
+ Hardware stack levels used:    1
+ This function calls:
+		Nothing
+ This function is called by:
+		_refresh
+ This function uses a non-reentrant model
+
+
+ *************** function _setRowHigh *****************
+ Defined at:
+		line 30 in file "Source/LED-API.c"
+ Parameters:    Size  Location     Type
+  row             1    wreg     unsigned char 
+ Auto vars:     Size  Location     Type
+  row             1    2[COMRAM] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		wreg, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+      Params:         0       0       0       0       0       0       0
+      Locals:         1       0       0       0       0       0       0
+      Temps:          2       0       0       0       0       0       0
+      Totals:         3       0       0       0       0       0       0
+Total ram usage:        3 bytes
+ Hardware stack levels used:    1
+ This function calls:
+		Nothing
+ This function is called by:
+		_refresh
+ This function uses a non-reentrant model
+
+
+ *************** function _setColLow *****************
+ Defined at:
+		line 24 in file "Source/LED-API.c"
+ Parameters:    Size  Location     Type
+  column          1    wreg     unsigned char 
+ Auto vars:     Size  Location     Type
+  column          1    2[COMRAM] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		wreg, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+      Params:         0       0       0       0       0       0       0
+      Locals:         1       0       0       0       0       0       0
+      Temps:          2       0       0       0       0       0       0
+      Totals:         3       0       0       0       0       0       0
+Total ram usage:        3 bytes
+ Hardware stack levels used:    1
+ This function calls:
+		Nothing
+ This function is called by:
+		_refresh
+ This function uses a non-reentrant model
+
+
+ *************** function _setColHigh *****************
+ Defined at:
+		line 20 in file "Source/LED-API.c"
+ Parameters:    Size  Location     Type
+  column          1    wreg     unsigned char 
+ Auto vars:     Size  Location     Type
+  column          1    2[COMRAM] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		wreg, status,2, status,0
+ Tracked objects:
+		On entry : 
+		On exit  : 
+		Unchanged: 
+ Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+      Params:         0       0       0       0       0       0       0
+      Locals:         1       0       0       0       0       0       0
+      Temps:          2       0       0       0       0       0       0
+      Totals:         3       0       0       0       0       0       0
+Total ram usage:        3 bytes
+ Hardware stack levels used:    1
+ This function calls:
+		Nothing
+ This function is called by:
+		_refresh
+ This function uses a non-reentrant model
+
+
+ *************** function _on *****************
+ Defined at:
+		line 56 in file "Source/LED-API.c"
+ Parameters:    Size  Location     Type
+  row             1    wreg     unsigned char 
+  column          1    0[COMRAM] unsigned char 
+ Auto vars:     Size  Location     Type
+  row             1    3[COMRAM] unsigned char 
+ Return value:  Size  Location     Type
+                  1    wreg      void 
+ Registers used:
+		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh
  Tracked objects:
 		On entry : 
 		On exit  : 
@@ -451,69 +594,35 @@ Total ram usage:       11 bytes
       Totals:         4       0       0       0       0       0       0
 Total ram usage:        4 bytes
  Hardware stack levels used:    1
- Hardware stack levels required when called:    1
  This function calls:
-		___awdiv
+		Nothing
  This function is called by:
 		_main
  This function uses a non-reentrant model
 
 
- *************** function ___awdiv *****************
- Defined at:
-		line 8 in file "C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\awdiv.c"
- Parameters:    Size  Location     Type
-  dividend        2    0[COMRAM] int 
-  divisor         2    2[COMRAM] int 
- Auto vars:     Size  Location     Type
-  quotient        2    6[COMRAM] int 
-  sign            1    5[COMRAM] unsigned char 
-  counter         1    4[COMRAM] unsigned char 
- Return value:  Size  Location     Type
-                  2    0[COMRAM] int 
- Registers used:
-		wreg, status,2, status,0
- Tracked objects:
-		On entry : 
-		On exit  : 
-		Unchanged: 
- Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
-      Params:         4       0       0       0       0       0       0
-      Locals:         4       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0
-      Totals:         8       0       0       0       0       0       0
-Total ram usage:        8 bytes
- Hardware stack levels used:    1
- This function calls:
-		Nothing
- This function is called by:
-		_on
-		_refresh
-		_off
- This function uses a non-reentrant model
-
-
  *************** function _initializeLED *****************
  Defined at:
-		line 25 in file "Source/LED-API.c"
+		line 40 in file "Source/LED-API.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
-		None
+  j               1    3[COMRAM] unsigned char 
+  i               1    2[COMRAM] unsigned char 
  Return value:  Size  Location     Type
-                  2    4[None  ] int 
+                  1    wreg      void 
  Registers used:
-		wreg, status,2
+		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh
  Tracked objects:
 		On entry : 
 		On exit  : 
 		Unchanged: 
  Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
       Params:         0       0       0       0       0       0       0
-      Locals:         0       0       0       0       0       0       0
-      Temps:          0       0       0       0       0       0       0
-      Totals:         0       0       0       0       0       0       0
-Total ram usage:        0 bytes
+      Locals:         2       0       0       0       0       0       0
+      Temps:          2       0       0       0       0       0       0
+      Totals:         4       0       0       0       0       0       0
+Total ram usage:        4 bytes
  Hardware stack levels used:    1
  This function calls:
 		Nothing
@@ -526,25 +635,24 @@ Total ram usage:        0 bytes
 MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
-C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\awdiv.c
-		___awdiv       		CODE           	7D6E	0000	133
-
-C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\awdiv.c estimated size: 133
-
 shared
-		__initialization		CODE           	7D2C	0000	5
+		__initialization		CODE           	7E1C	0000	13
 
-shared estimated size: 5
+shared estimated size: 13
 
 main.c
-		_main          		CODE           	7D50	0000	31
+		_main          		CODE           	7E66	0000	51
 
-main.c estimated size: 31
+main.c estimated size: 51
 
 Source/LED-API.c
-		_refresh       		CODE           	7E7A	0000	391
-		_on            		CODE           	7DF2	0000	137
-		_initializeLED 		CODE           	7D36	0000	27
+		_setColHigh    		CODE           	7E2E	0000	29
+		_setRowHigh    		CODE           	7E4A	0000	29
+		_refresh       		CODE           	7F9C	0000	101
+		_on            		CODE           	7E98	0000	61
+		_setColLow     		CODE           	7ED4	0000	61
+		_setRowLow     		CODE           	7F10	0000	61
+		_initializeLED 		CODE           	7F4C	0000	81
 
-Source/LED-API.c estimated size: 555
+Source/LED-API.c estimated size: 423
 

@@ -3954,11 +3954,31 @@ extern __nonreentrant void _delay3(unsigned char);
 # 13 "Header\LED-API.h"
 extern void on(unsigned char row, unsigned char column);
 extern void off(unsigned char row, unsigned char column);
+extern void initializeLED();
 extern void refresh();
 
-# 22 "Source/LED-API.c"
-unsigned char columns[1];
-unsigned char rows[1];
+# 18 "Source/LED-API.c"
+unsigned char pixels[8][8];
+
+void setColHigh(unsigned char column)
+{
+LATA |= (1 << column);
+}
+void setColLow(unsigned char column)
+{
+if(LATA & (1 << column))
+LATA &= ~(1 << column);
+}
+
+void setRowHigh(unsigned char row)
+{
+LATC |= (1 << row);
+}
+void setRowLow(unsigned char row)
+{
+if(LATC & (1 << row))
+LATC &= ~(1 << row);
+}
 
 void initializeLED() {
 TRISA = 0b00000000;
@@ -3967,41 +3987,45 @@ LATC = 0b00000000;
 LATA = 0b00000000;
 
 
-columns[0] = 0;
-rows[0] = 0;
+for(unsigned char i; i < 8; i++)
+{
+for (unsigned char j; j < 8; j++)
+{
+pixels[i][j] = 0;
+}
+}
 }
 
 void on(unsigned char row, unsigned char column) {
-if (row < 0 || row > 7)
+
+if (row < 0 || row > 8)
 return;
-if (column < 0 || column > 7)
+if (column < 0 || column > 8)
 return;
 
-(columns[column/8] |= (1 << (column%8));
-(rows[row/8] |= (1 << (row%8));
+pixels[column][row] = 1;
 }
 
 void off(unsigned char row, unsigned char column) {
-if (row < 0 || row > 7)
+
+if (row < 0 || row > 8)
 return;
-if (column < 0 || column > 7)
+if (column < 0 || column > 8)
 return;
 
-(columns[column/8] &= ~(1 << (column%8)));
-(rows[row/8] &= ~(1 << (row%8)));
+pixels[column][row] = 0;
 }
 
 void refresh() {
-for(unsigned char theRow = 0; theRow < 8; theRow++)
+for(unsigned char theCol = 0; theCol < 8; theCol++)
 {
-(LATC |= (1 << theRow));
-for (unsigned char theCol = 0; theCol < 8; theCol++) {
-if (( (columns[theCol/8] & (1 << (theCol%8) )) != 0) && ( (rows[theRow/8] & (1 << (theRow%8) )) != 0))
-(LATA |= (1 << theCol));
+setColHigh(theCol);
+for (unsigned char theRow = 0; theRow < 8; theRow++) {
+if (pixels[theCol][theRow] == 1)
+setRowHigh(theRow);
 else
-(LATA = (LATA & (1 << theCol)) ? LATA ^ (1 << theCol) : LATA);
+setRowLow(theRow);
 }
-(LATC = (LATC & (1 << theRow)) ? LATC ^ (1 << theRow) : LATC);
+setColLow(theCol);
 }
-
 }

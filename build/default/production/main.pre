@@ -4010,6 +4010,7 @@ extern __nonreentrant void _delay3(unsigned char);
 # 13 "Header/LED-API.h"
 extern void on(unsigned char row, unsigned char column);
 extern void off(unsigned char row, unsigned char column);
+extern void initializeLED();
 extern void refresh();
 
 # 13 "main.c"
@@ -4024,6 +4025,8 @@ initializeLED();
 
 on(5, 6);
 on(3, 2);
+on(0, 0);
+on(7, 7);
 while(1)
 {
 refresh();

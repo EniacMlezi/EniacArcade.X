@@ -18,9 +18,12 @@ void delaySeconds(int numberOfSeconds)
 
 void main(void) { 
     initializeLED();
-   
+    
     on(5, 6);
     on(3, 2);
+    on(0, 0);
+    on(7, 7);
+    
     while(1)
     {
         refresh();

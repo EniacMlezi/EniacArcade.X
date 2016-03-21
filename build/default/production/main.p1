@@ -4,11 +4,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v __delay `JF3183 ~T0 @X0 0 e ]
 [p i __delay ]
 [p mainexit ]
-"20 main.c
-[v _initializeLED `(i ~T0 @X0 0 ef ]
-"13 Header/LED-API.h
+"15 Header/LED-API.h
+[v _initializeLED `(v ~T0 @X0 0 ef ]
+"13
 [v _on `(v ~T0 @X0 0 ef2`uc`uc ]
-"15
+"16
 [v _refresh `(v ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
@@ -3052,7 +3052,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p x EBTRB=OFF ]
 [; ;LED-API.h: 13: extern void on(unsigned char row, unsigned char column);
 [; ;LED-API.h: 14: extern void off(unsigned char row, unsigned char column);
-[; ;LED-API.h: 15: extern void refresh();
+[; ;LED-API.h: 15: extern void initializeLED();
+[; ;LED-API.h: 16: extern void refresh();
 "13 main.c
 [v _delaySeconds `(v ~T0 @X0 1 ef1`i ]
 "14
@@ -3100,23 +3101,29 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 23: on(3, 2);
 "23
 [e ( _on (2 , -> -> 3 `i `uc -> -> 2 `i `uc ]
-[; ;main.c: 24: while(1)
+[; ;main.c: 24: on(0, 0);
 "24
-[e :U 351 ]
-[; ;main.c: 25: {
+[e ( _on (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
+[; ;main.c: 25: on(7, 7);
 "25
-{
-[; ;main.c: 26: refresh();
+[e ( _on (2 , -> -> 7 `i `uc -> -> 7 `i `uc ]
+[; ;main.c: 26: while(1)
 "26
-[e ( _refresh ..  ]
+[e :U 351 ]
+[; ;main.c: 27: {
 "27
+{
+[; ;main.c: 28: refresh();
+"28
+[e ( _refresh ..  ]
+"29
 }
 [e :U 350 ]
-"24
+"26
 [e $U 351  ]
 [e :U 352 ]
-[; ;main.c: 27: }
-[; ;main.c: 28: }
-"28
+[; ;main.c: 29: }
+[; ;main.c: 30: }
+"30
 [e :UE 349 ]
 }
