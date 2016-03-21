@@ -1,15 +1,20 @@
 __CFG_XINST$OFF 0 0 ABS 0
+__size_of_allOff 0 0 ABS 0
+__end_of_setColHigh 7EF6 0 CODE 0
+_on 7F12 0 CODE 0
 __S0 30000E 0 ABS 0
-__S1 E 0 ABS 0
+__S1 100 0 ABS 0
 __S2 0 0 ABS 0
 __Hintentry 0 0 ABS 0
 __CFG_PWRT$OFF 0 0 ABS 0
 __Lintentry 0 0 ABS 0
 _LATA F89 0 ABS 0
 _LATC F8B 0 ABS 0
-_main 7F76 0 CODE 0
+_LATD F8C 0 ABS 0
+_main 7EC6 0 CODE 0
 ___sp 0 0 STACK 2
 start 0 0 CODE 0
+__end_of_setRowHigh 7F12 0 CODE 0
 _TRISA F92 0 ABS 0
 _TRISC F94 0 ABS 0
 __Hirdata 0 0 CODE 0
@@ -19,7 +24,8 @@ __LRAM 1 0 ABS 0
 __CFG_WDTPS$32768 0 0 ABS 0
 __Hconfig 30000E 0 CONFIG 0
 __Lconfig 300000 0 CONFIG 0
-main@i C 0 COMRAM 1
+__size_of_setRowHigh 0 0 ABS 0
+__end_of_refresh 8000 0 CODE 0
 __Hbigram 0 0 ABS 0
 __Lbigram 0 0 ABS 0
 __Hrparam 0 0 COMRAM 1
@@ -36,8 +42,13 @@ __Lbss 0 0 RAM 1
 ___param_bank 10 0 ABS 0
 __Hnvrram 0 0 COMRAM 1
 __Lnvrram 0 0 COMRAM 1
+on@row 1 0 COMRAM 1
+__size_of_initializeLED 0 0 ABS 0
+__size_of_refresh 0 0 ABS 0
 __Heeprom_data 0 0 EEDATA 0
 __Leeprom_data 0 0 EEDATA 0
+on@column 4 0 COMRAM 1
+setColHigh@column 3 0 COMRAM 1
 __Hintsave_regs 0 0 BIGRAM 1
 __Lintsave_regs 0 0 BIGRAM 1
 __Hbigbss 0 0 BIGRAM 1
@@ -61,38 +72,41 @@ __Lfardata 0 0 FARRAM 0
 __Habs1 0 0 ABS 0
 __Labs1 0 0 ABS 0
 __CFG_EBTR0$OFF 0 0 ABS 0
-__end_of_delaySeconds 8000 0 CODE 0
 __CFG_OSC$INTIO67 0 0 ABS 0
 __HnvFARRAM 0 0 FARRAM 0
 __LnvFARRAM 0 0 FARRAM 0
+initializeLED@j 4 0 COMRAM 1
 __CFG_EBTR1$OFF 0 0 ABS 0
 __CFG_PBADEN$OFF 0 0 ABS 0
 __CFG_CCP2MX$PORTC 0 0 ABS 0
 __CFG_EBTR2$OFF 0 0 ABS 0
+__size_of_on 0 0 ABS 0
+_allOff 7EA6 0 CODE 0
 __Hdata 0 0 ABS 0
 __Ldata 0 0 ABS 0
 __CFG_EBTR3$OFF 0 0 ABS 0
 stackhi 5FF 0 ABS 0
 __Htemp 0 0 COMRAM 1
 __Ltemp 0 0 COMRAM 1
-stacklo 80 0 ABS 0
+stacklo 100 0 ABS 0
 __Hrbit 0 0 COMRAM 1
 __Lrbit 0 0 COMRAM 1
 __Hinit 0 0 CODE 0
 __Linit 0 0 CODE 0
 __Hintcodelo 0 0 CODE 0
 __Lintcodelo 0 0 CODE 0
-___wmul 7F50 0 CODE 0
 __Hrbss 0 0 COMRAM 1
-__end_of_main 7FBA 0 CODE 0
+__end_of_main 7EDA 0 CODE 0
 __Lrbss 0 0 COMRAM 1
+_pixels 80 0 BANK0 1
 __Htext 0 0 ABS 0
 __Ltext 0 0 ABS 0
-___wmul@multiplier 1 0 COMRAM 1
-end_of_initialization 7F4A 0 CODE 0
-___wmul@multiplicand 3 0 COMRAM 1
+end_of_initialization 7EC0 0 CODE 0
+refresh@theCol 7 0 COMRAM 1
+_setColHigh 7EDA 0 CODE 0
 __Hibigdata 0 0 CODE 0
 __Libigdata 0 0 CODE 0
+_setRowHigh 7EF6 0 CODE 0
 __Hifardata 0 0 CODE 0
 __Lifardata 0 0 CODE 0
 __Hbank0 0 0 ABS 0
@@ -113,17 +127,30 @@ __Htext0 0 0 ABS 0
 __Ltext0 0 0 ABS 0
 __Htext1 0 0 ABS 0
 __Ltext1 0 0 ABS 0
-__ptext0 7F76 0 CODE 0
+__ptext0 7EC6 0 CODE 0
 __Htext2 0 0 ABS 0
 __Ltext2 0 0 ABS 0
-__ptext1 7FBA 0 CODE 0
-__ptext2 7F50 0 CODE 0
-delaySeconds@numberOfSeconds 7 0 COMRAM 1
+__ptext1 7F9E 0 CODE 0
+__Htext3 0 0 ABS 0
+__Ltext3 0 0 ABS 0
+__ptext2 7EF6 0 CODE 0
+__Htext4 0 0 ABS 0
+__Ltext4 0 0 ABS 0
+__ptext3 7EDA 0 CODE 0
+__Htext5 0 0 ABS 0
+__Ltext5 0 0 ABS 0
+__ptext4 7EA6 0 CODE 0
+__Htext6 0 0 ABS 0
+__Ltext6 0 0 ABS 0
+__ptext5 7F12 0 CODE 0
+__ptext6 7F4E 0 CODE 0
 __Hclrtext 0 0 ABS 0
 __Lclrtext 0 0 ABS 0
-__size_of_delaySeconds 0 0 ABS 0
-__end_of__initialization 7F4A 0 CODE 0
+setRowHigh@row 3 0 COMRAM 1
+__end_of__initialization 7EC0 0 CODE 0
+__end_of_allOff 7EB4 0 CODE 0
 ___rparam_used 1 0 ABS 0
+_initializeLED 7F4E 0 CODE 0
 __Hidata 0 0 CODE 0
 __Lidata 0 0 CODE 0
 __Hrdata 0 0 COMRAM 1
@@ -139,7 +166,8 @@ __HcstackCOMRAM 0 0 ABS 0
 __Lspace_0 0 0 ABS 0
 __LcstackCOMRAM 0 0 ABS 0
 __pcstackCOMRAM 1 0 COMRAM 1
-__Hspace_1 E 0 ABS 0
+_refresh 7F9E 0 CODE 0
+__Hspace_1 100 0 ABS 0
 __Lspace_1 0 0 ABS 0
 __Hsmallconst 0 0 SMALLCONST 0
 __Lsmallconst 0 0 SMALLCONST 0
@@ -147,19 +175,22 @@ __Hspace_2 0 0 ABS 0
 __Lspace_2 0 0 ABS 0
 __Hnvbit 0 0 COMRAM 1
 __Lnvbit 0 0 COMRAM 1
-?___wmul 1 0 COMRAM 1
 __Hcinit 0 0 ABS 0
 __Lcinit 0 0 ABS 0
-__pcinit 7F4A 0 CODE 0
+__pcinit 7EB4 0 CODE 0
 __CFG_EBTRB$OFF 0 0 ABS 0
 __ramtop 600 0 RAM 0
 __mediumconst 0 0 MEDIUMCONST 0
 __size_of_main 0 0 ABS 0
 __Hconst 0 0 CONST 0
 __Lconst 0 0 CONST 0
+__end_of_on 7F4E 0 CODE 0
 __CFG_WRT0$OFF 0 0 ABS 0
 __CFG_WRT1$OFF 0 0 ABS 0
+__HbssBANK0 0 0 ABS 0
+__LbssBANK0 0 0 ABS 0
 __CFG_WRT2$OFF 0 0 ABS 0
+__pbssBANK0 80 0 BANK0 1
 __CFG_WRT3$OFF 0 0 ABS 0
 __CFG_FCMEN$OFF 0 0 ABS 0
 ___inthi_sp 0 0 STACK 2
@@ -171,12 +202,10 @@ __Lend_init 0 0 CODE 0
 __CFG_CP0$OFF 0 0 ABS 0
 __smallconst 0 0 SMALLCONST 0
 __CFG_CP1$OFF 0 0 ABS 0
-__size_of___wmul 0 0 ABS 0
 __Hreset_vec 0 0 CODE 0
 __Lreset_vec 0 0 CODE 0
 __CFG_CP2$OFF 0 0 ABS 0
 __CFG_CP3$OFF 0 0 ABS 0
-_delaySeconds 7FBA 0 CODE 0
 __accesstop 80 0 ABS 0
 __Hintcode_body 0 0 ABS 0
 __Lintcode_body 0 0 ABS 0
@@ -187,57 +216,96 @@ intlevel2 0 0 CODE 0
 intlevel3 0 0 CODE 0
 __CFG_WRTC$OFF 0 0 ABS 0
 __CFG_WRTD$OFF 0 0 ABS 0
+__end_of_initializeLED 7F9E 0 CODE 0
+initializeLED@i 3 0 COMRAM 1
 __CFG_CPB$OFF 0 0 ABS 0
-__end_of___wmul 7F76 0 CODE 0
 __CFG_CPD$OFF 0 0 ABS 0
-start_initialization 7F4A 0 CODE 0
+start_initialization 7EB4 0 CODE 0
+refresh@theRow 8 0 COMRAM 1
 __CFG_IESO$OFF 0 0 ABS 0
 __CFG_MCLRE$ON 0 0 ABS 0
-__initialization 7F4A 0 CODE 0
+__initialization 7EB4 0 CODE 0
 __CFG_LPT1OSC$OFF 0 0 ABS 0
-delaySeconds@i A 0 COMRAM 1
 __activetblptr 0 0 ABS 0
-___wmul@product 5 0 COMRAM 1
+__size_of_setColHigh 0 0 ABS 0
 __CFG_WDT$OFF 0 0 ABS 0
 __CFG_LVP$OFF 0 0 ABS 0
 %segments
 reset_vec 0 3 CODE 0 0
 config 300000 30000D CONFIG 300000 0
 idloc 200000 200007 IDLOC 200000 0
-cstackCOMRAM 1 D COMRAM 1 1
-text1 7FBA 7FFF CODE 7FBA 0
-text0 7F76 7FB9 CODE 7F76 0
-text2 7F50 7F75 CODE 7F50 0
-cinit 7F4A 7F4F CODE 7F4A 0
+cstackCOMRAM 1 8 COMRAM 1 1
+bssBANK0 80 FF BANK0 80 1
+text1 7F9E 7FFF CODE 7F9E 0
+text6 7F4E 7F9D CODE 7F4E 0
+text5 7F12 7F4D CODE 7F12 0
+text2 7EF6 7F11 CODE 7EF6 0
+text3 7EDA 7EF5 CODE 7EDA 0
+text0 7EC6 7ED9 CODE 7EC6 0
+cinit 7EB4 7EC5 CODE 7EB4 0
+text4 7EA6 7EB3 CODE 7EA6 0
 %locals
 dist/default/production\EniacArcade.X.production.obj
 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f4520.h
-C:\Users\larsg\AppData\Local\Temp\s3vo.
-505 7F4A 0 CODE 0
-507 7F4A 0 CODE 0
-510 7F4A 0 CODE 0
-516 7F4A 0 CODE 0
-518 7F4A 0 CODE 0
-519 7F4C 0 CODE 0
+C:\Users\larsg\AppData\Local\Temp\s4eo.
+788 7EB4 0 CODE 0
+790 7EB4 0 CODE 0
+793 7EB4 0 CODE 0
+805 7EB4 0 CODE 0
+806 7EB8 0 CODE 0
+807 7EBA 0 CODE 0
+808 7EBA 0 CODE 0
+809 7EBC 0 CODE 0
+810 7EBE 0 CODE 0
+816 7EC0 0 CODE 0
+818 7EC0 0 CODE 0
+819 7EC2 0 CODE 0
 main.c
-19 7F76 0 CODE 0
-20 7F76 0 CODE 0
-21 7F7A 0 CODE 0
-23 7F7E 0 CODE 0
-24 7F80 0 CODE 0
-25 7F84 0 CODE 0
-27 7F9E 0 CODE 0
-28 7FAA 0 CODE 0
-25 7FB0 0 CODE 0
-30 7FB6 0 CODE 0
-main.c
-32 7FBA 0 CODE 0
-34 7FBA 0 CODE 0
-35 7FC4 0 CODE 0
-34 7FD2 0 CODE 0
-C:\Program Files (x86)\Microchip\xc8\v1.36\sources\common\Umul16.c
-15 7F50 0 CODE 0
-37 7F50 0 CODE 0
-38 7F5C 0 CODE 0
-39 7F64 0 CODE 0
-52 7F6C 0 CODE 0
+19 7EC6 0 CODE 0
+20 7EC6 0 CODE 0
+22 7ECA 0 CODE 0
+24 7ED4 0 CODE 0
+26 7ED4 0 CODE 0
+24 7ED8 0 CODE 0
+Source/LED-API.c
+67 7F9E 0 CODE 0
+69 7F9E 0 CODE 0
+71 7FAA 0 CODE 0
+73 7FB6 0 CODE 0
+74 7FE0 0 CODE 0
+71 7FE6 0 CODE 0
+80 7FEA 0 CODE 0
+81 7FF0 0 CODE 0
+82 7FF8 0 CODE 0
+69 7FFC 0 CODE 0
+Source/LED-API.c
+23 7EF6 0 CODE 0
+24 7EF8 0 CODE 0
+25 7F10 0 CODE 0
+Source/LED-API.c
+19 7EDA 0 CODE 0
+20 7EDC 0 CODE 0
+21 7EF4 0 CODE 0
+Source/LED-API.c
+61 7EA6 0 CODE 0
+62 7EA6 0 CODE 0
+63 7EAA 0 CODE 0
+64 7EAE 0 CODE 0
+65 7EB2 0 CODE 0
+Source/LED-API.c
+41 7F12 0 CODE 0
+43 7F14 0 CODE 0
+45 7F1C 0 CODE 0
+48 7F24 0 CODE 0
+49 7F4C 0 CODE 0
+Source/LED-API.c
+27 7F4E 0 CODE 0
+28 7F4E 0 CODE 0
+29 7F52 0 CODE 0
+30 7F56 0 CODE 0
+31 7F5A 0 CODE 0
+34 7F5E 0 CODE 0
+35 7F66 0 CODE 0
+36 7F6E 0 CODE 0
+35 7F96 0 CODE 0
+34 7F9A 0 CODE 0
