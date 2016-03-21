@@ -4008,8 +4008,8 @@ extern __nonreentrant void _delay3(unsigned char);
 #pragma config EBTRB = OFF
 
 # 13 "Header/LED-API.h"
-extern void on(unsigned char row, unsigned char column);
-extern void off(unsigned char row, unsigned char column);
+extern void on(unsigned char column, unsigned char row);
+extern void off(unsigned char column, unsigned char row);
 extern void initializeLED();
 extern void refresh();
 
@@ -4023,11 +4023,7 @@ _delay((unsigned long)((10)*(1000000/4000.0)));
 void main(void) {
 initializeLED();
 
-on(5, 6);
-on(3, 2);
-on(0, 0);
-on(4, 5);
-on(7, 6);
+on(2, 2);
 
 while(1)
 {

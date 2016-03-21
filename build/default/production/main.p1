@@ -3050,8 +3050,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p x EBTR3=OFF ]
 "64
 [p x EBTRB=OFF ]
-[; ;LED-API.h: 13: extern void on(unsigned char row, unsigned char column);
-[; ;LED-API.h: 14: extern void off(unsigned char row, unsigned char column);
+[; ;LED-API.h: 13: extern void on(unsigned char column, unsigned char row);
+[; ;LED-API.h: 14: extern void off(unsigned char column, unsigned char row);
 [; ;LED-API.h: 15: extern void initializeLED();
 [; ;LED-API.h: 16: extern void refresh();
 "13 main.c
@@ -3095,38 +3095,26 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 20: initializeLED();
 "20
 [e ( _initializeLED ..  ]
-[; ;main.c: 22: on(5, 6);
+[; ;main.c: 22: on(2, 2);
 "22
-[e ( _on (2 , -> -> 5 `i `uc -> -> 6 `i `uc ]
-[; ;main.c: 23: on(3, 2);
-"23
-[e ( _on (2 , -> -> 3 `i `uc -> -> 2 `i `uc ]
-[; ;main.c: 24: on(0, 0);
+[e ( _on (2 , -> -> 2 `i `uc -> -> 2 `i `uc ]
+[; ;main.c: 24: while(1)
 "24
-[e ( _on (2 , -> -> 0 `i `uc -> -> 0 `i `uc ]
-[; ;main.c: 25: on(4, 5);
-"25
-[e ( _on (2 , -> -> 4 `i `uc -> -> 5 `i `uc ]
-[; ;main.c: 26: on(7, 6);
-"26
-[e ( _on (2 , -> -> 7 `i `uc -> -> 6 `i `uc ]
-[; ;main.c: 28: while(1)
-"28
 [e :U 351 ]
-[; ;main.c: 29: {
-"29
+[; ;main.c: 25: {
+"25
 {
-[; ;main.c: 30: refresh();
-"30
+[; ;main.c: 26: refresh();
+"26
 [e ( _refresh ..  ]
-"31
+"27
 }
 [e :U 350 ]
-"28
+"24
 [e $U 351  ]
 [e :U 352 ]
-[; ;main.c: 31: }
-[; ;main.c: 32: }
-"32
+[; ;main.c: 27: }
+[; ;main.c: 28: }
+"28
 [e :UE 349 ]
 }

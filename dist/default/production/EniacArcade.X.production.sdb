@@ -29,79 +29,79 @@
 [v _main main `(v  1 e 1 0 ]
 "19 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
 [v _setColHigh setColHigh `(v  1 e 1 0 ]
-"29
+"23
 [v _setRowHigh setRowHigh `(v  1 e 1 0 ]
-"39
-[v _allOff allOff `(v  1 e 1 0 ]
-"45
+"27
 [v _initializeLED initializeLED `(v  1 e 1 0 ]
-"61
+"41
 [v _on on `(v  1 e 1 0 ]
-"81
+"61
+[v _allOff allOff `(v  1 e 1 0 ]
+"67
 [v _refresh refresh `(v  1 e 1 0 ]
 "992 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f4520.h
 [v _LATA LATA `VEuc  1 e 1 @3977 ]
 "1256
 [v _LATC LATC `VEuc  1 e 1 @3979 ]
+"1388
+[v _LATD LATD `VEuc  1 e 1 @3980 ]
 "1577
 [v _TRISA TRISA `VEuc  1 e 1 @3986 ]
 "2019
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
 "17 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
-[v _pixels pixels `[8][8]uc  1 e 64 0 ]
+[v _pixels pixels `[8][16]uc  1 e 128 0 ]
 "19 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"32
+"28
 } 0
-"81 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+"67 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
 [v _refresh refresh `(v  1 e 1 0 ]
 {
-"87
+"71
 [v refresh@theRow theRow `uc  1 a 1 7 ]
-"84
+"69
 [v refresh@theCol theCol `uc  1 a 1 6 ]
-"95
+"84
 } 0
-"29
+"23
 [v _setRowHigh setRowHigh `(v  1 e 1 0 ]
 {
 [v setRowHigh@row row `uc  1 a 1 wreg ]
 [v setRowHigh@row row `uc  1 a 1 wreg ]
-"31
 [v setRowHigh@row row `uc  1 a 1 2 ]
-"32
+"25
 } 0
 "19
 [v _setColHigh setColHigh `(v  1 e 1 0 ]
 {
 [v setColHigh@column column `uc  1 a 1 wreg ]
 [v setColHigh@column column `uc  1 a 1 wreg ]
-"21
 [v setColHigh@column column `uc  1 a 1 2 ]
-"22
-} 0
-"39
-[v _allOff allOff `(v  1 e 1 0 ]
-{
-"43
+"21
 } 0
 "61
+[v _allOff allOff `(v  1 e 1 0 ]
+{
+"65
+} 0
+"41
 [v _on on `(v  1 e 1 0 ]
 {
-[v on@row row `uc  1 a 1 wreg ]
-[v on@row row `uc  1 a 1 wreg ]
-[v on@column column `uc  1 p 1 0 ]
-"63
-[v on@row row `uc  1 a 1 3 ]
-"69
+[v on@column column `uc  1 a 1 wreg ]
+[v on@column column `uc  1 a 1 wreg ]
+[v on@row row `uc  1 p 1 0 ]
+"43
+[v on@column column `uc  1 a 1 3 ]
+"49
 } 0
-"45
+"27
 [v _initializeLED initializeLED `(v  1 e 1 0 ]
 {
-"54
+"35
 [v initializeLED@j j `uc  1 a 1 3 ]
-"52
+"34
 [v initializeLED@i i `uc  1 a 1 2 ]
-"59
+"39
 } 0

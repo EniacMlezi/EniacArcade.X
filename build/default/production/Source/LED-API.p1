@@ -7,6 +7,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TRISA `Vuc ~T0 @X0 0 e@3986 ]
 "2019
 [v _TRISC `Vuc ~T0 @X0 0 e@3988 ]
+"1388
+[v _LATD `Vuc ~T0 @X0 0 e@3980 ]
 [v F3183 `(v ~T0 @X0 1 tf1`ul ]
 "156 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18.h
 [v __delay `JF3183 ~T0 @X0 0 e ]
@@ -2985,307 +2987,237 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 156: extern __nonreentrant void _delay(unsigned long);
 [; ;pic18.h: 158: extern __nonreentrant void _delaywdt(unsigned long);
 [; ;pic18.h: 160: extern __nonreentrant void _delay3(unsigned char);
-[; ;LED-API.h: 13: extern void on(unsigned char row, unsigned char column);
-[; ;LED-API.h: 14: extern void off(unsigned char row, unsigned char column);
+[; ;LED-API.h: 13: extern void on(unsigned char column, unsigned char row);
+[; ;LED-API.h: 14: extern void off(unsigned char column, unsigned char row);
 [; ;LED-API.h: 15: extern void initializeLED();
 [; ;LED-API.h: 16: extern void refresh();
-[v F3199 `uc ~T0 @X0 -> 8 `i t ]
+[v F3199 `uc ~T0 @X0 -> 16 `i t ]
 "17 Source/LED-API.c
 [v _pixels `F3199 ~T0 @X0 -> 8 `i e ]
-[; ;LED-API.c: 17: unsigned char pixels[8][8];
+[; ;LED-API.c: 17: unsigned char pixels[8][16];
 "19
 [v _setColHigh `(v ~T0 @X0 1 ef1`uc ]
-"20
 {
-[; ;LED-API.c: 19: void setColHigh(unsigned char column)
-[; ;LED-API.c: 20: {
+[; ;LED-API.c: 19: void setColHigh(unsigned char column) {
 [e :U _setColHigh ]
-"19
 [v _column `uc ~T0 @X0 1 r1 ]
-"20
 [f ]
-[; ;LED-API.c: 21: LATA |= (1 << column);
-"21
+[; ;LED-API.c: 20: LATA |= (1 << column);
+"20
 [e =| _LATA -> << -> 1 `i _column `uc ]
-[; ;LED-API.c: 22: }
-"22
+[; ;LED-API.c: 21: }
+"21
 [e :UE 344 ]
 }
 "23
-[v _setColLow `(v ~T0 @X0 1 ef1`uc ]
-"24
+[v _setRowHigh `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;LED-API.c: 23: void setColLow(unsigned char column)
-[; ;LED-API.c: 24: {
-[e :U _setColLow ]
-"23
-[v _column `uc ~T0 @X0 1 r1 ]
-"24
+[; ;LED-API.c: 23: void setRowHigh(unsigned char row) {
+[e :U _setRowHigh ]
+[v _row `uc ~T0 @X0 1 r1 ]
 [f ]
-[; ;LED-API.c: 25: if(LATA & (1 << column))
+[; ;LED-API.c: 24: LATC |= (1 << row);
+"24
+[e =| _LATC -> << -> 1 `i _row `uc ]
+[; ;LED-API.c: 25: }
 "25
-[e $ ! != & -> _LATA `i << -> 1 `i _column -> 0 `i 346  ]
-[; ;LED-API.c: 26: LATA &= ~(1 << column);
-"26
-[e =& _LATA -> ~ << -> 1 `i _column `uc ]
-[e :U 346 ]
-[; ;LED-API.c: 27: }
-"27
 [e :UE 345 ]
 }
-"29
-[v _setRowHigh `(v ~T0 @X0 1 ef1`uc ]
-"30
-{
-[; ;LED-API.c: 29: void setRowHigh(unsigned char row)
-[; ;LED-API.c: 30: {
-[e :U _setRowHigh ]
-"29
-[v _row `uc ~T0 @X0 1 r1 ]
-"30
-[f ]
-[; ;LED-API.c: 31: LATC |= (1 << row);
-"31
-[e =| _LATC -> << -> 1 `i _row `uc ]
-[; ;LED-API.c: 32: }
-"32
-[e :UE 347 ]
-}
-"33
-[v _setRowLow `(v ~T0 @X0 1 ef1`uc ]
-"34
-{
-[; ;LED-API.c: 33: void setRowLow(unsigned char row)
-[; ;LED-API.c: 34: {
-[e :U _setRowLow ]
-"33
-[v _row `uc ~T0 @X0 1 r1 ]
-"34
-[f ]
-[; ;LED-API.c: 35: if(LATC & (1 << row))
-"35
-[e $ ! != & -> _LATC `i << -> 1 `i _row -> 0 `i 349  ]
-[; ;LED-API.c: 36: LATC &= ~(1 << row);
-"36
-[e =& _LATC -> ~ << -> 1 `i _row `uc ]
-[e :U 349 ]
-[; ;LED-API.c: 37: }
-"37
-[e :UE 348 ]
-}
-"39
-[v _allOff `(v ~T0 @X0 1 ef ]
-"40
-{
-[; ;LED-API.c: 39: void allOff()
-[; ;LED-API.c: 40: {
-[e :U _allOff ]
-[f ]
-[; ;LED-API.c: 41: LATA = 0;
-"41
-[e = _LATA -> -> 0 `i `uc ]
-[; ;LED-API.c: 42: LATC = 0;
-"42
-[e = _LATC -> -> 0 `i `uc ]
-[; ;LED-API.c: 43: }
-"43
-[e :UE 350 ]
-}
-"45
+"27
 [v _initializeLED `(v ~T0 @X0 1 ef ]
 {
-[; ;LED-API.c: 45: void initializeLED() {
+[; ;LED-API.c: 27: void initializeLED() {
 [e :U _initializeLED ]
 [f ]
-[; ;LED-API.c: 46: TRISA = 0b00000000;
-"46
+[; ;LED-API.c: 28: TRISA = 0b00000000;
+"28
 [e = _TRISA -> -> 0 `i `uc ]
-[; ;LED-API.c: 47: TRISC = 0b00000000;
-"47
+[; ;LED-API.c: 29: TRISC = 0b00000000;
+"29
 [e = _TRISC -> -> 0 `i `uc ]
-[; ;LED-API.c: 48: LATC = 0b00000000;
-"48
+[; ;LED-API.c: 30: LATC = 0b00000000;
+"30
 [e = _LATC -> -> 0 `i `uc ]
-[; ;LED-API.c: 49: LATA = 0b00000000;
-"49
+[; ;LED-API.c: 31: LATA = 0b00000000;
+"31
 [e = _LATA -> -> 0 `i `uc ]
-[; ;LED-API.c: 52: for(unsigned char i; i < 8; i++)
-"52
+[; ;LED-API.c: 34: for (unsigned char i; i < 8; i++) {
+"34
 {
 [v _i `uc ~T0 @X0 1 a ]
-[e $ < -> _i `i -> 8 `i 352  ]
-[e $U 353  ]
-"53
-[e :U 352 ]
-[; ;LED-API.c: 53: {
+[e $ < -> _i `i -> 8 `i 347  ]
+[e $U 348  ]
+[e :U 347 ]
 {
-[; ;LED-API.c: 54: for (unsigned char j; j < 8; j++)
-"54
+[; ;LED-API.c: 35: for (unsigned char j; j < 16; j++) {
+"35
 {
 [v _j `uc ~T0 @X0 1 a ]
-[e $ < -> _j `i -> 8 `i 355  ]
-[e $U 356  ]
-"55
-[e :U 355 ]
-[; ;LED-API.c: 55: {
+[e $ < -> _j `i -> 16 `i 350  ]
+[e $U 351  ]
+[e :U 350 ]
 {
-[; ;LED-API.c: 56: pixels[i][j] = 0;
-"56
-[e = *U + &U *U + &U _pixels * -> _i `ux -> * -> # *U &U *U &U _pixels `ui -> -> 8 `i `ui `ux * -> _j `ux -> -> # *U &U *U + &U _pixels * -> _i `ux -> * -> # *U &U *U &U _pixels `ui -> -> 8 `i `ui `ux `ui `ux -> -> 0 `i `uc ]
-"57
+[; ;LED-API.c: 36: pixels[i][j] = 0;
+"36
+[e = *U + &U *U + &U _pixels * -> _i `ux -> * -> # *U &U *U &U _pixels `ui -> -> 16 `i `ui `ux * -> _j `ux -> -> # *U &U *U + &U _pixels * -> _i `ux -> * -> # *U &U *U &U _pixels `ui -> -> 16 `i `ui `ux `ui `ux -> -> 0 `i `uc ]
+"37
 }
-"54
+"35
 [e ++ _j -> -> 1 `i `uc ]
-[e $ < -> _j `i -> 8 `i 355  ]
-[e :U 356 ]
-"57
+[e $ < -> _j `i -> 16 `i 350  ]
+[e :U 351 ]
+"37
 }
-"58
+"38
 }
-"52
+"34
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 8 `i 352  ]
-[e :U 353 ]
-"58
+[e $ < -> _i `i -> 8 `i 347  ]
+[e :U 348 ]
+"38
 }
-[; ;LED-API.c: 57: }
-[; ;LED-API.c: 58: }
-[; ;LED-API.c: 59: }
-"59
-[e :UE 351 ]
+[; ;LED-API.c: 37: }
+[; ;LED-API.c: 38: }
+[; ;LED-API.c: 39: }
+"39
+[e :UE 346 ]
 }
-"61
+"41
 [v _on `(v ~T0 @X0 1 ef2`uc`uc ]
 {
-[; ;LED-API.c: 61: void on(unsigned char row, unsigned char column) {
+[; ;LED-API.c: 41: void on(unsigned char column, unsigned char row) {
 [e :U _on ]
-[v _row `uc ~T0 @X0 1 r1 ]
-[v _column `uc ~T0 @X0 1 r2 ]
+[v _column `uc ~T0 @X0 1 r1 ]
+[v _row `uc ~T0 @X0 1 r2 ]
 [f ]
-[; ;LED-API.c: 63: if (row < 0 || row > 8)
-"63
-[e $ ! || < -> _row `i -> 0 `i > -> _row `i -> 8 `i 359  ]
-[; ;LED-API.c: 64: return;
-"64
-[e $UE 358  ]
-[e :U 359 ]
-[; ;LED-API.c: 65: if (column < 0 || column > 8)
-"65
-[e $ ! || < -> _column `i -> 0 `i > -> _column `i -> 8 `i 360  ]
-[; ;LED-API.c: 66: return;
-"66
-[e $UE 358  ]
-[e :U 360 ]
-[; ;LED-API.c: 68: pixels[column][row] = 1;
-"68
-[e = *U + &U *U + &U _pixels * -> _column `ux -> * -> # *U &U *U &U _pixels `ui -> -> 8 `i `ui `ux * -> _row `ux -> -> # *U &U *U + &U _pixels * -> _column `ux -> * -> # *U &U *U &U _pixels `ui -> -> 8 `i `ui `ux `ui `ux -> -> 1 `i `uc ]
-[; ;LED-API.c: 69: }
-"69
-[e :UE 358 ]
+[; ;LED-API.c: 43: if (row < 0 || row > 16)
+"43
+[e $ ! || < -> _row `i -> 0 `i > -> _row `i -> 16 `i 354  ]
+[; ;LED-API.c: 44: return;
+"44
+[e $UE 353  ]
+[e :U 354 ]
+[; ;LED-API.c: 45: if (column < 0 || column > 8)
+"45
+[e $ ! || < -> _column `i -> 0 `i > -> _column `i -> 8 `i 355  ]
+[; ;LED-API.c: 46: return;
+"46
+[e $UE 353  ]
+[e :U 355 ]
+[; ;LED-API.c: 48: pixels[column][row] = 1;
+"48
+[e = *U + &U *U + &U _pixels * -> _column `ux -> * -> # *U &U *U &U _pixels `ui -> -> 16 `i `ui `ux * -> _row `ux -> -> # *U &U *U + &U _pixels * -> _column `ux -> * -> # *U &U *U &U _pixels `ui -> -> 16 `i `ui `ux `ui `ux -> -> 1 `i `uc ]
+[; ;LED-API.c: 49: }
+"49
+[e :UE 353 ]
 }
-"71
+"51
 [v _off `(v ~T0 @X0 1 ef2`uc`uc ]
 {
-[; ;LED-API.c: 71: void off(unsigned char row, unsigned char column) {
+[; ;LED-API.c: 51: void off(unsigned char column, unsigned char row) {
 [e :U _off ]
-[v _row `uc ~T0 @X0 1 r1 ]
-[v _column `uc ~T0 @X0 1 r2 ]
+[v _column `uc ~T0 @X0 1 r1 ]
+[v _row `uc ~T0 @X0 1 r2 ]
 [f ]
-[; ;LED-API.c: 73: if (row < 0 || row > 8)
-"73
-[e $ ! || < -> _row `i -> 0 `i > -> _row `i -> 8 `i 362  ]
-[; ;LED-API.c: 74: return;
-"74
-[e $UE 361  ]
-[e :U 362 ]
-[; ;LED-API.c: 75: if (column < 0 || column > 8)
-"75
-[e $ ! || < -> _column `i -> 0 `i > -> _column `i -> 8 `i 363  ]
-[; ;LED-API.c: 76: return;
-"76
-[e $UE 361  ]
-[e :U 363 ]
-[; ;LED-API.c: 78: pixels[column][row] = 0;
-"78
-[e = *U + &U *U + &U _pixels * -> _column `ux -> * -> # *U &U *U &U _pixels `ui -> -> 8 `i `ui `ux * -> _row `ux -> -> # *U &U *U + &U _pixels * -> _column `ux -> * -> # *U &U *U &U _pixels `ui -> -> 8 `i `ui `ux `ui `ux -> -> 0 `i `uc ]
-[; ;LED-API.c: 79: }
-"79
-[e :UE 361 ]
+[; ;LED-API.c: 53: if (row < 0 || row > 16)
+"53
+[e $ ! || < -> _row `i -> 0 `i > -> _row `i -> 16 `i 357  ]
+[; ;LED-API.c: 54: return;
+"54
+[e $UE 356  ]
+[e :U 357 ]
+[; ;LED-API.c: 55: if (column < 0 || column > 8)
+"55
+[e $ ! || < -> _column `i -> 0 `i > -> _column `i -> 8 `i 358  ]
+[; ;LED-API.c: 56: return;
+"56
+[e $UE 356  ]
+[e :U 358 ]
+[; ;LED-API.c: 58: pixels[column][row] = 0;
+"58
+[e = *U + &U *U + &U _pixels * -> _column `ux -> * -> # *U &U *U &U _pixels `ui -> -> 16 `i `ui `ux * -> _row `ux -> -> # *U &U *U + &U _pixels * -> _column `ux -> * -> # *U &U *U &U _pixels `ui -> -> 16 `i `ui `ux `ui `ux -> -> 0 `i `uc ]
+[; ;LED-API.c: 59: }
+"59
+[e :UE 356 ]
 }
-"81
+"61
+[v _allOff `(v ~T0 @X0 1 ef ]
+{
+[; ;LED-API.c: 61: void allOff() {
+[e :U _allOff ]
+[f ]
+[; ;LED-API.c: 62: LATA = 0;
+"62
+[e = _LATA -> -> 0 `i `uc ]
+[; ;LED-API.c: 63: LATC = 0;
+"63
+[e = _LATC -> -> 0 `i `uc ]
+[; ;LED-API.c: 64: LATD = 0;
+"64
+[e = _LATD -> -> 0 `i `uc ]
+[; ;LED-API.c: 65: }
+"65
+[e :UE 359 ]
+}
+"67
 [v _refresh `(v ~T0 @X0 1 ef ]
 {
-[; ;LED-API.c: 81: void refresh() {
+[; ;LED-API.c: 67: void refresh() {
 [e :U _refresh ]
 [f ]
-[; ;LED-API.c: 82: while(1)
-"82
-[e :U 366 ]
-[; ;LED-API.c: 83: {
-"83
-{
-[; ;LED-API.c: 84: for(unsigned char theCol = 0; theCol < 8; theCol++)
-"84
+[; ;LED-API.c: 69: for (unsigned char theCol = 0; theCol < 8; theCol++) {
+"69
 {
 [v _theCol `uc ~T0 @X0 1 a ]
 [e = _theCol -> -> 0 `i `uc ]
-[e $ < -> _theCol `i -> 8 `i 368  ]
-[e $U 369  ]
-"85
-[e :U 368 ]
-[; ;LED-API.c: 85: {
+[e $ < -> _theCol `i -> 8 `i 361  ]
+[e $U 362  ]
+[e :U 361 ]
 {
-[; ;LED-API.c: 86: allOff();
-"86
-[e ( _allOff ..  ]
-[; ;LED-API.c: 87: for (unsigned char theRow = 0; theRow < 8; theRow++) {
-"87
+[; ;LED-API.c: 71: for (unsigned char theRow = 0; theRow < 16; theRow++) {
+"71
 {
 [v _theRow `uc ~T0 @X0 1 a ]
 [e = _theRow -> -> 0 `i `uc ]
-[e $ < -> _theRow `i -> 8 `i 371  ]
-[e $U 372  ]
-[e :U 371 ]
+[e $ < -> _theRow `i -> 16 `i 364  ]
+[e $U 365  ]
+[e :U 364 ]
 {
-[; ;LED-API.c: 88: if (pixels[theCol][theRow] == 1)
-"88
-[e $ ! == -> *U + &U *U + &U _pixels * -> _theCol `ux -> * -> # *U &U *U &U _pixels `ui -> -> 8 `i `ui `ux * -> _theRow `ux -> -> # *U &U *U + &U _pixels * -> _theCol `ux -> * -> # *U &U *U &U _pixels `ui -> -> 8 `i `ui `ux `ui `ux `i -> 1 `i 374  ]
-[; ;LED-API.c: 89: setRowHigh(theRow);
-"89
+[; ;LED-API.c: 73: if (pixels[theCol][theRow] == 1)
+"73
+[e $ ! == -> *U + &U *U + &U _pixels * -> _theCol `ux -> * -> # *U &U *U &U _pixels `ui -> -> 16 `i `ui `ux * -> _theRow `ux -> -> # *U &U *U + &U _pixels * -> _theCol `ux -> * -> # *U &U *U &U _pixels `ui -> -> 16 `i `ui `ux `ui `ux `i -> 1 `i 367  ]
+[; ;LED-API.c: 74: setRowHigh(theRow);
+"74
 [e ( _setRowHigh (1 _theRow ]
-[e :U 374 ]
-"90
-}
-"87
-[e ++ _theRow -> -> 1 `i `uc ]
-[e $ < -> _theRow `i -> 8 `i 371  ]
-[e :U 372 ]
-"90
-}
-[; ;LED-API.c: 90: }
-[; ;LED-API.c: 91: setColHigh(theCol);
-"91
-[e ( _setColHigh (1 _theCol ]
-[; ;LED-API.c: 92: _delay((unsigned long)((1)*(1000000/4000.0)));
-"92
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
-"93
-}
-"84
-[e ++ _theCol -> -> 1 `i `uc ]
-[e $ < -> _theCol `i -> 8 `i 368  ]
-[e :U 369 ]
-"93
-}
-"94
-}
-[e :U 365 ]
-"82
-[e $U 366  ]
 [e :U 367 ]
-[; ;LED-API.c: 93: }
-[; ;LED-API.c: 94: }
-[; ;LED-API.c: 95: }
-"95
-[e :UE 364 ]
+"76
+}
+"71
+[e ++ _theRow -> -> 1 `i `uc ]
+[e $ < -> _theRow `i -> 16 `i 364  ]
+[e :U 365 ]
+"76
+}
+[; ;LED-API.c: 76: }
+[; ;LED-API.c: 80: setColHigh(theCol);
+"80
+[e ( _setColHigh (1 _theCol ]
+[; ;LED-API.c: 81: _delay((unsigned long)((500)*(1000000/4000000.0)));
+"81
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 1000000 `l `d .4000000.0 `ul ]
+[; ;LED-API.c: 82: allOff();
+"82
+[e ( _allOff ..  ]
+"83
+}
+"69
+[e ++ _theCol -> -> 1 `i `uc ]
+[e $ < -> _theCol `i -> 8 `i 361  ]
+[e :U 362 ]
+"83
+}
+[; ;LED-API.c: 83: }
+[; ;LED-API.c: 84: }
+"84
+[e :UE 360 ]
 }

@@ -10,8 +10,8 @@
 
 #include <xc.h>
 
-extern void on(unsigned char row, unsigned char column);
-extern void off(unsigned char row, unsigned char column);
+extern void on(unsigned char column, unsigned char row);
+extern void off(unsigned char column, unsigned char row);
 extern void initializeLED();
 extern void refresh();
 
