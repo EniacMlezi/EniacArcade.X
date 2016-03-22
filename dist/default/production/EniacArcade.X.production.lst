@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.36 build -262312587 
-                                                                                               Mon Mar 21 19:15:24 2016
+                                                                                               Tue Mar 22 20:15:12 2016
 
 Microchip Technology Omniscient Code Generator v1.36 (Free mode) build 201601150325
      1                           	processor	18F4520
@@ -18,679 +18,917 @@ Microchip Technology Omniscient Code Generator v1.36 (Free mode) build 201601150
     12                           	psect	text4,global,reloc=2,class=CODE,delta=1
     13                           	psect	text5,global,reloc=2,class=CODE,delta=1
     14                           	psect	text6,global,reloc=2,class=CODE,delta=1
-    15                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1
-    16                           	psect	rparam,global,class=COMRAM,space=1,delta=1
-    17  0000                     _LATA	set	3977
-    18  0000                     _LATC	set	3979
-    19  0000                     _LATD	set	3980
-    20  0000                     _TRISA	set	3986
-    21  0000                     _TRISC	set	3988
-    22                           
-    23                           ; #config settings
-    24  0000                     
-    25                           	psect	cinit
-    26  007EB4                     __pcinit:
-    27                           	opt stack 0
-    28  007EB4                     start_initialization:
-    29                           	opt stack 0
-    30  007EB4                     __initialization:
-    31                           	opt stack 0
-    32                           
-    33                           ; Clear objects allocated to BANK0 (128 bytes)
-    34  007EB4  EE00  F080         	lfsr	0,__pbssBANK0
-    35  007EB8  0E80               	movlw	128
-    36  007EBA                     clear_0:
-    37  007EBA  6AEE               	clrf	postinc0,c
-    38  007EBC  06E8               	decf	wreg,f,c
-    39  007EBE  E1FD               	bnz	clear_0
-    40  007EC0                     end_of_initialization:
-    41                           	opt stack 0
-    42  007EC0                     __end_of__initialization:
-    43                           	opt stack 0
-    44  007EC0  0100               	movlb	0
-    45  007EC2  EF63  F03F         	goto	_main	;jump to C main() function
-    46                           postinc0	equ	0xFEE
-    47                           wreg	equ	0xFE8
-    48                           
-    49                           	psect	bssBANK0
-    50  000080                     __pbssBANK0:
-    51                           	opt stack 0
-    52  000080                     _pixels:
-    53                           	opt stack 0
-    54  000080                     	ds	128
-    55                           postinc0	equ	0xFEE
-    56                           wreg	equ	0xFE8
-    57                           
-    58                           	psect	cstackCOMRAM
-    59  000001                     __pcstackCOMRAM:
-    60                           	opt stack 0
-    61  000001                     ??_initializeLED:
-    62  000001                     ??_setColHigh:
-    63  000001                     ??_setRowHigh:
-    64  000001                     on@row:
-    65                           	opt stack 0
-    66                           
-    67                           ; 1 bytes @ 0x0
-    68  000001                     	ds	1
-    69  000002                     ??_on:
-    70                           
-    71                           ; 1 bytes @ 0x1
-    72  000002                     	ds	1
-    73  000003                     setColHigh@column:
-    74                           	opt stack 0
-    75  000003                     setRowHigh@row:
-    76                           	opt stack 0
-    77  000003                     initializeLED@i:
-    78                           	opt stack 0
-    79                           
-    80                           ; 1 bytes @ 0x2
-    81  000003                     	ds	1
-    82  000004                     ??_refresh:
-    83  000004                     initializeLED@j:
-    84                           	opt stack 0
-    85  000004                     on@column:
+    15                           	psect	text7,global,reloc=2,class=CODE,delta=1
+    16                           	psect	intcode,global,reloc=2,class=CODE,delta=1
+    17                           	psect	intcode_body,global,reloc=2,class=CODE,delta=1
+    18                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1
+    19                           	psect	rparam,global,class=COMRAM,space=1,delta=1
+    20                           	psect	temp,global,ovrld,common,class=COMRAM,space=1,delta=1
+    21  0000                     _LATA	set	3977
+    22  0000                     _LATC	set	3979
+    23  0000                     _LATD	set	3980
+    24  0000                     _TRISA	set	3986
+    25  0000                     _TRISC	set	3988
+    26  0000                     _GIE	set	32663
+    27  0000                     _PEIE	set	32662
+    28                           
+    29                           ; #config settings
+    30  0000                     
+    31                           	psect	cinit
+    32  0001CE                     __pcinit:
+    33                           	opt stack 0
+    34  0001CE                     start_initialization:
+    35                           	opt stack 0
+    36  0001CE                     __initialization:
+    37                           	opt stack 0
+    38                           
+    39                           ; Clear objects allocated to BANK0 (128 bytes)
+    40  0001CE  EE00  F080         	lfsr	0,__pbssBANK0
+    41  0001D2  0E80               	movlw	128
+    42  0001D4                     clear_0:
+    43  0001D4  6AEE               	clrf	postinc0,c
+    44  0001D6  06E8               	decf	wreg,f,c
+    45  0001D8  E1FD               	bnz	clear_0
+    46  0001DA                     end_of_initialization:
+    47                           	opt stack 0
+    48  0001DA                     __end_of__initialization:
+    49                           	opt stack 0
+    50  0001DA  9017               	bcf	int$flags,0,c	;clear compiler interrupt flag (level 1)
+    51  0001DC  9217               	bcf	int$flags,1,c	;clear compiler interrupt flag (level 2)
+    52  0001DE  0100               	movlb	0
+    53  0001E0  EFDB  F000         	goto	_main	;jump to C main() function
+    54                           postinc0	equ	0xFEE
+    55                           wreg	equ	0xFE8
+    56                           
+    57                           	psect	bssBANK0
+    58  000080                     __pbssBANK0:
+    59                           	opt stack 0
+    60  000080                     _pixels:
+    61                           	opt stack 0
+    62  000080                     	ds	128
+    63                           postinc0	equ	0xFEE
+    64                           wreg	equ	0xFE8
+    65                           
+    66                           	psect	cstackCOMRAM
+    67  000001                     __pcstackCOMRAM:
+    68                           	opt stack 0
+    69  000001                     ??_ISR:
+    70  000001                     
+    71                           ; 1 bytes @ 0x0
+    72  000001                     	ds	14
+    73  00000F                     ??_initializeLED:
+    74  00000F                     ??_setColHigh:
+    75  00000F                     ??_setRowHigh:
+    76  00000F                     on@row:
+    77                           	opt stack 0
+    78                           
+    79                           ; 1 bytes @ 0xE
+    80  00000F                     	ds	1
+    81  000010                     ??_on:
+    82                           
+    83                           ; 1 bytes @ 0xF
+    84  000010                     	ds	1
+    85  000011                     setColHigh@column:
     86                           	opt stack 0
-    87                           
-    88                           ; 1 bytes @ 0x3
-    89  000004                     	ds	3
-    90  000007                     refresh@theCol:
-    91                           	opt stack 0
-    92                           
-    93                           ; 1 bytes @ 0x6
-    94  000007                     	ds	1
-    95  000008                     refresh@theRow:
+    87  000011                     setRowHigh@row:
+    88                           	opt stack 0
+    89  000011                     initializeLED@i:
+    90                           	opt stack 0
+    91                           
+    92                           ; 1 bytes @ 0x10
+    93  000011                     	ds	1
+    94  000012                     ??_refresh:
+    95  000012                     initializeLED@j:
     96                           	opt stack 0
-    97                           
-    98                           ; 1 bytes @ 0x7
-    99  000008                     	ds	1
-   100  000009                     postinc0	equ	0xFEE
-   101                           wreg	equ	0xFE8
-   102                           
-   103                           ; 1 bytes @ 0x8
-   104 ;;
-   105 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
-   106 ;;
-   107 ;; *************** function _main *****************
-   108 ;; Defined at:
-   109 ;;		line 19 in file "main.c"
-   110 ;; Parameters:    Size  Location     Type
-   111 ;;		None
-   112 ;; Auto vars:     Size  Location     Type
-   113 ;;		None
-   114 ;; Return value:  Size  Location     Type
-   115 ;;                  1    wreg      void 
-   116 ;; Registers used:
-   117 ;;		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
-   118 ;; Tracked objects:
-   119 ;;		On entry : 0/0
-   120 ;;		On exit  : 0/0
-   121 ;;		Unchanged: 0/0
-   122 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
-   123 ;;      Params:         0       0       0       0       0       0       0
-   124 ;;      Locals:         0       0       0       0       0       0       0
-   125 ;;      Temps:          0       0       0       0       0       0       0
-   126 ;;      Totals:         0       0       0       0       0       0       0
-   127 ;;Total ram usage:        0 bytes
-   128 ;; Hardware stack levels required when called:    2
-   129 ;; This function calls:
-   130 ;;		_initializeLED
-   131 ;;		_on
-   132 ;;		_refresh
-   133 ;; This function is called by:
-   134 ;;		Startup code after reset
-   135 ;; This function uses a non-reentrant model
-   136 ;;
-   137                           
-   138                           	psect	text0
-   139  007EC6                     __ptext0:
-   140                           	opt stack 0
-   141  007EC6                     _main:
-   142                           	opt stack 29
-   143                           
-   144                           ;main.c: 20: initializeLED();
-   145                           
-   146                           ;incstack = 0
-   147  007EC6  ECA7  F03F         	call	_initializeLED	;wreg free
-   148                           
-   149                           ;main.c: 22: on(2, 2);
-   150  007ECA  0E02               	movlw	2
-   151  007ECC  6E01               	movwf	on@row,c
-   152  007ECE  0E02               	movlw	2
-   153  007ED0  EC89  F03F         	call	_on
-   154  007ED4                     l17:
-   155                           
-   156                           ;main.c: 25: {
-   157                           ;main.c: 26: refresh();
-   158  007ED4  ECCF  F03F         	call	_refresh	;wreg free
-   159  007ED8  D7FD               	goto	l17
-   160  007EDA                     __end_of_main:
-   161                           	opt stack 0
-   162                           postinc0	equ	0xFEE
-   163                           wreg	equ	0xFE8
+    97  000012                     on@column:
+    98                           	opt stack 0
+    99                           
+   100                           ; 1 bytes @ 0x11
+   101  000012                     	ds	3
+   102  000015                     refresh@theCol:
+   103                           	opt stack 0
+   104                           
+   105                           ; 1 bytes @ 0x14
+   106  000015                     	ds	1
+   107  000016                     refresh@theRow:
+   108                           	opt stack 0
+   109                           
+   110                           ; 1 bytes @ 0x15
+   111  000016                     	ds	1
+   112  000017                     postinc0	equ	0xFEE
+   113                           wreg	equ	0xFE8
+   114                           
+   115                           ; 1 bytes @ 0x16
+   116 ;;
+   117 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+   118 ;;
+   119 ;; *************** function _main *****************
+   120 ;; Defined at:
+   121 ;;		line 32 in file "main.c"
+   122 ;; Parameters:    Size  Location     Type
+   123 ;;		None
+   124 ;; Auto vars:     Size  Location     Type
+   125 ;;		None
+   126 ;; Return value:  Size  Location     Type
+   127 ;;                  1    wreg      void 
+   128 ;; Registers used:
+   129 ;;		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
+   130 ;; Tracked objects:
+   131 ;;		On entry : 0/0
+   132 ;;		On exit  : 0/0
+   133 ;;		Unchanged: 0/0
+   134 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   135 ;;      Params:         0       0       0       0       0       0       0
+   136 ;;      Locals:         0       0       0       0       0       0       0
+   137 ;;      Temps:          0       0       0       0       0       0       0
+   138 ;;      Totals:         0       0       0       0       0       0       0
+   139 ;;Total ram usage:        0 bytes
+   140 ;; Hardware stack levels required when called:    3
+   141 ;; This function calls:
+   142 ;;		_initialize
+   143 ;;		_initializeLED
+   144 ;;		_on
+   145 ;;		_refresh
+   146 ;; This function is called by:
+   147 ;;		Startup code after reset
+   148 ;; This function uses a non-reentrant model
+   149 ;;
+   150                           
+   151                           	psect	text0
+   152  0001B6                     __ptext0:
+   153                           	opt stack 0
+   154  0001B6                     _main:
+   155                           	opt stack 28
+   156                           
+   157                           ;main.c: 33: initializeLED();
+   158                           
+   159                           ;incstack = 0
+   160  0001B6  EC75  F000         	call	_initializeLED	;wreg free
+   161                           
+   162                           ;main.c: 34: initialize();
+   163  0001BA  ECF9  F000         	call	_initialize	;wreg free
    164                           
-   165 ;; *************** function _refresh *****************
-   166 ;; Defined at:
-   167 ;;		line 67 in file "Source/LED-API.c"
-   168 ;; Parameters:    Size  Location     Type
-   169 ;;		None
-   170 ;; Auto vars:     Size  Location     Type
-   171 ;;  theRow          1    7[COMRAM] unsigned char 
-   172 ;;  theCol          1    6[COMRAM] unsigned char 
-   173 ;; Return value:  Size  Location     Type
-   174 ;;                  1    wreg      void 
-   175 ;; Registers used:
-   176 ;;		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
-   177 ;; Tracked objects:
-   178 ;;		On entry : 0/0
-   179 ;;		On exit  : 0/0
-   180 ;;		Unchanged: 0/0
-   181 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
-   182 ;;      Params:         0       0       0       0       0       0       0
-   183 ;;      Locals:         2       0       0       0       0       0       0
-   184 ;;      Temps:          3       0       0       0       0       0       0
-   185 ;;      Totals:         5       0       0       0       0       0       0
-   186 ;;Total ram usage:        5 bytes
-   187 ;; Hardware stack levels used:    1
-   188 ;; Hardware stack levels required when called:    1
-   189 ;; This function calls:
-   190 ;;		_allOff
-   191 ;;		_setColHigh
-   192 ;;		_setRowHigh
-   193 ;; This function is called by:
-   194 ;;		_main
-   195 ;; This function uses a non-reentrant model
-   196 ;;
-   197                           
-   198                           	psect	text1
-   199  007F9E                     __ptext1:
-   200                           	opt stack 0
-   201  007F9E                     _refresh:
-   202                           	opt stack 29
-   203                           
-   204                           ;LED-API.c: 69: for (unsigned char theCol = 0; theCol < 8; theCol++) {
-   205                           
-   206                           ;incstack = 0
-   207  007F9E  0E00               	movlw	0
-   208  007FA0  6E07               	movwf	refresh@theCol,c
-   209  007FA2                     l704:
-   210  007FA2  0E07               	movlw	7
-   211  007FA4  6407               	cpfsgt	refresh@theCol,c
-   212  007FA6  D001               	goto	l708
-   213  007FA8  0012               	return	
-   214  007FAA                     l708:
-   215                           
-   216                           ;LED-API.c: 71: for (unsigned char theRow = 0; theRow < 16; theRow++) {
-   217  007FAA  0E00               	movlw	0
-   218  007FAC  6E08               	movwf	refresh@theRow,c
-   219  007FAE                     l710:
-   220  007FAE  0E0F               	movlw	15
-   221  007FB0  6408               	cpfsgt	refresh@theRow,c
-   222  007FB2  D001               	goto	l714
-   223  007FB4  D01A               	goto	l722
-   224  007FB6                     l714:
-   225                           
-   226                           ;LED-API.c: 73: if (pixels[theCol][theRow] == 1)
-   227  007FB6  5007               	movf	refresh@theCol,w,c
-   228  007FB8  0D10               	mullw	16
-   229  007FBA  0E80               	movlw	low _pixels
-   230  007FBC  6E04               	movwf	??_refresh& (0+255),c
-   231  007FBE  0E00               	movlw	high _pixels
-   232  007FC0  6E05               	movwf	(??_refresh+1)& (0+255),c
-   233  007FC2  50F3               	movf	prodl,w,c
-   234  007FC4  2604               	addwf	??_refresh,f,c
-   235  007FC6  50F4               	movf	prodh,w,c
-   236  007FC8  2205               	addwfc	??_refresh+1,f,c
-   237  007FCA  5008               	movf	refresh@theRow,w,c
-   238  007FCC  0D01               	mullw	1
-   239  007FCE  50F3               	movf	prodl,w,c
-   240  007FD0  2404               	addwf	??_refresh,w,c
-   241  007FD2  6ED9               	movwf	fsr2l,c
-   242  007FD4  50F4               	movf	prodh,w,c
-   243  007FD6  2005               	addwfc	??_refresh+1,w,c
-   244  007FD8  6EDA               	movwf	fsr2h,c
-   245  007FDA  04DE               	decf	postinc2,w,c
-   246  007FDC  A4D8               	btfss	status,2,c
-   247  007FDE  D003               	goto	l718
-   248                           
-   249                           ;LED-API.c: 74: setRowHigh(theRow);
-   250  007FE0  5008               	movf	refresh@theRow,w,c
-   251  007FE2  EC7B  F03F         	call	_setRowHigh
-   252  007FE6                     l718:
-   253  007FE6  2A08               	incf	refresh@theRow,f,c
-   254  007FE8  D7E2               	goto	l710
-   255  007FEA                     l722:
-   256                           
-   257                           ;LED-API.c: 76: }
-   258                           ;LED-API.c: 80: setColHigh(theCol);
-   259  007FEA  5007               	movf	refresh@theCol,w,c
-   260  007FEC  EC6D  F03F         	call	_setColHigh
+   165                           ;main.c: 36: on(2, 2);
+   166  0001BE  0E02               	movlw	2
+   167  0001C0  6E0F               	movwf	on@row,c
+   168  0001C2  0E02               	movlw	2
+   169  0001C4  ECA1  F000         	call	_on
+   170  0001C8                     l788:
+   171  0001C8  EC44  F000         	call	_refresh	;wreg free
+   172  0001CC  D7FD               	goto	l788
+   173  0001CE                     __end_of_main:
+   174                           	opt stack 0
+   175                           postinc0	equ	0xFEE
+   176                           wreg	equ	0xFE8
+   177                           
+   178 ;; *************** function _refresh *****************
+   179 ;; Defined at:
+   180 ;;		line 67 in file "Source/LED-API.c"
+   181 ;; Parameters:    Size  Location     Type
+   182 ;;		None
+   183 ;; Auto vars:     Size  Location     Type
+   184 ;;  theRow          1   21[COMRAM] unsigned char 
+   185 ;;  theCol          1   20[COMRAM] unsigned char 
+   186 ;; Return value:  Size  Location     Type
+   187 ;;                  1    wreg      void 
+   188 ;; Registers used:
+   189 ;;		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh, cstack
+   190 ;; Tracked objects:
+   191 ;;		On entry : 0/0
+   192 ;;		On exit  : 0/0
+   193 ;;		Unchanged: 0/0
+   194 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   195 ;;      Params:         0       0       0       0       0       0       0
+   196 ;;      Locals:         2       0       0       0       0       0       0
+   197 ;;      Temps:          3       0       0       0       0       0       0
+   198 ;;      Totals:         5       0       0       0       0       0       0
+   199 ;;Total ram usage:        5 bytes
+   200 ;; Hardware stack levels used:    1
+   201 ;; Hardware stack levels required when called:    2
+   202 ;; This function calls:
+   203 ;;		_allOff
+   204 ;;		_setColHigh
+   205 ;;		_setRowHigh
+   206 ;; This function is called by:
+   207 ;;		_main
+   208 ;; This function uses a non-reentrant model
+   209 ;;
+   210                           
+   211                           	psect	text1
+   212  000088                     __ptext1:
+   213                           	opt stack 0
+   214  000088                     _refresh:
+   215                           	opt stack 28
+   216                           
+   217                           ;LED-API.c: 69: for (unsigned char theCol = 0; theCol < 8; theCol++) {
+   218                           
+   219                           ;incstack = 0
+   220  000088  0E00               	movlw	0
+   221  00008A  6E15               	movwf	refresh@theCol,c
+   222  00008C                     l718:
+   223  00008C  0E07               	movlw	7
+   224  00008E  6415               	cpfsgt	refresh@theCol,c
+   225  000090  D001               	goto	l722
+   226  000092  0012               	return	
+   227  000094                     l722:
+   228                           
+   229                           ;LED-API.c: 71: for (unsigned char theRow = 0; theRow < 16; theRow++) {
+   230  000094  0E00               	movlw	0
+   231  000096  6E16               	movwf	refresh@theRow,c
+   232  000098                     l724:
+   233  000098  0E0F               	movlw	15
+   234  00009A  6416               	cpfsgt	refresh@theRow,c
+   235  00009C  D001               	goto	l728
+   236  00009E  D01A               	goto	l736
+   237  0000A0                     l728:
+   238                           
+   239                           ;LED-API.c: 73: if (pixels[theCol][theRow] == 1)
+   240  0000A0  5015               	movf	refresh@theCol,w,c
+   241  0000A2  0D10               	mullw	16
+   242  0000A4  0E80               	movlw	low _pixels
+   243  0000A6  6E12               	movwf	??_refresh& (0+255),c
+   244  0000A8  0E00               	movlw	high _pixels
+   245  0000AA  6E13               	movwf	(??_refresh+1)& (0+255),c
+   246  0000AC  50F3               	movf	prodl,w,c
+   247  0000AE  2612               	addwf	??_refresh,f,c
+   248  0000B0  50F4               	movf	prodh,w,c
+   249  0000B2  2213               	addwfc	??_refresh+1,f,c
+   250  0000B4  5016               	movf	refresh@theRow,w,c
+   251  0000B6  0D01               	mullw	1
+   252  0000B8  50F3               	movf	prodl,w,c
+   253  0000BA  2412               	addwf	??_refresh,w,c
+   254  0000BC  6ED9               	movwf	fsr2l,c
+   255  0000BE  50F4               	movf	prodh,w,c
+   256  0000C0  2013               	addwfc	??_refresh+1,w,c
+   257  0000C2  6EDA               	movwf	fsr2h,c
+   258  0000C4  04DE               	decf	postinc2,w,c
+   259  0000C6  A4D8               	btfss	status,2,c
+   260  0000C8  D003               	goto	l732
    261                           
-   262                           ;LED-API.c: 81: _delay((unsigned long)((500)*(1000000/4000000.0)));
-   263  007FF0  0E29               	movlw	41
-   264  007FF2                     u197:
-   265  007FF2  2EE8               	decfsz	wreg,f,c
-   266  007FF4  D7FE               	goto	u197
-   267  007FF6  D000               	nop2		;nop
-   268                           
-   269                           ;LED-API.c: 82: allOff();
-   270  007FF8  EC53  F03F         	call	_allOff	;wreg free
-   271  007FFC  2A07               	incf	refresh@theCol,f,c
-   272  007FFE  D7D1               	goto	l704
-   273  008000                     __end_of_refresh:
-   274                           	opt stack 0
-   275                           prodh	equ	0xFF4
-   276                           prodl	equ	0xFF3
-   277                           postinc0	equ	0xFEE
-   278                           wreg	equ	0xFE8
-   279                           postinc2	equ	0xFDE
-   280                           fsr2h	equ	0xFDA
-   281                           fsr2l	equ	0xFD9
-   282                           status	equ	0xFD8
-   283                           
-   284 ;; *************** function _setRowHigh *****************
-   285 ;; Defined at:
-   286 ;;		line 23 in file "Source/LED-API.c"
-   287 ;; Parameters:    Size  Location     Type
-   288 ;;  row             1    wreg     unsigned char 
-   289 ;; Auto vars:     Size  Location     Type
-   290 ;;  row             1    2[COMRAM] unsigned char 
-   291 ;; Return value:  Size  Location     Type
-   292 ;;                  1    wreg      void 
-   293 ;; Registers used:
-   294 ;;		wreg, status,2, status,0
-   295 ;; Tracked objects:
-   296 ;;		On entry : 0/0
-   297 ;;		On exit  : 0/0
-   298 ;;		Unchanged: 0/0
-   299 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
-   300 ;;      Params:         0       0       0       0       0       0       0
-   301 ;;      Locals:         1       0       0       0       0       0       0
-   302 ;;      Temps:          2       0       0       0       0       0       0
-   303 ;;      Totals:         3       0       0       0       0       0       0
-   304 ;;Total ram usage:        3 bytes
-   305 ;; Hardware stack levels used:    1
-   306 ;; This function calls:
-   307 ;;		Nothing
-   308 ;; This function is called by:
-   309 ;;		_refresh
-   310 ;; This function uses a non-reentrant model
-   311 ;;
-   312                           
-   313                           	psect	text2
-   314  007EF6                     __ptext2:
-   315                           	opt stack 0
-   316  007EF6                     _setRowHigh:
-   317                           	opt stack 29
-   318                           
-   319                           ;incstack = 0
-   320                           ;setRowHigh@row stored from wreg
-   321  007EF6  6E03               	movwf	setRowHigh@row,c
-   322                           
-   323                           ;LED-API.c: 24: LATC |= (1 << row);
-   324  007EF8  C003  F001         	movff	setRowHigh@row,??_setRowHigh
-   325  007EFC  0E01               	movlw	1
-   326  007EFE  6E02               	movwf	(??_setRowHigh+1)& (0+255),c
-   327  007F00  2A01               	incf	??_setRowHigh,f,c
-   328  007F02  D002               	goto	u24
-   329  007F04                     u25:
-   330  007F04  90D8               	bcf	status,0,c
-   331  007F06  3602               	rlcf	??_setRowHigh+1,f,c
-   332  007F08                     u24:
-   333  007F08  2E01               	decfsz	??_setRowHigh,f,c
-   334  007F0A  D7FC               	goto	u25
-   335  007F0C  5002               	movf	??_setRowHigh+1,w,c
-   336  007F0E  128B               	iorwf	3979,f,c	;volatile
-   337  007F10  0012               	return		;funcret
-   338  007F12                     __end_of_setRowHigh:
-   339                           	opt stack 0
-   340                           prodh	equ	0xFF4
-   341                           prodl	equ	0xFF3
-   342                           postinc0	equ	0xFEE
-   343                           wreg	equ	0xFE8
-   344                           postinc2	equ	0xFDE
-   345                           fsr2h	equ	0xFDA
-   346                           fsr2l	equ	0xFD9
-   347                           status	equ	0xFD8
-   348                           
-   349 ;; *************** function _setColHigh *****************
-   350 ;; Defined at:
-   351 ;;		line 19 in file "Source/LED-API.c"
-   352 ;; Parameters:    Size  Location     Type
-   353 ;;  column          1    wreg     unsigned char 
-   354 ;; Auto vars:     Size  Location     Type
-   355 ;;  column          1    2[COMRAM] unsigned char 
-   356 ;; Return value:  Size  Location     Type
-   357 ;;                  1    wreg      void 
-   358 ;; Registers used:
-   359 ;;		wreg, status,2, status,0
-   360 ;; Tracked objects:
-   361 ;;		On entry : 0/0
-   362 ;;		On exit  : 0/0
-   363 ;;		Unchanged: 0/0
-   364 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
-   365 ;;      Params:         0       0       0       0       0       0       0
-   366 ;;      Locals:         1       0       0       0       0       0       0
-   367 ;;      Temps:          2       0       0       0       0       0       0
-   368 ;;      Totals:         3       0       0       0       0       0       0
-   369 ;;Total ram usage:        3 bytes
-   370 ;; Hardware stack levels used:    1
-   371 ;; This function calls:
-   372 ;;		Nothing
-   373 ;; This function is called by:
-   374 ;;		_refresh
-   375 ;; This function uses a non-reentrant model
-   376 ;;
-   377                           
-   378                           	psect	text3
-   379  007EDA                     __ptext3:
-   380                           	opt stack 0
-   381  007EDA                     _setColHigh:
-   382                           	opt stack 29
-   383                           
-   384                           ;incstack = 0
-   385                           ;setColHigh@column stored from wreg
-   386  007EDA  6E03               	movwf	setColHigh@column,c
-   387                           
-   388                           ;LED-API.c: 20: LATA |= (1 << column);
-   389  007EDC  C003  F001         	movff	setColHigh@column,??_setColHigh
-   390  007EE0  0E01               	movlw	1
-   391  007EE2  6E02               	movwf	(??_setColHigh+1)& (0+255),c
-   392  007EE4  2A01               	incf	??_setColHigh,f,c
-   393  007EE6  D002               	goto	u14
-   394  007EE8                     u15:
-   395  007EE8  90D8               	bcf	status,0,c
-   396  007EEA  3602               	rlcf	??_setColHigh+1,f,c
-   397  007EEC                     u14:
-   398  007EEC  2E01               	decfsz	??_setColHigh,f,c
-   399  007EEE  D7FC               	goto	u15
-   400  007EF0  5002               	movf	??_setColHigh+1,w,c
-   401  007EF2  1289               	iorwf	3977,f,c	;volatile
-   402  007EF4  0012               	return		;funcret
-   403  007EF6                     __end_of_setColHigh:
-   404                           	opt stack 0
-   405                           prodh	equ	0xFF4
-   406                           prodl	equ	0xFF3
-   407                           postinc0	equ	0xFEE
-   408                           wreg	equ	0xFE8
-   409                           postinc2	equ	0xFDE
-   410                           fsr2h	equ	0xFDA
-   411                           fsr2l	equ	0xFD9
-   412                           status	equ	0xFD8
-   413                           
-   414 ;; *************** function _allOff *****************
-   415 ;; Defined at:
-   416 ;;		line 61 in file "Source/LED-API.c"
-   417 ;; Parameters:    Size  Location     Type
-   418 ;;		None
-   419 ;; Auto vars:     Size  Location     Type
-   420 ;;		None
-   421 ;; Return value:  Size  Location     Type
-   422 ;;                  1    wreg      void 
-   423 ;; Registers used:
-   424 ;;		wreg, status,2
-   425 ;; Tracked objects:
-   426 ;;		On entry : 0/0
-   427 ;;		On exit  : 0/0
-   428 ;;		Unchanged: 0/0
-   429 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
-   430 ;;      Params:         0       0       0       0       0       0       0
-   431 ;;      Locals:         0       0       0       0       0       0       0
-   432 ;;      Temps:          0       0       0       0       0       0       0
-   433 ;;      Totals:         0       0       0       0       0       0       0
-   434 ;;Total ram usage:        0 bytes
-   435 ;; Hardware stack levels used:    1
-   436 ;; This function calls:
-   437 ;;		Nothing
-   438 ;; This function is called by:
-   439 ;;		_refresh
-   440 ;; This function uses a non-reentrant model
-   441 ;;
-   442                           
-   443                           	psect	text4
-   444  007EA6                     __ptext4:
-   445                           	opt stack 0
-   446  007EA6                     _allOff:
-   447                           	opt stack 29
-   448                           
-   449                           ;LED-API.c: 62: LATA = 0;
-   450                           
-   451                           ;incstack = 0
-   452  007EA6  0E00               	movlw	0
-   453  007EA8  6E89               	movwf	3977,c	;volatile
-   454                           
-   455                           ;LED-API.c: 63: LATC = 0;
-   456  007EAA  0E00               	movlw	0
-   457  007EAC  6E8B               	movwf	3979,c	;volatile
+   262                           ;LED-API.c: 74: setRowHigh(theRow);
+   263  0000CA  5016               	movf	refresh@theRow,w,c
+   264  0000CC  ECBF  F000         	call	_setRowHigh
+   265  0000D0                     l732:
+   266  0000D0  2A16               	incf	refresh@theRow,f,c
+   267  0000D2  D7E2               	goto	l724
+   268  0000D4                     l736:
+   269                           
+   270                           ;LED-API.c: 75: }
+   271                           ;LED-API.c: 79: setColHigh(theCol);
+   272  0000D4  5015               	movf	refresh@theCol,w,c
+   273  0000D6  ECCD  F000         	call	_setColHigh
+   274                           
+   275                           ;LED-API.c: 80: _delay((unsigned long)((500)*(1000000/4000000.0)));
+   276  0000DA  0E29               	movlw	41
+   277  0000DC                     u197:
+   278  0000DC  2EE8               	decfsz	wreg,f,c
+   279  0000DE  D7FE               	goto	u197
+   280  0000E0  D000               	nop2		;nop
+   281                           
+   282                           ;LED-API.c: 81: allOff();
+   283  0000E2  ECF2  F000         	call	_allOff	;wreg free
+   284  0000E6  2A15               	incf	refresh@theCol,f,c
+   285  0000E8  D7D1               	goto	l718
+   286  0000EA                     __end_of_refresh:
+   287                           	opt stack 0
+   288                           prodh	equ	0xFF4
+   289                           prodl	equ	0xFF3
+   290                           postinc0	equ	0xFEE
+   291                           wreg	equ	0xFE8
+   292                           postinc2	equ	0xFDE
+   293                           fsr2h	equ	0xFDA
+   294                           fsr2l	equ	0xFD9
+   295                           status	equ	0xFD8
+   296                           
+   297 ;; *************** function _setRowHigh *****************
+   298 ;; Defined at:
+   299 ;;		line 23 in file "Source/LED-API.c"
+   300 ;; Parameters:    Size  Location     Type
+   301 ;;  row             1    wreg     unsigned char 
+   302 ;; Auto vars:     Size  Location     Type
+   303 ;;  row             1   16[COMRAM] unsigned char 
+   304 ;; Return value:  Size  Location     Type
+   305 ;;                  1    wreg      void 
+   306 ;; Registers used:
+   307 ;;		wreg, status,2, status,0
+   308 ;; Tracked objects:
+   309 ;;		On entry : 0/0
+   310 ;;		On exit  : 0/0
+   311 ;;		Unchanged: 0/0
+   312 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   313 ;;      Params:         0       0       0       0       0       0       0
+   314 ;;      Locals:         1       0       0       0       0       0       0
+   315 ;;      Temps:          2       0       0       0       0       0       0
+   316 ;;      Totals:         3       0       0       0       0       0       0
+   317 ;;Total ram usage:        3 bytes
+   318 ;; Hardware stack levels used:    1
+   319 ;; Hardware stack levels required when called:    1
+   320 ;; This function calls:
+   321 ;;		Nothing
+   322 ;; This function is called by:
+   323 ;;		_refresh
+   324 ;; This function uses a non-reentrant model
+   325 ;;
+   326                           
+   327                           	psect	text2
+   328  00017E                     __ptext2:
+   329                           	opt stack 0
+   330  00017E                     _setRowHigh:
+   331                           	opt stack 28
+   332                           
+   333                           ;incstack = 0
+   334                           ;setRowHigh@row stored from wreg
+   335  00017E  6E11               	movwf	setRowHigh@row,c
+   336                           
+   337                           ;LED-API.c: 24: LATC |= (1 << row);
+   338  000180  C011  F00F         	movff	setRowHigh@row,??_setRowHigh
+   339  000184  0E01               	movlw	1
+   340  000186  6E10               	movwf	(??_setRowHigh+1)& (0+255),c
+   341  000188  2A0F               	incf	??_setRowHigh,f,c
+   342  00018A  D002               	goto	u24
+   343  00018C                     u25:
+   344  00018C  90D8               	bcf	status,0,c
+   345  00018E  3610               	rlcf	??_setRowHigh+1,f,c
+   346  000190                     u24:
+   347  000190  2E0F               	decfsz	??_setRowHigh,f,c
+   348  000192  D7FC               	goto	u25
+   349  000194  5010               	movf	??_setRowHigh+1,w,c
+   350  000196  128B               	iorwf	3979,f,c	;volatile
+   351  000198  0012               	return		;funcret
+   352  00019A                     __end_of_setRowHigh:
+   353                           	opt stack 0
+   354                           prodh	equ	0xFF4
+   355                           prodl	equ	0xFF3
+   356                           postinc0	equ	0xFEE
+   357                           wreg	equ	0xFE8
+   358                           postinc2	equ	0xFDE
+   359                           fsr2h	equ	0xFDA
+   360                           fsr2l	equ	0xFD9
+   361                           status	equ	0xFD8
+   362                           
+   363 ;; *************** function _setColHigh *****************
+   364 ;; Defined at:
+   365 ;;		line 19 in file "Source/LED-API.c"
+   366 ;; Parameters:    Size  Location     Type
+   367 ;;  column          1    wreg     unsigned char 
+   368 ;; Auto vars:     Size  Location     Type
+   369 ;;  column          1   16[COMRAM] unsigned char 
+   370 ;; Return value:  Size  Location     Type
+   371 ;;                  1    wreg      void 
+   372 ;; Registers used:
+   373 ;;		wreg, status,2, status,0
+   374 ;; Tracked objects:
+   375 ;;		On entry : 0/0
+   376 ;;		On exit  : 0/0
+   377 ;;		Unchanged: 0/0
+   378 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   379 ;;      Params:         0       0       0       0       0       0       0
+   380 ;;      Locals:         1       0       0       0       0       0       0
+   381 ;;      Temps:          2       0       0       0       0       0       0
+   382 ;;      Totals:         3       0       0       0       0       0       0
+   383 ;;Total ram usage:        3 bytes
+   384 ;; Hardware stack levels used:    1
+   385 ;; Hardware stack levels required when called:    1
+   386 ;; This function calls:
+   387 ;;		Nothing
+   388 ;; This function is called by:
+   389 ;;		_refresh
+   390 ;; This function uses a non-reentrant model
+   391 ;;
+   392                           
+   393                           	psect	text3
+   394  00019A                     __ptext3:
+   395                           	opt stack 0
+   396  00019A                     _setColHigh:
+   397                           	opt stack 28
+   398                           
+   399                           ;incstack = 0
+   400                           ;setColHigh@column stored from wreg
+   401  00019A  6E11               	movwf	setColHigh@column,c
+   402                           
+   403                           ;LED-API.c: 20: LATA |= (1 << column);
+   404  00019C  C011  F00F         	movff	setColHigh@column,??_setColHigh
+   405  0001A0  0E01               	movlw	1
+   406  0001A2  6E10               	movwf	(??_setColHigh+1)& (0+255),c
+   407  0001A4  2A0F               	incf	??_setColHigh,f,c
+   408  0001A6  D002               	goto	u14
+   409  0001A8                     u15:
+   410  0001A8  90D8               	bcf	status,0,c
+   411  0001AA  3610               	rlcf	??_setColHigh+1,f,c
+   412  0001AC                     u14:
+   413  0001AC  2E0F               	decfsz	??_setColHigh,f,c
+   414  0001AE  D7FC               	goto	u15
+   415  0001B0  5010               	movf	??_setColHigh+1,w,c
+   416  0001B2  1289               	iorwf	3977,f,c	;volatile
+   417  0001B4  0012               	return		;funcret
+   418  0001B6                     __end_of_setColHigh:
+   419                           	opt stack 0
+   420                           prodh	equ	0xFF4
+   421                           prodl	equ	0xFF3
+   422                           postinc0	equ	0xFEE
+   423                           wreg	equ	0xFE8
+   424                           postinc2	equ	0xFDE
+   425                           fsr2h	equ	0xFDA
+   426                           fsr2l	equ	0xFD9
+   427                           status	equ	0xFD8
+   428                           
+   429 ;; *************** function _allOff *****************
+   430 ;; Defined at:
+   431 ;;		line 61 in file "Source/LED-API.c"
+   432 ;; Parameters:    Size  Location     Type
+   433 ;;		None
+   434 ;; Auto vars:     Size  Location     Type
+   435 ;;		None
+   436 ;; Return value:  Size  Location     Type
+   437 ;;                  1    wreg      void 
+   438 ;; Registers used:
+   439 ;;		wreg, status,2
+   440 ;; Tracked objects:
+   441 ;;		On entry : 0/0
+   442 ;;		On exit  : 0/0
+   443 ;;		Unchanged: 0/0
+   444 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   445 ;;      Params:         0       0       0       0       0       0       0
+   446 ;;      Locals:         0       0       0       0       0       0       0
+   447 ;;      Temps:          0       0       0       0       0       0       0
+   448 ;;      Totals:         0       0       0       0       0       0       0
+   449 ;;Total ram usage:        0 bytes
+   450 ;; Hardware stack levels used:    1
+   451 ;; Hardware stack levels required when called:    1
+   452 ;; This function calls:
+   453 ;;		Nothing
+   454 ;; This function is called by:
+   455 ;;		_refresh
+   456 ;; This function uses a non-reentrant model
+   457 ;;
    458                           
-   459                           ;LED-API.c: 64: LATD = 0;
-   460  007EAE  0E00               	movlw	0
-   461  007EB0  6E8C               	movwf	3980,c	;volatile
-   462  007EB2  0012               	return		;funcret
-   463  007EB4                     __end_of_allOff:
-   464                           	opt stack 0
-   465                           prodh	equ	0xFF4
-   466                           prodl	equ	0xFF3
-   467                           postinc0	equ	0xFEE
-   468                           wreg	equ	0xFE8
-   469                           postinc2	equ	0xFDE
-   470                           fsr2h	equ	0xFDA
-   471                           fsr2l	equ	0xFD9
-   472                           status	equ	0xFD8
-   473                           
-   474 ;; *************** function _on *****************
-   475 ;; Defined at:
-   476 ;;		line 41 in file "Source/LED-API.c"
-   477 ;; Parameters:    Size  Location     Type
-   478 ;;  column          1    wreg     unsigned char 
-   479 ;;  row             1    0[COMRAM] unsigned char 
-   480 ;; Auto vars:     Size  Location     Type
-   481 ;;  column          1    3[COMRAM] unsigned char 
-   482 ;; Return value:  Size  Location     Type
-   483 ;;                  1    wreg      void 
-   484 ;; Registers used:
-   485 ;;		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh
-   486 ;; Tracked objects:
-   487 ;;		On entry : 0/0
-   488 ;;		On exit  : 0/0
-   489 ;;		Unchanged: 0/0
-   490 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
-   491 ;;      Params:         1       0       0       0       0       0       0
-   492 ;;      Locals:         1       0       0       0       0       0       0
-   493 ;;      Temps:          2       0       0       0       0       0       0
-   494 ;;      Totals:         4       0       0       0       0       0       0
-   495 ;;Total ram usage:        4 bytes
-   496 ;; Hardware stack levels used:    1
-   497 ;; This function calls:
-   498 ;;		Nothing
-   499 ;; This function is called by:
-   500 ;;		_main
-   501 ;; This function uses a non-reentrant model
-   502 ;;
-   503                           
-   504                           	psect	text5
-   505  007F12                     __ptext5:
-   506                           	opt stack 0
-   507  007F12                     _on:
-   508                           	opt stack 30
-   509                           
-   510                           ;incstack = 0
-   511                           ;on@column stored from wreg
-   512  007F12  6E04               	movwf	on@column,c
-   513                           
-   514                           ;LED-API.c: 43: if (row < 0 || row > 16)
-   515  007F14  0E10               	movlw	16
-   516  007F16  6401               	cpfsgt	on@row,c
-   517  007F18  D001               	goto	l756
-   518  007F1A  0012               	return	
-   519  007F1C                     l756:
+   459                           	psect	text4
+   460  0001E4                     __ptext4:
+   461                           	opt stack 0
+   462  0001E4                     _allOff:
+   463                           	opt stack 28
+   464                           
+   465                           ;LED-API.c: 62: LATA = 0;
+   466                           
+   467                           ;incstack = 0
+   468  0001E4  0E00               	movlw	0
+   469  0001E6  6E89               	movwf	3977,c	;volatile
+   470                           
+   471                           ;LED-API.c: 63: LATC = 0;
+   472  0001E8  0E00               	movlw	0
+   473  0001EA  6E8B               	movwf	3979,c	;volatile
+   474                           
+   475                           ;LED-API.c: 64: LATD = 0;
+   476  0001EC  0E00               	movlw	0
+   477  0001EE  6E8C               	movwf	3980,c	;volatile
+   478  0001F0  0012               	return		;funcret
+   479  0001F2                     __end_of_allOff:
+   480                           	opt stack 0
+   481                           prodh	equ	0xFF4
+   482                           prodl	equ	0xFF3
+   483                           postinc0	equ	0xFEE
+   484                           wreg	equ	0xFE8
+   485                           postinc2	equ	0xFDE
+   486                           fsr2h	equ	0xFDA
+   487                           fsr2l	equ	0xFD9
+   488                           status	equ	0xFD8
+   489                           
+   490 ;; *************** function _on *****************
+   491 ;; Defined at:
+   492 ;;		line 41 in file "Source/LED-API.c"
+   493 ;; Parameters:    Size  Location     Type
+   494 ;;  column          1    wreg     unsigned char 
+   495 ;;  row             1   14[COMRAM] unsigned char 
+   496 ;; Auto vars:     Size  Location     Type
+   497 ;;  column          1   17[COMRAM] unsigned char 
+   498 ;; Return value:  Size  Location     Type
+   499 ;;                  1    wreg      void 
+   500 ;; Registers used:
+   501 ;;		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh
+   502 ;; Tracked objects:
+   503 ;;		On entry : 0/0
+   504 ;;		On exit  : 0/0
+   505 ;;		Unchanged: 0/0
+   506 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   507 ;;      Params:         1       0       0       0       0       0       0
+   508 ;;      Locals:         1       0       0       0       0       0       0
+   509 ;;      Temps:          2       0       0       0       0       0       0
+   510 ;;      Totals:         4       0       0       0       0       0       0
+   511 ;;Total ram usage:        4 bytes
+   512 ;; Hardware stack levels used:    1
+   513 ;; Hardware stack levels required when called:    1
+   514 ;; This function calls:
+   515 ;;		Nothing
+   516 ;; This function is called by:
+   517 ;;		_main
+   518 ;; This function uses a non-reentrant model
+   519 ;;
    520                           
-   521                           ;LED-API.c: 45: if (column < 0 || column > 8)
-   522  007F1C  0E08               	movlw	8
-   523  007F1E  6404               	cpfsgt	on@column,c
-   524  007F20  D001               	goto	l760
-   525  007F22  0012               	return	
-   526  007F24                     l760:
-   527                           
-   528                           ;LED-API.c: 48: pixels[column][row] = 1;
-   529  007F24  5004               	movf	on@column,w,c
-   530  007F26  0D10               	mullw	16
-   531  007F28  0E80               	movlw	low _pixels
-   532  007F2A  6E02               	movwf	??_on& (0+255),c
-   533  007F2C  0E00               	movlw	high _pixels
-   534  007F2E  6E03               	movwf	(??_on+1)& (0+255),c
-   535  007F30  50F3               	movf	prodl,w,c
-   536  007F32  2602               	addwf	??_on,f,c
-   537  007F34  50F4               	movf	prodh,w,c
-   538  007F36  2203               	addwfc	??_on+1,f,c
-   539  007F38  5001               	movf	on@row,w,c
-   540  007F3A  0D01               	mullw	1
-   541  007F3C  50F3               	movf	prodl,w,c
-   542  007F3E  2402               	addwf	??_on,w,c
-   543  007F40  6ED9               	movwf	fsr2l,c
-   544  007F42  50F4               	movf	prodh,w,c
-   545  007F44  2003               	addwfc	??_on+1,w,c
-   546  007F46  6EDA               	movwf	fsr2h,c
-   547  007F48  0E01               	movlw	1
-   548  007F4A  6EDF               	movwf	indf2,c
-   549  007F4C  0012               	return		;funcret
-   550  007F4E                     __end_of_on:
-   551                           	opt stack 0
-   552                           prodh	equ	0xFF4
-   553                           prodl	equ	0xFF3
-   554                           postinc0	equ	0xFEE
-   555                           wreg	equ	0xFE8
-   556                           indf2	equ	0xFDF
-   557                           postinc2	equ	0xFDE
-   558                           fsr2h	equ	0xFDA
-   559                           fsr2l	equ	0xFD9
-   560                           status	equ	0xFD8
-   561                           
-   562 ;; *************** function _initializeLED *****************
-   563 ;; Defined at:
-   564 ;;		line 27 in file "Source/LED-API.c"
-   565 ;; Parameters:    Size  Location     Type
-   566 ;;		None
-   567 ;; Auto vars:     Size  Location     Type
-   568 ;;  j               1    3[COMRAM] unsigned char 
-   569 ;;  i               1    2[COMRAM] unsigned char 
-   570 ;; Return value:  Size  Location     Type
-   571 ;;                  1    wreg      void 
-   572 ;; Registers used:
-   573 ;;		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh
-   574 ;; Tracked objects:
-   575 ;;		On entry : 0/0
-   576 ;;		On exit  : 0/0
-   577 ;;		Unchanged: 0/0
-   578 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
-   579 ;;      Params:         0       0       0       0       0       0       0
-   580 ;;      Locals:         2       0       0       0       0       0       0
-   581 ;;      Temps:          2       0       0       0       0       0       0
-   582 ;;      Totals:         4       0       0       0       0       0       0
-   583 ;;Total ram usage:        4 bytes
-   584 ;; Hardware stack levels used:    1
-   585 ;; This function calls:
-   586 ;;		Nothing
-   587 ;; This function is called by:
-   588 ;;		_main
-   589 ;; This function uses a non-reentrant model
-   590 ;;
-   591                           
-   592                           	psect	text6
-   593  007F4E                     __ptext6:
-   594                           	opt stack 0
-   595  007F4E                     _initializeLED:
-   596                           	opt stack 30
-   597                           
-   598                           ;LED-API.c: 28: TRISA = 0b00000000;
-   599                           
-   600                           ;incstack = 0
-   601  007F4E  0E00               	movlw	0
-   602  007F50  6E92               	movwf	3986,c	;volatile
-   603                           
-   604                           ;LED-API.c: 29: TRISC = 0b00000000;
-   605  007F52  0E00               	movlw	0
-   606  007F54  6E94               	movwf	3988,c	;volatile
-   607                           
-   608                           ;LED-API.c: 30: LATC = 0b00000000;
-   609  007F56  0E00               	movlw	0
-   610  007F58  6E8B               	movwf	3979,c	;volatile
-   611                           
-   612                           ;LED-API.c: 31: LATA = 0b00000000;
-   613  007F5A  0E00               	movlw	0
-   614  007F5C  6E89               	movwf	3977,c	;volatile
-   615  007F5E                     l674:
-   616                           
-   617                           ;LED-API.c: 34: for (unsigned char i; i < 8; i++) {
-   618  007F5E  0E07               	movlw	7
-   619  007F60  6403               	cpfsgt	initializeLED@i,c
-   620  007F62  D001               	goto	l678
-   621  007F64  0012               	return	
-   622  007F66                     l678:
-   623                           
-   624                           ;LED-API.c: 35: for (unsigned char j; j < 16; j++) {
-   625  007F66  0E0F               	movlw	15
-   626  007F68  6404               	cpfsgt	initializeLED@j,c
-   627  007F6A  D001               	goto	l682
-   628  007F6C  D016               	goto	l688
-   629  007F6E                     l682:
-   630                           
-   631                           ;LED-API.c: 36: pixels[i][j] = 0;
-   632  007F6E  5003               	movf	initializeLED@i,w,c
-   633  007F70  0D10               	mullw	16
-   634  007F72  0E80               	movlw	low _pixels
-   635  007F74  6E01               	movwf	??_initializeLED& (0+255),c
-   636  007F76  0E00               	movlw	high _pixels
-   637  007F78  6E02               	movwf	(??_initializeLED+1)& (0+255),c
-   638  007F7A  50F3               	movf	prodl,w,c
-   639  007F7C  2601               	addwf	??_initializeLED,f,c
-   640  007F7E  50F4               	movf	prodh,w,c
-   641  007F80  2202               	addwfc	??_initializeLED+1,f,c
-   642  007F82  5004               	movf	initializeLED@j,w,c
-   643  007F84  0D01               	mullw	1
-   644  007F86  50F3               	movf	prodl,w,c
-   645  007F88  2401               	addwf	??_initializeLED,w,c
-   646  007F8A  6ED9               	movwf	fsr2l,c
-   647  007F8C  50F4               	movf	prodh,w,c
-   648  007F8E  2002               	addwfc	??_initializeLED+1,w,c
-   649  007F90  6EDA               	movwf	fsr2h,c
-   650  007F92  0E00               	movlw	0
-   651  007F94  6EDF               	movwf	indf2,c
-   652  007F96  2A04               	incf	initializeLED@j,f,c
-   653  007F98  D7E6               	goto	l678
-   654  007F9A                     l688:
-   655  007F9A  2A03               	incf	initializeLED@i,f,c
-   656  007F9C  D7E0               	goto	l674
-   657  007F9E                     __end_of_initializeLED:
-   658                           	opt stack 0
-   659  0000                     prodh	equ	0xFF4
-   660                           prodl	equ	0xFF3
-   661                           postinc0	equ	0xFEE
-   662                           wreg	equ	0xFE8
-   663                           indf2	equ	0xFDF
-   664                           postinc2	equ	0xFDE
-   665                           fsr2h	equ	0xFDA
-   666                           fsr2l	equ	0xFD9
-   667                           status	equ	0xFD8
-   668                           prodh	equ	0xFF4
-   669                           prodl	equ	0xFF3
-   670                           postinc0	equ	0xFEE
-   671                           wreg	equ	0xFE8
-   672                           indf2	equ	0xFDF
-   673                           postinc2	equ	0xFDE
-   674                           fsr2h	equ	0xFDA
-   675                           fsr2l	equ	0xFD9
-   676                           status	equ	0xFD8
-   677                           
-   678                           	psect	rparam
-   679  0000                     prodh	equ	0xFF4
-   680                           prodl	equ	0xFF3
-   681                           postinc0	equ	0xFEE
-   682                           wreg	equ	0xFE8
-   683                           indf2	equ	0xFDF
-   684                           postinc2	equ	0xFDE
-   685                           fsr2h	equ	0xFDA
-   686                           fsr2l	equ	0xFD9
-   687                           status	equ	0xFD8
+   521                           	psect	text5
+   522  000142                     __ptext5:
+   523                           	opt stack 0
+   524  000142                     _on:
+   525                           	opt stack 29
+   526                           
+   527                           ;incstack = 0
+   528                           ;on@column stored from wreg
+   529  000142  6E12               	movwf	on@column,c
+   530                           
+   531                           ;LED-API.c: 43: if (row < 0 || row > 16)
+   532  000144  0E10               	movlw	16
+   533  000146  640F               	cpfsgt	on@row,c
+   534  000148  D001               	goto	l776
+   535  00014A  0012               	return	
+   536  00014C                     l776:
+   537                           
+   538                           ;LED-API.c: 45: if (column < 0 || column > 8)
+   539  00014C  0E08               	movlw	8
+   540  00014E  6412               	cpfsgt	on@column,c
+   541  000150  D001               	goto	l780
+   542  000152  0012               	return	
+   543  000154                     l780:
+   544                           
+   545                           ;LED-API.c: 48: pixels[column][row] = 1;
+   546  000154  5012               	movf	on@column,w,c
+   547  000156  0D10               	mullw	16
+   548  000158  0E80               	movlw	low _pixels
+   549  00015A  6E10               	movwf	??_on& (0+255),c
+   550  00015C  0E00               	movlw	high _pixels
+   551  00015E  6E11               	movwf	(??_on+1)& (0+255),c
+   552  000160  50F3               	movf	prodl,w,c
+   553  000162  2610               	addwf	??_on,f,c
+   554  000164  50F4               	movf	prodh,w,c
+   555  000166  2211               	addwfc	??_on+1,f,c
+   556  000168  500F               	movf	on@row,w,c
+   557  00016A  0D01               	mullw	1
+   558  00016C  50F3               	movf	prodl,w,c
+   559  00016E  2410               	addwf	??_on,w,c
+   560  000170  6ED9               	movwf	fsr2l,c
+   561  000172  50F4               	movf	prodh,w,c
+   562  000174  2011               	addwfc	??_on+1,w,c
+   563  000176  6EDA               	movwf	fsr2h,c
+   564  000178  0E01               	movlw	1
+   565  00017A  6EDF               	movwf	indf2,c
+   566  00017C  0012               	return		;funcret
+   567  00017E                     __end_of_on:
+   568                           	opt stack 0
+   569                           prodh	equ	0xFF4
+   570                           prodl	equ	0xFF3
+   571                           postinc0	equ	0xFEE
+   572                           wreg	equ	0xFE8
+   573                           indf2	equ	0xFDF
+   574                           postinc2	equ	0xFDE
+   575                           fsr2h	equ	0xFDA
+   576                           fsr2l	equ	0xFD9
+   577                           status	equ	0xFD8
+   578                           
+   579 ;; *************** function _initializeLED *****************
+   580 ;; Defined at:
+   581 ;;		line 27 in file "Source/LED-API.c"
+   582 ;; Parameters:    Size  Location     Type
+   583 ;;		None
+   584 ;; Auto vars:     Size  Location     Type
+   585 ;;  j               1   17[COMRAM] unsigned char 
+   586 ;;  i               1   16[COMRAM] unsigned char 
+   587 ;; Return value:  Size  Location     Type
+   588 ;;                  1    wreg      void 
+   589 ;; Registers used:
+   590 ;;		wreg, fsr2l, fsr2h, status,2, status,0, prodl, prodh
+   591 ;; Tracked objects:
+   592 ;;		On entry : 0/0
+   593 ;;		On exit  : 0/0
+   594 ;;		Unchanged: 0/0
+   595 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   596 ;;      Params:         0       0       0       0       0       0       0
+   597 ;;      Locals:         2       0       0       0       0       0       0
+   598 ;;      Temps:          2       0       0       0       0       0       0
+   599 ;;      Totals:         4       0       0       0       0       0       0
+   600 ;;Total ram usage:        4 bytes
+   601 ;; Hardware stack levels used:    1
+   602 ;; Hardware stack levels required when called:    1
+   603 ;; This function calls:
+   604 ;;		Nothing
+   605 ;; This function is called by:
+   606 ;;		_main
+   607 ;; This function uses a non-reentrant model
+   608 ;;
+   609                           
+   610                           	psect	text6
+   611  0000EA                     __ptext6:
+   612                           	opt stack 0
+   613  0000EA                     _initializeLED:
+   614                           	opt stack 29
+   615                           
+   616                           ;LED-API.c: 28: TRISA = 0b00000000;
+   617                           
+   618                           ;incstack = 0
+   619  0000EA  0E00               	movlw	0
+   620  0000EC  6E92               	movwf	3986,c	;volatile
+   621                           
+   622                           ;LED-API.c: 29: TRISC = 0b00000000;
+   623  0000EE  0E00               	movlw	0
+   624  0000F0  6E94               	movwf	3988,c	;volatile
+   625                           
+   626                           ;LED-API.c: 30: LATC = 0b00000000;
+   627  0000F2  0E00               	movlw	0
+   628  0000F4  6E8B               	movwf	3979,c	;volatile
+   629                           
+   630                           ;LED-API.c: 31: LATA = 0b00000000;
+   631  0000F6  0E00               	movlw	0
+   632  0000F8  6E89               	movwf	3977,c	;volatile
+   633                           
+   634                           ;LED-API.c: 34: for (unsigned char i = 0; i < 8; i++) {
+   635  0000FA  0E00               	movlw	0
+   636  0000FC  6E11               	movwf	initializeLED@i,c
+   637  0000FE                     l686:
+   638  0000FE  0E07               	movlw	7
+   639  000100  6411               	cpfsgt	initializeLED@i,c
+   640  000102  D001               	goto	l690
+   641  000104  0012               	return	
+   642  000106                     l690:
+   643                           
+   644                           ;LED-API.c: 35: for (unsigned char j = 0; j < 16; j++) {
+   645  000106  0E00               	movlw	0
+   646  000108  6E12               	movwf	initializeLED@j,c
+   647  00010A                     l692:
+   648  00010A  0E0F               	movlw	15
+   649  00010C  6412               	cpfsgt	initializeLED@j,c
+   650  00010E  D001               	goto	l696
+   651  000110  D016               	goto	l702
+   652  000112                     l696:
+   653                           
+   654                           ;LED-API.c: 36: pixels[i][j] = 0;
+   655  000112  5011               	movf	initializeLED@i,w,c
+   656  000114  0D10               	mullw	16
+   657  000116  0E80               	movlw	low _pixels
+   658  000118  6E0F               	movwf	??_initializeLED& (0+255),c
+   659  00011A  0E00               	movlw	high _pixels
+   660  00011C  6E10               	movwf	(??_initializeLED+1)& (0+255),c
+   661  00011E  50F3               	movf	prodl,w,c
+   662  000120  260F               	addwf	??_initializeLED,f,c
+   663  000122  50F4               	movf	prodh,w,c
+   664  000124  2210               	addwfc	??_initializeLED+1,f,c
+   665  000126  5012               	movf	initializeLED@j,w,c
+   666  000128  0D01               	mullw	1
+   667  00012A  50F3               	movf	prodl,w,c
+   668  00012C  240F               	addwf	??_initializeLED,w,c
+   669  00012E  6ED9               	movwf	fsr2l,c
+   670  000130  50F4               	movf	prodh,w,c
+   671  000132  2010               	addwfc	??_initializeLED+1,w,c
+   672  000134  6EDA               	movwf	fsr2h,c
+   673  000136  0E00               	movlw	0
+   674  000138  6EDF               	movwf	indf2,c
+   675  00013A  2A12               	incf	initializeLED@j,f,c
+   676  00013C  D7E6               	goto	l692
+   677  00013E                     l702:
+   678  00013E  2A11               	incf	initializeLED@i,f,c
+   679  000140  D7DE               	goto	l686
+   680  000142                     __end_of_initializeLED:
+   681                           	opt stack 0
+   682                           prodh	equ	0xFF4
+   683                           prodl	equ	0xFF3
+   684                           postinc0	equ	0xFEE
+   685                           wreg	equ	0xFE8
+   686                           indf2	equ	0xFDF
+   687                           postinc2	equ	0xFDE
+   688                           fsr2h	equ	0xFDA
+   689                           fsr2l	equ	0xFD9
+   690                           status	equ	0xFD8
+   691                           
+   692 ;; *************** function _initialize *****************
+   693 ;; Defined at:
+   694 ;;		line 14 in file "main.c"
+   695 ;; Parameters:    Size  Location     Type
+   696 ;;		None
+   697 ;; Auto vars:     Size  Location     Type
+   698 ;;		None
+   699 ;; Return value:  Size  Location     Type
+   700 ;;                  1    wreg      void 
+   701 ;; Registers used:
+   702 ;;		None
+   703 ;; Tracked objects:
+   704 ;;		On entry : 0/0
+   705 ;;		On exit  : 0/0
+   706 ;;		Unchanged: 0/0
+   707 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   708 ;;      Params:         0       0       0       0       0       0       0
+   709 ;;      Locals:         0       0       0       0       0       0       0
+   710 ;;      Temps:          0       0       0       0       0       0       0
+   711 ;;      Totals:         0       0       0       0       0       0       0
+   712 ;;Total ram usage:        0 bytes
+   713 ;; Hardware stack levels used:    1
+   714 ;; Hardware stack levels required when called:    1
+   715 ;; This function calls:
+   716 ;;		Nothing
+   717 ;; This function is called by:
+   718 ;;		_main
+   719 ;; This function uses a non-reentrant model
+   720 ;;
+   721                           
+   722                           	psect	text7
+   723  0001F2                     __ptext7:
+   724                           	opt stack 0
+   725  0001F2                     _initialize:
+   726                           	opt stack 29
+   727                           
+   728                           ;main.c: 16: GIE = 1;
+   729                           
+   730                           ;incstack = 0
+   731  0001F2  8EF2               	bsf	intcon,7,c	;volatile
+   732                           
+   733                           ;main.c: 17: PEIE=1;
+   734  0001F4  8CF2               	bsf	intcon,6,c	;volatile
+   735  0001F6  0012               	return		;funcret
+   736  0001F8                     __end_of_initialize:
+   737                           	opt stack 0
+   738                           prodh	equ	0xFF4
+   739                           prodl	equ	0xFF3
+   740                           intcon	equ	0xFF2
+   741                           postinc0	equ	0xFEE
+   742                           wreg	equ	0xFE8
+   743                           indf2	equ	0xFDF
+   744                           postinc2	equ	0xFDE
+   745                           fsr2h	equ	0xFDA
+   746                           fsr2l	equ	0xFD9
+   747                           status	equ	0xFD8
+   748                           
+   749 ;; *************** function _ISR *****************
+   750 ;; Defined at:
+   751 ;;		line 22 in file "main.c"
+   752 ;; Parameters:    Size  Location     Type
+   753 ;;		None
+   754 ;; Auto vars:     Size  Location     Type
+   755 ;;		None
+   756 ;; Return value:  Size  Location     Type
+   757 ;;                  1    wreg      void 
+   758 ;; Registers used:
+   759 ;;		None
+   760 ;; Tracked objects:
+   761 ;;		On entry : 0/0
+   762 ;;		On exit  : 0/0
+   763 ;;		Unchanged: 0/0
+   764 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+   765 ;;      Params:         0       0       0       0       0       0       0
+   766 ;;      Locals:         0       0       0       0       0       0       0
+   767 ;;      Temps:         14       0       0       0       0       0       0
+   768 ;;      Totals:        14       0       0       0       0       0       0
+   769 ;;Total ram usage:       14 bytes
+   770 ;; Hardware stack levels used:    1
+   771 ;; This function calls:
+   772 ;;		Nothing
+   773 ;; This function is called by:
+   774 ;;		Interrupt level 2
+   775 ;; This function uses a non-reentrant model
+   776 ;;
+   777                           
+   778                           	psect	intcode
+   779  000008                     __pintcode:
+   780                           	opt stack 0
+   781  000008                     _ISR:
+   782                           	opt stack 28
+   783                           
+   784                           ;incstack = 0
+   785  000008  8217               	bsf	btemp,1,c	;set compiler interrupt flag (level 2)
+   786  00000A  CFFA F001          	movff	pclath,??_ISR
+   787  00000E  CFFB F002          	movff	pclatu,??_ISR+1
+   788  000012  ED0D  F000         	call	int_func,f	;refresh shadow registers
+   789                           pclatu	equ	0xFFB
+   790                           pclath	equ	0xFFA
+   791                           prodh	equ	0xFF4
+   792                           prodl	equ	0xFF3
+   793                           intcon	equ	0xFF2
+   794                           postinc0	equ	0xFEE
+   795                           wreg	equ	0xFE8
+   796                           indf2	equ	0xFDF
+   797                           postinc2	equ	0xFDE
+   798                           fsr2h	equ	0xFDA
+   799                           fsr2l	equ	0xFD9
+   800                           status	equ	0xFD8
+   801                           
+   802                           	psect	intcode_body
+   803  00001A                     __pintcode_body:
+   804                           	opt stack 28
+   805  00001A                     int_func:
+   806                           	opt stack 28
+   807  00001A  0006               	pop		; remove dummy address from shadow register refresh
+   808  00001C  CFE9 F003          	movff	fsr0l,??_ISR+2
+   809  000020  CFEA F004          	movff	fsr0h,??_ISR+3
+   810  000024  CFE1 F005          	movff	fsr1l,??_ISR+4
+   811  000028  CFE2 F006          	movff	fsr1h,??_ISR+5
+   812  00002C  CFD9 F007          	movff	fsr2l,??_ISR+6
+   813  000030  CFDA F008          	movff	fsr2h,??_ISR+7
+   814  000034  CFF3 F009          	movff	prodl,??_ISR+8
+   815  000038  CFF4 F00A          	movff	prodh,??_ISR+9
+   816  00003C  CFF6 F00B          	movff	tblptrl,??_ISR+10
+   817  000040  CFF7 F00C          	movff	tblptrh,??_ISR+11
+   818  000044  CFF8 F00D          	movff	tblptru,??_ISR+12
+   819  000048  CFF5 F00E          	movff	tablat,??_ISR+13
+   820  00004C  C00E  FFF5         	movff	??_ISR+13,tablat
+   821  000050  C00D  FFF8         	movff	??_ISR+12,tblptru
+   822  000054  C00C  FFF7         	movff	??_ISR+11,tblptrh
+   823  000058  C00B  FFF6         	movff	??_ISR+10,tblptrl
+   824  00005C  C00A  FFF4         	movff	??_ISR+9,prodh
+   825  000060  C009  FFF3         	movff	??_ISR+8,prodl
+   826  000064  C008  FFDA         	movff	??_ISR+7,fsr2h
+   827  000068  C007  FFD9         	movff	??_ISR+6,fsr2l
+   828  00006C  C006  FFE2         	movff	??_ISR+5,fsr1h
+   829  000070  C005  FFE1         	movff	??_ISR+4,fsr1l
+   830  000074  C004  FFEA         	movff	??_ISR+3,fsr0h
+   831  000078  C003  FFE9         	movff	??_ISR+2,fsr0l
+   832  00007C  C002  FFFB         	movff	??_ISR+1,pclatu
+   833  000080  C001  FFFA         	movff	??_ISR,pclath
+   834  000084  9217               	bcf	btemp,1,c	;clear compiler interrupt flag (level 2)
+   835  000086  0011               	retfie		f
+   836  000088                     __end_of_ISR:
+   837                           	opt stack 0
+   838  0000                     pclatu	equ	0xFFB
+   839                           pclath	equ	0xFFA
+   840                           tblptru	equ	0xFF8
+   841                           tblptrh	equ	0xFF7
+   842                           tblptrl	equ	0xFF6
+   843                           tablat	equ	0xFF5
+   844                           prodh	equ	0xFF4
+   845                           prodl	equ	0xFF3
+   846                           intcon	equ	0xFF2
+   847                           postinc0	equ	0xFEE
+   848                           fsr0h	equ	0xFEA
+   849                           fsr0l	equ	0xFE9
+   850                           wreg	equ	0xFE8
+   851                           fsr1h	equ	0xFE2
+   852                           fsr1l	equ	0xFE1
+   853                           indf2	equ	0xFDF
+   854                           postinc2	equ	0xFDE
+   855                           fsr2h	equ	0xFDA
+   856                           fsr2l	equ	0xFD9
+   857                           status	equ	0xFD8
+   858                           pclatu	equ	0xFFB
+   859                           pclath	equ	0xFFA
+   860                           tblptru	equ	0xFF8
+   861                           tblptrh	equ	0xFF7
+   862                           tblptrl	equ	0xFF6
+   863                           tablat	equ	0xFF5
+   864                           prodh	equ	0xFF4
+   865                           prodl	equ	0xFF3
+   866                           intcon	equ	0xFF2
+   867                           postinc0	equ	0xFEE
+   868                           fsr0h	equ	0xFEA
+   869                           fsr0l	equ	0xFE9
+   870                           wreg	equ	0xFE8
+   871                           fsr1h	equ	0xFE2
+   872                           fsr1l	equ	0xFE1
+   873                           indf2	equ	0xFDF
+   874                           postinc2	equ	0xFDE
+   875                           fsr2h	equ	0xFDA
+   876                           fsr2l	equ	0xFD9
+   877                           status	equ	0xFD8
+   878                           
+   879                           	psect	rparam
+   880  0000                     pclatu	equ	0xFFB
+   881                           pclath	equ	0xFFA
+   882                           tblptru	equ	0xFF8
+   883                           tblptrh	equ	0xFF7
+   884                           tblptrl	equ	0xFF6
+   885                           tablat	equ	0xFF5
+   886                           prodh	equ	0xFF4
+   887                           prodl	equ	0xFF3
+   888                           intcon	equ	0xFF2
+   889                           postinc0	equ	0xFEE
+   890                           fsr0h	equ	0xFEA
+   891                           fsr0l	equ	0xFE9
+   892                           wreg	equ	0xFE8
+   893                           fsr1h	equ	0xFE2
+   894                           fsr1l	equ	0xFE1
+   895                           indf2	equ	0xFDF
+   896                           postinc2	equ	0xFDE
+   897                           fsr2h	equ	0xFDA
+   898                           fsr2l	equ	0xFD9
+   899                           status	equ	0xFD8
+   900                           
+   901                           	psect	temp
+   902  000017                     btemp:
+   903                           	opt stack 0
+   904  000017                     	ds	1
+   905  0000                     int$flags	set	btemp
+   906                           pclatu	equ	0xFFB
+   907                           pclath	equ	0xFFA
+   908                           tblptru	equ	0xFF8
+   909                           tblptrh	equ	0xFF7
+   910                           tblptrl	equ	0xFF6
+   911                           tablat	equ	0xFF5
+   912                           prodh	equ	0xFF4
+   913                           prodl	equ	0xFF3
+   914                           intcon	equ	0xFF2
+   915                           postinc0	equ	0xFEE
+   916                           fsr0h	equ	0xFEA
+   917                           fsr0l	equ	0xFE9
+   918                           wreg	equ	0xFE8
+   919                           fsr1h	equ	0xFE2
+   920                           fsr1l	equ	0xFE1
+   921                           indf2	equ	0xFDF
+   922                           postinc2	equ	0xFDE
+   923                           fsr2h	equ	0xFDA
+   924                           fsr2l	equ	0xFD9
+   925                           status	equ	0xFD8
 
 
 Data Sizes:
@@ -703,7 +941,7 @@ Data Sizes:
 
 Auto Spaces:
     Space          Size  Autos    Used
-    COMRAM          127      8       8
+    COMRAM          126     22      22
     BANK0           128      0     128
     BANK1           256      0       0
     BANK2           256      0       0
@@ -721,7 +959,15 @@ Critical Paths under _main in COMRAM
     _refresh->_setColHigh
     _refresh->_setRowHigh
 
+Critical Paths under _ISR in COMRAM
+
+    None.
+
 Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _ISR in BANK0
 
     None.
 
@@ -729,7 +975,15 @@ Critical Paths under _main in BANK1
 
     None.
 
+Critical Paths under _ISR in BANK1
+
+    None.
+
 Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _ISR in BANK2
 
     None.
 
@@ -737,11 +991,23 @@ Critical Paths under _main in BANK3
 
     None.
 
+Critical Paths under _ISR in BANK3
+
+    None.
+
 Critical Paths under _main in BANK4
 
     None.
 
+Critical Paths under _ISR in BANK4
+
+    None.
+
 Critical Paths under _main in BANK5
+
+    None.
+
+Critical Paths under _ISR in BANK5
 
     None.
 
@@ -751,42 +1017,55 @@ Call Graph Tables:
  (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
  ---------------------------------------------------------------------------------
  (0) _main                                                 0     0      0     371
+                         _initialize
                       _initializeLED
                                  _on
                             _refresh
  ---------------------------------------------------------------------------------
  (1) _refresh                                              5     5      0     150
-                                              3 COMRAM     5     5      0
+                                             17 COMRAM     5     5      0
                              _allOff
                          _setColHigh
                          _setRowHigh
  ---------------------------------------------------------------------------------
  (2) _setRowHigh                                           3     3      0      15
-                                              0 COMRAM     3     3      0
+                                             14 COMRAM     3     3      0
  ---------------------------------------------------------------------------------
  (2) _setColHigh                                           3     3      0      15
-                                              0 COMRAM     3     3      0
+                                             14 COMRAM     3     3      0
  ---------------------------------------------------------------------------------
  (2) _allOff                                               0     0      0       0
  ---------------------------------------------------------------------------------
  (1) _on                                                   4     3      1     131
-                                              0 COMRAM     4     3      1
+                                             14 COMRAM     4     3      1
  ---------------------------------------------------------------------------------
  (1) _initializeLED                                        4     4      0      90
-                                              0 COMRAM     4     4      0
+                                             14 COMRAM     4     4      0
+ ---------------------------------------------------------------------------------
+ (1) _initialize                                           0     0      0       0
  ---------------------------------------------------------------------------------
  Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (3) _ISR                                                 14    14      0       0
+                                              0 COMRAM    14    14      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 3
  ---------------------------------------------------------------------------------
 
  Call Graph Graphs:
 
  _main (ROOT)
+   _initialize
    _initializeLED
    _on
    _refresh
      _allOff
      _setColHigh
      _setRowHigh
+
+ _ISR (ROOT)
 
  Address spaces:
 Name               Size   Autos  Total    Cost      Usage
@@ -804,62 +1083,72 @@ BITBANK1           100      0       0       6        0.0%
 BANK1              100      0       0       7        0.0%
 BITBANK0            80      0       0       4        0.0%
 BANK0               80      0      80       5      100.0%
-BITCOMRAM           7F      0       0       0        0.0%
-COMRAM              7F      8       8       1        6.3%
+BITCOMRAM           7E      0       0       0        0.0%
+COMRAM              7E     16      16       1       17.5%
 BITSFR               0      0       0      40        0.0%
 SFR                  0      0       0      40        0.0%
 STACK                0      0       0       2        0.0%
 NULL                 0      0       0       0        0.0%
-ABS                  0      0      88      15        0.0%
-DATA                 0      0      88       3        0.0%
+ABS                  0      0      96      15        0.0%
+DATA                 0      0      96       3        0.0%
 CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.36 build -262312587 
-Symbol Table                                                                                   Mon Mar 21 19:15:24 2016
+Symbol Table                                                                                   Tue Mar 22 20:15:12 2016
 
-                     l17 7ED4                       u14 7EEC                       u15 7EE8  
-                     u24 7F08                       u25 7F04                       _on 7F12  
-            __CFG_BORV$3 000000             __CFG_CP0$OFF 000000             __CFG_CP1$OFF 000000  
-           __CFG_CP2$OFF 000000             __CFG_CP3$OFF 000000                      ?_on 0001  
-                    l710 7FAE                      l704 7FA2                      l722 7FEA  
-                    l714 7FB6                      l708 7FAA                      l718 7FE6  
-                    l760 7F24                      l682 7F6E                      l674 7F5E  
-                    l756 7F1C                      l678 7F66                      l688 7F9A  
-           __CFG_CPB$OFF 000000             __CFG_CPD$OFF 000000                      u197 7FF2  
-                    wreg 000FE8                     ??_on 0002             __CFG_LVP$OFF 000000  
-           __CFG_WDT$OFF 000000                     _LATA 000F89                     _LATC 000F8B  
-                   _LATD 000F8C                     _main 7EC6                     indf2 000FDF  
-                   fsr2l 000FD9                     prodh 000FF4                     prodl 000FF3  
-                   start 0000            __CFG_IESO$OFF 000000            __CFG_MCLRE$ON 000000  
-           ___param_bank 000010                    ?_main 0001                    _TRISA 000F92  
-                  _TRISC 000F94            __CFG_PWRT$OFF 000000            __CFG_WRT0$OFF 000000  
-          __CFG_WRT1$OFF 000000            __CFG_WRT2$OFF 000000            __CFG_WRT3$OFF 000000  
-         __CFG_EBTR0$OFF 000000           __CFG_FCMEN$OFF 000000           __CFG_EBTR1$OFF 000000  
-         __CFG_EBTR2$OFF 000000           __CFG_EBTR3$OFF 000000            __CFG_WRTB$OFF 000000  
-          __CFG_WRTC$OFF 000000            __CFG_WRTD$OFF 000000           __CFG_EBTRB$OFF 000000  
-        __end_of_refresh 8000                    on@row 0001           __CFG_BOREN$OFF 000000  
-                  status 000FD8          __initialization 7EB4             __end_of_main 7EDA  
-                 ??_main 0009            __activetblptr 000000           __CFG_XINST$OFF 000000  
-                 _allOff 7EA6           __CFG_STVREN$ON 000000                   clear_0 7EBA  
-                 _pixels 0080                ??_refresh 0004   __size_of_initializeLED 0050  
-             __accesstop 0080  __end_of__initialization 7EC0          __CFG_PBADEN$OFF 000000  
-          ___rparam_used 000001           __pcstackCOMRAM 0001               __end_of_on 7F4E  
-             __pbssBANK0 0080            _initializeLED 7F4E                  ?_allOff 0001  
-         ?_initializeLED 0001                  __Hparam 0000                  __Lparam 0000  
-          refresh@theCol 0007            refresh@theRow 0008          __size_of_allOff 000E  
-                __pcinit 7EB4                  __ramtop 0600                  __ptext0 7EC6  
-                __ptext1 7F9E                  __ptext2 7EF6                  __ptext3 7EDA  
-                __ptext4 7EA6                  __ptext5 7F12                  __ptext6 7F4E  
-                _refresh 7F9E               _setColHigh 7EDA     end_of_initialization 7EC0  
-             _setRowHigh 7EF6                  postinc0 000FEE                  postinc2 000FDE  
-        ??_initializeLED 0001            setRowHigh@row 0003           __end_of_allOff 7EB4  
-    start_initialization 7EB4              ?_setColHigh 0001              ?_setRowHigh 0001  
-       __CFG_OSC$INTIO67 000000                 ??_allOff 0001         __CFG_LPT1OSC$OFF 000000  
-      __CFG_CCP2MX$PORTC 000000      __size_of_setColHigh 001C      __size_of_setRowHigh 001C  
-               ?_refresh 0001              __size_of_on 003C         __CFG_WDTPS$32768 000000  
-               __Hrparam 0000                 __Lrparam 0000             ??_setColHigh 0001  
-       __size_of_refresh 0062             ??_setRowHigh 0001            __size_of_main 0014  
-  __end_of_initializeLED 7F9E           initializeLED@i 0003           initializeLED@j 0004  
-     __end_of_setColHigh 7EF6                 on@column 0004       __end_of_setRowHigh 7F12  
-       setColHigh@column 0003  
+                     u14 01AC                       u15 01A8                       u24 0190  
+                     u25 018C                       _on 0142              __CFG_BORV$3 000000  
+           __CFG_CP0$OFF 000000             __CFG_CP1$OFF 000000             __CFG_CP2$OFF 000000  
+           __CFG_CP3$OFF 000000                      ?_on 000F                      l702 013E  
+                    l722 0094                      l732 00D0                      l724 0098  
+                    l718 008C                      l736 00D4                      l728 00A0  
+                    l690 0106                      l692 010A                      l780 0154  
+                    l686 00FE                      l696 0112                      l776 014C  
+                    l788 01C8                      _GIE 007F97             __CFG_CPB$OFF 000000  
+           __CFG_CPD$OFF 000000                      _ISR 0008                      u197 00DC  
+                    wreg 000FE8                     ??_on 0010             __CFG_LVP$OFF 000000  
+                   ?_ISR 0001             __CFG_WDT$OFF 000000                     _LATA 000F89  
+                   _LATC 000F8B                     _LATD 000F8C                     _PEIE 007F96  
+                   _main 01B6                     fsr0h 000FEA                     fsr1h 000FE2  
+                   fsr0l 000FE9                     fsr2h 000FDA                     fsr1l 000FE1  
+                   indf2 000FDF                     fsr2l 000FD9                     btemp 0017  
+                   pclat 000FFA                     prodh 000FF4                     prodl 000FF3  
+                   start 0016            __CFG_IESO$OFF 000000            __CFG_MCLRE$ON 000000  
+           ___param_bank 000010                    ??_ISR 0001                    ?_main 0001  
+                  _TRISA 000F92                    _TRISC 000F94            __CFG_PWRT$OFF 000000  
+          __CFG_WRT0$OFF 000000            __CFG_WRT1$OFF 000000            __CFG_WRT2$OFF 000000  
+          __CFG_WRT3$OFF 000000           __CFG_EBTR0$OFF 000000           __CFG_FCMEN$OFF 000000  
+         __CFG_EBTR1$OFF 000000           __CFG_EBTR2$OFF 000000           __CFG_EBTR3$OFF 000000  
+          __CFG_WRTB$OFF 000000            __CFG_WRTC$OFF 000000            __CFG_WRTD$OFF 000000  
+         __CFG_EBTRB$OFF 000000          __end_of_refresh 00EA                    on@row 000F  
+         __CFG_BOREN$OFF 000000                    tablat 000FF5                    status 000FD8  
+        __initialization 01CE             __end_of_main 01CE                   ??_main 0017  
+          __activetblptr 000000           __CFG_XINST$OFF 000000                   _allOff 01E4  
+         __CFG_STVREN$ON 000000                   clear_0 01D4                   _pixels 0080  
+              ??_refresh 0012                   tblptrh 000FF7                   tblptrl 000FF6  
+                 tblptru 000FF8   __size_of_initializeLED 0058               __accesstop 0080  
+__end_of__initialization 01DA          __CFG_PBADEN$OFF 000000            ___rparam_used 000001  
+         __pcstackCOMRAM 0001               __end_of_on 017E               __pbssBANK0 0080  
+          _initializeLED 00EA                  ?_allOff 0001           ?_initializeLED 0001  
+                __Hparam 0000                  __Lparam 0000            refresh@theCol 0015  
+          refresh@theRow 0016          __size_of_allOff 000E                  __pcinit 01CE  
+                __ramtop 0600               _initialize 01F2                  __ptext0 01B6  
+                __ptext1 0088                  __ptext2 017E                  __ptext3 019A  
+                __ptext4 01E4                  __ptext5 0142                  __ptext6 00EA  
+                __ptext7 01F2             __size_of_ISR 0080                  _refresh 0088  
+             _setColHigh 019A           __pintcode_body 001A     end_of_initialization 01DA  
+                int_func 001A               _setRowHigh 017E                  postinc0 000FEE  
+                postinc2 000FDE          ??_initializeLED 000F            setRowHigh@row 0011  
+         __end_of_allOff 01F2              ?_initialize 0001      start_initialization 01CE  
+            __end_of_ISR 0088              ?_setColHigh 0001              ?_setRowHigh 0001  
+       __CFG_OSC$INTIO67 000000                 ??_allOff 000F         __CFG_LPT1OSC$OFF 000000  
+    __size_of_initialize 0006        __CFG_CCP2MX$PORTC 000000                __pintcode 0008  
+    __size_of_setColHigh 001C      __size_of_setRowHigh 001C                 ?_refresh 0001  
+            __size_of_on 003C         __CFG_WDTPS$32768 000000                 __Hrparam 0000  
+               __Lrparam 0000             ??_initialize 000F             ??_setColHigh 000F  
+       __size_of_refresh 0062             ??_setRowHigh 000F            __size_of_main 0018  
+     __end_of_initialize 01F8    __end_of_initializeLED 0142           initializeLED@i 0011  
+         initializeLED@j 0012                 int$flags 0017       __end_of_setColHigh 01B6  
+               on@column 0012       __end_of_setRowHigh 019A         setColHigh@column 0011  
+               intlevel2 0000  

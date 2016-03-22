@@ -1,4 +1,8 @@
 Version 3.2 HI-TECH Software Intermediate Code
+"7352 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f4520.h
+[v _GIE `Vb ~T0 @X0 0 e@32663 ]
+"7736
+[v _PEIE `Vb ~T0 @X0 0 e@32662 ]
 [v F3183 `(v ~T0 @X0 1 tf1`ul ]
 "156 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18.h
 [v __delay `JF3183 ~T0 @X0 0 e ]
@@ -3054,67 +3058,94 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;LED-API.h: 14: extern void off(unsigned char column, unsigned char row);
 [; ;LED-API.h: 15: extern void initializeLED();
 [; ;LED-API.h: 16: extern void refresh();
-"13 main.c
-[v _delaySeconds `(v ~T0 @X0 1 ef1`i ]
-"14
-{
-[; ;main.c: 13: void delaySeconds(int numberOfSeconds)
-[; ;main.c: 14: {
-[e :U _delaySeconds ]
-"13
-[v _numberOfSeconds `i ~T0 @X0 1 r1 ]
-"14
-[f ]
-[; ;main.c: 15: for(int i = 0; i < numberOfSeconds * 100; i++)
+"14 main.c
+[v _initialize `(v ~T0 @X0 1 ef ]
 "15
+{
+[; ;main.c: 14: void initialize()
+[; ;main.c: 15: {
+[e :U _initialize ]
+[f ]
+[; ;main.c: 16: GIE = 1;
+"16
+[e = _GIE -> -> 1 `i `b ]
+[; ;main.c: 17: PEIE=1;
+"17
+[e = _PEIE -> -> 1 `i `b ]
+[; ;main.c: 19: }
+"19
+[e :UE 344 ]
+}
+[v F3201 `(v ~T0 @X0 1 tf ]
+"22
+[v _ISR `IF3201 ~T0 @X0 1 e ]
+"23
+{
+[; ;main.c: 22: void interrupt ISR(void)
+[; ;main.c: 23: {
+[e :U _ISR ]
+[f ]
+[; ;main.c: 24: }
+"24
+[e :UE 345 ]
+}
+"26
+[v _delaySeconds `(v ~T0 @X0 1 ef1`i ]
+"27
+{
+[; ;main.c: 26: void delaySeconds(int numberOfSeconds)
+[; ;main.c: 27: {
+[e :U _delaySeconds ]
+"26
+[v _numberOfSeconds `i ~T0 @X0 1 r1 ]
+"27
+[f ]
+[; ;main.c: 28: for(int i = 0; i < numberOfSeconds * 100; i++)
+"28
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
-[e $U 348  ]
-"16
-[e :U 345 ]
-[; ;main.c: 16: _delay((unsigned long)((10)*(1000000/4000.0)));
+[e $U 350  ]
+"29
+[e :U 347 ]
+[; ;main.c: 29: _delay((unsigned long)((10)*(1000000/4000.0)));
 [e ( __delay (1 -> * -> -> 10 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
-"15
+"28
 [e ++ _i -> 1 `i ]
+[e :U 350 ]
+[e $ < _i * _numberOfSeconds -> 100 `i 347  ]
 [e :U 348 ]
-[e $ < _i * _numberOfSeconds -> 100 `i 345  ]
-[e :U 346 ]
-"16
+"29
 }
-[; ;main.c: 17: }
-"17
-[e :UE 344 ]
+[; ;main.c: 30: }
+"30
+[e :UE 346 ]
 }
-"19
+"32
 [v _main `(v ~T0 @X0 1 ef ]
 {
-[; ;main.c: 19: void main(void) {
+[; ;main.c: 32: void main(void) {
 [e :U _main ]
 [f ]
-[; ;main.c: 20: initializeLED();
-"20
+[; ;main.c: 33: initializeLED();
+"33
 [e ( _initializeLED ..  ]
-[; ;main.c: 22: on(2, 2);
-"22
+[; ;main.c: 34: initialize();
+"34
+[e ( _initialize ..  ]
+[; ;main.c: 36: on(2, 2);
+"36
 [e ( _on (2 , -> -> 2 `i `uc -> -> 2 `i `uc ]
-[; ;main.c: 24: while(1)
-"24
-[e :U 351 ]
-[; ;main.c: 25: {
-"25
+[; ;main.c: 40: while(1){ refresh(); };
+"40
+[e :U 353 ]
 {
-[; ;main.c: 26: refresh();
-"26
 [e ( _refresh ..  ]
-"27
 }
-[e :U 350 ]
-"24
-[e $U 351  ]
 [e :U 352 ]
-[; ;main.c: 27: }
-[; ;main.c: 28: }
-"28
-[e :UE 349 ]
+[e $U 353  ]
+[e :U 354 ]
+[; ;main.c: 41: }
+"41
+[e :UE 351 ]
 }

@@ -10,6 +10,19 @@
 #include "Header/config.h"
 #include "Header/LED-API.h"
 
+
+void initialize()
+{ 
+    GIE = 1; // gloval interrupt enabled
+    PEIE=1; // peripheral interropt enabled
+    
+}
+
+//Interrupt Service Routine
+void interrupt ISR(void)
+{
+}
+
 void delaySeconds(int numberOfSeconds)
 {
     for(int i = 0; i < numberOfSeconds * 100; i++)
@@ -18,11 +31,11 @@ void delaySeconds(int numberOfSeconds)
 
 void main(void) { 
     initializeLED();
+    initialize();
     
     on(2, 2);
     
-    while(1)
-    {
-        refresh();
-    }
+     //this will work: if there's input, an interrupt is called which
+    // will temporarily stop the refreshing.
+    while(1){ refresh(); };
 }
