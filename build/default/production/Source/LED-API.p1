@@ -3041,18 +3041,20 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;LED-API.c: 31: LATA = 0b00000000;
 "31
 [e = _LATA -> -> 0 `i `uc ]
-[; ;LED-API.c: 34: for (unsigned char i; i < 8; i++) {
+[; ;LED-API.c: 34: for (unsigned char i = 0; i < 8; i++) {
 "34
 {
 [v _i `uc ~T0 @X0 1 a ]
+[e = _i -> -> 0 `i `uc ]
 [e $ < -> _i `i -> 8 `i 347  ]
 [e $U 348  ]
 [e :U 347 ]
 {
-[; ;LED-API.c: 35: for (unsigned char j; j < 16; j++) {
+[; ;LED-API.c: 35: for (unsigned char j = 0; j < 16; j++) {
 "35
 {
 [v _j `uc ~T0 @X0 1 a ]
+[e = _j -> -> 0 `i `uc ]
 [e $ < -> _j `i -> 16 `i 350  ]
 [e $U 351  ]
 [e :U 350 ]
@@ -3190,34 +3192,34 @@ Version 3.2 HI-TECH Software Intermediate Code
 "74
 [e ( _setRowHigh (1 _theRow ]
 [e :U 367 ]
-"76
+"75
 }
 "71
 [e ++ _theRow -> -> 1 `i `uc ]
 [e $ < -> _theRow `i -> 16 `i 364  ]
 [e :U 365 ]
-"76
+"75
 }
-[; ;LED-API.c: 76: }
-[; ;LED-API.c: 80: setColHigh(theCol);
-"80
+[; ;LED-API.c: 75: }
+[; ;LED-API.c: 79: setColHigh(theCol);
+"79
 [e ( _setColHigh (1 _theCol ]
-[; ;LED-API.c: 81: _delay((unsigned long)((500)*(1000000/4000000.0)));
-"81
+[; ;LED-API.c: 80: _delay((unsigned long)((500)*(1000000/4000000.0)));
+"80
 [e ( __delay (1 -> * -> -> 500 `i `d / -> -> 1000000 `l `d .4000000.0 `ul ]
-[; ;LED-API.c: 82: allOff();
-"82
+[; ;LED-API.c: 81: allOff();
+"81
 [e ( _allOff ..  ]
-"83
+"82
 }
 "69
 [e ++ _theCol -> -> 1 `i `uc ]
 [e $ < -> _theCol `i -> 8 `i 361  ]
 [e :U 362 ]
-"83
+"82
 }
+[; ;LED-API.c: 82: }
 [; ;LED-API.c: 83: }
-[; ;LED-API.c: 84: }
-"84
+"83
 [e :UE 360 ]
 }

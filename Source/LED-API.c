@@ -31,8 +31,8 @@ void initializeLED() {
     LATA = 0b00000000; // write 0 to all pins
 
     //write 0 to the pixels array
-    for (unsigned char i; i < COLUMNS; i++) {
-        for (unsigned char j; j < ROWS; j++) {
+    for (unsigned char i = 0; i < COLUMNS; i++) {
+        for (unsigned char j = 0; j < ROWS; j++) {
             pixels[i][j] = 0;
         }
     }
@@ -71,8 +71,7 @@ void refresh() {
         for (unsigned char theRow = 0; theRow < ROWS; theRow++) {
             //if the column row combination should be high, pull the row high
             if (pixels[theCol][theRow] == 1) 
-                setRowHigh(theRow);
-            
+                setRowHigh(theRow);          
         }
         // when all rows for theCol are pulled high, pull the entire column
         // high for 500us. giving all LEDs in this column the same uptime.

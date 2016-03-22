@@ -3975,8 +3975,8 @@ LATC = 0b00000000;
 LATA = 0b00000000;
 
 
-for (unsigned char i; i < 8; i++) {
-for (unsigned char j; j < 16; j++) {
+for (unsigned char i = 0; i < 8; i++) {
+for (unsigned char j = 0; j < 16; j++) {
 pixels[i][j] = 0;
 }
 }
@@ -4016,7 +4016,6 @@ for (unsigned char theRow = 0; theRow < 16; theRow++) {
 
 if (pixels[theCol][theRow] == 1)
 setRowHigh(theRow);
-
 }
 
 
