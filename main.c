@@ -4,7 +4,9 @@
  *
  * Created on 19 maart 2016, 16:38
  */
+#ifndef __XTAL_FREQ
 #define _XTAL_FREQ 32000000
+#endif
 
 #define SBIT(reg,bit)	reg |=  (1<<bit)    // Macro defined for Setting  a bit of any register.
 #define CBIT(reg,bit)	reg &= ~(1<<bit)    // Macro defined for Clearing a bit of any register.
@@ -16,21 +18,28 @@
 
 void initialize()
 { 
-    // set osc speed to 8MHz and x4 pll  011111
+    // set osc speed to 8MHz and PLLx4 for 32MHz Clock Frequency
     OSCTUNEbits.PLLEN = 1; // Frequency Multiplier PLL for INTOSC Enabled
     OSCTUNEbits.TUN = 011111; // Run at maximum frequency
     
     OSCCONbits.SCS = 00; // set primary oscillator(internal) as System Clock
     OSCCONbits.IRCF = 111; // set Internal Oscillator Frequency Select bits to 8MHz 
     
-    PLLEN = 1; // Enable PLL for 32MHz
-    
+    PLLEN = 1; // Enable PLLx4 for 32MHz Clock Frequency    
     
     //setup interrupts
     GIE = 1; // global interrupt enabled
     PEIE=1; // peripheral interrupt enabled
     
-    //initialize A/D converter
+    //initialize A/D converter for inuts
+    TRISBbits.TRISB0 = 1; // set AN12 input
+    TRISBbits.TRISB1 = 1; // set AN10 input
+    ADCON2bits.ADFM = 1; // set Result Format selection bit to Right Justified
+    ADCON2bits.ADCS = 010; // Select Fosc/32 as Clock Time
+    ADCON2bits.ACQT = 111; // Set Acquisition Time to 20uS just to be safe !!!
+    ADCON0bits.CHS = 1100; // Listen to Channel 12 (Pin33)
+    ADCON0bits.ADON = 1; // Enable the converter module
+    ADIE = 1; // set A/D Interrupt Enable bit to enabled 
     
     
     //setup Timer0 for game refresh
@@ -40,7 +49,8 @@ void initialize()
     PSA = 0; // Timer0 prescaler enabled
     T0CS = 0; // set Timer0 clock to internal instruction cycle clock
     T08BIT = 1; // Timer0 is configured as an 8-bit timer/counter 
-    TMR0IE = 1; // set TIMER0 Interrupt Enable bit to enabled     
+    TMR0IE = 1; // set TIMER0 Interrupt Enable bit to enabled   
+    TMR0IF = 0; // clear TIMER0 Interrupt Flag bit
     //start the timer
     TMR0ON = 1; // set Timer0 On/Off Control bit to on  
     
@@ -54,12 +64,19 @@ void interrupt ISR(void)
         //TMR0 interrupt: start A/D converted inputs, write new ball coordinates to LED-API
         TMR0IF = 0;
         
+        //start receiving input
+        ADCON0bits.GODONE = 1; //start 
+        if(ADCON0bits.CHS = 1100)
+            ADCON0bits.CHS = 1010;
+        else
+            ADCON0bits.CHS = 1100;
     }
     
     if(ADIE && ADIF)
     {
         // refresh game, write new paddle coordinates to LED-API
         ADIF = 0;
+        
     }
 }
 
@@ -73,14 +90,8 @@ void main(void) {
     initializeLED();
     initialize();
     
-    LATA = 0b10101010;
-    LATC = 0b10101010;
-    while(1)
-    {
-        LATA = ~LATA;
-        LATC = ~LATC;
-        delaySeconds(5);
-    }
+    on(2, 2);
+    on(3, 5);
     
     //this will work: if there's input, an interrupt is called which
     // will temporarily stop the refreshing.
