@@ -4,11 +4,12 @@
  *
  * Created on 19 maart 2016, 16:38
  */
-#define _XTAL_FREQ 8000000
+#define _XTAL_FREQ 32000000
 
 #define SBIT(reg,bit)	reg |=  (1<<bit)    // Macro defined for Setting  a bit of any register.
 #define CBIT(reg,bit)	reg &= ~(1<<bit)    // Macro defined for Clearing a bit of any register.
 
+#include <p18f4520.h>
 #include <xc.h>
 #include "Header/config.h"
 #include "Header/LED-API.h"
@@ -20,8 +21,12 @@ void initialize()
     OSCTUNEbits.TUN = 011111; // Run at maximum frequency
     
     OSCCONbits.SCS = 00; // set primary oscillator(internal) as System Clock
-    OSCCONbits.IRCF = 111; // set Internal Oscillator Frequency Select bits to 8MHz
+    OSCCONbits.IRCF = 111; // set Internal Oscillator Frequency Select bits to 8MHz 
     
+    PLLEN = 1; // Enable PLL for 32MHz
+    
+    
+    //setup interrupts
     GIE = 1; // global interrupt enabled
     PEIE=1; // peripheral interrupt enabled
     
