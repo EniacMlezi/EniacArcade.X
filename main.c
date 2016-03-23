@@ -4,7 +4,10 @@
  *
  * Created on 19 maart 2016, 16:38
  */
-#define _XTAL_FREQ 1000000
+#define _XTAL_FREQ 8000000
+
+#define SBIT(reg,bit)	reg |=  (1<<bit)    // Macro defined for Setting  a bit of any register.
+#define CBIT(reg,bit)	reg &= ~(1<<bit)    // Macro defined for Clearing a bit of any register.
 
 #include <xc.h>
 #include "Header/config.h"
@@ -12,7 +15,12 @@
 
 void initialize()
 { 
-    // set osc speed to 8MHz and x4 pll
+    // set osc speed to 8MHz and x4 pll  011111
+    OSCTUNEbits.PLLEN = 1; // Frequency Multiplier PLL for INTOSC Enabled
+    OSCTUNEbits.TUN = 011111; // Run at maximum frequency
+    
+    OSCCONbits.SCS = 00; // set primary oscillator(internal) as System Clock
+    OSCCONbits.IRCF = 111; // set Internal Oscillator Frequency Select bits to 8MHz
     
     GIE = 1; // global interrupt enabled
     PEIE=1; // peripheral interrupt enabled
@@ -60,7 +68,14 @@ void main(void) {
     initializeLED();
     initialize();
     
-    on(2, 2);
+    LATA = 0b10101010;
+    LATC = 0b10101010;
+    while(1)
+    {
+        LATA = ~LATA;
+        LATC = ~LATC;
+        delaySeconds(5);
+    }
     
     //this will work: if there's input, an interrupt is called which
     // will temporarily stop the refreshing.
