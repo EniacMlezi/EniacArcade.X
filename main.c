@@ -8,13 +8,20 @@
 #define _XTAL_FREQ 32000000
 #endif
 
-#define SBIT(reg,bit)	reg |=  (1<<bit)    // Macro defined for Setting  a bit of any register.
-#define CBIT(reg,bit)	reg &= ~(1<<bit)    // Macro defined for Clearing a bit of any register.
-
 #include <p18f4520.h>
 #include <xc.h>
 #include "Header/config.h"
 #include "Header/LED-API.h"
+
+
+unsigned char channel = 12;
+
+
+void delaySeconds(int numberOfSeconds)
+{
+    for(int i = 0; i < numberOfSeconds * 100; i++)
+        __delay_ms(10);
+}
 
 void initialize()
 { 
@@ -37,15 +44,17 @@ void initialize()
     ADCON2bits.ADFM = 1; // set Result Format selection bit to Right Justified
     ADCON2bits.ADCS = 010; // Select Fosc/32 as Clock Time
     ADCON2bits.ACQT = 111; // Set Acquisition Time to 20uS just to be safe !!!
+    ADCON1bits.VCFG0 = 0;
+    ADCON1bits.VCFG1 = 0;
+    ADCON1bits.PCFG = 0000;
     ADCON0bits.CHS = 1100; // Listen to Channel 12 (Pin33)
     ADCON0bits.ADON = 1; // Enable the converter module
     ADIE = 1; // set A/D Interrupt Enable bit to enabled 
     
-    
     //setup Timer0 for game refresh
-    T0PS0 = 0; 
+    T0PS0 = 1; 
     T0PS1 = 0;
-    T0PS2 = 0; // set prescaler to 1:2 for 500us timer when xtal is 1MHz
+    T0PS2 = 1; // set prescaler to 1:64 for 512us timer when xtal is 1MHz
     PSA = 0; // Timer0 prescaler enabled
     T0CS = 0; // set Timer0 clock to internal instruction cycle clock
     T08BIT = 1; // Timer0 is configured as an 8-bit timer/counter 
@@ -65,11 +74,8 @@ void interrupt ISR(void)
         TMR0IF = 0;
         
         //start receiving input
-        ADCON0bits.GODONE = 1; //start 
-        if(ADCON0bits.CHS = 1100)
-            ADCON0bits.CHS = 1010;
-        else
-            ADCON0bits.CHS = 1100;
+        ADCON0bits.GODONE = 1; //start
+        
     }
     
     if(ADIE && ADIF)
@@ -77,21 +83,30 @@ void interrupt ISR(void)
         // refresh game, write new paddle coordinates to LED-API
         ADIF = 0;
         
+        unsigned short ADvalue = ADRES;//grab the 10 bit value
+        unsigned char value = (ADvalue / 85); // divide by 85 for a number between 0 and 6
+        
+        // select which paddle needs to refresh
+        if(ADCON0bits.CHS == 12)
+        {       
+            ADCON0bits.CHS = 10; //next refresh will be on channel 10   
+            rowOff(0); // turn off the paddle's row
+            on(value, 0); 
+            on(value + 1, 0); // draw paddle
+        }
+        else
+        {
+            ADCON0bits.CHS = 12; // next refresh will be on channel 12
+            rowOff(15); // turn off the paddle's row
+            on(value, 15);
+            on(value + 1, 15);// draw paddle
+        }
     }
-}
-
-void delaySeconds(int numberOfSeconds)
-{
-    for(int i = 0; i < numberOfSeconds * 100; i++)
-        __delay_ms(10);
 }
 
 void main(void) { 
     initializeLED();
     initialize();
-    
-    on(2, 2);
-    on(3, 5);
     
     //this will work: if there's input, an interrupt is called which
     // will temporarily stop the refreshing.
