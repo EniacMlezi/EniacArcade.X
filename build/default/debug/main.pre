@@ -4168,41 +4168,24 @@ extern int printf(const char *, ...);
 
 #pragma config EBTRB = OFF
 
-# 16 "main.c"
-enum ballHorizontalDirection {up = '1', down = '0'};
-enum ballVerticalDirection {left = '1', right = '0'};
-enum ballVelocity {bSlow = '3', bMedium = '4', bHard = '5', bHardest = '6'};
-
-
-enum padleSpeed {pStill = '0', pSlow = '1', pMedium = '2', pHard = '3'};
-enum padleDirection {pUp = 1, pDown = 0};
-
-
-typedef enum {scored = '0', normal = '1', gameOver = '2'} gameConditions;
-
-# 36
-char _pOneLives = 3;
-char _pTwoLives = 3;
-
-# 58
+# 39 "main.c"
 struct playerData
 {
 
-unsigned char paddlePos[2];
+unsigned char padlePos[2];
 
-unsigned char pVelocity;
+unsigned char pSpeed;
 
 unsigned char pHorizontalDirection;
 
 unsigned char lives;
 };
 
-
 struct ballData
 {
 unsigned char bPos[2];
 
-unsigned char bVelocity;
+unsigned char bSpeed;
 
 unsigned char bHorizontalDirection;
 
@@ -4210,6 +4193,13 @@ unsigned char bVerticalDirection;
 };
 
 
+enum ballHorizontalDirection {up = 1, down = 0};
+enum ballVerticalDirection {left = 1, right = 0};
+enum ballVelocity {bSlow = 3, bMedium = 4, bHard = 5, bHardest = 6};
+
+
+enum padleSpeed {pStill = 1, pSlow = 1, pMedium = 2, pHard = 3};
+enum padleDirection {pUp = 1, pDown = 0};
 struct ballData _ball;
 struct playerData _pOne;
 struct playerData _pTwo;
@@ -4217,55 +4207,26 @@ struct playerData _pTwo;
 
 char _hit = 0;
 
+_ball.bSpeed = (char)ballVelocity.bSlow;
+
 
 void init(void)
 {
 
-# 110
-}
-
-
-gameConditions checkNextPosition()
-{
 
 }
-
-void goalScored()
-{
-
-}
-
-
-void handleCollision()
-{
-
-}
-
 
 void preformStep()
 {
-switch(checkNextPosition())
-{
-case 0:
-goalScored();
-break;
-case 1:
-handleCollision();
-break;
-default:
-break;
+
 
 }
-
-}
-
-
-
 
 void padleChange()
 {
 
 }
+
 
 void main(void)
 {
@@ -4290,5 +4251,5 @@ padleChange();
 preformStep();
 }
 
-do { ((void)0); asm("reset"); }while(0);
+do { __builtin_software_breakpoint(); asm("reset"); }while(0);
 }

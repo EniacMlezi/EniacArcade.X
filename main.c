@@ -11,26 +11,8 @@
 #include <stdio.h>
 #include "config.h"
 
-
-//Possible ball values
-enum ballHorizontalDirection {up = '1', down = '0'};
-enum ballVerticalDirection {left = '1', right = '0'};
-enum ballVelocity {bSlow = '3', bMedium = '4', bHard = '5', bHardest = '6'};
-
-//Possible player values
-enum padleSpeed {pStill = '0', pSlow = '1', pMedium = '2', pHard = '3'};
-enum padleDirection {pUp = 1, pDown = 0};
-
 //Possible game conditions
 typedef enum {scored = '0', normal = '1', gameOver = '2'} gameConditions;
-
-//(16 led dots - 1)
-#define MAXX = 15
-#define MINX = 0
-
-//(8 led dots -1)
-#define MAXY = 7
-#define MINY = 0
 
 //Player lives
 char _pOneLives = 3;
@@ -46,23 +28,17 @@ char _pTwoLives = 3;
 #define _XTAL_FREQ 1000
 #define OSCON = 0x76
 
-/*Drawings the are shown on the led matrix 
- * before the game start*/
-#define const PLAY_SYMBOL //PLAY drawn in LEDs
-#define const THREE_SYMBOL //THREE drawn in LEDs
-#define const TWO_SYMBOL //TWO drawn in LEDs
-#define const ONE_SYMBOL //ONE drawn in LEDs
-#define const GO_SYMBOL //GO draw in LEDs
+
 
 //Structure of a player
 struct playerData
 {
-    //0: lowest 1: highest
+    //[0]: lowest [1]: highest
     unsigned char paddlePos[2];
     //min 0 max 3
     unsigned char pVelocity;
-    //up ^ down
-    unsigned char pHorizontalDirection;
+    //1 = up; 0 = down
+    unsigned bit pHorizontalDirection;
     //amount of lives of an player
     unsigned char lives;
 };
@@ -73,10 +49,10 @@ struct ballData
     unsigned char bPos[2];
     //min 3 max 6
     unsigned char bVelocity;
-    //left ^ right
-    unsigned char bHorizontalDirection;
-    //up ^ down
-    unsigned char bVerticalDirection;
+    //1 = up; 0 = down
+    unsigned bit bHorizontalDirection;
+    //1 = up; 0 = down
+    unsigned bit bVerticalDirection;
 };
 
 //Structure instances
@@ -87,11 +63,17 @@ struct playerData _pTwo;
 //Ball hit (with the paddle) counter
 char _hit = 0;
 
+short getRandom(short max)
+{
+    unsigned short temp = ((max >> 0) ^ (max >> 2) ^ (max >> 3) ^ (max >> 4) & 1;
+    max = (max >> 1) | (temp << 7);
+    return max;
+}
+
 //Initializes structure values
 void init(void)
 {    
     
-    /*
     _ball.bHorizontalDirection = ;
     _ball.bVerticalDirection = ;
     _ball.bPos = {a, b};
@@ -106,28 +88,28 @@ void init(void)
     _pTwo.pVelocity = 0;
     _pTwo.paddlePos = {,};
     _pTwo.lives = _pTwoLives;
-     */
+     
 }
 
 //check if the next step is going to be a collision
-gameConditions checkNextPosition()
+gameConditions checkNextPosition(void)
 {
     
 }
 
-void goalScored()
+void goalScored(void)
 {
     
 }
 
 //Handles collision based steps (check if it is possible to discard this method)
-void handleCollision()
+void handleCollision(void)
 {
     //check 
 }
 
 //Preforms a step that changes the position of the ball
-void preformStep()
+void preformStep(void)
 {
     switch(checkNextPosition())
     {
@@ -147,13 +129,22 @@ void preformStep()
 
 
 //Changes the of a given paddle
-void padleChange()
+void padleChange(void)
 {
     
 }
 
+
 void main(void) 
 {
+    //LED symbols for displaying for the game start
+    const char HELLO_SYMBOL; //{:AY drawn in LEDs
+    const char THREE_SYMBOL; //THREE drawn in LEDs
+    const char TWO_SYMBOL; //TWO drawn in LEDs
+    const char ONE_SYMBOL; //ONE drawn in LEDs
+    const char GO_SYMBOL; //GO drawn in LEDs
+    
+    
     init();
     /*Wait for interrupt signal.*/
     while(!RBIF)

@@ -1,24 +1,25 @@
 Version 3.2 HI-TECH Software Intermediate Code
+"71 main.c
+[s S351 `uc -> 2 `i `uc 1 `uc 1 `uc 1 ]
+[n S351 ballData bPos bVelocity bHorizontalDirection bVerticalDirection ]
+"58
+[s S350 `uc -> 2 `i `uc 1 `uc 1 `uc 1 ]
+[n S350 playerData paddlePos pVelocity pHorizontalDirection lives ]
+"114
+[c E3421 48 49 50 .. ]
+[n E3421 . scored normal gameOver  ]
 [p mainexit ]
-"1577 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f4520.h
-[v _TRISA `Vuc ~T0 @X0 0 e@3986 ]
-"2019
-[v _TRISC `Vuc ~T0 @X0 0 e@3988 ]
-"992
-[v _LATA `Vuc ~T0 @X0 0 e@3977 ]
-"1256
-[v _LATC `Vuc ~T0 @X0 0 e@3979 ]
-"15 main.c
-[v _delaySeconds `(v ~T0 @X0 0 ef1`i ]
 [v F3183 `(v ~T0 @X0 1 tf1`ul ]
-"156 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18.h
+"157 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic18.h
 [v __delay `JF3183 ~T0 @X0 0 e ]
 [p i __delay ]
+"7822 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic18f4520.h
+[v _RBIF `Vb ~T0 @X0 0 e@32656 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f4520.h: 49: extern volatile unsigned char PORTA @ 0xF80;
-"51 C:\Program Files (x86)\Microchip\xc8\v1.36\include\pic18f4520.h
+"51 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic18f4520.h
 [; ;pic18f4520.h: 51: asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
 [; ;pic18f4520.h: 54: typedef union {
@@ -2985,9 +2986,110 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pic18.h: 18: __attribute__((__unsupported__("The " "flash_write" " routine is no longer supported. Please use the MPLAB X MCC."))) void flash_write(const unsigned char *, unsigned int, __far unsigned char *);
 [; ;pic18.h: 19: __attribute__((__unsupported__("The " "EraseFlash" " routine is no longer supported. Please use the MPLAB X MCC."))) void EraseFlash(unsigned long startaddr, unsigned long endaddr);
 [; ;pic18.h: 43: extern void __nop(void);
-[; ;pic18.h: 156: extern __nonreentrant void _delay(unsigned long);
-[; ;pic18.h: 158: extern __nonreentrant void _delaywdt(unsigned long);
-[; ;pic18.h: 160: extern __nonreentrant void _delay3(unsigned char);
+[; ;pic18.h: 157: extern __nonreentrant void _delay(unsigned long);
+[; ;pic18.h: 159: extern __nonreentrant void _delaywdt(unsigned long);
+[; ;pic18.h: 161: extern __nonreentrant void _delay3(unsigned char);
+[; ;__size_t.h: 4: typedef unsigned size_t;
+[; ;time.h: 8: typedef long time_t;
+[; ;time.h: 9: struct tm {
+[; ;time.h: 10: int tm_sec;
+[; ;time.h: 11: int tm_min;
+[; ;time.h: 12: int tm_hour;
+[; ;time.h: 13: int tm_mday;
+[; ;time.h: 14: int tm_mon;
+[; ;time.h: 15: int tm_year;
+[; ;time.h: 16: int tm_wday;
+[; ;time.h: 17: int tm_yday;
+[; ;time.h: 18: int tm_isdst;
+[; ;time.h: 19: };
+[; ;time.h: 25: extern int time_zone;
+[; ;time.h: 30: extern time_t time(time_t *);
+[; ;time.h: 31: extern int stime(time_t *);
+[; ;time.h: 47: extern char * asctime(const struct tm *) ;
+[; ;time.h: 48: extern char * ctime(const time_t *) ;
+[; ;time.h: 49: extern struct tm * gmtime(const time_t *) ;
+[; ;time.h: 50: extern struct tm * localtime(const time_t *) ;
+[; ;time.h: 51: extern size_t strftime(char *, size_t, const char *, const struct tm *) ;
+[; ;time.h: 52: extern time_t mktime(struct tm *);
+[; ;stdlib.h: 7: typedef unsigned short wchar_t;
+[; ;stdlib.h: 15: typedef struct {
+[; ;stdlib.h: 16: int rem;
+[; ;stdlib.h: 17: int quot;
+[; ;stdlib.h: 18: } div_t;
+[; ;stdlib.h: 19: typedef struct {
+[; ;stdlib.h: 20: unsigned rem;
+[; ;stdlib.h: 21: unsigned quot;
+[; ;stdlib.h: 22: } udiv_t;
+[; ;stdlib.h: 23: typedef struct {
+[; ;stdlib.h: 24: long quot;
+[; ;stdlib.h: 25: long rem;
+[; ;stdlib.h: 26: } ldiv_t;
+[; ;stdlib.h: 27: typedef struct {
+[; ;stdlib.h: 28: unsigned long quot;
+[; ;stdlib.h: 29: unsigned long rem;
+[; ;stdlib.h: 30: } uldiv_t;
+[; ;stdlib.h: 53: extern double atof(const char *);
+[; ;stdlib.h: 54: extern double strtod(const char *, const char **);
+[; ;stdlib.h: 55: extern int atoi(const char *);
+[; ;stdlib.h: 56: extern unsigned xtoi(const char *);
+[; ;stdlib.h: 57: extern long atol(const char *);
+[; ;stdlib.h: 58: extern long strtol(const char *, char **, int);
+[; ;stdlib.h: 60: extern int rand(void);
+[; ;stdlib.h: 61: extern void srand(unsigned int);
+[; ;stdlib.h: 62: extern void * calloc(size_t, size_t);
+[; ;stdlib.h: 63: extern div_t div(int numer, int denom);
+[; ;stdlib.h: 64: extern udiv_t udiv(unsigned numer, unsigned denom);
+[; ;stdlib.h: 65: extern ldiv_t ldiv(long numer, long denom);
+[; ;stdlib.h: 66: extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+[; ;stdlib.h: 67: extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 68: extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 69: extern unsigned int _rotl(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 70: extern unsigned int _rotr(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 75: extern void * malloc(size_t);
+[; ;stdlib.h: 76: extern void free(void *);
+[; ;stdlib.h: 77: extern void * realloc(void *, size_t);
+[; ;stdlib.h: 86: extern int atexit(void (*)(void));
+[; ;stdlib.h: 87: extern char * getenv(const char *);
+[; ;stdlib.h: 88: extern char ** environ;
+[; ;stdlib.h: 89: extern int system(char *);
+[; ;stdlib.h: 90: extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+[; ;stdlib.h: 91: extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+[; ;stdlib.h: 92: extern int abs(int);
+[; ;stdlib.h: 93: extern long labs(long);
+[; ;stdlib.h: 95: extern char * itoa(char * buf, int val, int base);
+[; ;stdlib.h: 96: extern char * utoa(char * buf, unsigned val, int base);
+[; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
+[; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
+[; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
+[; ;stdarg.h: 7: typedef void * va_list[1];
+[; ;stdarg.h: 10: extern void * __va_start(void);
+[; ;stdarg.h: 13: extern void * __va_arg(void *, ...);
+[; ;stdio.h: 43: struct __prbuf
+[; ;stdio.h: 44: {
+[; ;stdio.h: 45: char * ptr;
+[; ;stdio.h: 46: void (* func)(char);
+[; ;stdio.h: 47: };
+[; ;errno.h: 29: extern int errno;
+[; ;conio.h: 12: extern void init_uart(void);
+[; ;conio.h: 14: extern char getch(void);
+[; ;conio.h: 15: extern char getche(void);
+[; ;conio.h: 16: extern void putch(char);
+[; ;conio.h: 17: extern void ungetch(char);
+[; ;conio.h: 19: extern __bit kbhit(void);
+[; ;conio.h: 23: extern char * cgets(char *);
+[; ;conio.h: 24: extern void cputs(const char *);
+[; ;stdio.h: 88: extern int cprintf(char *, ...);
+[; ;stdio.h: 93: extern int _doprnt(struct __prbuf *, const register char *, register va_list);
+[; ;stdio.h: 183: extern char * gets(char *);
+[; ;stdio.h: 184: extern int puts(const char *);
+[; ;stdio.h: 185: extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
+[; ;stdio.h: 186: extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
+[; ;stdio.h: 187: extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
+[; ;stdio.h: 188: extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
+[; ;stdio.h: 189: extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
+[; ;stdio.h: 190: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
+[; ;stdio.h: 194: extern int sprintf(char *, const char *, ...);
+[; ;stdio.h: 195: extern int printf(const char *, ...);
 "12 config.h
 [p x OSC=INTIO67 ]
 "13
@@ -3054,109 +3156,232 @@ Version 3.2 HI-TECH Software Intermediate Code
 [p x EBTR3=OFF ]
 "64
 [p x EBTRB=OFF ]
-[; ;main.c: 15: void delaySeconds(int numberOfSeconds);
-[; ;main.c: 16: void on(unsigned char row, unsigned char column);
-"19 main.c
-[v _main `(v ~T0 @X0 1 ef ]
+[; ;main.c: 16: enum ballHorizontalDirection {up = '1', down = '0'};
+[; ;main.c: 17: enum ballVerticalDirection {left = '1', right = '0'};
+[; ;main.c: 18: enum ballVelocity {bSlow = '3', bMedium = '4', bHard = '5', bHardest = '6'};
+[; ;main.c: 21: enum padleSpeed {pStill = '0', pSlow = '1', pMedium = '2', pHard = '3'};
+[; ;main.c: 22: enum padleDirection {pUp = 1, pDown = 0};
+[; ;main.c: 25: typedef enum {scored = '0', normal = '1', gameOver = '2'} gameConditions;
+"36 main.c
+[v __pOneLives `uc ~T0 @X0 1 e ]
+[i __pOneLives
+-> -> 3 `i `uc
+]
+[; ;main.c: 36: char _pOneLives = 3;
+"37
+[v __pTwoLives `uc ~T0 @X0 1 e ]
+[i __pTwoLives
+-> -> 3 `i `uc
+]
+[; ;main.c: 37: char _pTwoLives = 3;
+[; ;main.c: 58: struct playerData
+[; ;main.c: 59: {
+[; ;main.c: 61: unsigned char paddlePos[2];
+[; ;main.c: 63: unsigned char pVelocity;
+[; ;main.c: 65: unsigned char pHorizontalDirection;
+[; ;main.c: 67: unsigned char lives;
+[; ;main.c: 68: };
+[; ;main.c: 71: struct ballData
+[; ;main.c: 72: {
+[; ;main.c: 73: unsigned char bPos[2];
+[; ;main.c: 75: unsigned char bVelocity;
+[; ;main.c: 77: unsigned char bHorizontalDirection;
+[; ;main.c: 79: unsigned char bVerticalDirection;
+[; ;main.c: 80: };
+"83
+[v __ball `S351 ~T0 @X0 1 e ]
+[; ;main.c: 83: struct ballData _ball;
+"84
+[v __pOne `S350 ~T0 @X0 1 e ]
+[; ;main.c: 84: struct playerData _pOne;
+"85
+[v __pTwo `S350 ~T0 @X0 1 e ]
+[; ;main.c: 85: struct playerData _pTwo;
+"88
+[v __hit `uc ~T0 @X0 1 e ]
+[i __hit
+-> -> 0 `i `uc
+]
+[; ;main.c: 88: char _hit = 0;
+"91
+[v _init `(v ~T0 @X0 1 ef ]
+"92
 {
-[; ;main.c: 19: void main(void) {
-[e :U _main ]
+[; ;main.c: 91: void init(void)
+[; ;main.c: 92: {
+[e :U _init ]
 [f ]
-[; ;main.c: 20: TRISA = 0b00000000;
-"20
-[e = _TRISA -> -> 0 `i `uc ]
-[; ;main.c: 21: TRISC = 0b00000000;
-"21
-[e = _TRISC -> -> 0 `i `uc ]
-[; ;main.c: 23: LATA = 0b11111111;
-"23
-[e = _LATA -> -> 255 `i `uc ]
-[; ;main.c: 24: LATC = 0b00000001;
-"24
-[e = _LATC -> -> 1 `i `uc ]
-[; ;main.c: 25: for(int i = 0; i <= 7; i++)
-"25
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ <= _i -> 7 `i 345  ]
-[e $U 346  ]
-"26
-[e :U 345 ]
-[; ;main.c: 26: {
-{
-[; ;main.c: 27: delaySeconds(5);
-"27
-[e ( _delaySeconds (1 -> 5 `i ]
-[; ;main.c: 28: LATC = LATC << 1;
-"28
-[e = _LATC -> << -> _LATC `i -> 1 `i `uc ]
-"29
+[; ;main.c: 110: }
+"110
+[e :UE 352 ]
 }
-"25
-[e ++ _i -> 1 `i ]
-[e $ <= _i -> 7 `i 345  ]
-[e :U 346 ]
-"29
-}
-[; ;main.c: 29: }
-[; ;main.c: 30: }
-"30
-[e :UE 344 ]
-}
-"32
-[v _delaySeconds `(v ~T0 @X0 1 ef1`i ]
-"33
+"113
+[v _checkNextPosition `(E3421 ~T0 @X0 1 ef ]
+"114
 {
-[; ;main.c: 32: void delaySeconds(int numberOfSeconds)
-[; ;main.c: 33: {
-[e :U _delaySeconds ]
-"32
-[v _numberOfSeconds `i ~T0 @X0 1 r1 ]
-"33
+[; ;main.c: 113: gameConditions checkNextPosition()
+[; ;main.c: 114: {
+[e :U _checkNextPosition ]
 [f ]
-[; ;main.c: 34: for(int i = 0; i < numberOfSeconds * 100; i++)
-"34
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $U 352  ]
-"35
-[e :U 349 ]
-[; ;main.c: 35: _delay((unsigned long)((10)*(1000000/4000.0)));
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 1000000 `l `d .4000.0 `ul ]
-"34
-[e ++ _i -> 1 `i ]
-[e :U 352 ]
-[e $ < _i * _numberOfSeconds -> 100 `i 349  ]
-[e :U 350 ]
-"35
-}
-[; ;main.c: 36: }
-"36
-[e :UE 348 ]
-}
-"38
-[v _on `(v ~T0 @X0 1 ef2`uc`uc ]
-{
-[; ;main.c: 38: void on(unsigned char row, unsigned char column) {
-[e :U _on ]
-[v _row `uc ~T0 @X0 1 r1 ]
-[v _column `uc ~T0 @X0 1 r2 ]
-[f ]
-[; ;main.c: 40: }
-"40
+[; ;main.c: 116: }
+"116
 [e :UE 353 ]
 }
-"42
-[v _off `(v ~T0 @X0 1 ef2`uc`uc ]
+"118
+[v _goalScored `(v ~T0 @X0 1 ef ]
+"119
 {
-[; ;main.c: 42: void off(unsigned char row, unsigned char column) {
-[e :U _off ]
-[v _row `uc ~T0 @X0 1 r1 ]
-[v _column `uc ~T0 @X0 1 r2 ]
+[; ;main.c: 118: void goalScored()
+[; ;main.c: 119: {
+[e :U _goalScored ]
 [f ]
-[; ;main.c: 44: }
-"44
+[; ;main.c: 121: }
+"121
 [e :UE 354 ]
+}
+"124
+[v _handleCollision `(v ~T0 @X0 1 ef ]
+"125
+{
+[; ;main.c: 124: void handleCollision()
+[; ;main.c: 125: {
+[e :U _handleCollision ]
+[f ]
+[; ;main.c: 127: }
+"127
+[e :UE 355 ]
+}
+"130
+[v _preformStep `(v ~T0 @X0 1 ef ]
+"131
+{
+[; ;main.c: 130: void preformStep()
+[; ;main.c: 131: {
+[e :U _preformStep ]
+[f ]
+[; ;main.c: 132: switch(checkNextPosition())
+"132
+[e $U 358  ]
+[; ;main.c: 133: {
+"133
+{
+[; ;main.c: 134: case 0:
+"134
+[e :U 359 ]
+[; ;main.c: 135: goalScored();
+"135
+[e ( _goalScored ..  ]
+[; ;main.c: 136: break;
+"136
+[e $U 357  ]
+[; ;main.c: 137: case 1:
+"137
+[e :U 360 ]
+[; ;main.c: 138: handleCollision();
+"138
+[e ( _handleCollision ..  ]
+[; ;main.c: 139: break;
+"139
+[e $U 357  ]
+[; ;main.c: 140: default:
+"140
+[e :U 361 ]
+[; ;main.c: 141: break;
+"141
+[e $U 357  ]
+"143
+}
+[; ;main.c: 143: }
+[e $U 357  ]
+"132
+[e :U 358 ]
+[e [\ ( _checkNextPosition ..  , $ -> -> 0 `i `E3421 359
+ , $ -> -> 1 `i `E3421 360
+ 361 ]
+"143
+[e :U 357 ]
+[; ;main.c: 145: }
+"145
+[e :UE 356 ]
+}
+"150
+[v _padleChange `(v ~T0 @X0 1 ef ]
+"151
+{
+[; ;main.c: 150: void padleChange()
+[; ;main.c: 151: {
+[e :U _padleChange ]
+[f ]
+[; ;main.c: 153: }
+"153
+[e :UE 362 ]
+}
+"155
+[v _main `(v ~T0 @X0 1 ef ]
+"156
+{
+[; ;main.c: 155: void main(void)
+[; ;main.c: 156: {
+[e :U _main ]
+[f ]
+[; ;main.c: 157: init();
+"157
+[e ( _init ..  ]
+[; ;main.c: 159: while(!RBIF)
+"159
+[e $U 364  ]
+[e :U 365 ]
+[; ;main.c: 160: {
+"160
+{
+[; ;main.c: 162: _delay((unsigned long)((2000)*(1000/4000.0)));
+"162
+[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 1000 `i `d .4000.0 `ul ]
+[; ;main.c: 164: _delay((unsigned long)((1000)*(1000/4000.0)));
+"164
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 1000 `i `d .4000.0 `ul ]
+"165
+}
+[e :U 364 ]
+"159
+[e $ ! _RBIF 365  ]
+[e :U 366 ]
+[; ;main.c: 165: }
+[; ;main.c: 167: RBIF = 0;
+"167
+[e = _RBIF -> -> 0 `i `b ]
+[; ;main.c: 170: while(1)
+"170
+[e :U 368 ]
+[; ;main.c: 171: {
+"171
+{
+[; ;main.c: 173: if(RBIF)
+"173
+[e $ ! _RBIF 370  ]
+[; ;main.c: 174: padleChange();
+"174
+[e ( _padleChange ..  ]
+[e :U 370 ]
+[; ;main.c: 175: preformStep();
+"175
+[e ( _preformStep ..  ]
+"176
+}
+[e :U 367 ]
+"170
+[e $U 368  ]
+[e :U 369 ]
+[; ;main.c: 176: }
+[; ;main.c: 178: do { ((void)0); asm("reset"); }while(0);
+"178
+[e :U 373 ]
+{
+[e -> 0 `i ]
+[; <" reset ;# ">
+}
+[e :U 372 ]
+[; ;main.c: 179: }
+"179
+[e :UE 363 ]
 }
