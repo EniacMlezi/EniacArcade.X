@@ -5,102 +5,47 @@
  * Created on 19 maart 2016, 16:38
  */
 
+#ifndef __XTAL_FREQ
+#define _XTAL_FREQ 32000000
+#endif
+
+#include <p18f4520.h>
 #include <xc.h>
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "config.h"
+#include <string.h>
+#include "Header/config.h"
+#include "Header/LED-API.h"
 
 //Possible game conditions
-typedef enum {scored = '0', normal = '1', gameOver = '2'} gameConditions;
-
-//Player lives
-char _pOneLives = 3;
-char _pTwoLives = 3;
-
-//Set pins to receive input
-#define TRISBbits.Rb3 = 0xFF //pin 33
-#define TRISBbits.Rb2 = 0xFF //pin 34
-#define TRISBbits.Rb1 = 0xFF //pin 35
-#define TRISBbits.Rb0 = 0xFF //pin 36
-
-//Will be done by the LED.API.c in the final version but is necessary for testing purposes
-#define _XTAL_FREQ 1000
-#define OSCON = 0x76
-
-
-
-//Structure of a player
-struct playerData
-{
-    //[0]: lowest [1]: highest
-    unsigned char paddlePos[2];
-    //min 0 max 3
-    unsigned char pVelocity;
-    //1 = up; 0 = down
-    unsigned bit pHorizontalDirection;
-    //amount of lives of an player
-    unsigned char lives;
-};
+typedef enum {scored = '0', normal = '1', gameOver = '2', outOfBounds = "3"} gameConditions;
 
 //Structure of a ball
 struct ballData
 {
     unsigned char bPos[2];
-    //min 3 max 6
-    unsigned char bVelocity;
-    //1 = up; 0 = down
-    unsigned bit bHorizontalDirection;
-    //1 = up; 0 = down
-    unsigned bit bVerticalDirection;
+    //[1-6] 
+    unsigned char bDirection;
+};
+
+//Structure of a player
+struct playerData
+{
+    //0: lowest 1: highest
+    unsigned char paddlePos[2];
+    //amount of lives of an player
+    unsigned char lives;
 };
 
 //Structure instances
 struct ballData _ball;
-struct playerData _pOne;
-struct playerData _pTwo;
+struct playerData _p1;
+struct playerData _p2;
 
 //Ball hit (with the paddle) counter
 char _hit = 0;
-
-short getRandom(short max)
-{
-    unsigned short temp = ((max >> 0) ^ (max >> 2) ^ (max >> 3) ^ (max >> 4) & 1;
-    max = (max >> 1) | (temp << 7);
-    return max;
-}
-
-//Initializes structure values
-void init(void)
-{    
-    
-    _ball.bHorizontalDirection = ;
-    _ball.bVerticalDirection = ;
-    _ball.bPos = {a, b};
-    _ball.bVelocity = 3;
-    
-    _pOne.pHorizontalDirection = ;
-    _pOne.pVelocity = 0;
-    _pOne.paddlePos = {,};
-    _pOne.lives = _pOneLives;
-    
-    _pTwo.pHorizontalDirection = ;
-    _pTwo.pVelocity = 0;
-    _pTwo.paddlePos = {,};
-    _pTwo.lives = _pTwoLives;
-     
-}
-
-//check if the next step is going to be a collision
-gameConditions checkNextPosition(void)
-{
-    
-}
-
-void goalScored(void)
-{
-    
-}
+//Game state
 
 //Handles collision based steps (check if it is possible to discard this method)
 void handleCollision(void)
@@ -108,44 +53,170 @@ void handleCollision(void)
     //check 
 }
 
-//Preforms a step that changes the position of the ball
-void preformStep(void)
+char* getNextPosition(void)
 {
-    switch(checkNextPosition())
+    char *ballPos = malloc(sizeof(2 * char));
+    
+    switch(_ball.bDirection)
     {
-        case 0:
-            goalScored();
-            break;
         case 1:
-            handleCollision();
+            ballPos[0] = _ball.bPos[0]++;
+            ballPos[1] = _ball.bPos[1]++;
             break;
-        default:
+        case 2:
+            ballPos[0] = _ball.bPos[0]++;
             break;
-            //Change _ball Vertical- and Horizontal position
+        case 3:
+            ballPos[0] = _ball.bPos[0]++;
+            ballPos[1] = _ball.bPos[1]--;      
+            break;
+        case 4:
+            ballPos[0] = _ball.bPos[0]--;
+            ballPos[1] = _ball.bPos[1]--;
+            break;
+        case 5:
+            ballPos[0] = _ball.bPos[0]--;
+            break;
+        case 6:
+            ballPos[0] = _ball.bPos[0]--;
+            ballPos[1] = _ball.bPos[1]++;
+            break;
     }
-    //change position of _ball
+    
+    return ballPos;
 }
 
-
-
-//Changes the of a given paddle
-void padleChange(void)
+void checkNextPosition(void)
 {
+    char* nextBallPos = getNextPosition();
+    
+    if(nextBallPos[1] == 0)
+    {
+        if(_p1.paddlePos[0] == nextBallPos[0] || _p1.paddlePos[1] == nextBallPos[0])
+        {
+            //paddle collision
+        }
+    }
+    else if(nextBallPos[1] == 15)
+    {
+        if(_p2.paddlePos[0] == nextBallPos[0] || _p2.paddlePos[1] == nextBallPos[0])
+        {
+            //paddle collision
+        }
+    }
+    else if(nextBallPos[0] < 0 || nextBallPos[0] > 7)
+    {
+        //ball collides with wall
+    }
+    
     
 }
 
+//Initializes structure values
+void initializePONG(void)
+{    
+    //random ball generation
+    _ball.bDirection = 2;//should be random
+    _ball.bPos[0] = 4;//should be random
+    _ball.bPos[1] = 6;//should be random
+}
+
+void initialize()
+{ 
+    // set osc speed to 8MHz and PLLx4 for 32MHz Clock Frequency
+    OSCTUNEbits.PLLEN = 1; // Frequency Multiplier PLL for INTOSC Enabled
+    OSCTUNEbits.TUN = 011111; // Run at maximum frequency
+    
+    OSCCONbits.SCS = 00; // set primary oscillator(internal) as System Clock
+    OSCCONbits.IRCF = 111; // set Internal Oscillator Frequency Select bits to 8MHz 
+    
+    PLLEN = 1; // Enable PLLx4 for 32MHz Clock Frequency    
+    
+    //setup interrupts
+    GIE = 1; // global interrupt enabled
+    PEIE=1; // peripheral interrupt enabled
+    
+    //initialize A/D converter for inputs
+    TRISBbits.TRISB0 = 1; // set AN12 input
+    TRISBbits.TRISB1 = 1; // set AN10 input
+    ADCON2bits.ADFM = 1; // set Result Format selection bit to Right Justified
+    ADCON2bits.ADCS = 010; // Select Fosc/32 as Clock Time
+    ADCON2bits.ACQT = 111; // Set Acquisition Time to 20uS just to be safe !!!
+    ADCON1bits.VCFG0 = 0;
+    ADCON1bits.VCFG1 = 0;
+    ADCON1bits.PCFG = 0000;
+    ADCON0bits.CHS = 1100; // Listen to Channel 12 (Pin33)
+    ADCON0bits.ADON = 1; // Enable the converter module
+    ADIE = 1; // set A/D Interrupt Enable bit to enabled 
+    
+    //setup Timer0 for game refresh
+    T0PS0 = 1; 
+    T0PS1 = 0;
+    T0PS2 = 1; // set prescaler to 1:64 for 512us timer when xtal is 1MHz
+    PSA = 0; // Timer0 prescaler enabled
+    T0CS = 0; // set Timer0 clock to internal instruction cycle clock
+    T08BIT = 1; // Timer0 is configured as an 8-bit timer/counter 
+    TMR0IE = 1; // set TIMER0 Interrupt Enable bit to enabled   
+    TMR0IF = 0; // clear TIMER0 Interrupt Flag bit
+    //start the timer
+    TMR0ON = 1; // set Timer0 On/Off Control bit to on  
+    
+}
+
+//Interrupt Service Routine
+void interrupt ISR(void)
+{
+    if(TMR0IE && TMR0IF)
+    {
+        //TMR0 interrupt: start A/D converted inputs, write new ball coordinates to LED-API
+        TMR0IF = 0;
+        
+        checkNextPosition();
+        
+        
+        //start receiving input
+        ADCON0bits.GODONE = 1; //start
+        
+    }
+    
+    if(ADIE && ADIF)
+    {
+        // refresh game, write new paddle coordinates to LED-API
+        ADIF = 0;
+        
+        unsigned short ADvalue = ADRES;//grab the 10 bit value
+        unsigned char value = (ADvalue / 85); // divide by 85 for a number between 0 and 6
+        
+        // select which paddle needs to refresh
+        if(ADCON0bits.CHS == 12)
+        {       
+            ADCON0bits.CHS = 10; //next refresh will be on channel 10   
+            rowOff(0); // turn off the paddle's row
+            _p1.paddlePos[0] == value;
+            _p1.paddlePos[1] == value + 1;
+        }
+        else
+        {
+            ADCON0bits.CHS = 12; // next refresh will be on channel 12
+            rowOff(15); // turn off the paddle's row
+            _p2.paddlePos[0] == value;
+            _p2.paddlePos[1] == value + 1;
+        }
+    }
+}
 
 void main(void) 
 {
+    initializeLED();
+    initialize();
+    initializePONG();
+    
     //LED symbols for displaying for the game start
     const char HELLO_SYMBOL; //{:AY drawn in LEDs
     const char THREE_SYMBOL; //THREE drawn in LEDs
     const char TWO_SYMBOL; //TWO drawn in LEDs
     const char ONE_SYMBOL; //ONE drawn in LEDs
-    const char GO_SYMBOL; //GO drawn in LEDs
-    
-    
-    init();
+    const char GO_SYMBOL; //GO drawn in LEDs   
     /*Wait for interrupt signal.*/
     while(!RBIF)
     {
@@ -154,17 +225,10 @@ void main(void)
         //LEDs off
         __delay_ms(1000);
     }
-    //Clear flag (I think)
-    RBIF = 0;
-    //Display 3 -> 2 -> 1 -> GO
+    //Display 3 -> 2 -> 1 -> GO  
     
-    while(1)
-    {
-        //if a button is pressed
-        if(RBIF)
-            padleChange();
-        preformStep();
-    }
     
-    exit(EXIT_SUCCESS);
+    //this will work: if there's input, an interrupt is called which
+    // will temporarily stop the refreshing.
+    while(1){ refresh(); };
 }
