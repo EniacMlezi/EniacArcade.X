@@ -4201,7 +4201,7 @@ struct playerData _p1;
 struct playerData _p2;
 unsigned char _nextPos[2];
 
-unsigned int _speed = 200;
+unsigned int _speed = 60;
 unsigned int _timerCounter = 0;
 
 void writePong(void)
@@ -4355,9 +4355,9 @@ getNextPosition();
 void initializePONG(void)
 {
 
-_ball.bDirection = 3;
-_ball.bPos[0] = 2;
-_ball.bPos[1] = 4;
+_ball.bDirection = 2;
+_ball.bPos[0] = 3;
+_ball.bPos[1] = 5;
 
 _nextPos[0] = _ball.bPos[0];
 _nextPos[1] = _ball.bPos[1];

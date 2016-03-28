@@ -1,5 +1,5 @@
 
-# 1 "main.c"
+# 1 "Source/LED-API.c"
 
 # 26 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
@@ -3951,224 +3951,7 @@ extern __nonreentrant void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __nonreentrant void _delay3(unsigned char);
 
-# 4 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\__size_t.h"
-typedef unsigned size_t;
-
-# 8 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\time.h"
-typedef long time_t;
-struct tm {
-int tm_sec;
-int tm_min;
-int tm_hour;
-int tm_mday;
-int tm_mon;
-int tm_year;
-int tm_wday;
-int tm_yday;
-int tm_isdst;
-};
-
-# 25
-extern int time_zone;
-
-# 30
-extern time_t time(time_t *);
-extern int stime(time_t *);
-
-# 47
-extern char * asctime(const struct tm *) ;
-extern char * ctime(const time_t *) ;
-extern struct tm * gmtime(const time_t *) ;
-extern struct tm * localtime(const time_t *) ;
-extern size_t strftime(char *, size_t, const char *, const struct tm *) ;
-extern time_t mktime(struct tm *);
-
-# 7 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\stdlib.h"
-typedef unsigned short wchar_t;
-
-# 15
-typedef struct {
-int rem;
-int quot;
-} div_t;
-typedef struct {
-unsigned rem;
-unsigned quot;
-} udiv_t;
-typedef struct {
-long quot;
-long rem;
-} ldiv_t;
-typedef struct {
-unsigned long quot;
-unsigned long rem;
-} uldiv_t;
-
-# 53
-extern double atof(const char *);
-extern double strtod(const char *, const char **);
-extern int atoi(const char *);
-extern unsigned xtoi(const char *);
-extern long atol(const char *);
-extern long strtol(const char *, char **, int);
-
-extern int rand(void);
-extern void srand(unsigned int);
-extern void * calloc(size_t, size_t);
-extern div_t div(int numer, int denom);
-extern udiv_t udiv(unsigned numer, unsigned denom);
-extern ldiv_t ldiv(long numer, long denom);
-extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
-extern unsigned long _lrotl(unsigned long value, unsigned int shift);
-extern unsigned long _lrotr(unsigned long value, unsigned int shift);
-extern unsigned int _rotl(unsigned int value, unsigned int shift);
-extern unsigned int _rotr(unsigned int value, unsigned int shift);
-
-
-
-
-extern void * malloc(size_t);
-extern void free(void *);
-extern void * realloc(void *, size_t);
-
-# 86
-extern int atexit(void (*)(void));
-extern char * getenv(const char *);
-extern char ** environ;
-extern int system(char *);
-extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
-extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
-extern int abs(int);
-extern long labs(long);
-
-extern char * itoa(char * buf, int val, int base);
-extern char * utoa(char * buf, unsigned val, int base);
-
-
-
-
-extern char * ltoa(char * buf, long val, int base);
-extern char * ultoa(char * buf, unsigned long val, int base);
-
-extern char * ftoa(float f, int * status);
-
-# 7 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\stdarg.h"
-typedef void * va_list[1];
-
-#pragma intrinsic(__va_start)
-extern void * __va_start(void);
-
-#pragma intrinsic(__va_arg)
-extern void * __va_arg(void *, ...);
-
-# 43 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\stdio.h"
-struct __prbuf
-{
-char * ptr;
-void (* func)(char);
-};
-
-# 29 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\errno.h"
-extern int errno;
-
-# 12 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\conio.h"
-extern void init_uart(void);
-
-extern char getch(void);
-extern char getche(void);
-extern void putch(char);
-extern void ungetch(char);
-
-extern __bit kbhit(void);
-
-# 23
-extern char * cgets(char *);
-extern void cputs(const char *);
-
-# 88 "C:\Program Files (x86)\Microchip\xc8\v1.37\include\stdio.h"
-extern int cprintf(char *, ...);
-#pragma printf_check(cprintf)
-
-
-
-extern int _doprnt(struct __prbuf *, const register char *, register va_list);
-
-
-# 180
-#pragma printf_check(vprintf) const
-#pragma printf_check(vsprintf) const
-
-extern char * gets(char *);
-extern int puts(const char *);
-extern int scanf(const char *, ...) __attribute__((unsupported("scanf() is not supported by this compiler")));
-extern int sscanf(const char *, const char *, ...) __attribute__((unsupported("sscanf() is not supported by this compiler")));
-extern int vprintf(const char *, va_list) __attribute__((unsupported("vprintf() is not supported by this compiler")));
-extern int vsprintf(char *, const char *, va_list) __attribute__((unsupported("vsprintf() is not supported by this compiler")));
-extern int vscanf(const char *, va_list ap) __attribute__((unsupported("vscanf() is not supported by this compiler")));
-extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
-
-#pragma printf_check(printf) const
-#pragma printf_check(sprintf) const
-extern int sprintf(char *, const char *, ...);
-extern int printf(const char *, ...);
-
-
-# 12 "Header/config.h"
-#pragma config OSC = INTIO67
-#pragma config FCMEN = OFF
-#pragma config IESO = OFF
-
-
-#pragma config PWRT = OFF
-#pragma config BOREN = OFF
-#pragma config BORV = 3
-
-
-#pragma config WDT = OFF
-#pragma config WDTPS = 32768
-
-
-#pragma config CCP2MX = PORTC
-#pragma config PBADEN = OFF
-#pragma config LPT1OSC = OFF
-#pragma config MCLRE = ON
-
-
-#pragma config STVREN = ON
-#pragma config LVP = OFF
-#pragma config XINST = OFF
-
-
-#pragma config CP0 = OFF
-#pragma config CP1 = OFF
-#pragma config CP2 = OFF
-#pragma config CP3 = OFF
-
-
-#pragma config CPB = OFF
-#pragma config CPD = OFF
-
-
-#pragma config WRT0 = OFF
-#pragma config WRT1 = OFF
-#pragma config WRT2 = OFF
-#pragma config WRT3 = OFF
-
-
-#pragma config WRTC = OFF
-#pragma config WRTB = OFF
-#pragma config WRTD = OFF
-
-
-#pragma config EBTR0 = OFF
-#pragma config EBTR1 = OFF
-#pragma config EBTR2 = OFF
-#pragma config EBTR3 = OFF
-
-
-#pragma config EBTRB = OFF
-
-# 13 "Header/LED-API.h"
+# 13 "Header\LED-API.h"
 extern void on(unsigned char column, unsigned char row);
 extern void rowOn(unsigned char row);
 extern void off(unsigned char column, unsigned char row);
@@ -4177,293 +3960,108 @@ extern void turnAllOff();
 extern void initializeLED();
 extern void refresh();
 
-# 21 "main.c"
-struct ballData
-{
+# 18 "Source/LED-API.c"
+unsigned char pixels[8][16];
 
-unsigned char bPos[2];
-
-unsigned char bDirection;
-};
-
-
-struct playerData
-{
-
-unsigned char paddlePos[2];
-
-unsigned char lives;
-};
-
-
-struct ballData _ball;
-struct playerData _p1;
-struct playerData _p2;
-unsigned char _nextPos[2];
-
-unsigned int _speed = 200;
-unsigned int _timerCounter = 0;
-
-void writePong(void)
-{
-
-
-
-off(_ball.bPos[1], _ball.bPos[0]);
-_ball.bPos[0] = _nextPos[0];
-_ball.bPos[1] = _nextPos[1];
-on(_ball.bPos[1], _ball.bPos[0]);
-
-
-rowOff(0);
-rowOff(15);
-on(_p1.paddlePos[0], 0);
-on(_p1.paddlePos[1], 0);
-on(_p2.paddlePos[0], 15);
-on(_p2.paddlePos[1], 15);
-
+void setColHigh(unsigned char column) {
+LATA |= (1 << column);
 }
 
-void getNextPosition(void)
-{
-switch(_ball.bDirection)
-{
-case 1:
-_nextPos[0] = _ball.bPos[0] + 1;
-_nextPos[1] = _ball.bPos[1] + 1;
-break;
-case 2:
-_nextPos[0] = _ball.bPos[0] + 1;
-break;
-case 3:
-_nextPos[0] = _ball.bPos[0] - 1;
-_nextPos[1] = _ball.bPos[1] + 1;
-break;
-case 4:
-_nextPos[0] = _ball.bPos[0] - 1;
-_nextPos[1] = _ball.bPos[1] - 1;
-break;
-case 5:
-_nextPos[0] = _ball.bPos[0] - 1;
-break;
-case 6:
-_nextPos[0] = _ball.bPos[0] + 1;
-_nextPos[1] = _ball.bPos[1] - 1;
-break;
-}
-}
-
-void checkNextPosition(void)
-{
-getNextPosition();
-if(_nextPos[0] == 0)
-{
-if(_p1.paddlePos[0] == _nextPos[1])
-{
-
-switch(_ball.bDirection)
-{
-
-case 4:
-_ball.bDirection = 3;
-break;
-case 5:
-_ball.bDirection = 1;
-break;
-case 6:
-_ball.bDirection = 2;
-}
-getNextPosition();
-}
-else if(_p1.paddlePos[1] == _nextPos[1])
-{
-
-switch(_ball.bDirection)
-{
-
-case 4:
-_ball.bDirection = 2;
-break;
-case 5:
-_ball.bDirection = 3;
-break;
-case 6:
-_ball.bDirection = 1;
-}
-getNextPosition();
-}
-
-}
-else if(_nextPos[0] == 15)
-{
-if(_p2.paddlePos[0] == _nextPos[1])
-{
-switch(_ball.bDirection)
-{
-
-case 1:
-_ball.bDirection = 5;
-break;
-case 2:
-_ball.bDirection = 6;
-break;
-case 3:
-_ball.bDirection = 4;
-}
-}
-else if( _p2.paddlePos[1] == _nextPos[1])
-{
-
-switch(_ball.bDirection)
-{
-
-case 1:
-_ball.bDirection = 6;
-break;
-case 2:
-_ball.bDirection = 4;
-break;
-case 3:
-_ball.bDirection = 5;
-}
-}
-
-
-}
-else if(_nextPos[0] < 0 || _nextPos[0] > 7)
-{
-switch(_ball.bDirection)
-{
-case 1:
-_ball.bDirection = 3;
-break;
-case 3:
-_ball.bDirection = 1;
-break;
-case 4:
-_ball.bDirection = 6;
-break;
-case 6:
-_ball.bDirection = 4;
-break;
-}
-getNextPosition();
-}
-}
-
-
-void initializePONG(void)
-{
-
-_ball.bDirection = 3;
-_ball.bPos[0] = 2;
-_ball.bPos[1] = 4;
-
-_nextPos[0] = _ball.bPos[0];
-_nextPos[1] = _ball.bPos[1];
-}
-
-void initialize()
-{
-
-OSCTUNEbits.PLLEN = 1;
-OSCTUNEbits.TUN = 011111;
-
-OSCCONbits.SCS = 00;
-OSCCONbits.IRCF = 111;
-
-PLLEN = 1;
-
-
-GIE = 1;
-PEIE=1;
-
-
-TRISBbits.TRISB0 = 1;
-TRISBbits.TRISB1 = 1;
-ADCON2bits.ADFM = 1;
-ADCON2bits.ADCS = 010;
-ADCON2bits.ACQT = 111;
-ADCON1bits.VCFG0 = 0;
-ADCON1bits.VCFG1 = 0;
-ADCON1bits.PCFG = 0000;
-ADCON0bits.CHS = 1100;
-ADCON0bits.ADON = 1;
-ADIE = 1;
-
-
-T0PS0 = 1;
-T0PS1 = 0;
-T0PS2 = 1;
-PSA = 0;
-T0CS = 0;
-T08BIT = 1;
-TMR0IE = 1;
-TMR0IF = 0;
-
-TMR0ON = 1;
-
-}
-
-
-void interrupt ISR(void)
-{
-if(TMR0IE && TMR0IF)
-{
-
-TMR0IF = 0;
-
-if(_timerCounter > _speed)
-{
-checkNextPosition();
-_timerCounter = 0;
-}
-
-_timerCounter++;
-writePong();
-
-
-ADCON0bits.GODONE = 1;
-
-}
-
-if(ADIE && ADIF)
-{
-
-ADIF = 0;
-
-unsigned short ADvalue = ADRES;
-unsigned char value = (ADvalue / 85);
-
-
-if(ADCON0bits.CHS == 12)
-{
-ADCON0bits.CHS = 10;
-_p1.paddlePos[0] = value;
-_p1.paddlePos[1] = value + 1;
-}
+void setRowHigh(unsigned char row) {
+if(row < 8)
+LATC |= (1 << row);
 else
+LATD |= (1 << (row - 8));
+}
+
+void initializeLED() {
+TRISA = 0b00000000;
+TRISC = 0b00000000;
+TRISD = 0b00000000;
+LATA = 0b00000000;
+LATC = 0b00000000;
+LATD = 0b00000000;
+
+
+for (unsigned char i = 0; i < 8; i++) {
+for (unsigned char j = 0; j < 16; j++) {
+pixels[i][j] = 0;
+}
+}
+}
+
+void on(unsigned char column, unsigned char row) {
+
+if (row < 0 || row > 16)
+return;
+if (column < 0 || column > 8)
+return;
+
+pixels[column][row] = 1;
+}
+
+void rowOn(unsigned char row)
 {
-ADCON0bits.CHS = 12;
-_p2.paddlePos[0] = value;
-_p2.paddlePos[1] = value + 1;
-}
-}
-}
+if (row < 0 || row > 16)
+return;
 
-void main(void)
+for(unsigned char i = 0; i < 8; i++)
 {
-initializeLED();
-initializePONG();
-initialize();
+pixels[i][row] = 1;
+}
+}
+
+void off(unsigned char column, unsigned char row) {
+
+if (row < 0 || row > 16)
+return;
+if (column < 0 || column > 8)
+return;
+
+pixels[column][row] = 0;
+}
+
+void rowOff(unsigned char row)
+{
+if (row < 0 || row > 16)
+return;
+
+for(unsigned char i = 0; i < 8; i++)
+{
+pixels[i][row] = 0;
+}
+}
+
+void turnAllOff()
+{
+
+for (unsigned char i = 0; i < 8; i++) {
+for (unsigned char j = 0; j < 16; j++) {
+pixels[i][j] = 0;
+}
+}
+}
+
+void allOff() {
+LATA = 0;
+LATC = 0;
+LATD = 0;
+}
+
+void refresh() {
+
+for (unsigned char theCol = 0; theCol < 8; theCol++) {
+
+for (unsigned char theRow = 0; theRow < 16; theRow++) {
+
+if (pixels[theCol][theRow] == 1)
+setRowHigh(theRow);
+}
 
 
-const char HELLO_SYMBOL;
-const char THREE_SYMBOL;
-const char TWO_SYMBOL;
-const char ONE_SYMBOL;
-const char GO_SYMBOL;
 
-# 311
-while(1){ refresh(); };
+setColHigh(theCol);
+_delay((unsigned long)((500)*(32000000/4000000.0)));
+allOff();
+}
 }

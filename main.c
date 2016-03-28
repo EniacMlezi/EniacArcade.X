@@ -14,16 +14,13 @@
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 #include "Header/config.h"
 #include "Header/LED-API.h"
-
-//Possible game conditions
-typedef enum {scored = '0', normal = '1', gameOver = '2', outOfBounds = "3"} gameConditions;
 
 //Structure of a ball
 struct ballData
 {
+    //position, bPos[0] = ROW bPos[1] = COL
     unsigned char bPos[2];
     //[1-6] 
     unsigned char bDirection;
@@ -42,83 +39,168 @@ struct playerData
 struct ballData _ball;
 struct playerData _p1;
 struct playerData _p2;
+unsigned char _nextPos[2];
 
-//Ball hit (with the paddle) counter
-char _hit = 0;
-//Game state
+unsigned int _speed = 200;
+unsigned int _timerCounter = 0;
 
-//Handles collision based steps (check if it is possible to discard this method)
-void handleCollision(void)
-{
-    //check 
+void writePong(void)
+{  
+    //write all positions
+    
+    //write ball positions
+    off(_ball.bPos[1], _ball.bPos[0]);
+    _ball.bPos[0] = _nextPos[0];
+    _ball.bPos[1] = _nextPos[1];
+    on(_ball.bPos[1], _ball.bPos[0]);
+    
+    //write paddle positions
+    rowOff(0);
+    rowOff(15);  
+    on(_p1.paddlePos[0], 0);
+    on(_p1.paddlePos[1], 0);
+    on(_p2.paddlePos[0], 15);
+    on(_p2.paddlePos[1], 15);
+    
 }
 
-char* getNextPosition(void)
-{
-    char *ballPos = malloc(sizeof(2 * char));
-    
+void getNextPosition(void)
+{   
     switch(_ball.bDirection)
     {
         case 1:
-            ballPos[0] = _ball.bPos[0]++;
-            ballPos[1] = _ball.bPos[1]++;
+            _nextPos[0] = _ball.bPos[0] + 1;
+            _nextPos[1] = _ball.bPos[1] + 1;
             break;
         case 2:
-            ballPos[0] = _ball.bPos[0]++;
+            _nextPos[0] = _ball.bPos[0] + 1;
             break;
         case 3:
-            ballPos[0] = _ball.bPos[0]++;
-            ballPos[1] = _ball.bPos[1]--;      
+            _nextPos[0] = _ball.bPos[0] - 1;
+            _nextPos[1] = _ball.bPos[1] + 1;      
             break;
         case 4:
-            ballPos[0] = _ball.bPos[0]--;
-            ballPos[1] = _ball.bPos[1]--;
+            _nextPos[0] = _ball.bPos[0] - 1;
+            _nextPos[1] = _ball.bPos[1] - 1;
             break;
         case 5:
-            ballPos[0] = _ball.bPos[0]--;
+            _nextPos[0] = _ball.bPos[0] - 1;
             break;
         case 6:
-            ballPos[0] = _ball.bPos[0]--;
-            ballPos[1] = _ball.bPos[1]++;
+            _nextPos[0] = _ball.bPos[0] + 1;
+            _nextPos[1] = _ball.bPos[1] - 1;
             break;
     }
-    
-    return ballPos;
 }
 
 void checkNextPosition(void)
 {
-    char* nextBallPos = getNextPosition();
-    
-    if(nextBallPos[1] == 0)
+    getNextPosition();
+    if(_nextPos[0] == 0)
     {
-        if(_p1.paddlePos[0] == nextBallPos[0] || _p1.paddlePos[1] == nextBallPos[0])
+        if(_p1.paddlePos[0] == _nextPos[1])
+        {
+            //paddle collision           
+            switch(_ball.bDirection)
+            {
+                //process 6, 5, 4. redirect ball
+                case 4:
+                    _ball.bDirection = 3;
+                    break;
+                case 5:
+                    _ball.bDirection = 1;
+                    break;
+                case 6:
+                    _ball.bDirection = 2;
+            }
+            getNextPosition();
+        }
+        else if(_p1.paddlePos[1] == _nextPos[1])
         {
             //paddle collision
+            switch(_ball.bDirection)
+            {
+                //process 6, 5, 4. redirect ball
+                case 4:
+                    _ball.bDirection = 2;
+                    break;
+                case 5:
+                    _ball.bDirection = 3;
+                    break;
+                case 6:
+                    _ball.bDirection = 1;
+            }
+            getNextPosition();
         }
+        //scored!!
     }
-    else if(nextBallPos[1] == 15)
+    else if(_nextPos[0] == 15)
     {
-        if(_p2.paddlePos[0] == nextBallPos[0] || _p2.paddlePos[1] == nextBallPos[0])
+        if(_p2.paddlePos[0] == _nextPos[1])
+        {
+           switch(_ball.bDirection)
+            {
+                //process 6, 5, 4. redirect ball
+                case 1:
+                    _ball.bDirection = 5;
+                    break;
+                case 2:
+                    _ball.bDirection = 6;
+                    break;
+                case 3:
+                    _ball.bDirection = 4;
+            }
+        }
+        else if( _p2.paddlePos[1] == _nextPos[1])
         {
             //paddle collision
+            switch(_ball.bDirection)
+            {
+                //process 6, 5, 4. redirect ball
+                case 1:
+                    _ball.bDirection = 6;
+                    break;
+                case 2:
+                    _ball.bDirection = 4;
+                    break;
+                case 3:
+                    _ball.bDirection = 5;
+            }
         }
+        
+        // scored!!
     }
-    else if(nextBallPos[0] < 0 || nextBallPos[0] > 7)
+    else if(_nextPos[0] < 0 || _nextPos[0] > 7)
     {
-        //ball collides with wall
+        switch(_ball.bDirection)
+        {
+            case 1:
+                _ball.bDirection = 3;
+                break;
+            case 3:
+                _ball.bDirection = 1;
+                break;
+            case 4:
+                _ball.bDirection = 6;
+                break;
+            case 6:
+                _ball.bDirection = 4;
+                break;
+        }
+        getNextPosition();
     }
-    
-    
 }
 
 //Initializes structure values
 void initializePONG(void)
 {    
     //random ball generation
-    _ball.bDirection = 2;//should be random
-    _ball.bPos[0] = 4;//should be random
-    _ball.bPos[1] = 6;//should be random
+    _ball.bDirection = 3;//should be random
+    _ball.bPos[0] = 2;//should be random
+    _ball.bPos[1] = 4;//should be random
+    
+    _nextPos[0] = _ball.bPos[0];
+    _nextPos[1] = _ball.bPos[1];
 }
 
 void initialize()
@@ -171,8 +253,14 @@ void interrupt ISR(void)
         //TMR0 interrupt: start A/D converted inputs, write new ball coordinates to LED-API
         TMR0IF = 0;
         
-        checkNextPosition();
+        if(_timerCounter > _speed)
+        {
+            checkNextPosition();
+            _timerCounter = 0;       
+        }
         
+        _timerCounter++;
+        writePong();
         
         //start receiving input
         ADCON0bits.GODONE = 1; //start
@@ -190,17 +278,15 @@ void interrupt ISR(void)
         // select which paddle needs to refresh
         if(ADCON0bits.CHS == 12)
         {       
-            ADCON0bits.CHS = 10; //next refresh will be on channel 10   
-            rowOff(0); // turn off the paddle's row
-            _p1.paddlePos[0] == value;
-            _p1.paddlePos[1] == value + 1;
+            ADCON0bits.CHS = 10; //next refresh will be on channel 10
+            _p1.paddlePos[0] = value;
+            _p1.paddlePos[1] = value + 1;
         }
         else
         {
             ADCON0bits.CHS = 12; // next refresh will be on channel 12
-            rowOff(15); // turn off the paddle's row
-            _p2.paddlePos[0] == value;
-            _p2.paddlePos[1] == value + 1;
+            _p2.paddlePos[0] = value;
+            _p2.paddlePos[1] = value + 1;
         }
     }
 }
@@ -208,8 +294,8 @@ void interrupt ISR(void)
 void main(void) 
 {
     initializeLED();
-    initialize();
     initializePONG();
+    initialize();
     
     //LED symbols for displaying for the game start
     const char HELLO_SYMBOL; //{:AY drawn in LEDs
@@ -217,15 +303,7 @@ void main(void)
     const char TWO_SYMBOL; //TWO drawn in LEDs
     const char ONE_SYMBOL; //ONE drawn in LEDs
     const char GO_SYMBOL; //GO drawn in LEDs   
-    /*Wait for interrupt signal.*/
-    while(!RBIF)
-    {
-        //Display play
-        __delay_ms(2000);
-        //LEDs off
-        __delay_ms(1000);
-    }
-    //Display 3 -> 2 -> 1 -> GO  
+    
     
     
     //this will work: if there's input, an interrupt is called which

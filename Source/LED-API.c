@@ -7,6 +7,7 @@
 
 #define COLUMNS 8 // define the amount of columns on the panel
 #define ROWS 16 // define the amount of rows on the panel
+#define PANELSIZE 8
 
 #define _XTAL_FREQ 32000000
 
@@ -21,14 +22,19 @@ void setColHigh(unsigned char column) {
 }
 
 void setRowHigh(unsigned char row) {
-    LATC |= (1 << row); // shift 1 by the row you want to pull high. Apply an or gate to it and the LATA register.
+    if(row < PANELSIZE)
+        LATC |= (1 << row); // shift 1 by the row you want to pull high. Apply an or gate to it and the LATA register.
+    else
+        LATD |= (1 << (row - PANELSIZE));
 }
 
 void initializeLED() {
     TRISA = 0b00000000; // configure all pins as output
-    TRISC = 0b00000000; // configure all pins as outpur
-    LATC = 0b00000000; // write 0 to all pins
+    TRISC = 0b00000000; // configure all pins as output
+    TRISD = 0b00000000; // configure all pins as output  
     LATA = 0b00000000; // write 0 to all pins
+    LATC = 0b00000000; // write 0 to all pins
+    LATD = 0b00000000; // write 0 to all pins
 
     //write 0 to the pixels array
     for (unsigned char i = 0; i < COLUMNS; i++) {
@@ -79,18 +85,16 @@ void rowOff(unsigned char row)
         pixels[i][row] = 0;
     }
 }
-//
-//*char getRow(unsigned char row)
-//{
-//    unsigned char *row = malloc(sizeof(COLUMNS * char));
-//    
-//    for(unsigned char i = 0; i < COLUMNS; i++)
-//    {
-//        row[i] = pixels[i][row];
-//    }
-//    
-//    return row;
-//}
+
+void turnAllOff()
+{
+    //write 0 to the pixels array
+    for (unsigned char i = 0; i < COLUMNS; i++) {
+        for (unsigned char j = 0; j < ROWS; j++) {
+            pixels[i][j] = 0;
+        }
+    }
+}
 
 void allOff() {
     LATA = 0; // write 0 to LATA
