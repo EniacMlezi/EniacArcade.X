@@ -3,14 +3,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [s S350 `uc -> 2 `i `uc 1 ]
 [n S350 ballData bPos bDirection ]
 "30
-[s S351 `uc -> 2 `i `uc 1 ]
-[n S351 playerData paddlePos lives ]
-"15 Header/LED-API.h
-[v _off `(v ~T0 @X0 0 ef2`uc`uc ]
-"13
-[v _on `(v ~T0 @X0 0 ef2`uc`uc ]
-"16
-[v _rowOff `(v ~T0 @X0 0 ef1`uc ]
+[s S351 `uc -> 2 `i `uc -> 2 `i `uc 1 ]
+[n S351 playerData paddlePosOld paddlePos lives ]
+[v F3183 `(v ~T0 @X0 1 tf1`ul ]
+"157 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic18.h
+[v __delay `JF3183 ~T0 @X0 0 e ]
+[p i __delay ]
+"18 Header/LED-API.h
+[v _turnAllOff `(v ~T0 @X0 0 ef ]
+"17
+[v _drawSymbol `(v ~T0 @X0 0 ef2`uc`uc ]
 "2630 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic18f4520.h
 [s S123 :5 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S123 . TUN . PLLEN INTSRC ]
@@ -130,14 +132,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TMR0IF `Vb ~T0 @X0 0 e@32658 ]
 "8080
 [v _TMR0ON `Vb ~T0 @X0 0 e@32431 ]
-"7116
+"15 Header/LED-API.h
+[v _off `(v ~T0 @X0 0 ef2`uc`uc ]
+"13
+[v _on `(v ~T0 @X0 0 ef2`uc`uc ]
+"7116 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic18f4520.h
 [v _ADIF `Vb ~T0 @X0 0 e@31990 ]
 "5017
 [v _ADRES `Vus ~T0 @X0 0 e@4035 ]
 [p mainexit ]
-"18 Header/LED-API.h
+"19 Header/LED-API.h
 [v _initializeLED `(v ~T0 @X0 0 ef ]
-"19
+"20
 [v _refresh `(v ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
@@ -3284,9 +3290,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;LED-API.h: 14: extern void rowOn(unsigned char row);
 [; ;LED-API.h: 15: extern void off(unsigned char column, unsigned char row);
 [; ;LED-API.h: 16: extern void rowOff(unsigned char row);
-[; ;LED-API.h: 17: extern void turnAllOff();
-[; ;LED-API.h: 18: extern void initializeLED();
-[; ;LED-API.h: 19: extern void refresh();
+[; ;LED-API.h: 17: extern void drawSymbol(unsigned char chosenSymbol, unsigned char offSetX);
+[; ;LED-API.h: 18: extern void turnAllOff();
+[; ;LED-API.h: 19: extern void initializeLED();
+[; ;LED-API.h: 20: extern void refresh();
 [; ;main.c: 21: struct ballData
 [; ;main.c: 22: {
 [; ;main.c: 24: unsigned char bPos[2];
@@ -3294,780 +3301,908 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 27: };
 [; ;main.c: 30: struct playerData
 [; ;main.c: 31: {
-[; ;main.c: 33: unsigned char paddlePos[2];
-[; ;main.c: 35: unsigned char lives;
-[; ;main.c: 36: };
-"39 main.c
+[; ;main.c: 33: unsigned char paddlePosOld[2];
+[; ;main.c: 35: unsigned char paddlePos[2];
+[; ;main.c: 37: unsigned char lives;
+[; ;main.c: 38: };
+"41 main.c
 [v __ball `S350 ~T0 @X0 1 e ]
-[; ;main.c: 39: struct ballData _ball;
-"40
-[v __p1 `S351 ~T0 @X0 1 e ]
-[; ;main.c: 40: struct playerData _p1;
-"41
-[v __p2 `S351 ~T0 @X0 1 e ]
-[; ;main.c: 41: struct playerData _p2;
+[; ;main.c: 41: struct ballData _ball;
 "42
-[v __nextPos `uc ~T0 @X0 -> 2 `i e ]
-[; ;main.c: 42: unsigned char _nextPos[2];
+[v __p1 `S351 ~T0 @X0 1 e ]
+[; ;main.c: 42: struct playerData _p1;
+"43
+[v __p2 `S351 ~T0 @X0 1 e ]
+[; ;main.c: 43: struct playerData _p2;
 "44
+[v __nextPos `uc ~T0 @X0 -> 2 `i e ]
+[; ;main.c: 44: unsigned char _nextPos[2];
+"46
 [v __speed `ui ~T0 @X0 1 e ]
 [i __speed
 -> -> 200 `i `ui
 ]
-[; ;main.c: 44: unsigned int _speed = 200;
-"45
+[; ;main.c: 46: unsigned int _speed = 200;
+"47
 [v __timerCounter `ui ~T0 @X0 1 e ]
 [i __timerCounter
 -> -> 0 `i `ui
 ]
-[; ;main.c: 45: unsigned int _timerCounter = 0;
-"47
-[v _writePong `(v ~T0 @X0 1 ef ]
-"48
+[; ;main.c: 47: unsigned int _timerCounter = 0;
+"49
+[v _delaySeconds `(b ~T0 @X0 1 ef1`i ]
+"50
 {
-[; ;main.c: 47: void writePong(void)
-[; ;main.c: 48: {
-[e :U _writePong ]
+[; ;main.c: 49: bit delaySeconds(int numberOfSeconds)
+[; ;main.c: 50: {
+[e :U _delaySeconds ]
+"49
+[v _numberOfSeconds `i ~T0 @X0 1 r1 ]
+"50
 [f ]
-[; ;main.c: 52: off(_ball.bPos[1], _ball.bPos[0]);
+[; ;main.c: 51: for(int i = 0; i < numberOfSeconds * 100; i++)
+"51
+{
+[v _i `i ~T0 @X0 1 a ]
+[e = _i -> 0 `i ]
+[e $U 356  ]
 "52
-[e ( _off (2 , *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux ]
-[; ;main.c: 53: _ball.bPos[0] = _nextPos[0];
-"53
-[e = *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux ]
-[; ;main.c: 54: _ball.bPos[1] = _nextPos[1];
+[e :U 353 ]
+[; ;main.c: 52: _delay((unsigned long)((10)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"51
+[e ++ _i -> 1 `i ]
+[e :U 356 ]
+[e $ < _i * _numberOfSeconds -> 100 `i 353  ]
+[e :U 354 ]
+"52
+}
+[; ;main.c: 54: return 1;
 "54
-[e = *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux ]
-[; ;main.c: 55: on(_ball.bPos[1], _ball.bPos[0]);
+[e ) -> -> 1 `i `b ]
+[e $UE 352  ]
+[; ;main.c: 55: }
 "55
-[e ( _on (2 , *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux ]
-[; ;main.c: 58: rowOff(0);
-"58
-[e ( _rowOff (1 -> -> 0 `i `uc ]
-[; ;main.c: 59: rowOff(15);
-"59
-[e ( _rowOff (1 -> -> 15 `i `uc ]
-[; ;main.c: 60: on(_p1.paddlePos[0], 0);
-"60
-[e ( _on (2 , *U + &U . __p1 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p1 0 `ui `ux -> -> 0 `i `uc ]
-[; ;main.c: 61: on(_p1.paddlePos[1], 0);
-"61
-[e ( _on (2 , *U + &U . __p1 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p1 0 `ui `ux -> -> 0 `i `uc ]
-[; ;main.c: 62: on(_p2.paddlePos[0], 15);
-"62
-[e ( _on (2 , *U + &U . __p2 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p2 0 `ui `ux -> -> 15 `i `uc ]
-[; ;main.c: 63: on(_p2.paddlePos[1], 15);
-"63
-[e ( _on (2 , *U + &U . __p2 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p2 0 `ui `ux -> -> 15 `i `uc ]
-[; ;main.c: 65: }
-"65
 [e :UE 352 ]
 }
-"67
-[v _getNextPosition `(v ~T0 @X0 1 ef ]
-"68
+"58
+[v _startPong `(v ~T0 @X0 1 ef ]
+"59
 {
-[; ;main.c: 67: void getNextPosition(void)
-[; ;main.c: 68: {
-[e :U _getNextPosition ]
+[; ;main.c: 58: void startPong(void)
+[; ;main.c: 59: {
+[e :U _startPong ]
 [f ]
-[; ;main.c: 69: switch(_ball.bDirection)
-"69
-[e $U 355  ]
-[; ;main.c: 70: {
-"70
-{
-[; ;main.c: 71: case 1:
-"71
-[e :U 356 ]
-[; ;main.c: 72: _nextPos[0] = _ball.bPos[0] + 1;
-"72
-[e = *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> + -> *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
-[; ;main.c: 73: _nextPos[1] = _ball.bPos[1] + 1;
-"73
-[e = *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> + -> *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
-[; ;main.c: 74: break;
-"74
-[e $U 354  ]
-[; ;main.c: 75: case 2:
-"75
-[e :U 357 ]
-[; ;main.c: 76: _nextPos[0] = _ball.bPos[1] + 1;
-"76
-[e = *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> + -> *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
-[; ;main.c: 77: break;
-"77
-[e $U 354  ]
-[; ;main.c: 78: case 3:
-"78
-[e :U 358 ]
-[; ;main.c: 79: _nextPos[0] = _ball.bPos[0] - 1;
-"79
-[e = *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> - -> *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
-[; ;main.c: 80: _nextPos[1] = _ball.bPos[1] + 1;
-"80
-[e = *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> + -> *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
-[; ;main.c: 81: break;
-"81
-[e $U 354  ]
-[; ;main.c: 82: case 4:
-"82
+[; ;main.c: 61: turnAllOff();
+"61
+[e ( _turnAllOff ..  ]
+[; ;main.c: 62: drawSymbol(_p1.lives, 0);
+"62
+[e ( _drawSymbol (2 , . __p1 2 -> -> 0 `i `uc ]
+[; ;main.c: 63: drawSymbol(_p2.lives, 8);
+"63
+[e ( _drawSymbol (2 , . __p2 2 -> -> 8 `i `uc ]
+[; ;main.c: 64: while(!delaySeconds(2));
+"64
+[e $U 358  ]
 [e :U 359 ]
-[; ;main.c: 83: _nextPos[0] = _ball.bPos[0] - 1;
-"83
-[e = *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> - -> *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
-[; ;main.c: 84: _nextPos[1] = _ball.bPos[1] - 1;
-"84
-[e = *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> - -> *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
-[; ;main.c: 85: break;
-"85
-[e $U 354  ]
-[; ;main.c: 86: case 5:
-"86
+[e :U 358 ]
+[e $ ! ( _delaySeconds (1 -> 2 `i 359  ]
 [e :U 360 ]
-[; ;main.c: 87: _nextPos[0] = _ball.bPos[1] - 1;
-"87
-[e = *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> - -> *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
-[; ;main.c: 88: break;
-"88
-[e $U 354  ]
-[; ;main.c: 89: case 6:
-"89
-[e :U 361 ]
-[; ;main.c: 90: _nextPos[0] = _ball.bPos[0] + 1;
-"90
-[e = *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> + -> *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
-[; ;main.c: 91: _nextPos[1] = _ball.bPos[1] - 1;
-"91
-[e = *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> - -> *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
-[; ;main.c: 92: break;
-"92
-[e $U 354  ]
-"93
-}
-[; ;main.c: 93: }
-[e $U 354  ]
+[; ;main.c: 65: turnAllOff();
+"65
+[e ( _turnAllOff ..  ]
+[; ;main.c: 68: _ball.bDirection = 3;
+"68
+[e = . __ball 1 -> -> 3 `i `uc ]
+[; ;main.c: 69: _ball.bPos[0] = 2;
 "69
-[e :U 355 ]
-[e [\ . __ball 1 , $ -> -> 1 `i `uc 356
- , $ -> -> 2 `i `uc 357
- , $ -> -> 3 `i `uc 358
- , $ -> -> 4 `i `uc 359
- , $ -> -> 5 `i `uc 360
- , $ -> -> 6 `i `uc 361
- 354 ]
-"93
-[e :U 354 ]
-[; ;main.c: 94: }
-"94
-[e :UE 353 ]
-}
-"96
-[v _checkNextPosition `(v ~T0 @X0 1 ef ]
-"97
-{
-[; ;main.c: 96: void checkNextPosition(void)
-[; ;main.c: 97: {
-[e :U _checkNextPosition ]
-[f ]
-[; ;main.c: 98: getNextPosition();
-"98
-[e ( _getNextPosition ..  ]
-[; ;main.c: 99: if(_nextPos[1] == 0)
-"99
-[e $ ! == -> *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux `i -> 0 `i 363  ]
-[; ;main.c: 100: {
-"100
-{
-[; ;main.c: 101: if(_p1.paddlePos[0] == _nextPos[1])
-"101
-[e $ ! == -> *U + &U . __p1 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p1 0 `ui `ux `i -> *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux `i 364  ]
-[; ;main.c: 102: {
-"102
-{
-[; ;main.c: 104: switch(_ball.bDirection)
-"104
-[e $U 366  ]
-[; ;main.c: 105: {
-"105
-{
-[; ;main.c: 107: case 4:
-"107
-[e :U 367 ]
-[; ;main.c: 108: _ball.bDirection = 3;
-"108
-[e = . __ball 1 -> -> 3 `i `uc ]
-[; ;main.c: 109: break;
-"109
-[e $U 365  ]
-[; ;main.c: 110: case 5:
-"110
-[e :U 368 ]
-[; ;main.c: 111: _ball.bDirection = 1;
-"111
-[e = . __ball 1 -> -> 1 `i `uc ]
-[; ;main.c: 112: break;
-"112
-[e $U 365  ]
-[; ;main.c: 113: case 6:
-"113
-[e :U 369 ]
-[; ;main.c: 114: _ball.bDirection = 2;
-"114
-[e = . __ball 1 -> -> 2 `i `uc ]
-"115
-}
-[; ;main.c: 115: }
-[e $U 365  ]
-"104
-[e :U 366 ]
-[e [\ . __ball 1 , $ -> -> 4 `i `uc 367
- , $ -> -> 5 `i `uc 368
- , $ -> -> 6 `i `uc 369
- 365 ]
-"115
-[e :U 365 ]
-[; ;main.c: 116: getNextPosition();
-"116
-[e ( _getNextPosition ..  ]
-"117
-}
-[; ;main.c: 117: }
-[e $U 370  ]
-"118
-[e :U 364 ]
-[; ;main.c: 118: else if(_p1.paddlePos[1] == _nextPos[1])
-[e $ ! == -> *U + &U . __p1 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p1 0 `ui `ux `i -> *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux `i 371  ]
-[; ;main.c: 119: {
-"119
-{
-[; ;main.c: 121: switch(_ball.bDirection)
-"121
-[e $U 373  ]
-[; ;main.c: 122: {
-"122
-{
-[; ;main.c: 124: case 4:
-"124
-[e :U 374 ]
-[; ;main.c: 125: _ball.bDirection = 2;
-"125
-[e = . __ball 1 -> -> 2 `i `uc ]
-[; ;main.c: 126: break;
-"126
-[e $U 372  ]
-[; ;main.c: 127: case 5:
-"127
-[e :U 375 ]
-[; ;main.c: 128: _ball.bDirection = 3;
-"128
-[e = . __ball 1 -> -> 3 `i `uc ]
-[; ;main.c: 129: break;
-"129
-[e $U 372  ]
-[; ;main.c: 130: case 6:
-"130
-[e :U 376 ]
-[; ;main.c: 131: _ball.bDirection = 1;
-"131
-[e = . __ball 1 -> -> 1 `i `uc ]
-[; ;main.c: 132: break;
-"132
-[e $U 372  ]
-"133
-}
-[; ;main.c: 133: }
-[e $U 372  ]
-"121
-[e :U 373 ]
-[e [\ . __ball 1 , $ -> -> 4 `i `uc 374
- , $ -> -> 5 `i `uc 375
- , $ -> -> 6 `i `uc 376
- 372 ]
-"133
-[e :U 372 ]
-[; ;main.c: 134: getNextPosition();
-"134
-[e ( _getNextPosition ..  ]
-"135
-}
-[e :U 371 ]
-"137
-[e :U 370 ]
-}
-[; ;main.c: 135: }
-[; ;main.c: 137: }
-[e $U 377  ]
-"138
-[e :U 363 ]
-[; ;main.c: 138: else if(_nextPos[1] == 15)
-[e $ ! == -> *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux `i -> 15 `i 378  ]
-[; ;main.c: 139: {
-"139
-{
-[; ;main.c: 140: if(_p2.paddlePos[0] == _nextPos[1])
-"140
-[e $ ! == -> *U + &U . __p2 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p2 0 `ui `ux `i -> *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux `i 379  ]
-[; ;main.c: 141: {
-"141
-{
-[; ;main.c: 142: switch(_ball.bDirection)
-"142
-[e $U 381  ]
-[; ;main.c: 143: {
-"143
-{
-[; ;main.c: 145: case 1:
-"145
-[e :U 382 ]
-[; ;main.c: 146: _ball.bDirection = 5;
-"146
-[e = . __ball 1 -> -> 5 `i `uc ]
-[; ;main.c: 147: break;
-"147
-[e $U 380  ]
-[; ;main.c: 148: case 2:
-"148
-[e :U 383 ]
-[; ;main.c: 149: _ball.bDirection = 6;
-"149
-[e = . __ball 1 -> -> 6 `i `uc ]
-[; ;main.c: 150: break;
-"150
-[e $U 380  ]
-[; ;main.c: 151: case 3:
-"151
-[e :U 384 ]
-[; ;main.c: 152: _ball.bDirection = 4;
-"152
-[e = . __ball 1 -> -> 4 `i `uc ]
-[; ;main.c: 153: break;
-"153
-[e $U 380  ]
-"154
-}
-[; ;main.c: 154: }
-[e $U 380  ]
-"142
-[e :U 381 ]
-[e [\ . __ball 1 , $ -> -> 1 `i `uc 382
- , $ -> -> 2 `i `uc 383
- , $ -> -> 3 `i `uc 384
- 380 ]
-"154
-[e :U 380 ]
-"155
-}
-[; ;main.c: 155: }
-[e $U 385  ]
-"156
-[e :U 379 ]
-[; ;main.c: 156: else if( _p2.paddlePos[1] == _nextPos[1])
-[e $ ! == -> *U + &U . __p2 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p2 0 `ui `ux `i -> *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux `i 386  ]
-[; ;main.c: 157: {
-"157
-{
-[; ;main.c: 159: switch(_ball.bDirection)
-"159
-[e $U 388  ]
-[; ;main.c: 160: {
-"160
-{
-[; ;main.c: 162: case 1:
-"162
-[e :U 389 ]
-[; ;main.c: 163: _ball.bDirection = 6;
-"163
-[e = . __ball 1 -> -> 6 `i `uc ]
-[; ;main.c: 164: break;
-"164
-[e $U 387  ]
-[; ;main.c: 165: case 2:
-"165
-[e :U 390 ]
-[; ;main.c: 166: _ball.bDirection = 4;
-"166
-[e = . __ball 1 -> -> 4 `i `uc ]
-[; ;main.c: 167: break;
-"167
-[e $U 387  ]
-[; ;main.c: 168: case 3:
-"168
-[e :U 391 ]
-[; ;main.c: 169: _ball.bDirection = 5;
-"169
-[e = . __ball 1 -> -> 5 `i `uc ]
-[; ;main.c: 170: break;
-"170
-[e $U 387  ]
-"171
-}
-[; ;main.c: 171: }
-[e $U 387  ]
-"159
-[e :U 388 ]
-[e [\ . __ball 1 , $ -> -> 1 `i `uc 389
- , $ -> -> 2 `i `uc 390
- , $ -> -> 3 `i `uc 391
- 387 ]
-"171
-[e :U 387 ]
-"172
-}
-[e :U 386 ]
-"175
-[e :U 385 ]
-}
-[; ;main.c: 172: }
-[; ;main.c: 175: }
-[e $U 392  ]
-"176
-[e :U 378 ]
-[; ;main.c: 176: else if(_nextPos[0] < 0 || _nextPos[0] > 7)
-[e $ ! || < -> *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux `i -> 0 `i > -> *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux `i -> 7 `i 393  ]
-[; ;main.c: 177: {
-"177
-{
-[; ;main.c: 178: switch(_ball.bDirection)
-"178
-[e $U 395  ]
-[; ;main.c: 179: {
-"179
-{
-[; ;main.c: 180: case 1:
-"180
-[e :U 396 ]
-[; ;main.c: 181: _ball.bDirection = 3;
-"181
-[e = . __ball 1 -> -> 3 `i `uc ]
-[; ;main.c: 182: break;
-"182
-[e $U 394  ]
-[; ;main.c: 183: case 3:
-"183
-[e :U 397 ]
-[; ;main.c: 184: _ball.bDirection = 1;
-"184
-[e = . __ball 1 -> -> 1 `i `uc ]
-[; ;main.c: 185: break;
-"185
-[e $U 394  ]
-[; ;main.c: 186: case 4:
-"186
-[e :U 398 ]
-[; ;main.c: 187: _ball.bDirection = 6;
-"187
-[e = . __ball 1 -> -> 6 `i `uc ]
-[; ;main.c: 188: break;
-"188
-[e $U 394  ]
-[; ;main.c: 189: case 6:
-"189
-[e :U 399 ]
-[; ;main.c: 190: _ball.bDirection = 4;
-"190
-[e = . __ball 1 -> -> 4 `i `uc ]
-[; ;main.c: 191: break;
-"191
-[e $U 394  ]
-"192
-}
-[; ;main.c: 192: }
-[e $U 394  ]
-"178
-[e :U 395 ]
-[e [\ . __ball 1 , $ -> -> 1 `i `uc 396
- , $ -> -> 3 `i `uc 397
- , $ -> -> 4 `i `uc 398
- , $ -> -> 6 `i `uc 399
- 394 ]
-"192
-[e :U 394 ]
-[; ;main.c: 193: getNextPosition();
-"193
-[e ( _getNextPosition ..  ]
-"194
-}
-[e :U 393 ]
-"195
-[e :U 392 ]
-[e :U 377 ]
-[; ;main.c: 194: }
-[; ;main.c: 195: }
-[e :UE 362 ]
-}
-"198
-[v _initializePONG `(v ~T0 @X0 1 ef ]
-"199
-{
-[; ;main.c: 198: void initializePONG(void)
-[; ;main.c: 199: {
-[e :U _initializePONG ]
-[f ]
-[; ;main.c: 201: _ball.bDirection = 3;
-"201
-[e = . __ball 1 -> -> 3 `i `uc ]
-[; ;main.c: 202: _ball.bPos[0] = 2;
-"202
 [e = *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux -> -> 2 `i `uc ]
-[; ;main.c: 203: _ball.bPos[1] = 4;
-"203
+[; ;main.c: 70: _ball.bPos[1] = 4;
+"70
 [e = *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux -> -> 4 `i `uc ]
-[; ;main.c: 205: _nextPos[0] = _ball.bPos[0];
-"205
+[; ;main.c: 72: _nextPos[0] = _ball.bPos[0];
+"72
 [e = *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux ]
-[; ;main.c: 206: _nextPos[1] = _ball.bPos[1];
-"206
+[; ;main.c: 73: _nextPos[1] = _ball.bPos[1];
+"73
 [e = *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux ]
-[; ;main.c: 207: }
-"207
-[e :UE 400 ]
+[; ;main.c: 74: }
+"74
+[e :UE 357 ]
 }
-"209
-[v _initialize `(v ~T0 @X0 1 ef ]
-"210
+"77
+[v _initializePong `(v ~T0 @X0 1 ef ]
+"78
 {
-[; ;main.c: 209: void initialize()
-[; ;main.c: 210: {
+[; ;main.c: 77: void initializePong(void)
+[; ;main.c: 78: {
+[e :U _initializePong ]
+[f ]
+[; ;main.c: 82: _p1.lives = 2;
+"82
+[e = . __p1 2 -> -> 2 `i `uc ]
+[; ;main.c: 83: _p2.lives = 2;
+"83
+[e = . __p2 2 -> -> 2 `i `uc ]
+[; ;main.c: 85: startPong();
+"85
+[e ( _startPong ..  ]
+[; ;main.c: 86: }
+"86
+[e :UE 361 ]
+}
+"88
+[v _initialize `(v ~T0 @X0 1 ef ]
+"89
+{
+[; ;main.c: 88: void initialize()
+[; ;main.c: 89: {
 [e :U _initialize ]
 [f ]
-[; ;main.c: 212: OSCTUNEbits.PLLEN = 1;
-"212
+[; ;main.c: 91: OSCTUNEbits.PLLEN = 1;
+"91
 [e = . . _OSCTUNEbits 0 2 -> -> 1 `i `uc ]
-[; ;main.c: 213: OSCTUNEbits.TUN = 011111;
-"213
+[; ;main.c: 92: OSCTUNEbits.TUN = 011111;
+"92
 [e = . . _OSCTUNEbits 0 0 -> -> 4681 `i `uc ]
-[; ;main.c: 215: OSCCONbits.SCS = 00;
-"215
+[; ;main.c: 94: OSCCONbits.SCS = 00;
+"94
 [e = . . _OSCCONbits 0 0 -> -> 0 `i `uc ]
-[; ;main.c: 216: OSCCONbits.IRCF = 111;
-"216
+[; ;main.c: 95: OSCCONbits.IRCF = 111;
+"95
 [e = . . _OSCCONbits 0 3 -> -> 111 `i `uc ]
-[; ;main.c: 218: PLLEN = 1;
-"218
+[; ;main.c: 97: PLLEN = 1;
+"97
 [e = _PLLEN -> -> 1 `i `b ]
-[; ;main.c: 221: GIE = 1;
-"221
+[; ;main.c: 100: GIE = 1;
+"100
 [e = _GIE -> -> 1 `i `b ]
-[; ;main.c: 222: PEIE=1;
-"222
+[; ;main.c: 101: PEIE=1;
+"101
 [e = _PEIE -> -> 1 `i `b ]
-[; ;main.c: 225: TRISBbits.TRISB0 = 1;
-"225
+[; ;main.c: 104: TRISBbits.TRISB0 = 1;
+"104
 [e = . . _TRISBbits 0 0 -> -> 1 `i `uc ]
-[; ;main.c: 226: TRISBbits.TRISB1 = 1;
-"226
+[; ;main.c: 105: TRISBbits.TRISB1 = 1;
+"105
 [e = . . _TRISBbits 0 1 -> -> 1 `i `uc ]
-[; ;main.c: 227: ADCON2bits.ADFM = 1;
-"227
+[; ;main.c: 106: ADCON2bits.ADFM = 1;
+"106
 [e = . . _ADCON2bits 0 3 -> -> 1 `i `uc ]
-[; ;main.c: 228: ADCON2bits.ADCS = 010;
-"228
+[; ;main.c: 107: ADCON2bits.ADCS = 010;
+"107
 [e = . . _ADCON2bits 0 0 -> -> 8 `i `uc ]
-[; ;main.c: 229: ADCON2bits.ACQT = 111;
-"229
+[; ;main.c: 108: ADCON2bits.ACQT = 111;
+"108
 [e = . . _ADCON2bits 0 1 -> -> 111 `i `uc ]
-[; ;main.c: 230: ADCON1bits.VCFG0 = 0;
-"230
+[; ;main.c: 109: ADCON1bits.VCFG0 = 0;
+"109
 [e = . . _ADCON1bits 1 4 -> -> 0 `i `uc ]
-[; ;main.c: 231: ADCON1bits.VCFG1 = 0;
-"231
+[; ;main.c: 110: ADCON1bits.VCFG1 = 0;
+"110
 [e = . . _ADCON1bits 1 5 -> -> 0 `i `uc ]
-[; ;main.c: 232: ADCON1bits.PCFG = 0000;
-"232
+[; ;main.c: 111: ADCON1bits.PCFG = 0000;
+"111
 [e = . . _ADCON1bits 0 0 -> -> 0 `i `uc ]
-[; ;main.c: 233: ADCON0bits.CHS = 1100;
-"233
+[; ;main.c: 112: ADCON0bits.CHS = 1100;
+"112
 [e = . . _ADCON0bits 1 2 -> -> 1100 `i `uc ]
-[; ;main.c: 234: ADCON0bits.ADON = 1;
-"234
+[; ;main.c: 113: ADCON0bits.ADON = 1;
+"113
 [e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
-[; ;main.c: 235: ADIE = 1;
-"235
+[; ;main.c: 114: ADIE = 1;
+"114
 [e = _ADIE -> -> 1 `i `b ]
-[; ;main.c: 238: T0PS0 = 1;
-"238
+[; ;main.c: 117: T0PS0 = 1;
+"117
 [e = _T0PS0 -> -> 1 `i `b ]
-[; ;main.c: 239: T0PS1 = 0;
-"239
+[; ;main.c: 118: T0PS1 = 0;
+"118
 [e = _T0PS1 -> -> 0 `i `b ]
-[; ;main.c: 240: T0PS2 = 1;
-"240
+[; ;main.c: 119: T0PS2 = 1;
+"119
 [e = _T0PS2 -> -> 1 `i `b ]
-[; ;main.c: 241: PSA = 0;
-"241
+[; ;main.c: 120: PSA = 0;
+"120
 [e = _PSA -> -> 0 `i `b ]
-[; ;main.c: 242: T0CS = 0;
-"242
+[; ;main.c: 121: T0CS = 0;
+"121
 [e = _T0CS -> -> 0 `i `b ]
-[; ;main.c: 243: T08BIT = 1;
-"243
+[; ;main.c: 122: T08BIT = 1;
+"122
 [e = _T08BIT -> -> 1 `i `b ]
-[; ;main.c: 244: TMR0IE = 1;
-"244
+[; ;main.c: 123: TMR0IE = 1;
+"123
 [e = _TMR0IE -> -> 1 `i `b ]
-[; ;main.c: 245: TMR0IF = 0;
-"245
+[; ;main.c: 124: TMR0IF = 0;
+"124
 [e = _TMR0IF -> -> 0 `i `b ]
-[; ;main.c: 247: TMR0ON = 1;
-"247
+[; ;main.c: 126: TMR0ON = 1;
+"126
 [e = _TMR0ON -> -> 1 `i `b ]
-[; ;main.c: 249: }
-"249
-[e :UE 401 ]
+[; ;main.c: 127: }
+"127
+[e :UE 362 ]
 }
-[v F3438 `(v ~T0 @X0 1 tf ]
-"252
-[v _ISR `IF3438 ~T0 @X0 1 e ]
-"253
+"130
+[v _writePong `(v ~T0 @X0 1 ef ]
+"131
 {
-[; ;main.c: 252: void interrupt ISR(void)
-[; ;main.c: 253: {
-[e :U _ISR ]
+[; ;main.c: 130: void writePong(void)
+[; ;main.c: 131: {
+[e :U _writePong ]
 [f ]
-[; ;main.c: 254: if(TMR0IE && TMR0IF)
-"254
-[e $ ! && _TMR0IE _TMR0IF 403  ]
-[; ;main.c: 255: {
-"255
-{
-[; ;main.c: 257: TMR0IF = 0;
-"257
-[e = _TMR0IF -> -> 0 `i `b ]
-[; ;main.c: 259: if(_timerCounter > _speed)
-"259
-[e $ ! > __timerCounter __speed 404  ]
-[; ;main.c: 260: {
-"260
-{
-[; ;main.c: 261: checkNextPosition();
-"261
-[e ( _checkNextPosition ..  ]
-[; ;main.c: 262: _timerCounter = 0;
-"262
-[e = __timerCounter -> -> 0 `i `ui ]
-"263
+[; ;main.c: 135: off(_ball.bPos[1], _ball.bPos[0]);
+"135
+[e ( _off (2 , *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux ]
+[; ;main.c: 136: _ball.bPos[0] = _nextPos[0];
+"136
+[e = *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux ]
+[; ;main.c: 137: _ball.bPos[1] = _nextPos[1];
+"137
+[e = *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux ]
+[; ;main.c: 138: on(_ball.bPos[1], _ball.bPos[0]);
+"138
+[e ( _on (2 , *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux ]
+[; ;main.c: 141: off(_p1.paddlePosOld[0], 0);
+"141
+[e ( _off (2 , *U + &U . __p1 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p1 0 `ui `ux -> -> 0 `i `uc ]
+[; ;main.c: 142: off(_p1.paddlePosOld[1], 0);
+"142
+[e ( _off (2 , *U + &U . __p1 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p1 0 `ui `ux -> -> 0 `i `uc ]
+[; ;main.c: 144: off(_p2.paddlePosOld[0], 15);
+"144
+[e ( _off (2 , *U + &U . __p2 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p2 0 `ui `ux -> -> 15 `i `uc ]
+[; ;main.c: 145: off(_p2.paddlePosOld[1], 15);
+"145
+[e ( _off (2 , *U + &U . __p2 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p2 0 `ui `ux -> -> 15 `i `uc ]
+[; ;main.c: 147: on(_p1.paddlePos[0], 0);
+"147
+[e ( _on (2 , *U + &U . __p1 1 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p1 1 `ui `ux -> -> 0 `i `uc ]
+[; ;main.c: 148: on(_p1.paddlePos[1], 0);
+"148
+[e ( _on (2 , *U + &U . __p1 1 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p1 1 `ui `ux -> -> 0 `i `uc ]
+[; ;main.c: 149: on(_p2.paddlePos[0], 15);
+"149
+[e ( _on (2 , *U + &U . __p2 1 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p2 1 `ui `ux -> -> 15 `i `uc ]
+[; ;main.c: 150: on(_p2.paddlePos[1], 15);
+"150
+[e ( _on (2 , *U + &U . __p2 1 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p2 1 `ui `ux -> -> 15 `i `uc ]
+[; ;main.c: 152: }
+"152
+[e :UE 363 ]
 }
-[e :U 404 ]
-[; ;main.c: 263: }
-[; ;main.c: 265: _timerCounter++;
+"155
+[v _getNextPosition `(v ~T0 @X0 1 ef ]
+"156
+{
+[; ;main.c: 155: void getNextPosition(void)
+[; ;main.c: 156: {
+[e :U _getNextPosition ]
+[f ]
+[; ;main.c: 157: switch(_ball.bDirection)
+"157
+[e $U 366  ]
+[; ;main.c: 158: {
+"158
+{
+[; ;main.c: 159: case 1:
+"159
+[e :U 367 ]
+[; ;main.c: 160: _nextPos[0] = _ball.bPos[0] + 1;
+"160
+[e = *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> + -> *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
+[; ;main.c: 161: _nextPos[1] = _ball.bPos[1] + 1;
+"161
+[e = *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> + -> *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
+[; ;main.c: 162: break;
+"162
+[e $U 365  ]
+[; ;main.c: 163: case 2:
+"163
+[e :U 368 ]
+[; ;main.c: 164: _nextPos[0] = _ball.bPos[0] + 1;
+"164
+[e = *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> + -> *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
+[; ;main.c: 165: break;
+"165
+[e $U 365  ]
+[; ;main.c: 166: case 3:
+"166
+[e :U 369 ]
+[; ;main.c: 167: _nextPos[0] = _ball.bPos[0] + 1;
+"167
+[e = *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> + -> *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
+[; ;main.c: 168: _nextPos[1] = _ball.bPos[1] - 1;
+"168
+[e = *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> - -> *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
+[; ;main.c: 169: break;
+"169
+[e $U 365  ]
+[; ;main.c: 170: case 4:
+"170
+[e :U 370 ]
+[; ;main.c: 171: _nextPos[0] = _ball.bPos[0] - 1;
+"171
+[e = *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> - -> *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
+[; ;main.c: 172: _nextPos[1] = _ball.bPos[1] - 1;
+"172
+[e = *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> - -> *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
+[; ;main.c: 173: break;
+"173
+[e $U 365  ]
+[; ;main.c: 174: case 5:
+"174
+[e :U 371 ]
+[; ;main.c: 175: _nextPos[0] = _ball.bPos[0] - 1;
+"175
+[e = *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> - -> *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
+[; ;main.c: 176: break;
+"176
+[e $U 365  ]
+[; ;main.c: 177: case 6:
+"177
+[e :U 372 ]
+[; ;main.c: 178: _nextPos[0] = _ball.bPos[0] - 1;
+"178
+[e = *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> - -> *U + &U . __ball 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
+[; ;main.c: 179: _nextPos[1] = _ball.bPos[1] + 1;
+"179
+[e = *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux -> + -> *U + &U . __ball 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __ball 0 `ui `ux `i -> 1 `i `uc ]
+[; ;main.c: 180: break;
+"180
+[e $U 365  ]
+"181
+}
+[; ;main.c: 181: }
+[e $U 365  ]
+"157
+[e :U 366 ]
+[e [\ . __ball 1 , $ -> -> 1 `i `uc 367
+ , $ -> -> 2 `i `uc 368
+ , $ -> -> 3 `i `uc 369
+ , $ -> -> 4 `i `uc 370
+ , $ -> -> 5 `i `uc 371
+ , $ -> -> 6 `i `uc 372
+ 365 ]
+"181
+[e :U 365 ]
+[; ;main.c: 182: }
+"182
+[e :UE 364 ]
+}
+"184
+[v _checkNextPosition `(v ~T0 @X0 1 ef ]
+"185
+{
+[; ;main.c: 184: void checkNextPosition(void)
+[; ;main.c: 185: {
+[e :U _checkNextPosition ]
+[f ]
+[; ;main.c: 186: getNextPosition();
+"186
+[e ( _getNextPosition ..  ]
+[; ;main.c: 187: if(_nextPos[0] == 0)
+"187
+[e $ ! == -> *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux `i -> 0 `i 374  ]
+[; ;main.c: 188: {
+"188
+{
+[; ;main.c: 189: if(_p1.paddlePos[0] == _nextPos[1])
+"189
+[e $ ! == -> *U + &U . __p1 1 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p1 1 `ui `ux `i -> *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux `i 375  ]
+[; ;main.c: 190: {
+"190
+{
+[; ;main.c: 192: switch(_ball.bDirection)
+"192
+[e $U 377  ]
+[; ;main.c: 193: {
+"193
+{
+[; ;main.c: 195: case 4:
+"195
+[e :U 378 ]
+[; ;main.c: 196: _ball.bDirection = 2;
+"196
+[e = . __ball 1 -> -> 2 `i `uc ]
+[; ;main.c: 197: break;
+"197
+[e $U 376  ]
+[; ;main.c: 198: case 5:
+"198
+[e :U 379 ]
+[; ;main.c: 199: _ball.bDirection = 1;
+"199
+[e = . __ball 1 -> -> 1 `i `uc ]
+[; ;main.c: 200: break;
+"200
+[e $U 376  ]
+[; ;main.c: 201: case 6:
+"201
+[e :U 380 ]
+[; ;main.c: 202: _ball.bDirection = 2;
+"202
+[e = . __ball 1 -> -> 2 `i `uc ]
+"203
+}
+[; ;main.c: 203: }
+[e $U 376  ]
+"192
+[e :U 377 ]
+[e [\ . __ball 1 , $ -> -> 4 `i `uc 378
+ , $ -> -> 5 `i `uc 379
+ , $ -> -> 6 `i `uc 380
+ 376 ]
+"203
+[e :U 376 ]
+[; ;main.c: 204: getNextPosition();
+"204
+[e ( _getNextPosition ..  ]
+[; ;main.c: 205: return;
+"205
+[e $UE 373  ]
+"206
+}
+[; ;main.c: 206: }
+[e $U 381  ]
+"207
+[e :U 375 ]
+[; ;main.c: 207: else if(_p1.paddlePos[1] == _nextPos[1])
+[e $ ! == -> *U + &U . __p1 1 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p1 1 `ui `ux `i -> *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux `i 382  ]
+[; ;main.c: 208: {
+"208
+{
+[; ;main.c: 210: switch(_ball.bDirection)
+"210
+[e $U 384  ]
+[; ;main.c: 211: {
+"211
+{
+[; ;main.c: 213: case 4:
+"213
+[e :U 385 ]
+[; ;main.c: 214: _ball.bDirection = 1;
+"214
+[e = . __ball 1 -> -> 1 `i `uc ]
+[; ;main.c: 215: break;
+"215
+[e $U 383  ]
+[; ;main.c: 216: case 5:
+"216
+[e :U 386 ]
+[; ;main.c: 217: _ball.bDirection = 3;
+"217
+[e = . __ball 1 -> -> 3 `i `uc ]
+[; ;main.c: 218: break;
+"218
+[e $U 383  ]
+[; ;main.c: 219: case 6:
+"219
+[e :U 387 ]
+[; ;main.c: 220: _ball.bDirection = 3;
+"220
+[e = . __ball 1 -> -> 3 `i `uc ]
+[; ;main.c: 221: break;
+"221
+[e $U 383  ]
+"222
+}
+[; ;main.c: 222: }
+[e $U 383  ]
+"210
+[e :U 384 ]
+[e [\ . __ball 1 , $ -> -> 4 `i `uc 385
+ , $ -> -> 5 `i `uc 386
+ , $ -> -> 6 `i `uc 387
+ 383 ]
+"222
+[e :U 383 ]
+[; ;main.c: 223: getNextPosition();
+"223
+[e ( _getNextPosition ..  ]
+[; ;main.c: 224: return;
+"224
+[e $UE 373  ]
+"225
+}
+[e :U 382 ]
+"227
+[e :U 381 ]
+[; ;main.c: 225: }
+[; ;main.c: 227: _p1.lives--;
+[e -- . __p1 2 -> -> 1 `i `uc ]
+[; ;main.c: 228: startPong();
+"228
+[e ( _startPong ..  ]
+"229
+}
+[; ;main.c: 229: }
+[e $U 388  ]
+"230
+[e :U 374 ]
+[; ;main.c: 230: else if(_nextPos[0] == 15)
+[e $ ! == -> *U + &U __nextPos * -> -> -> 0 `i `ui `ux -> -> # *U &U __nextPos `ui `ux `i -> 15 `i 389  ]
+[; ;main.c: 231: {
+"231
+{
+[; ;main.c: 232: if(_p2.paddlePos[0] == _nextPos[1])
+"232
+[e $ ! == -> *U + &U . __p2 1 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p2 1 `ui `ux `i -> *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux `i 390  ]
+[; ;main.c: 233: {
+"233
+{
+[; ;main.c: 234: switch(_ball.bDirection)
+"234
+[e $U 392  ]
+[; ;main.c: 235: {
+"235
+{
+[; ;main.c: 237: case 1:
+"237
+[e :U 393 ]
+[; ;main.c: 238: _ball.bDirection = 4;
+"238
+[e = . __ball 1 -> -> 4 `i `uc ]
+[; ;main.c: 239: break;
+"239
+[e $U 391  ]
+[; ;main.c: 240: case 2:
+"240
+[e :U 394 ]
+[; ;main.c: 241: _ball.bDirection = 6;
+"241
+[e = . __ball 1 -> -> 6 `i `uc ]
+[; ;main.c: 242: break;
+"242
+[e $U 391  ]
+[; ;main.c: 243: case 3:
+"243
+[e :U 395 ]
+[; ;main.c: 244: _ball.bDirection = 5;
+"244
+[e = . __ball 1 -> -> 5 `i `uc ]
+[; ;main.c: 245: break;
+"245
+[e $U 391  ]
+"246
+}
+[; ;main.c: 246: }
+[e $U 391  ]
+"234
+[e :U 392 ]
+[e [\ . __ball 1 , $ -> -> 1 `i `uc 393
+ , $ -> -> 2 `i `uc 394
+ , $ -> -> 3 `i `uc 395
+ 391 ]
+"246
+[e :U 391 ]
+[; ;main.c: 247: getNextPosition();
+"247
+[e ( _getNextPosition ..  ]
+[; ;main.c: 248: return;
+"248
+[e $UE 373  ]
+"249
+}
+[; ;main.c: 249: }
+[e $U 396  ]
+"250
+[e :U 390 ]
+[; ;main.c: 250: else if( _p2.paddlePos[1] == _nextPos[1])
+[e $ ! == -> *U + &U . __p2 1 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p2 1 `ui `ux `i -> *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux `i 397  ]
+[; ;main.c: 251: {
+"251
+{
+[; ;main.c: 253: switch(_ball.bDirection)
+"253
+[e $U 399  ]
+[; ;main.c: 254: {
+"254
+{
+[; ;main.c: 255: case 1:
+"255
+[e :U 400 ]
+[; ;main.c: 256: _ball.bDirection = 4;
+"256
+[e = . __ball 1 -> -> 4 `i `uc ]
+[; ;main.c: 257: break;
+"257
+[e $U 398  ]
+[; ;main.c: 258: case 2:
+"258
+[e :U 401 ]
+[; ;main.c: 259: _ball.bDirection = 4;
+"259
+[e = . __ball 1 -> -> 4 `i `uc ]
+[; ;main.c: 260: break;
+"260
+[e $U 398  ]
+[; ;main.c: 261: case 3:
+"261
+[e :U 402 ]
+[; ;main.c: 262: _ball.bDirection = 6;
+"262
+[e = . __ball 1 -> -> 6 `i `uc ]
+[; ;main.c: 263: break;
+"263
+[e $U 398  ]
+"264
+}
+[; ;main.c: 264: }
+[e $U 398  ]
+"253
+[e :U 399 ]
+[e [\ . __ball 1 , $ -> -> 1 `i `uc 400
+ , $ -> -> 2 `i `uc 401
+ , $ -> -> 3 `i `uc 402
+ 398 ]
+"264
+[e :U 398 ]
+[; ;main.c: 265: getNextPosition();
 "265
-[e ++ __timerCounter -> -> 1 `i `ui ]
-[; ;main.c: 266: writePong();
+[e ( _getNextPosition ..  ]
+[; ;main.c: 266: return;
 "266
-[e ( _writePong ..  ]
-[; ;main.c: 269: ADCON0bits.GODONE = 1;
+[e $UE 373  ]
+"267
+}
+[e :U 397 ]
 "269
-[e = . . _ADCON0bits 7 1 -> -> 1 `i `uc ]
+[e :U 396 ]
+[; ;main.c: 267: }
+[; ;main.c: 269: _p2.lives--;
+[e -- . __p2 2 -> -> 1 `i `uc ]
+[; ;main.c: 270: startPong();
+"270
+[e ( _startPong ..  ]
 "271
 }
-[e :U 403 ]
 [; ;main.c: 271: }
-[; ;main.c: 273: if(ADIE && ADIF)
+[e $U 403  ]
+"272
+[e :U 389 ]
+[; ;main.c: 272: else if(_nextPos[1] < 0 || _nextPos[1] > 7)
+[e $ ! || < -> *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux `i -> 0 `i > -> *U + &U __nextPos * -> -> -> 1 `i `ui `ux -> -> # *U &U __nextPos `ui `ux `i -> 7 `i 404  ]
+[; ;main.c: 273: {
 "273
-[e $ ! && _ADIE _ADIF 405  ]
-[; ;main.c: 274: {
+{
+[; ;main.c: 274: switch(_ball.bDirection)
 "274
+[e $U 406  ]
+[; ;main.c: 275: {
+"275
 {
-[; ;main.c: 276: ADIF = 0;
+[; ;main.c: 276: case 1:
 "276
-[e = _ADIF -> -> 0 `i `b ]
-"278
-[v _ADvalue `us ~T0 @X0 1 a ]
-[; ;main.c: 278: unsigned short ADvalue = ADRES;
-[e = _ADvalue _ADRES ]
-"279
-[v _value `uc ~T0 @X0 1 a ]
-[; ;main.c: 279: unsigned char value = (ADvalue / 85);
-[e = _value -> / -> _ADvalue `ui -> -> 85 `i `ui `uc ]
-[; ;main.c: 282: if(ADCON0bits.CHS == 12)
-"282
-[e $ ! == -> . . _ADCON0bits 1 2 `i -> 12 `i 406  ]
-[; ;main.c: 283: {
-"283
-{
-[; ;main.c: 284: ADCON0bits.CHS = 10;
-"284
-[e = . . _ADCON0bits 1 2 -> -> 10 `i `uc ]
-[; ;main.c: 285: _p1.paddlePos[0] = value;
-"285
-[e = *U + &U . __p1 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p1 0 `ui `ux _value ]
-[; ;main.c: 286: _p1.paddlePos[1] = value + 1;
-"286
-[e = *U + &U . __p1 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p1 0 `ui `ux -> + -> _value `i -> 1 `i `uc ]
-"287
-}
-[; ;main.c: 287: }
-[e $U 407  ]
-"288
-[e :U 406 ]
-[; ;main.c: 288: else
-[; ;main.c: 289: {
-"289
-{
-[; ;main.c: 290: ADCON0bits.CHS = 12;
-"290
-[e = . . _ADCON0bits 1 2 -> -> 12 `i `uc ]
-[; ;main.c: 291: _p2.paddlePos[0] = value;
-"291
-[e = *U + &U . __p2 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p2 0 `ui `ux _value ]
-[; ;main.c: 292: _p2.paddlePos[1] = value + 1;
-"292
-[e = *U + &U . __p2 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p2 0 `ui `ux -> + -> _value `i -> 1 `i `uc ]
-"293
-}
 [e :U 407 ]
-"294
+[; ;main.c: 277: _ball.bDirection = 3;
+"277
+[e = . __ball 1 -> -> 3 `i `uc ]
+[; ;main.c: 278: break;
+"278
+[e $U 405  ]
+[; ;main.c: 279: case 3:
+"279
+[e :U 408 ]
+[; ;main.c: 280: _ball.bDirection = 1;
+"280
+[e = . __ball 1 -> -> 1 `i `uc ]
+[; ;main.c: 281: break;
+"281
+[e $U 405  ]
+[; ;main.c: 282: case 4:
+"282
+[e :U 409 ]
+[; ;main.c: 283: _ball.bDirection = 6;
+"283
+[e = . __ball 1 -> -> 6 `i `uc ]
+[; ;main.c: 284: break;
+"284
+[e $U 405  ]
+[; ;main.c: 285: case 6:
+"285
+[e :U 410 ]
+[; ;main.c: 286: _ball.bDirection = 4;
+"286
+[e = . __ball 1 -> -> 4 `i `uc ]
+[; ;main.c: 287: break;
+"287
+[e $U 405  ]
+"288
 }
+[; ;main.c: 288: }
+[e $U 405  ]
+"274
+[e :U 406 ]
+[e [\ . __ball 1 , $ -> -> 1 `i `uc 407
+ , $ -> -> 3 `i `uc 408
+ , $ -> -> 4 `i `uc 409
+ , $ -> -> 6 `i `uc 410
+ 405 ]
+"288
 [e :U 405 ]
-[; ;main.c: 293: }
-[; ;main.c: 294: }
-[; ;main.c: 295: }
-"295
-[e :UE 402 ]
+[; ;main.c: 289: getNextPosition();
+"289
+[e ( _getNextPosition ..  ]
+[; ;main.c: 290: return;
+"290
+[e $UE 373  ]
+"291
 }
+[e :U 404 ]
+"292
+[e :U 403 ]
+[e :U 388 ]
+[; ;main.c: 291: }
+[; ;main.c: 292: }
+[e :UE 373 ]
+}
+[v F3448 `(v ~T0 @X0 1 tf ]
+"295
+[v _ISR `IF3448 ~T0 @X0 1 e ]
+"296
+{
+[; ;main.c: 295: void interrupt ISR(void)
+[; ;main.c: 296: {
+[e :U _ISR ]
+[f ]
+[; ;main.c: 297: if(TMR0IE && TMR0IF)
 "297
-[v _main `(v ~T0 @X0 1 ef ]
+[e $ ! && _TMR0IE _TMR0IF 412  ]
+[; ;main.c: 298: {
 "298
 {
-[; ;main.c: 297: void main(void)
-[; ;main.c: 298: {
+[; ;main.c: 300: TMR0IF = 0;
+"300
+[e = _TMR0IF -> -> 0 `i `b ]
+[; ;main.c: 302: if(_timerCounter > _speed)
+"302
+[e $ ! > __timerCounter __speed 413  ]
+[; ;main.c: 303: {
+"303
+{
+[; ;main.c: 304: checkNextPosition();
+"304
+[e ( _checkNextPosition ..  ]
+[; ;main.c: 305: _timerCounter = 0;
+"305
+[e = __timerCounter -> -> 0 `i `ui ]
+"306
+}
+[e :U 413 ]
+[; ;main.c: 306: }
+[; ;main.c: 308: _timerCounter++;
+"308
+[e ++ __timerCounter -> -> 1 `i `ui ]
+[; ;main.c: 309: writePong();
+"309
+[e ( _writePong ..  ]
+[; ;main.c: 312: ADCON0bits.GODONE = 1;
+"312
+[e = . . _ADCON0bits 7 1 -> -> 1 `i `uc ]
+"314
+}
+[e :U 412 ]
+[; ;main.c: 314: }
+[; ;main.c: 316: if(ADIE && ADIF)
+"316
+[e $ ! && _ADIE _ADIF 414  ]
+[; ;main.c: 317: {
+"317
+{
+[; ;main.c: 319: ADIF = 0;
+"319
+[e = _ADIF -> -> 0 `i `b ]
+"321
+[v _ADvalue `us ~T0 @X0 1 a ]
+[; ;main.c: 321: unsigned short ADvalue = ADRES;
+[e = _ADvalue _ADRES ]
+"322
+[v _value `uc ~T0 @X0 1 a ]
+[; ;main.c: 322: unsigned char value = (ADvalue / 85);
+[e = _value -> / -> _ADvalue `ui -> -> 85 `i `ui `uc ]
+[; ;main.c: 325: if(ADCON0bits.CHS == 12)
+"325
+[e $ ! == -> . . _ADCON0bits 1 2 `i -> 12 `i 415  ]
+[; ;main.c: 326: {
+"326
+{
+[; ;main.c: 327: ADCON0bits.CHS = 10;
+"327
+[e = . . _ADCON0bits 1 2 -> -> 10 `i `uc ]
+[; ;main.c: 330: _p1.paddlePosOld[0] = _p1.paddlePos[0];
+"330
+[e = *U + &U . __p1 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p1 0 `ui `ux *U + &U . __p1 1 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p1 1 `ui `ux ]
+[; ;main.c: 331: _p1.paddlePos[0] = value;
+"331
+[e = *U + &U . __p1 1 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p1 1 `ui `ux _value ]
+[; ;main.c: 333: _p1.paddlePosOld[1] = _p1.paddlePos[1];
+"333
+[e = *U + &U . __p1 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p1 0 `ui `ux *U + &U . __p1 1 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p1 1 `ui `ux ]
+[; ;main.c: 334: _p1.paddlePos[1] = value + 1;
+"334
+[e = *U + &U . __p1 1 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p1 1 `ui `ux -> + -> _value `i -> 1 `i `uc ]
+"335
+}
+[; ;main.c: 335: }
+[e $U 416  ]
+"336
+[e :U 415 ]
+[; ;main.c: 336: else
+[; ;main.c: 337: {
+"337
+{
+[; ;main.c: 338: ADCON0bits.CHS = 12;
+"338
+[e = . . _ADCON0bits 1 2 -> -> 12 `i `uc ]
+[; ;main.c: 341: _p2.paddlePosOld[0] = _p2.paddlePos[0];
+"341
+[e = *U + &U . __p2 0 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p2 0 `ui `ux *U + &U . __p2 1 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p2 1 `ui `ux ]
+[; ;main.c: 342: _p2.paddlePos[0] = value;
+"342
+[e = *U + &U . __p2 1 * -> -> -> 0 `i `ui `ux -> -> # *U &U . __p2 1 `ui `ux _value ]
+[; ;main.c: 344: _p2.paddlePosOld[1] = _p2.paddlePos[1];
+"344
+[e = *U + &U . __p2 0 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p2 0 `ui `ux *U + &U . __p2 1 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p2 1 `ui `ux ]
+[; ;main.c: 345: _p2.paddlePos[1] = value + 1;
+"345
+[e = *U + &U . __p2 1 * -> -> -> 1 `i `ui `ux -> -> # *U &U . __p2 1 `ui `ux -> + -> _value `i -> 1 `i `uc ]
+"346
+}
+[e :U 416 ]
+"347
+}
+[e :U 414 ]
+[; ;main.c: 346: }
+[; ;main.c: 347: }
+[; ;main.c: 348: }
+"348
+[e :UE 411 ]
+}
+"350
+[v _main `(v ~T0 @X0 1 ef ]
+"351
+{
+[; ;main.c: 350: void main(void)
+[; ;main.c: 351: {
 [e :U _main ]
 [f ]
-[; ;main.c: 299: initializeLED();
-"299
+[; ;main.c: 352: initializeLED();
+"352
 [e ( _initializeLED ..  ]
-[; ;main.c: 300: initializePONG();
-"300
-[e ( _initializePONG ..  ]
-[; ;main.c: 301: initialize();
-"301
+[; ;main.c: 353: initializePong();
+"353
+[e ( _initializePong ..  ]
+[; ;main.c: 354: initialize();
+"354
 [e ( _initialize ..  ]
-"304
+"357
 [v _HELLO_SYMBOL `Cuc ~T0 @X0 1 a ]
-"305
+"358
 [v _THREE_SYMBOL `Cuc ~T0 @X0 1 a ]
-"306
+"359
 [v _TWO_SYMBOL `Cuc ~T0 @X0 1 a ]
-"307
+"360
 [v _ONE_SYMBOL `Cuc ~T0 @X0 1 a ]
-"308
+"361
 [v _GO_SYMBOL `Cuc ~T0 @X0 1 a ]
-[; ;main.c: 304: const char HELLO_SYMBOL;
-[; ;main.c: 305: const char THREE_SYMBOL;
-[; ;main.c: 306: const char TWO_SYMBOL;
-[; ;main.c: 307: const char ONE_SYMBOL;
-[; ;main.c: 308: const char GO_SYMBOL;
-[; ;main.c: 314: while(1){ refresh(); };
-"314
-[e :U 410 ]
+[; ;main.c: 357: const char HELLO_SYMBOL;
+[; ;main.c: 358: const char THREE_SYMBOL;
+[; ;main.c: 359: const char TWO_SYMBOL;
+[; ;main.c: 360: const char ONE_SYMBOL;
+[; ;main.c: 361: const char GO_SYMBOL;
+[; ;main.c: 367: while(1){ refresh(); };
+"367
+[e :U 419 ]
 {
 [e ( _refresh ..  ]
 }
-[e :U 409 ]
-[e $U 410  ]
-[e :U 411 ]
-[; ;main.c: 315: }
-"315
-[e :UE 408 ]
+[e :U 418 ]
+[e $U 419  ]
+[e :U 420 ]
+[; ;main.c: 368: }
+"368
+[e :UE 417 ]
 }

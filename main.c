@@ -46,14 +46,22 @@ unsigned char _nextPos[2];
 unsigned int _speed = 200;
 unsigned int _timerCounter = 0;
 
-//Initializes structure values
-void initializePong(void)
+bit delaySeconds(int numberOfSeconds)
+{
+    for(int i = 0; i < numberOfSeconds * 100; i++)
+        __delay_ms(10);
+    
+    return 1;
+}
+
+//shows player lives and resets ball structure values
+void startPong(void)
 {    
     //Display player lives
     turnAllOff();
     drawSymbol(_p1.lives, 0);
     drawSymbol(_p2.lives, 8);
-    __delay_us(500);
+    while(!delaySeconds(2));
     turnAllOff();
     
     //random ball generation
@@ -63,6 +71,18 @@ void initializePong(void)
     
     _nextPos[0] = _ball.bPos[0];
     _nextPos[1] = _ball.bPos[1];
+}
+
+
+void initializePong(void)
+{
+    //main menu?
+    
+    //set player lives
+    _p1.lives = 2;
+    _p2.lives = 2;
+    
+    startPong();
 }
 
 void initialize()
@@ -205,7 +225,7 @@ void checkNextPosition(void)
         }
         //scored
         _p1.lives--;
-        initializePong();
+        startPong();
     }
     else if(_nextPos[0] == 15)
     {
@@ -247,7 +267,7 @@ void checkNextPosition(void)
         }
         //scored
         _p2.lives--;
-        initializePong();
+        startPong();
     }
     else if(_nextPos[1] < 0 || _nextPos[1] > 7)
     {
