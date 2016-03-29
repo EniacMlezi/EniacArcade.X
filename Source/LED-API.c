@@ -7,7 +7,7 @@
 
 #define COLUMNS 8 // define the amount of columns on the panel
 #define ROWS 16 // define the amount of rows on the panel
-#define PANELSIZE 8
+#define PANELSIZE 8 // define size of panels on the panel
 
 #define _XTAL_FREQ 32000000
 
@@ -46,9 +46,9 @@ void initializeLED() {
 
 void on(unsigned char column, unsigned char row) {
     //check out of bounds
-    if (row < 0 || row > ROWS)
+    if (row < 0 || row >= ROWS)
         return;
-    if (column < 0 || column > COLUMNS)
+    if (column < 0 || column >= COLUMNS)
         return;
     
     pixels[column][row] = 1;
@@ -83,6 +83,70 @@ void rowOff(unsigned char row)
     for(unsigned char i = 0; i < COLUMNS; i++)
     {
         pixels[i][row] = 0;
+    }
+}
+
+void drawSymbol(unsigned char chosenSymbol, unsigned char offSetX)
+{
+    char symbolOne[12][2] = {{2,5},{3,6},{4,7},{4,6},{4,5},{4,4},{4,3},{4,2},{4,1},{4,0},{3,0},{5,0}};
+    char symbolTwo[14][2] = {{2,5},{3,6},{4,6},{5,6},{6,5},{6,4},{5,3},{4,2},{3,1},{2,0},{3,0},{4,0},{5,0},{6,0}};
+    char symbolThree[12][2] = {{2,6},{3,7},{4,7},{5,6},{5,5},{4,4},{5,3},{5,2},{5,1},{4,0},{3,0},{2,1}};
+
+    char symbolPlay[34][2] = {
+    {1,1},{1,2},{1,3},{1,4},{1,5},{1,6},{2,6},{3,6},{3,5},{3,4},{2,4}, /*P*/
+    {5,6},{5,5},{5,4},{5,3},{5,2},{5,1},{6,1}, /*L*/
+    {8,1},{8,2},{8,3},{9,4},{10,4},{11,3},{11,2},{11,1}, /*A*/
+    {13,1},{13,2},{13,3},{13,4},{12,5},{11,6},{14,5},{14,6}}; /*Y*/
+
+    char symbolGo[34][2] = {
+    {6,6},{5,7},{4,7},{3,7},{2,6},{2,5},{2,4},{2,3},{2,2},{2,1},{3,0},{4,0},{5,0},{6,1},{5,2},{4,2}, /*G*/
+    {9,6},{9,5},{9,4},{9,3},{9,2},{9,1},{10,0},{11,0},{12,0},{13,1},{13,2},{13,4},{13,5},{13,6},{12,7},{11,7},{10,7}};/*O*/
+    
+    
+    switch(chosenSymbol)
+    {
+        //symbolOne
+        case 1:
+            //draw symbol in with given x position
+            for(int i = 0; i < 12; i++)
+            {
+                on(symbolOne[i + offSetX][0], symbolOne[i][1]);
+            }
+            break;
+        //symbolTwo
+        case 2:
+            //draw symbol in with given x position
+            for(int i = 0; i < 14; i++)
+            {
+                on(symbolTwo[i + offSetX][0], symbolTwo[i][1]);
+            }
+            break;
+        //symbolThree
+        case 3:          
+            //draw symbol in with given x position
+            for(int i = 0; i < 12; i++)
+            {
+                on(symbolThree[i + offSetX][0], symbolThree[i][1]);
+            }
+            break;
+        //symbolPlay
+        case 4:                
+            //draw symbol in with given x position
+            turnAllOff();
+            for(int i = 0; i < 34; i++)
+            {
+                on(symbolPlay[i + offSetX][0], symbolPlay[i][1]);
+            }
+            break;
+        //symbolGo
+        case 5:         
+            //draw symbol in with given x position
+            turnAllOff();
+            for(int i = 0; i < 34; i++)
+            {
+                on(symbolGo[i + offSetX][0], symbolGo[i][1]);
+            }
+            break;
     }
 }
 

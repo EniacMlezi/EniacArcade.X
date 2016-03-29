@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V1.37 build -260352376 
-                                                                                               Mon Mar 28 22:22:18 2016
+                                                                                               Tue Mar 29 11:12:48 2016
 
 Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110536
      1                           	processor	18F4520
@@ -40,7 +40,7 @@ Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110
     34                           	opt stack 0
     35                           
     36                           ;initializer for __speed
-    37  0005CC  003C               	dw	60
+    37  0005CC  00C8               	dw	200
     38  0000                     _LATA	set	3977
     39  0000                     _LATC	set	3979
     40  0000                     _LATD	set	3980
@@ -279,7 +279,7 @@ Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110
    273 ;;
    274 ;; *************** function _main *****************
    275 ;; Defined at:
-   276 ;;		line 294 in file "main.c"
+   276 ;;		line 297 in file "main.c"
    277 ;; Parameters:    Size  Location     Type
    278 ;;		None
    279 ;; Auto vars:     Size  Location     Type
@@ -319,15 +319,15 @@ Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110
    313  0005AC                     _main:
    314                           	opt stack 26
    315                           
-   316                           ;main.c: 296: initializeLED();
+   316                           ;main.c: 299: initializeLED();
    317                           
    318                           ;incstack = 0
    319  0005AC  EC43  F001         	call	_initializeLED	;wreg free
    320                           
-   321                           ;main.c: 297: initializePONG();
+   321                           ;main.c: 300: initializePONG();
    322  0005B0  ECCB  F002         	call	_initializePONG	;wreg free
    323                           
-   324                           ;main.c: 298: initialize();
+   324                           ;main.c: 301: initialize();
    325  0005B4  ECA2  F001         	call	_initialize	;wreg free
    326  0005B8                     l206:
    327  0005B8  EC0E  F001         	call	_refresh	;wreg free
@@ -700,7 +700,7 @@ Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110
    694                           
    695 ;; *************** function _initializePONG *****************
    696 ;; Defined at:
-   697 ;;		line 195 in file "main.c"
+   697 ;;		line 198 in file "main.c"
    698 ;; Parameters:    Size  Location     Type
    699 ;;		None
    700 ;; Auto vars:     Size  Location     Type
@@ -734,24 +734,24 @@ Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110
    728  000596                     _initializePONG:
    729                           	opt stack 27
    730                           
-   731                           ;main.c: 198: _ball.bDirection = 2;
+   731                           ;main.c: 201: _ball.bDirection = 3;
    732                           
    733                           ;incstack = 0
-   734  000596  0E02               	movlw	2
+   734  000596  0E03               	movlw	3
    735  000598  6E23               	movwf	__ball+2,c
    736                           
-   737                           ;main.c: 199: _ball.bPos[0] = 3;
-   738  00059A  0E03               	movlw	3
+   737                           ;main.c: 202: _ball.bPos[0] = 2;
+   738  00059A  0E02               	movlw	2
    739  00059C  6E21               	movwf	__ball,c
    740                           
-   741                           ;main.c: 200: _ball.bPos[1] = 5;
-   742  00059E  0E05               	movlw	5
+   741                           ;main.c: 203: _ball.bPos[1] = 4;
+   742  00059E  0E04               	movlw	4
    743  0005A0  6E22               	movwf	__ball+1,c
    744                           
-   745                           ;main.c: 202: _nextPos[0] = _ball.bPos[0];
+   745                           ;main.c: 205: _nextPos[0] = _ball.bPos[0];
    746  0005A2  C021  F02A         	movff	__ball,__nextPos
    747                           
-   748                           ;main.c: 203: _nextPos[1] = _ball.bPos[1];
+   748                           ;main.c: 206: _nextPos[1] = _ball.bPos[1];
    749  0005A6  C022  F02B         	movff	__ball+1,__nextPos+1
    750  0005AA  0012               	return		;funcret
    751  0005AC                     __end_of_initializePONG:
@@ -896,7 +896,7 @@ Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110
    890                           
    891 ;; *************** function _initialize *****************
    892 ;; Defined at:
-   893 ;;		line 206 in file "main.c"
+   893 ;;		line 209 in file "main.c"
    894 ;; Parameters:    Size  Location     Type
    895 ;;		None
    896 ;; Auto vars:     Size  Location     Type
@@ -930,104 +930,104 @@ Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110
    924  000344                     _initialize:
    925                           	opt stack 27
    926                           
-   927                           ;main.c: 209: OSCTUNEbits.PLLEN = 1;
+   927                           ;main.c: 212: OSCTUNEbits.PLLEN = 1;
    928                           
    929                           ;incstack = 0
    930  000344  8C9B               	bsf	3995,6,c	;volatile
    931                           
-   932                           ;main.c: 210: OSCTUNEbits.TUN = 011111;
+   932                           ;main.c: 213: OSCTUNEbits.TUN = 011111;
    933  000346  809B               	bsf	3995,0,c	;volatile
    934  000348  929B               	bcf	3995,1,c	;volatile
    935  00034A  949B               	bcf	3995,2,c	;volatile
    936  00034C  869B               	bsf	3995,3,c	;volatile
    937  00034E  989B               	bcf	3995,4,c	;volatile
    938                           
-   939                           ;main.c: 212: OSCCONbits.SCS = 00;
+   939                           ;main.c: 215: OSCCONbits.SCS = 00;
    940  000350  0EFC               	movlw	-4
    941  000352  16D3               	andwf	4051,f,c	;volatile
    942                           
-   943                           ;main.c: 213: OSCCONbits.IRCF = 111;
+   943                           ;main.c: 216: OSCCONbits.IRCF = 111;
    944  000354  88D3               	bsf	4051,4,c	;volatile
    945  000356  8AD3               	bsf	4051,5,c	;volatile
    946  000358  8CD3               	bsf	4051,6,c	;volatile
    947                           
-   948                           ;main.c: 215: PLLEN = 1;
+   948                           ;main.c: 218: PLLEN = 1;
    949  00035A  8C9B               	bsf	3995,6,c	;volatile
    950                           
-   951                           ;main.c: 218: GIE = 1;
+   951                           ;main.c: 221: GIE = 1;
    952  00035C  8EF2               	bsf	intcon,7,c	;volatile
    953                           
-   954                           ;main.c: 219: PEIE=1;
+   954                           ;main.c: 222: PEIE=1;
    955  00035E  8CF2               	bsf	intcon,6,c	;volatile
    956                           
-   957                           ;main.c: 222: TRISBbits.TRISB0 = 1;
+   957                           ;main.c: 225: TRISBbits.TRISB0 = 1;
    958  000360  8093               	bsf	3987,0,c	;volatile
    959                           
-   960                           ;main.c: 223: TRISBbits.TRISB1 = 1;
+   960                           ;main.c: 226: TRISBbits.TRISB1 = 1;
    961  000362  8293               	bsf	3987,1,c	;volatile
    962                           
-   963                           ;main.c: 224: ADCON2bits.ADFM = 1;
+   963                           ;main.c: 227: ADCON2bits.ADFM = 1;
    964  000364  8EC0               	bsf	4032,7,c	;volatile
    965                           
-   966                           ;main.c: 225: ADCON2bits.ADCS = 010;
+   966                           ;main.c: 228: ADCON2bits.ADCS = 010;
    967  000366  90C0               	bcf	4032,0,c	;volatile
    968  000368  92C0               	bcf	4032,1,c	;volatile
    969  00036A  94C0               	bcf	4032,2,c	;volatile
    970                           
-   971                           ;main.c: 226: ADCON2bits.ACQT = 111;
+   971                           ;main.c: 229: ADCON2bits.ACQT = 111;
    972  00036C  86C0               	bsf	4032,3,c	;volatile
    973  00036E  88C0               	bsf	4032,4,c	;volatile
    974  000370  8AC0               	bsf	4032,5,c	;volatile
    975                           
-   976                           ;main.c: 227: ADCON1bits.VCFG0 = 0;
+   976                           ;main.c: 230: ADCON1bits.VCFG0 = 0;
    977  000372  98C1               	bcf	4033,4,c	;volatile
    978                           
-   979                           ;main.c: 228: ADCON1bits.VCFG1 = 0;
+   979                           ;main.c: 231: ADCON1bits.VCFG1 = 0;
    980  000374  9AC1               	bcf	4033,5,c	;volatile
    981                           
-   982                           ;main.c: 229: ADCON1bits.PCFG = 0000;
+   982                           ;main.c: 232: ADCON1bits.PCFG = 0000;
    983  000376  90C1               	bcf	4033,0,c	;volatile
    984  000378  92C1               	bcf	4033,1,c	;volatile
    985  00037A  94C1               	bcf	4033,2,c	;volatile
    986  00037C  96C1               	bcf	4033,3,c	;volatile
    987                           
-   988                           ;main.c: 230: ADCON0bits.CHS = 1100;
+   988                           ;main.c: 233: ADCON0bits.CHS = 1100;
    989  00037E  50C2               	movf	4034,w,c	;volatile
    990  000380  0BC3               	andlw	-61
    991  000382  0930               	iorlw	48
    992  000384  6EC2               	movwf	4034,c	;volatile
    993                           
-   994                           ;main.c: 231: ADCON0bits.ADON = 1;
+   994                           ;main.c: 234: ADCON0bits.ADON = 1;
    995  000386  80C2               	bsf	4034,0,c	;volatile
    996                           
-   997                           ;main.c: 232: ADIE = 1;
+   997                           ;main.c: 235: ADIE = 1;
    998  000388  8C9D               	bsf	3997,6,c	;volatile
    999                           
-  1000                           ;main.c: 235: T0PS0 = 1;
+  1000                           ;main.c: 238: T0PS0 = 1;
   1001  00038A  80D5               	bsf	4053,0,c	;volatile
   1002                           
-  1003                           ;main.c: 236: T0PS1 = 0;
+  1003                           ;main.c: 239: T0PS1 = 0;
   1004  00038C  92D5               	bcf	4053,1,c	;volatile
   1005                           
-  1006                           ;main.c: 237: T0PS2 = 1;
+  1006                           ;main.c: 240: T0PS2 = 1;
   1007  00038E  84D5               	bsf	4053,2,c	;volatile
   1008                           
-  1009                           ;main.c: 238: PSA = 0;
+  1009                           ;main.c: 241: PSA = 0;
   1010  000390  96D5               	bcf	4053,3,c	;volatile
   1011                           
-  1012                           ;main.c: 239: T0CS = 0;
+  1012                           ;main.c: 242: T0CS = 0;
   1013  000392  9AD5               	bcf	4053,5,c	;volatile
   1014                           
-  1015                           ;main.c: 240: T08BIT = 1;
+  1015                           ;main.c: 243: T08BIT = 1;
   1016  000394  8CD5               	bsf	4053,6,c	;volatile
   1017                           
-  1018                           ;main.c: 241: TMR0IE = 1;
+  1018                           ;main.c: 244: TMR0IE = 1;
   1019  000396  8AF2               	bsf	intcon,5,c	;volatile
   1020                           
-  1021                           ;main.c: 242: TMR0IF = 0;
+  1021                           ;main.c: 245: TMR0IF = 0;
   1022  000398  94F2               	bcf	intcon,2,c	;volatile
   1023                           
-  1024                           ;main.c: 244: TMR0ON = 1;
+  1024                           ;main.c: 247: TMR0ON = 1;
   1025  00039A  8ED5               	bsf	4053,7,c	;volatile
   1026  00039C  0012               	return		;funcret
   1027  00039E                     __end_of_initialize:
@@ -1049,7 +1049,7 @@ Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110
   1043                           
   1044 ;; *************** function _ISR *****************
   1045 ;; Defined at:
-  1046 ;;		line 249 in file "main.c"
+  1046 ;;		line 252 in file "main.c"
   1047 ;; Parameters:    Size  Location     Type
   1048 ;;		None
   1049 ;; Auto vars:     Size  Location     Type
@@ -1127,61 +1127,61 @@ Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110
   1121  000158  CFF8 F014          	movff	tblptru,??_ISR+12
   1122  00015C  CFF5 F015          	movff	tablat,??_ISR+13
   1123                           
-  1124                           ;main.c: 251: if(TMR0IE && TMR0IF)
+  1124                           ;main.c: 254: if(TMR0IE && TMR0IF)
   1125  000160  BAF2               	btfsc	intcon,5,c	;volatile
   1126  000162  A4F2               	btfss	intcon,2,c	;volatile
-  1127  000164  D012               	goto	i2l1233
+  1127  000164  D012               	goto	i2l1239
   1128                           
-  1129                           ;main.c: 252: {
-  1130                           ;main.c: 254: TMR0IF = 0;
+  1129                           ;main.c: 255: {
+  1130                           ;main.c: 257: TMR0IF = 0;
   1131  000166  94F2               	bcf	intcon,2,c	;volatile
   1132                           
-  1133                           ;main.c: 256: if(_timerCounter > _speed)
+  1133                           ;main.c: 259: if(_timerCounter > _speed)
   1134  000168  502C               	movf	__timerCounter,w,c
   1135  00016A  5C2E               	subwf	__speed,w,c
   1136  00016C  502D               	movf	__timerCounter+1,w,c
   1137  00016E  582F               	subwfb	__speed+1,w,c
   1138  000170  B0D8               	btfsc	status,0,c
-  1139  000172  D006               	goto	i2l1227
+  1139  000172  D006               	goto	i2l1233
   1140                           
-  1141                           ;main.c: 257: {
-  1142                           ;main.c: 258: checkNextPosition();
+  1141                           ;main.c: 260: {
+  1142                           ;main.c: 261: checkNextPosition();
   1143  000174  EC0D  F000         	call	_checkNextPosition	;wreg free
   1144                           
-  1145                           ;main.c: 259: _timerCounter = 0;
+  1145                           ;main.c: 262: _timerCounter = 0;
   1146  000178  0E00               	movlw	0
   1147  00017A  6E2D               	movwf	__timerCounter+1,c
   1148  00017C  0E00               	movlw	0
   1149  00017E  6E2C               	movwf	__timerCounter,c
-  1150  000180                     i2l1227:
+  1150  000180                     i2l1233:
   1151                           
-  1152                           ;main.c: 260: }
-  1153                           ;main.c: 262: _timerCounter++;
+  1152                           ;main.c: 263: }
+  1153                           ;main.c: 265: _timerCounter++;
   1154  000180  4A2C               	infsnz	__timerCounter,f,c
   1155  000182  2A2D               	incf	__timerCounter+1,f,c
   1156                           
-  1157                           ;main.c: 263: writePong();
+  1157                           ;main.c: 266: writePong();
   1158  000184  ECCF  F001         	call	_writePong	;wreg free
   1159                           
-  1160                           ;main.c: 266: ADCON0bits.GODONE = 1;
+  1160                           ;main.c: 269: ADCON0bits.GODONE = 1;
   1161  000188  82C2               	bsf	4034,1,c	;volatile
-  1162  00018A                     i2l1233:
+  1162  00018A                     i2l1239:
   1163                           
-  1164                           ;main.c: 268: }
-  1165                           ;main.c: 270: if(ADIE && ADIF)
+  1164                           ;main.c: 271: }
+  1165                           ;main.c: 273: if(ADIE && ADIF)
   1166  00018A  BC9D               	btfsc	3997,6,c	;volatile
   1167  00018C  AC9E               	btfss	3998,6,c	;volatile
   1168  00018E  D028               	goto	i2l203
   1169                           
-  1170                           ;main.c: 271: {
-  1171                           ;main.c: 273: ADIF = 0;
+  1170                           ;main.c: 274: {
+  1171                           ;main.c: 276: ADIF = 0;
   1172  000190  9C9E               	bcf	3998,6,c	;volatile
   1173                           
-  1174                           ;main.c: 275: unsigned short ADvalue = ADRES;
+  1174                           ;main.c: 278: unsigned short ADvalue = ADRES;
   1175  000192  CFC3 F016          	movff	4035,ISR@ADvalue	;volatile
   1176  000196  CFC4 F017          	movff	4036,ISR@ADvalue+1	;volatile
   1177                           
-  1178                           ;main.c: 276: unsigned char value = (ADvalue / 85);
+  1178                           ;main.c: 279: unsigned char value = (ADvalue / 85);
   1179  00019A  C016  F001         	movff	ISR@ADvalue,___lwdiv@dividend
   1180  00019E  C017  F002         	movff	ISR@ADvalue+1,___lwdiv@dividend+1
   1181  0001A2  0E00               	movlw	0
@@ -1192,44 +1192,44 @@ Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110
   1186  0001AE  5001               	movf	?___lwdiv,w,c
   1187  0001B0  6E18               	movwf	ISR@value,c
   1188                           
-  1189                           ;main.c: 279: if(ADCON0bits.CHS == 12)
+  1189                           ;main.c: 282: if(ADCON0bits.CHS == 12)
   1190  0001B2  30C2               	rrcf	4034,w,c	;volatile
   1191  0001B4  32E8               	rrcf	wreg,f,c
   1192  0001B6  0B0F               	andlw	15
   1193  0001B8  0A0C               	xorlw	12
   1194  0001BA  A4D8               	btfss	status,2,c
-  1195  0001BC  D009               	goto	i2l1249
+  1195  0001BC  D009               	goto	i2l1255
   1196                           
-  1197                           ;main.c: 280: {
-  1198                           ;main.c: 281: ADCON0bits.CHS = 10;
+  1197                           ;main.c: 283: {
+  1198                           ;main.c: 284: ADCON0bits.CHS = 10;
   1199  0001BE  50C2               	movf	4034,w,c	;volatile
   1200  0001C0  0BC3               	andlw	-61
   1201  0001C2  0928               	iorlw	40
   1202  0001C4  6EC2               	movwf	4034,c	;volatile
   1203                           
-  1204                           ;main.c: 282: _p1.paddlePos[0] = value;
+  1204                           ;main.c: 285: _p1.paddlePos[0] = value;
   1205  0001C6  C018  F024         	movff	ISR@value,__p1
   1206                           
-  1207                           ;main.c: 283: _p1.paddlePos[1] = value + 1;
+  1207                           ;main.c: 286: _p1.paddlePos[1] = value + 1;
   1208  0001CA  2818               	incf	ISR@value,w,c
   1209  0001CC  6E25               	movwf	__p1+1,c
   1210                           
-  1211                           ;main.c: 284: }
+  1211                           ;main.c: 287: }
   1212  0001CE  D008               	goto	i2l203
-  1213  0001D0                     i2l1249:
+  1213  0001D0                     i2l1255:
   1214                           
-  1215                           ;main.c: 285: else
-  1216                           ;main.c: 286: {
-  1217                           ;main.c: 287: ADCON0bits.CHS = 12;
+  1215                           ;main.c: 288: else
+  1216                           ;main.c: 289: {
+  1217                           ;main.c: 290: ADCON0bits.CHS = 12;
   1218  0001D0  50C2               	movf	4034,w,c	;volatile
   1219  0001D2  0BC3               	andlw	-61
   1220  0001D4  0930               	iorlw	48
   1221  0001D6  6EC2               	movwf	4034,c	;volatile
   1222                           
-  1223                           ;main.c: 288: _p2.paddlePos[0] = value;
+  1223                           ;main.c: 291: _p2.paddlePos[0] = value;
   1224  0001D8  C018  F027         	movff	ISR@value,__p2
   1225                           
-  1226                           ;main.c: 289: _p2.paddlePos[1] = value + 1;
+  1226                           ;main.c: 292: _p2.paddlePos[1] = value + 1;
   1227  0001DC  2818               	incf	ISR@value,w,c
   1228  0001DE  6E28               	movwf	__p2+1,c
   1229  0001E0                     i2l203:
@@ -1530,16 +1530,16 @@ Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110
   1524                           ;LED-API.c: 49: if (row < 0 || row > 16)
   1525  000504  0E10               	movlw	16
   1526  000506  6401               	cpfsgt	on@row,c
-  1527  000508  D001               	goto	i2l1171
+  1527  000508  D001               	goto	i2l1177
   1528  00050A  0012               	return	
-  1529  00050C                     i2l1171:
+  1529  00050C                     i2l1177:
   1530                           
   1531                           ;LED-API.c: 51: if (column < 0 || column > 8)
   1532  00050C  0E08               	movlw	8
   1533  00050E  6404               	cpfsgt	on@column,c
-  1534  000510  D001               	goto	i2l1175
+  1534  000510  D001               	goto	i2l1181
   1535  000512  0012               	return	
-  1536  000514                     i2l1175:
+  1536  000514                     i2l1181:
   1537                           
   1538                           ;LED-API.c: 54: pixels[column][row] = 1;
   1539  000514  5004               	movf	on@column,w,c
@@ -1629,16 +1629,16 @@ Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110
   1623                           ;LED-API.c: 70: if (row < 0 || row > 16)
   1624  000540  0E10               	movlw	16
   1625  000542  6401               	cpfsgt	off@row,c
-  1626  000544  D001               	goto	i2l1181
+  1626  000544  D001               	goto	i2l1187
   1627  000546  0012               	return	
-  1628  000548                     i2l1181:
+  1628  000548                     i2l1187:
   1629                           
   1630                           ;LED-API.c: 72: if (column < 0 || column > 8)
   1631  000548  0E08               	movlw	8
   1632  00054A  6404               	cpfsgt	off@column,c
-  1633  00054C  D001               	goto	i2l1185
+  1633  00054C  D001               	goto	i2l1191
   1634  00054E  0012               	return	
-  1635  000550                     i2l1185:
+  1635  000550                     i2l1191:
   1636                           
   1637                           ;LED-API.c: 75: pixels[column][row] = 0;
   1638  000550  5004               	movf	off@column,w,c
@@ -1726,10 +1726,10 @@ Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110
   1720                           ;incstack = 0
   1721  00001A  EC73  F001         	call	_getNextPosition	;wreg free
   1722                           
-  1723                           ;main.c: 99: if(_nextPos[0] == 0)
-  1724  00001E  502A               	movf	__nextPos,w,c
+  1723                           ;main.c: 99: if(_nextPos[1] == 0)
+  1724  00001E  502B               	movf	__nextPos+1,w,c
   1725  000020  A4D8               	btfss	status,2,c
-  1726  000022  D032               	goto	i2l961
+  1726  000022  D032               	goto	i2l963
   1727                           
   1728                           ;main.c: 100: {
   1729                           ;main.c: 101: if(_p1.paddlePos[0] == _nextPos[1])
@@ -1789,7 +1789,7 @@ Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110
   1783  000058  1825               	xorwf	__p1+1,w,c
   1784  00005A  A4D8               	btfss	status,2,c
   1785  00005C  0012               	return	
-  1786  00005E  D007               	goto	i2l957
+  1786  00005E  D007               	goto	i2l959
   1787  000060                     i2l951:
   1788                           
   1789                           ;main.c: 125: _ball.bDirection = 2;
@@ -1807,558 +1807,564 @@ Microchip Technology Omniscient Code Generator v1.37 (Free mode) build 201603110
   1801  00006A                     L4:
   1802  00006A  6E23               	movwf	__ball+2,c
   1803                           
-  1804                           ;main.c: 132: }
-  1805  00006C  D00A               	goto	i2l959
-  1806  00006E                     i2l957:
-  1807  00006E  5023               	movf	__ball+2,w,c
-  1808                           
-  1809                           ; Switch size 1, requested type "space"
-  1810                           ; Number of cases is 3, Range of values is 4 to 6
-  1811                           ; switch strategies available:
-  1812                           ; Name         Instructions Cycles
-  1813                           ; simple_byte           10     6 (average)
-  1814                           ;	Chosen strategy is simple_byte
-  1815  000070  0A04               	xorlw	4	; case 4
-  1816  000072  B4D8               	btfsc	status,2,c
-  1817  000074  D7F5               	goto	i2l951
-  1818  000076  0A01               	xorlw	1	; case 5
-  1819  000078  B4D8               	btfsc	status,2,c
-  1820  00007A  D7F4               	goto	i2l953
-  1821  00007C  0A03               	xorlw	3	; case 6
-  1822  00007E  B4D8               	btfsc	status,2,c
-  1823  000080  D7F3               	goto	i2l955
-  1824  000082                     i2l959:
-  1825                           
-  1826                           ;main.c: 133: getNextPosition();
-  1827  000082  EC73  F001         	call	_getNextPosition	;wreg free
-  1828                           
-  1829                           ;main.c: 134: }
-  1830                           ;main.c: 136: }
-  1831  000086  0012               	return	
-  1832  000088                     i2l961:
-  1833                           
-  1834                           ;main.c: 137: else if(_nextPos[0] == 15)
-  1835  000088  0E0F               	movlw	15
-  1836  00008A  182A               	xorwf	__nextPos,w,c
-  1837  00008C  A4D8               	btfss	status,2,c
-  1838  00008E  D032               	goto	i2l987
-  1839                           
-  1840                           ;main.c: 138: {
-  1841                           ;main.c: 139: if(_p2.paddlePos[0] == _nextPos[1])
-  1842  000090  5027               	movf	__p2,w,c
-  1843  000092  182B               	xorwf	__nextPos+1,w,c
-  1844  000094  B4D8               	btfsc	status,2,c
-  1845  000096  D00A               	goto	i2l973
-  1846  000098  D014               	goto	i2l975
-  1847  00009A                     i2l967:
-  1848                           
-  1849                           ;main.c: 145: _ball.bDirection = 5;
-  1850  00009A  0E05               	movlw	5
-  1851  00009C  6E23               	movwf	__ball+2,c
-  1852                           
-  1853                           ;main.c: 146: break;
-  1854  00009E  0012               	return	
-  1855  0000A0                     i2l969:
-  1856                           
-  1857                           ;main.c: 148: _ball.bDirection = 6;
-  1858  0000A0  0E06               	movlw	6
-  1859  0000A2  6E23               	movwf	__ball+2,c
-  1860                           
-  1861                           ;main.c: 149: break;
-  1862  0000A4  0012               	return	
-  1863  0000A6                     i2l971:
-  1864                           
-  1865                           ;main.c: 151: _ball.bDirection = 4;
-  1866  0000A6  0E04               	movlw	4
-  1867  0000A8  6E23               	movwf	__ball+2,c
-  1868                           
-  1869                           ;main.c: 152: }
-  1870  0000AA  0012               	return	
-  1871  0000AC                     i2l973:
-  1872  0000AC  5023               	movf	__ball+2,w,c
-  1873                           
-  1874                           ; Switch size 1, requested type "space"
-  1875                           ; Number of cases is 3, Range of values is 1 to 3
-  1876                           ; switch strategies available:
-  1877                           ; Name         Instructions Cycles
-  1878                           ; simple_byte           10     6 (average)
-  1879                           ;	Chosen strategy is simple_byte
-  1880  0000AE  0A01               	xorlw	1	; case 1
-  1881  0000B0  B4D8               	btfsc	status,2,c
-  1882  0000B2  D7F3               	goto	i2l967
-  1883  0000B4  0A03               	xorlw	3	; case 2
-  1884  0000B6  B4D8               	btfsc	status,2,c
-  1885  0000B8  D7F3               	goto	i2l969
-  1886  0000BA  0A01               	xorlw	1	; case 3
-  1887  0000BC  A4D8               	btfss	status,2,c
-  1888                           
-  1889                           ;main.c: 153: }
-  1890  0000BE  0012               	return	
-  1891  0000C0  D7F2               	goto	i2l971
-  1892  0000C2                     i2l975:
-  1893                           
-  1894                           ;main.c: 154: else if( _p2.paddlePos[1] == _nextPos[1])
-  1895  0000C2  502B               	movf	__nextPos+1,w,c
-  1896  0000C4  1828               	xorwf	__p2+1,w,c
-  1897  0000C6  A4D8               	btfss	status,2,c
-  1898  0000C8  0012               	return	
-  1899  0000CA  D009               	goto	i2l985
-  1900  0000CC                     i2l979:
-  1901                           
-  1902                           ;main.c: 161: _ball.bDirection = 6;
-  1903  0000CC  0E06               	movlw	6
-  1904  0000CE  6E23               	movwf	__ball+2,c
+  1804                           ;main.c: 133: }
+  1805                           
+  1806                           ;main.c: 132: break;
+  1807  00006C  D00A               	goto	i2l961
+  1808  00006E                     i2l959:
+  1809  00006E  5023               	movf	__ball+2,w,c
+  1810                           
+  1811                           ; Switch size 1, requested type "space"
+  1812                           ; Number of cases is 3, Range of values is 4 to 6
+  1813                           ; switch strategies available:
+  1814                           ; Name         Instructions Cycles
+  1815                           ; simple_byte           10     6 (average)
+  1816                           ;	Chosen strategy is simple_byte
+  1817  000070  0A04               	xorlw	4	; case 4
+  1818  000072  B4D8               	btfsc	status,2,c
+  1819  000074  D7F5               	goto	i2l951
+  1820  000076  0A01               	xorlw	1	; case 5
+  1821  000078  B4D8               	btfsc	status,2,c
+  1822  00007A  D7F4               	goto	i2l953
+  1823  00007C  0A03               	xorlw	3	; case 6
+  1824  00007E  B4D8               	btfsc	status,2,c
+  1825  000080  D7F3               	goto	i2l955
+  1826  000082                     i2l961:
+  1827                           
+  1828                           ;main.c: 134: getNextPosition();
+  1829  000082  EC73  F001         	call	_getNextPosition	;wreg free
+  1830                           
+  1831                           ;main.c: 135: }
+  1832                           ;main.c: 137: }
+  1833  000086  0012               	return	
+  1834  000088                     i2l963:
+  1835                           
+  1836                           ;main.c: 138: else if(_nextPos[1] == 15)
+  1837  000088  0E0F               	movlw	15
+  1838  00008A  182B               	xorwf	__nextPos+1,w,c
+  1839  00008C  A4D8               	btfss	status,2,c
+  1840  00008E  D032               	goto	i2l993
+  1841                           
+  1842                           ;main.c: 139: {
+  1843                           ;main.c: 140: if(_p2.paddlePos[0] == _nextPos[1])
+  1844  000090  5027               	movf	__p2,w,c
+  1845  000092  182B               	xorwf	__nextPos+1,w,c
+  1846  000094  B4D8               	btfsc	status,2,c
+  1847  000096  D00A               	goto	i2l977
+  1848  000098  D014               	goto	i2l979
+  1849  00009A                     i2l969:
+  1850                           
+  1851                           ;main.c: 146: _ball.bDirection = 5;
+  1852  00009A  0E05               	movlw	5
+  1853  00009C  6E23               	movwf	__ball+2,c
+  1854                           
+  1855                           ;main.c: 147: break;
+  1856  00009E  0012               	return	
+  1857  0000A0                     i2l971:
+  1858                           
+  1859                           ;main.c: 149: _ball.bDirection = 6;
+  1860  0000A0  0E06               	movlw	6
+  1861  0000A2  6E23               	movwf	__ball+2,c
+  1862                           
+  1863                           ;main.c: 150: break;
+  1864  0000A4  0012               	return	
+  1865  0000A6                     i2l973:
+  1866                           
+  1867                           ;main.c: 152: _ball.bDirection = 4;
+  1868  0000A6  0E04               	movlw	4
+  1869  0000A8  6E23               	movwf	__ball+2,c
+  1870                           
+  1871                           ;main.c: 154: }
+  1872                           
+  1873                           ;main.c: 153: break;
+  1874  0000AA  0012               	return	
+  1875  0000AC                     i2l977:
+  1876  0000AC  5023               	movf	__ball+2,w,c
+  1877                           
+  1878                           ; Switch size 1, requested type "space"
+  1879                           ; Number of cases is 3, Range of values is 1 to 3
+  1880                           ; switch strategies available:
+  1881                           ; Name         Instructions Cycles
+  1882                           ; simple_byte           10     6 (average)
+  1883                           ;	Chosen strategy is simple_byte
+  1884  0000AE  0A01               	xorlw	1	; case 1
+  1885  0000B0  B4D8               	btfsc	status,2,c
+  1886  0000B2  D7F3               	goto	i2l969
+  1887  0000B4  0A03               	xorlw	3	; case 2
+  1888  0000B6  B4D8               	btfsc	status,2,c
+  1889  0000B8  D7F3               	goto	i2l971
+  1890  0000BA  0A01               	xorlw	1	; case 3
+  1891  0000BC  A4D8               	btfss	status,2,c
+  1892                           
+  1893                           ;main.c: 155: }
+  1894  0000BE  0012               	return	
+  1895  0000C0  D7F2               	goto	i2l973
+  1896  0000C2                     i2l979:
+  1897                           
+  1898                           ;main.c: 156: else if( _p2.paddlePos[1] == _nextPos[1])
+  1899  0000C2  502B               	movf	__nextPos+1,w,c
+  1900  0000C4  1828               	xorwf	__p2+1,w,c
+  1901  0000C6  A4D8               	btfss	status,2,c
+  1902  0000C8  0012               	return	
+  1903  0000CA  D009               	goto	i2l991
+  1904  0000CC                     i2l983:
   1905                           
-  1906                           ;main.c: 162: break;
-  1907  0000D0  0012               	return	
-  1908  0000D2                     i2l981:
+  1906                           ;main.c: 163: _ball.bDirection = 6;
+  1907  0000CC  0E06               	movlw	6
+  1908  0000CE  6E23               	movwf	__ball+2,c
   1909                           
-  1910                           ;main.c: 164: _ball.bDirection = 4;
-  1911  0000D2  0E04               	movlw	4
-  1912  0000D4  6E23               	movwf	__ball+2,c
+  1910                           ;main.c: 164: break;
+  1911  0000D0  0012               	return	
+  1912  0000D2                     i2l985:
   1913                           
-  1914                           ;main.c: 165: break;
-  1915  0000D6  0012               	return	
-  1916  0000D8                     i2l983:
+  1914                           ;main.c: 166: _ball.bDirection = 4;
+  1915  0000D2  0E04               	movlw	4
+  1916  0000D4  6E23               	movwf	__ball+2,c
   1917                           
-  1918                           ;main.c: 167: _ball.bDirection = 5;
-  1919  0000D8  0E05               	movlw	5
-  1920  0000DA  6E23               	movwf	__ball+2,c
+  1918                           ;main.c: 167: break;
+  1919  0000D6  0012               	return	
+  1920  0000D8                     i2l987:
   1921                           
-  1922                           ;main.c: 168: }
-  1923  0000DC  0012               	return	
-  1924  0000DE                     i2l985:
-  1925  0000DE  5023               	movf	__ball+2,w,c
-  1926                           
-  1927                           ; Switch size 1, requested type "space"
-  1928                           ; Number of cases is 3, Range of values is 1 to 3
-  1929                           ; switch strategies available:
-  1930                           ; Name         Instructions Cycles
-  1931                           ; simple_byte           10     6 (average)
-  1932                           ;	Chosen strategy is simple_byte
-  1933  0000E0  0A01               	xorlw	1	; case 1
-  1934  0000E2  B4D8               	btfsc	status,2,c
-  1935  0000E4  D7F3               	goto	i2l979
-  1936  0000E6  0A03               	xorlw	3	; case 2
-  1937  0000E8  B4D8               	btfsc	status,2,c
-  1938  0000EA  D7F3               	goto	i2l981
-  1939  0000EC  0A01               	xorlw	1	; case 3
-  1940  0000EE  A4D8               	btfss	status,2,c
-  1941                           
-  1942                           ;main.c: 169: }
-  1943                           ;main.c: 172: }
-  1944  0000F0  0012               	return	
-  1945  0000F2  D7F2               	goto	i2l983
-  1946  0000F4                     i2l987:
+  1922                           ;main.c: 169: _ball.bDirection = 5;
+  1923  0000D8  0E05               	movlw	5
+  1924  0000DA  6E23               	movwf	__ball+2,c
+  1925                           
+  1926                           ;main.c: 171: }
+  1927                           
+  1928                           ;main.c: 170: break;
+  1929  0000DC  0012               	return	
+  1930  0000DE                     i2l991:
+  1931  0000DE  5023               	movf	__ball+2,w,c
+  1932                           
+  1933                           ; Switch size 1, requested type "space"
+  1934                           ; Number of cases is 3, Range of values is 1 to 3
+  1935                           ; switch strategies available:
+  1936                           ; Name         Instructions Cycles
+  1937                           ; simple_byte           10     6 (average)
+  1938                           ;	Chosen strategy is simple_byte
+  1939  0000E0  0A01               	xorlw	1	; case 1
+  1940  0000E2  B4D8               	btfsc	status,2,c
+  1941  0000E4  D7F3               	goto	i2l983
+  1942  0000E6  0A03               	xorlw	3	; case 2
+  1943  0000E8  B4D8               	btfsc	status,2,c
+  1944  0000EA  D7F3               	goto	i2l985
+  1945  0000EC  0A01               	xorlw	1	; case 3
+  1946  0000EE  A4D8               	btfss	status,2,c
   1947                           
-  1948                           ;main.c: 173: else if(_nextPos[0] < 0 || _nextPos[0] > 7)
-  1949  0000F4  0E07               	movlw	7
-  1950  0000F6  642A               	cpfsgt	__nextPos,c
-  1951  0000F8  0012               	return	
-  1952  0000FA  D009               	goto	i2l1001
-  1953  0000FC                     i2l991:
-  1954                           
-  1955                           ;main.c: 178: _ball.bDirection = 3;
-  1956  0000FC  0E03               	movlw	3
-  1957  0000FE  D005               	goto	L7
-  1958  000100                     i2l993:
-  1959                           
-  1960                           ;main.c: 181: _ball.bDirection = 1;
-  1961  000100  0E01               	movlw	1
-  1962  000102  D003               	goto	L7
-  1963  000104                     i2l995:
-  1964                           
-  1965                           ;main.c: 184: _ball.bDirection = 6;
-  1966  000104  0E06               	movlw	6
-  1967  000106  D001               	goto	L7
-  1968  000108                     i2l997:
-  1969                           
-  1970                           ;main.c: 187: _ball.bDirection = 4;
-  1971  000108  0E04               	movlw	4
-  1972  00010A                     L7:
-  1973  00010A  6E23               	movwf	__ball+2,c
-  1974                           
-  1975                           ;main.c: 189: }
-  1976                           
-  1977                           ;main.c: 188: break;
-  1978  00010C  D00D               	goto	i2l1003
-  1979  00010E                     i2l1001:
-  1980  00010E  5023               	movf	__ball+2,w,c
-  1981                           
-  1982                           ; Switch size 1, requested type "space"
-  1983                           ; Number of cases is 4, Range of values is 1 to 6
-  1984                           ; switch strategies available:
-  1985                           ; Name         Instructions Cycles
-  1986                           ; simple_byte           13     7 (average)
-  1987                           ;	Chosen strategy is simple_byte
-  1988  000110  0A01               	xorlw	1	; case 1
-  1989  000112  B4D8               	btfsc	status,2,c
-  1990  000114  D7F3               	goto	i2l991
-  1991  000116  0A02               	xorlw	2	; case 3
-  1992  000118  B4D8               	btfsc	status,2,c
-  1993  00011A  D7F2               	goto	i2l993
-  1994  00011C  0A07               	xorlw	7	; case 4
-  1995  00011E  B4D8               	btfsc	status,2,c
-  1996  000120  D7F1               	goto	i2l995
-  1997  000122  0A02               	xorlw	2	; case 6
-  1998  000124  B4D8               	btfsc	status,2,c
-  1999  000126  D7F0               	goto	i2l997
-  2000  000128                     i2l1003:
-  2001                           
-  2002                           ;main.c: 190: getNextPosition();
-  2003  000128  EC73  F001         	call	_getNextPosition	;wreg free
-  2004  00012C  0012               	return	
-  2005  00012E                     __end_of_checkNextPosition:
-  2006                           	opt stack 0
-  2007                           pclatu	equ	0xFFB
-  2008                           pclath	equ	0xFFA
-  2009                           tblptru	equ	0xFF8
-  2010                           tblptrh	equ	0xFF7
-  2011                           tblptrl	equ	0xFF6
-  2012                           tablat	equ	0xFF5
-  2013                           prodh	equ	0xFF4
-  2014                           prodl	equ	0xFF3
-  2015                           intcon	equ	0xFF2
-  2016                           postinc0	equ	0xFEE
-  2017                           fsr0h	equ	0xFEA
-  2018                           fsr0l	equ	0xFE9
-  2019                           wreg	equ	0xFE8
-  2020                           fsr1h	equ	0xFE2
-  2021                           fsr1l	equ	0xFE1
-  2022                           indf2	equ	0xFDF
-  2023                           postinc2	equ	0xFDE
-  2024                           fsr2h	equ	0xFDA
-  2025                           fsr2l	equ	0xFD9
-  2026                           status	equ	0xFD8
-  2027                           
-  2028 ;; *************** function _getNextPosition *****************
-  2029 ;; Defined at:
-  2030 ;;		line 67 in file "main.c"
-  2031 ;; Parameters:    Size  Location     Type
-  2032 ;;		None
-  2033 ;; Auto vars:     Size  Location     Type
-  2034 ;;		None
-  2035 ;; Return value:  Size  Location     Type
-  2036 ;;                  1    wreg      void 
-  2037 ;; Registers used:
-  2038 ;;		wreg, status,2, status,0
-  2039 ;; Tracked objects:
-  2040 ;;		On entry : 0/0
-  2041 ;;		On exit  : 0/0
-  2042 ;;		Unchanged: 0/0
-  2043 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
-  2044 ;;      Params:         0       0       0       0       0       0       0
-  2045 ;;      Locals:         0       0       0       0       0       0       0
-  2046 ;;      Temps:          0       0       0       0       0       0       0
-  2047 ;;      Totals:         0       0       0       0       0       0       0
-  2048 ;;Total ram usage:        0 bytes
-  2049 ;; Hardware stack levels used:    1
-  2050 ;; This function calls:
-  2051 ;;		Nothing
-  2052 ;; This function is called by:
-  2053 ;;		_checkNextPosition
-  2054 ;; This function uses a non-reentrant model
-  2055 ;;
-  2056                           
-  2057                           	psect	text14
-  2058  0002E6                     __ptext14:
-  2059                           	opt stack 0
-  2060  0002E6                     _getNextPosition:
-  2061                           	opt stack 26
+  1948                           ;main.c: 172: }
+  1949                           ;main.c: 175: }
+  1950  0000F0  0012               	return	
+  1951  0000F2  D7F2               	goto	i2l987
+  1952  0000F4                     i2l993:
+  1953                           
+  1954                           ;main.c: 176: else if(_nextPos[0] < 0 || _nextPos[0] > 7)
+  1955  0000F4  0E07               	movlw	7
+  1956  0000F6  642A               	cpfsgt	__nextPos,c
+  1957  0000F8  0012               	return	
+  1958  0000FA  D009               	goto	i2l1007
+  1959  0000FC                     i2l997:
+  1960                           
+  1961                           ;main.c: 181: _ball.bDirection = 3;
+  1962  0000FC  0E03               	movlw	3
+  1963  0000FE  D005               	goto	L7
+  1964  000100                     i2l999:
+  1965                           
+  1966                           ;main.c: 184: _ball.bDirection = 1;
+  1967  000100  0E01               	movlw	1
+  1968  000102  D003               	goto	L7
+  1969  000104                     i2l1001:
+  1970                           
+  1971                           ;main.c: 187: _ball.bDirection = 6;
+  1972  000104  0E06               	movlw	6
+  1973  000106  D001               	goto	L7
+  1974  000108                     i2l1003:
+  1975                           
+  1976                           ;main.c: 190: _ball.bDirection = 4;
+  1977  000108  0E04               	movlw	4
+  1978  00010A                     L7:
+  1979  00010A  6E23               	movwf	__ball+2,c
+  1980                           
+  1981                           ;main.c: 192: }
+  1982                           
+  1983                           ;main.c: 191: break;
+  1984  00010C  D00D               	goto	i2l1009
+  1985  00010E                     i2l1007:
+  1986  00010E  5023               	movf	__ball+2,w,c
+  1987                           
+  1988                           ; Switch size 1, requested type "space"
+  1989                           ; Number of cases is 4, Range of values is 1 to 6
+  1990                           ; switch strategies available:
+  1991                           ; Name         Instructions Cycles
+  1992                           ; simple_byte           13     7 (average)
+  1993                           ;	Chosen strategy is simple_byte
+  1994  000110  0A01               	xorlw	1	; case 1
+  1995  000112  B4D8               	btfsc	status,2,c
+  1996  000114  D7F3               	goto	i2l997
+  1997  000116  0A02               	xorlw	2	; case 3
+  1998  000118  B4D8               	btfsc	status,2,c
+  1999  00011A  D7F2               	goto	i2l999
+  2000  00011C  0A07               	xorlw	7	; case 4
+  2001  00011E  B4D8               	btfsc	status,2,c
+  2002  000120  D7F1               	goto	i2l1001
+  2003  000122  0A02               	xorlw	2	; case 6
+  2004  000124  B4D8               	btfsc	status,2,c
+  2005  000126  D7F0               	goto	i2l1003
+  2006  000128                     i2l1009:
+  2007                           
+  2008                           ;main.c: 193: getNextPosition();
+  2009  000128  EC73  F001         	call	_getNextPosition	;wreg free
+  2010  00012C  0012               	return	
+  2011  00012E                     __end_of_checkNextPosition:
+  2012                           	opt stack 0
+  2013                           pclatu	equ	0xFFB
+  2014                           pclath	equ	0xFFA
+  2015                           tblptru	equ	0xFF8
+  2016                           tblptrh	equ	0xFF7
+  2017                           tblptrl	equ	0xFF6
+  2018                           tablat	equ	0xFF5
+  2019                           prodh	equ	0xFF4
+  2020                           prodl	equ	0xFF3
+  2021                           intcon	equ	0xFF2
+  2022                           postinc0	equ	0xFEE
+  2023                           fsr0h	equ	0xFEA
+  2024                           fsr0l	equ	0xFE9
+  2025                           wreg	equ	0xFE8
+  2026                           fsr1h	equ	0xFE2
+  2027                           fsr1l	equ	0xFE1
+  2028                           indf2	equ	0xFDF
+  2029                           postinc2	equ	0xFDE
+  2030                           fsr2h	equ	0xFDA
+  2031                           fsr2l	equ	0xFD9
+  2032                           status	equ	0xFD8
+  2033                           
+  2034 ;; *************** function _getNextPosition *****************
+  2035 ;; Defined at:
+  2036 ;;		line 67 in file "main.c"
+  2037 ;; Parameters:    Size  Location     Type
+  2038 ;;		None
+  2039 ;; Auto vars:     Size  Location     Type
+  2040 ;;		None
+  2041 ;; Return value:  Size  Location     Type
+  2042 ;;                  1    wreg      void 
+  2043 ;; Registers used:
+  2044 ;;		wreg, status,2, status,0
+  2045 ;; Tracked objects:
+  2046 ;;		On entry : 0/0
+  2047 ;;		On exit  : 0/0
+  2048 ;;		Unchanged: 0/0
+  2049 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  2050 ;;      Params:         0       0       0       0       0       0       0
+  2051 ;;      Locals:         0       0       0       0       0       0       0
+  2052 ;;      Temps:          0       0       0       0       0       0       0
+  2053 ;;      Totals:         0       0       0       0       0       0       0
+  2054 ;;Total ram usage:        0 bytes
+  2055 ;; Hardware stack levels used:    1
+  2056 ;; This function calls:
+  2057 ;;		Nothing
+  2058 ;; This function is called by:
+  2059 ;;		_checkNextPosition
+  2060 ;; This function uses a non-reentrant model
+  2061 ;;
   2062                           
-  2063                           ;main.c: 69: switch(_ball.bDirection)
-  2064                           
-  2065                           ;incstack = 0
-  2066  0002E6  D01A               	goto	i2l869
-  2067  0002E8                     i2l855:
+  2063                           	psect	text14
+  2064  0002E6                     __ptext14:
+  2065                           	opt stack 0
+  2066  0002E6                     _getNextPosition:
+  2067                           	opt stack 26
   2068                           
-  2069                           ;main.c: 72: _nextPos[0] = _ball.bPos[0] + 1;
-  2070  0002E8  2821               	incf	__ball,w,c
-  2071  0002EA  6E2A               	movwf	__nextPos,c
-  2072                           
-  2073                           ;main.c: 73: _nextPos[1] = _ball.bPos[1] + 1;
-  2074  0002EC  2822               	incf	__ball+1,w,c
-  2075  0002EE  6E2B               	movwf	__nextPos+1,c
-  2076                           
-  2077                           ;main.c: 74: break;
-  2078  0002F0  0012               	return	
-  2079  0002F2                     i2l857:
-  2080                           
-  2081                           ;main.c: 76: _nextPos[0] = _ball.bPos[0] + 1;
-  2082  0002F2  2821               	incf	__ball,w,c
-  2083  0002F4  6E2A               	movwf	__nextPos,c
-  2084                           
-  2085                           ;main.c: 77: break;
-  2086  0002F6  0012               	return	
-  2087  0002F8                     i2l859:
-  2088                           
-  2089                           ;main.c: 79: _nextPos[0] = _ball.bPos[0] - 1;
-  2090  0002F8  0421               	decf	__ball,w,c
-  2091  0002FA  6E2A               	movwf	__nextPos,c
-  2092                           
-  2093                           ;main.c: 80: _nextPos[1] = _ball.bPos[1] + 1;
-  2094  0002FC  2822               	incf	__ball+1,w,c
-  2095  0002FE  6E2B               	movwf	__nextPos+1,c
-  2096                           
-  2097                           ;main.c: 81: break;
-  2098  000300  0012               	return	
-  2099  000302                     i2l861:
-  2100                           
-  2101                           ;main.c: 83: _nextPos[0] = _ball.bPos[0] - 1;
-  2102  000302  0421               	decf	__ball,w,c
-  2103  000304  6E2A               	movwf	__nextPos,c
-  2104                           
-  2105                           ;main.c: 84: _nextPos[1] = _ball.bPos[1] - 1;
-  2106  000306  0422               	decf	__ball+1,w,c
-  2107  000308  6E2B               	movwf	__nextPos+1,c
-  2108                           
-  2109                           ;main.c: 85: break;
-  2110  00030A  0012               	return	
-  2111  00030C                     i2l863:
-  2112                           
-  2113                           ;main.c: 87: _nextPos[0] = _ball.bPos[0] - 1;
-  2114  00030C  0421               	decf	__ball,w,c
-  2115  00030E  6E2A               	movwf	__nextPos,c
-  2116                           
-  2117                           ;main.c: 88: break;
-  2118  000310  0012               	return	
-  2119  000312                     i2l865:
-  2120                           
-  2121                           ;main.c: 90: _nextPos[0] = _ball.bPos[0] + 1;
-  2122  000312  2821               	incf	__ball,w,c
-  2123  000314  6E2A               	movwf	__nextPos,c
-  2124                           
-  2125                           ;main.c: 91: _nextPos[1] = _ball.bPos[1] - 1;
-  2126  000316  0422               	decf	__ball+1,w,c
-  2127  000318  6E2B               	movwf	__nextPos+1,c
-  2128                           
-  2129                           ;main.c: 93: }
+  2069                           ;main.c: 69: switch(_ball.bDirection)
+  2070                           
+  2071                           ;incstack = 0
+  2072  0002E6  D01A               	goto	i2l869
+  2073  0002E8                     i2l855:
+  2074                           
+  2075                           ;main.c: 72: _nextPos[0] = _ball.bPos[0] + 1;
+  2076  0002E8  2821               	incf	__ball,w,c
+  2077  0002EA  6E2A               	movwf	__nextPos,c
+  2078                           
+  2079                           ;main.c: 73: _nextPos[1] = _ball.bPos[1] + 1;
+  2080  0002EC  2822               	incf	__ball+1,w,c
+  2081  0002EE  6E2B               	movwf	__nextPos+1,c
+  2082                           
+  2083                           ;main.c: 74: break;
+  2084  0002F0  0012               	return	
+  2085  0002F2                     i2l857:
+  2086                           
+  2087                           ;main.c: 76: _nextPos[0] = _ball.bPos[1] + 1;
+  2088  0002F2  2822               	incf	__ball+1,w,c
+  2089  0002F4  6E2A               	movwf	__nextPos,c
+  2090                           
+  2091                           ;main.c: 77: break;
+  2092  0002F6  0012               	return	
+  2093  0002F8                     i2l859:
+  2094                           
+  2095                           ;main.c: 79: _nextPos[0] = _ball.bPos[0] - 1;
+  2096  0002F8  0421               	decf	__ball,w,c
+  2097  0002FA  6E2A               	movwf	__nextPos,c
+  2098                           
+  2099                           ;main.c: 80: _nextPos[1] = _ball.bPos[1] + 1;
+  2100  0002FC  2822               	incf	__ball+1,w,c
+  2101  0002FE  6E2B               	movwf	__nextPos+1,c
+  2102                           
+  2103                           ;main.c: 81: break;
+  2104  000300  0012               	return	
+  2105  000302                     i2l861:
+  2106                           
+  2107                           ;main.c: 83: _nextPos[0] = _ball.bPos[0] - 1;
+  2108  000302  0421               	decf	__ball,w,c
+  2109  000304  6E2A               	movwf	__nextPos,c
+  2110                           
+  2111                           ;main.c: 84: _nextPos[1] = _ball.bPos[1] - 1;
+  2112  000306  0422               	decf	__ball+1,w,c
+  2113  000308  6E2B               	movwf	__nextPos+1,c
+  2114                           
+  2115                           ;main.c: 85: break;
+  2116  00030A  0012               	return	
+  2117  00030C                     i2l863:
+  2118                           
+  2119                           ;main.c: 87: _nextPos[0] = _ball.bPos[1] - 1;
+  2120  00030C  0422               	decf	__ball+1,w,c
+  2121  00030E  6E2A               	movwf	__nextPos,c
+  2122                           
+  2123                           ;main.c: 88: break;
+  2124  000310  0012               	return	
+  2125  000312                     i2l865:
+  2126                           
+  2127                           ;main.c: 90: _nextPos[0] = _ball.bPos[0] + 1;
+  2128  000312  2821               	incf	__ball,w,c
+  2129  000314  6E2A               	movwf	__nextPos,c
   2130                           
-  2131                           ;main.c: 92: break;
-  2132  00031A  0012               	return	
-  2133  00031C                     i2l869:
-  2134  00031C  5023               	movf	__ball+2,w,c
-  2135                           
-  2136                           ; Switch size 1, requested type "space"
-  2137                           ; Number of cases is 6, Range of values is 1 to 6
-  2138                           ; switch strategies available:
-  2139                           ; Name         Instructions Cycles
-  2140                           ; simple_byte           19    10 (average)
-  2141                           ;	Chosen strategy is simple_byte
-  2142  00031E  0A01               	xorlw	1	; case 1
-  2143  000320  B4D8               	btfsc	status,2,c
-  2144  000322  D7E2               	goto	i2l855
-  2145  000324  0A03               	xorlw	3	; case 2
-  2146  000326  B4D8               	btfsc	status,2,c
-  2147  000328  D7E4               	goto	i2l857
-  2148  00032A  0A01               	xorlw	1	; case 3
-  2149  00032C  B4D8               	btfsc	status,2,c
-  2150  00032E  D7E4               	goto	i2l859
-  2151  000330  0A07               	xorlw	7	; case 4
-  2152  000332  B4D8               	btfsc	status,2,c
-  2153  000334  D7E6               	goto	i2l861
-  2154  000336  0A01               	xorlw	1	; case 5
-  2155  000338  B4D8               	btfsc	status,2,c
-  2156  00033A  D7E8               	goto	i2l863
-  2157  00033C  0A03               	xorlw	3	; case 6
-  2158  00033E  A4D8               	btfss	status,2,c
-  2159  000340  0012               	return	
-  2160  000342  D7E7               	goto	i2l865
-  2161  000344                     __end_of_getNextPosition:
-  2162                           	opt stack 0
-  2163                           pclatu	equ	0xFFB
-  2164                           pclath	equ	0xFFA
-  2165                           tblptru	equ	0xFF8
-  2166                           tblptrh	equ	0xFF7
-  2167                           tblptrl	equ	0xFF6
-  2168                           tablat	equ	0xFF5
-  2169                           prodh	equ	0xFF4
-  2170                           prodl	equ	0xFF3
-  2171                           intcon	equ	0xFF2
-  2172                           postinc0	equ	0xFEE
-  2173                           fsr0h	equ	0xFEA
-  2174                           fsr0l	equ	0xFE9
-  2175                           wreg	equ	0xFE8
-  2176                           fsr1h	equ	0xFE2
-  2177                           fsr1l	equ	0xFE1
-  2178                           indf2	equ	0xFDF
-  2179                           postinc2	equ	0xFDE
-  2180                           fsr2h	equ	0xFDA
-  2181                           fsr2l	equ	0xFD9
-  2182                           status	equ	0xFD8
-  2183                           
-  2184 ;; *************** function ___lwdiv *****************
-  2185 ;; Defined at:
-  2186 ;;		line 8 in file "C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lwdiv.c"
-  2187 ;; Parameters:    Size  Location     Type
-  2188 ;;  dividend        2    0[COMRAM] unsigned int 
-  2189 ;;  divisor         2    2[COMRAM] unsigned int 
-  2190 ;; Auto vars:     Size  Location     Type
-  2191 ;;  quotient        2    4[COMRAM] unsigned int 
-  2192 ;;  counter         1    6[COMRAM] unsigned char 
-  2193 ;; Return value:  Size  Location     Type
-  2194 ;;                  2    0[COMRAM] unsigned int 
-  2195 ;; Registers used:
-  2196 ;;		wreg, status,2, status,0
-  2197 ;; Tracked objects:
-  2198 ;;		On entry : 0/0
-  2199 ;;		On exit  : 0/0
-  2200 ;;		Unchanged: 0/0
-  2201 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
-  2202 ;;      Params:         4       0       0       0       0       0       0
-  2203 ;;      Locals:         3       0       0       0       0       0       0
-  2204 ;;      Temps:          0       0       0       0       0       0       0
-  2205 ;;      Totals:         7       0       0       0       0       0       0
-  2206 ;;Total ram usage:        7 bytes
-  2207 ;; Hardware stack levels used:    1
-  2208 ;; This function calls:
-  2209 ;;		Nothing
-  2210 ;; This function is called by:
-  2211 ;;		_ISR
-  2212 ;; This function uses a non-reentrant model
-  2213 ;;
-  2214                           
-  2215                           	psect	text15
-  2216  0003F0                     __ptext15:
-  2217                           	opt stack 0
-  2218  0003F0                     ___lwdiv:
-  2219                           	opt stack 27
+  2131                           ;main.c: 91: _nextPos[1] = _ball.bPos[1] - 1;
+  2132  000316  0422               	decf	__ball+1,w,c
+  2133  000318  6E2B               	movwf	__nextPos+1,c
+  2134                           
+  2135                           ;main.c: 93: }
+  2136                           
+  2137                           ;main.c: 92: break;
+  2138  00031A  0012               	return	
+  2139  00031C                     i2l869:
+  2140  00031C  5023               	movf	__ball+2,w,c
+  2141                           
+  2142                           ; Switch size 1, requested type "space"
+  2143                           ; Number of cases is 6, Range of values is 1 to 6
+  2144                           ; switch strategies available:
+  2145                           ; Name         Instructions Cycles
+  2146                           ; simple_byte           19    10 (average)
+  2147                           ;	Chosen strategy is simple_byte
+  2148  00031E  0A01               	xorlw	1	; case 1
+  2149  000320  B4D8               	btfsc	status,2,c
+  2150  000322  D7E2               	goto	i2l855
+  2151  000324  0A03               	xorlw	3	; case 2
+  2152  000326  B4D8               	btfsc	status,2,c
+  2153  000328  D7E4               	goto	i2l857
+  2154  00032A  0A01               	xorlw	1	; case 3
+  2155  00032C  B4D8               	btfsc	status,2,c
+  2156  00032E  D7E4               	goto	i2l859
+  2157  000330  0A07               	xorlw	7	; case 4
+  2158  000332  B4D8               	btfsc	status,2,c
+  2159  000334  D7E6               	goto	i2l861
+  2160  000336  0A01               	xorlw	1	; case 5
+  2161  000338  B4D8               	btfsc	status,2,c
+  2162  00033A  D7E8               	goto	i2l863
+  2163  00033C  0A03               	xorlw	3	; case 6
+  2164  00033E  A4D8               	btfss	status,2,c
+  2165  000340  0012               	return	
+  2166  000342  D7E7               	goto	i2l865
+  2167  000344                     __end_of_getNextPosition:
+  2168                           	opt stack 0
+  2169                           pclatu	equ	0xFFB
+  2170                           pclath	equ	0xFFA
+  2171                           tblptru	equ	0xFF8
+  2172                           tblptrh	equ	0xFF7
+  2173                           tblptrl	equ	0xFF6
+  2174                           tablat	equ	0xFF5
+  2175                           prodh	equ	0xFF4
+  2176                           prodl	equ	0xFF3
+  2177                           intcon	equ	0xFF2
+  2178                           postinc0	equ	0xFEE
+  2179                           fsr0h	equ	0xFEA
+  2180                           fsr0l	equ	0xFE9
+  2181                           wreg	equ	0xFE8
+  2182                           fsr1h	equ	0xFE2
+  2183                           fsr1l	equ	0xFE1
+  2184                           indf2	equ	0xFDF
+  2185                           postinc2	equ	0xFDE
+  2186                           fsr2h	equ	0xFDA
+  2187                           fsr2l	equ	0xFD9
+  2188                           status	equ	0xFD8
+  2189                           
+  2190 ;; *************** function ___lwdiv *****************
+  2191 ;; Defined at:
+  2192 ;;		line 8 in file "C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lwdiv.c"
+  2193 ;; Parameters:    Size  Location     Type
+  2194 ;;  dividend        2    0[COMRAM] unsigned int 
+  2195 ;;  divisor         2    2[COMRAM] unsigned int 
+  2196 ;; Auto vars:     Size  Location     Type
+  2197 ;;  quotient        2    4[COMRAM] unsigned int 
+  2198 ;;  counter         1    6[COMRAM] unsigned char 
+  2199 ;; Return value:  Size  Location     Type
+  2200 ;;                  2    0[COMRAM] unsigned int 
+  2201 ;; Registers used:
+  2202 ;;		wreg, status,2, status,0
+  2203 ;; Tracked objects:
+  2204 ;;		On entry : 0/0
+  2205 ;;		On exit  : 0/0
+  2206 ;;		Unchanged: 0/0
+  2207 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5
+  2208 ;;      Params:         4       0       0       0       0       0       0
+  2209 ;;      Locals:         3       0       0       0       0       0       0
+  2210 ;;      Temps:          0       0       0       0       0       0       0
+  2211 ;;      Totals:         7       0       0       0       0       0       0
+  2212 ;;Total ram usage:        7 bytes
+  2213 ;; Hardware stack levels used:    1
+  2214 ;; This function calls:
+  2215 ;;		Nothing
+  2216 ;; This function is called by:
+  2217 ;;		_ISR
+  2218 ;; This function uses a non-reentrant model
+  2219 ;;
   2220                           
-  2221                           ;incstack = 0
-  2222  0003F0  0E00               	movlw	0
-  2223  0003F2  6E06               	movwf	___lwdiv@quotient+1,c
-  2224  0003F4  0E00               	movlw	0
-  2225  0003F6  6E05               	movwf	___lwdiv@quotient,c
-  2226  0003F8  5003               	movf	___lwdiv@divisor,w,c
-  2227  0003FA  1004               	iorwf	___lwdiv@divisor+1,w,c
-  2228  0003FC  B4D8               	btfsc	status,2,c
-  2229  0003FE  D01C               	goto	i2l612
-  2230  000400  0E01               	movlw	1
-  2231  000402  6E07               	movwf	___lwdiv@counter,c
-  2232  000404  D004               	goto	i2l1201
-  2233  000406                     i2l1199:
-  2234  000406  90D8               	bcf	status,0,c
-  2235  000408  3603               	rlcf	___lwdiv@divisor,f,c
-  2236  00040A  3604               	rlcf	___lwdiv@divisor+1,f,c
-  2237  00040C  2A07               	incf	___lwdiv@counter,f,c
-  2238  00040E                     i2l1201:
-  2239  00040E  AE04               	btfss	___lwdiv@divisor+1,7,c
-  2240  000410  D7FA               	goto	i2l1199
-  2241  000412                     i2l1203:
-  2242  000412  90D8               	bcf	status,0,c
-  2243  000414  3605               	rlcf	___lwdiv@quotient,f,c
-  2244  000416  3606               	rlcf	___lwdiv@quotient+1,f,c
-  2245  000418  5003               	movf	___lwdiv@divisor,w,c
-  2246  00041A  5C01               	subwf	___lwdiv@dividend,w,c
-  2247  00041C  5004               	movf	___lwdiv@divisor+1,w,c
-  2248  00041E  5802               	subwfb	___lwdiv@dividend+1,w,c
-  2249  000420  A0D8               	btfss	status,0,c
-  2250  000422  D005               	goto	i2l1211
-  2251  000424  5003               	movf	___lwdiv@divisor,w,c
-  2252  000426  5E01               	subwf	___lwdiv@dividend,f,c
-  2253  000428  5004               	movf	___lwdiv@divisor+1,w,c
-  2254  00042A  5A02               	subwfb	___lwdiv@dividend+1,f,c
-  2255  00042C  8005               	bsf	___lwdiv@quotient,0,c
-  2256  00042E                     i2l1211:
-  2257  00042E  90D8               	bcf	status,0,c
-  2258  000430  3204               	rrcf	___lwdiv@divisor+1,f,c
-  2259  000432  3203               	rrcf	___lwdiv@divisor,f,c
-  2260  000434  2E07               	decfsz	___lwdiv@counter,f,c
-  2261  000436  D7ED               	goto	i2l1203
-  2262  000438                     i2l612:
-  2263  000438  C005  F001         	movff	___lwdiv@quotient,?___lwdiv
-  2264  00043C  C006  F002         	movff	___lwdiv@quotient+1,?___lwdiv+1
-  2265  000440  0012               	return		;funcret
-  2266  000442                     __end_of___lwdiv:
-  2267                           	opt stack 0
-  2268  0000                     pclatu	equ	0xFFB
-  2269                           pclath	equ	0xFFA
-  2270                           tblptru	equ	0xFF8
-  2271                           tblptrh	equ	0xFF7
-  2272                           tblptrl	equ	0xFF6
-  2273                           tablat	equ	0xFF5
-  2274                           prodh	equ	0xFF4
-  2275                           prodl	equ	0xFF3
-  2276                           intcon	equ	0xFF2
-  2277                           postinc0	equ	0xFEE
-  2278                           fsr0h	equ	0xFEA
-  2279                           fsr0l	equ	0xFE9
-  2280                           wreg	equ	0xFE8
-  2281                           fsr1h	equ	0xFE2
-  2282                           fsr1l	equ	0xFE1
-  2283                           indf2	equ	0xFDF
-  2284                           postinc2	equ	0xFDE
-  2285                           fsr2h	equ	0xFDA
-  2286                           fsr2l	equ	0xFD9
-  2287                           status	equ	0xFD8
-  2288                           pclatu	equ	0xFFB
-  2289                           pclath	equ	0xFFA
-  2290                           tblptru	equ	0xFF8
-  2291                           tblptrh	equ	0xFF7
-  2292                           tblptrl	equ	0xFF6
-  2293                           tablat	equ	0xFF5
-  2294                           prodh	equ	0xFF4
-  2295                           prodl	equ	0xFF3
-  2296                           intcon	equ	0xFF2
-  2297                           postinc0	equ	0xFEE
-  2298                           fsr0h	equ	0xFEA
-  2299                           fsr0l	equ	0xFE9
-  2300                           wreg	equ	0xFE8
-  2301                           fsr1h	equ	0xFE2
-  2302                           fsr1l	equ	0xFE1
-  2303                           indf2	equ	0xFDF
-  2304                           postinc2	equ	0xFDE
-  2305                           fsr2h	equ	0xFDA
-  2306                           fsr2l	equ	0xFD9
-  2307                           status	equ	0xFD8
-  2308                           
-  2309                           	psect	rparam
-  2310  0000                     pclatu	equ	0xFFB
-  2311                           pclath	equ	0xFFA
-  2312                           tblptru	equ	0xFF8
-  2313                           tblptrh	equ	0xFF7
-  2314                           tblptrl	equ	0xFF6
-  2315                           tablat	equ	0xFF5
-  2316                           prodh	equ	0xFF4
-  2317                           prodl	equ	0xFF3
-  2318                           intcon	equ	0xFF2
-  2319                           postinc0	equ	0xFEE
-  2320                           fsr0h	equ	0xFEA
-  2321                           fsr0l	equ	0xFE9
-  2322                           wreg	equ	0xFE8
-  2323                           fsr1h	equ	0xFE2
-  2324                           fsr1l	equ	0xFE1
-  2325                           indf2	equ	0xFDF
-  2326                           postinc2	equ	0xFDE
-  2327                           fsr2h	equ	0xFDA
-  2328                           fsr2l	equ	0xFD9
-  2329                           status	equ	0xFD8
-  2330                           
-  2331                           	psect	temp
-  2332  000030                     btemp:
-  2333                           	opt stack 0
-  2334  000030                     	ds	1
-  2335  0000                     int$flags	set	btemp
-  2336                           pclatu	equ	0xFFB
-  2337                           pclath	equ	0xFFA
-  2338                           tblptru	equ	0xFF8
-  2339                           tblptrh	equ	0xFF7
-  2340                           tblptrl	equ	0xFF6
-  2341                           tablat	equ	0xFF5
-  2342                           prodh	equ	0xFF4
-  2343                           prodl	equ	0xFF3
-  2344                           intcon	equ	0xFF2
-  2345                           postinc0	equ	0xFEE
-  2346                           fsr0h	equ	0xFEA
-  2347                           fsr0l	equ	0xFE9
-  2348                           wreg	equ	0xFE8
-  2349                           fsr1h	equ	0xFE2
-  2350                           fsr1l	equ	0xFE1
-  2351                           indf2	equ	0xFDF
-  2352                           postinc2	equ	0xFDE
-  2353                           fsr2h	equ	0xFDA
-  2354                           fsr2l	equ	0xFD9
-  2355                           status	equ	0xFD8
+  2221                           	psect	text15
+  2222  0003F0                     __ptext15:
+  2223                           	opt stack 0
+  2224  0003F0                     ___lwdiv:
+  2225                           	opt stack 27
+  2226                           
+  2227                           ;incstack = 0
+  2228  0003F0  0E00               	movlw	0
+  2229  0003F2  6E06               	movwf	___lwdiv@quotient+1,c
+  2230  0003F4  0E00               	movlw	0
+  2231  0003F6  6E05               	movwf	___lwdiv@quotient,c
+  2232  0003F8  5003               	movf	___lwdiv@divisor,w,c
+  2233  0003FA  1004               	iorwf	___lwdiv@divisor+1,w,c
+  2234  0003FC  B4D8               	btfsc	status,2,c
+  2235  0003FE  D01C               	goto	i2l612
+  2236  000400  0E01               	movlw	1
+  2237  000402  6E07               	movwf	___lwdiv@counter,c
+  2238  000404  D004               	goto	i2l1207
+  2239  000406                     i2l1205:
+  2240  000406  90D8               	bcf	status,0,c
+  2241  000408  3603               	rlcf	___lwdiv@divisor,f,c
+  2242  00040A  3604               	rlcf	___lwdiv@divisor+1,f,c
+  2243  00040C  2A07               	incf	___lwdiv@counter,f,c
+  2244  00040E                     i2l1207:
+  2245  00040E  AE04               	btfss	___lwdiv@divisor+1,7,c
+  2246  000410  D7FA               	goto	i2l1205
+  2247  000412                     i2l1209:
+  2248  000412  90D8               	bcf	status,0,c
+  2249  000414  3605               	rlcf	___lwdiv@quotient,f,c
+  2250  000416  3606               	rlcf	___lwdiv@quotient+1,f,c
+  2251  000418  5003               	movf	___lwdiv@divisor,w,c
+  2252  00041A  5C01               	subwf	___lwdiv@dividend,w,c
+  2253  00041C  5004               	movf	___lwdiv@divisor+1,w,c
+  2254  00041E  5802               	subwfb	___lwdiv@dividend+1,w,c
+  2255  000420  A0D8               	btfss	status,0,c
+  2256  000422  D005               	goto	i2l1217
+  2257  000424  5003               	movf	___lwdiv@divisor,w,c
+  2258  000426  5E01               	subwf	___lwdiv@dividend,f,c
+  2259  000428  5004               	movf	___lwdiv@divisor+1,w,c
+  2260  00042A  5A02               	subwfb	___lwdiv@dividend+1,f,c
+  2261  00042C  8005               	bsf	___lwdiv@quotient,0,c
+  2262  00042E                     i2l1217:
+  2263  00042E  90D8               	bcf	status,0,c
+  2264  000430  3204               	rrcf	___lwdiv@divisor+1,f,c
+  2265  000432  3203               	rrcf	___lwdiv@divisor,f,c
+  2266  000434  2E07               	decfsz	___lwdiv@counter,f,c
+  2267  000436  D7ED               	goto	i2l1209
+  2268  000438                     i2l612:
+  2269  000438  C005  F001         	movff	___lwdiv@quotient,?___lwdiv
+  2270  00043C  C006  F002         	movff	___lwdiv@quotient+1,?___lwdiv+1
+  2271  000440  0012               	return		;funcret
+  2272  000442                     __end_of___lwdiv:
+  2273                           	opt stack 0
+  2274  0000                     pclatu	equ	0xFFB
+  2275                           pclath	equ	0xFFA
+  2276                           tblptru	equ	0xFF8
+  2277                           tblptrh	equ	0xFF7
+  2278                           tblptrl	equ	0xFF6
+  2279                           tablat	equ	0xFF5
+  2280                           prodh	equ	0xFF4
+  2281                           prodl	equ	0xFF3
+  2282                           intcon	equ	0xFF2
+  2283                           postinc0	equ	0xFEE
+  2284                           fsr0h	equ	0xFEA
+  2285                           fsr0l	equ	0xFE9
+  2286                           wreg	equ	0xFE8
+  2287                           fsr1h	equ	0xFE2
+  2288                           fsr1l	equ	0xFE1
+  2289                           indf2	equ	0xFDF
+  2290                           postinc2	equ	0xFDE
+  2291                           fsr2h	equ	0xFDA
+  2292                           fsr2l	equ	0xFD9
+  2293                           status	equ	0xFD8
+  2294                           pclatu	equ	0xFFB
+  2295                           pclath	equ	0xFFA
+  2296                           tblptru	equ	0xFF8
+  2297                           tblptrh	equ	0xFF7
+  2298                           tblptrl	equ	0xFF6
+  2299                           tablat	equ	0xFF5
+  2300                           prodh	equ	0xFF4
+  2301                           prodl	equ	0xFF3
+  2302                           intcon	equ	0xFF2
+  2303                           postinc0	equ	0xFEE
+  2304                           fsr0h	equ	0xFEA
+  2305                           fsr0l	equ	0xFE9
+  2306                           wreg	equ	0xFE8
+  2307                           fsr1h	equ	0xFE2
+  2308                           fsr1l	equ	0xFE1
+  2309                           indf2	equ	0xFDF
+  2310                           postinc2	equ	0xFDE
+  2311                           fsr2h	equ	0xFDA
+  2312                           fsr2l	equ	0xFD9
+  2313                           status	equ	0xFD8
+  2314                           
+  2315                           	psect	rparam
+  2316  0000                     pclatu	equ	0xFFB
+  2317                           pclath	equ	0xFFA
+  2318                           tblptru	equ	0xFF8
+  2319                           tblptrh	equ	0xFF7
+  2320                           tblptrl	equ	0xFF6
+  2321                           tablat	equ	0xFF5
+  2322                           prodh	equ	0xFF4
+  2323                           prodl	equ	0xFF3
+  2324                           intcon	equ	0xFF2
+  2325                           postinc0	equ	0xFEE
+  2326                           fsr0h	equ	0xFEA
+  2327                           fsr0l	equ	0xFE9
+  2328                           wreg	equ	0xFE8
+  2329                           fsr1h	equ	0xFE2
+  2330                           fsr1l	equ	0xFE1
+  2331                           indf2	equ	0xFDF
+  2332                           postinc2	equ	0xFDE
+  2333                           fsr2h	equ	0xFDA
+  2334                           fsr2l	equ	0xFD9
+  2335                           status	equ	0xFD8
+  2336                           
+  2337                           	psect	temp
+  2338  000030                     btemp:
+  2339                           	opt stack 0
+  2340  000030                     	ds	1
+  2341  0000                     int$flags	set	btemp
+  2342                           pclatu	equ	0xFFB
+  2343                           pclath	equ	0xFFA
+  2344                           tblptru	equ	0xFF8
+  2345                           tblptrh	equ	0xFF7
+  2346                           tblptrl	equ	0xFF6
+  2347                           tablat	equ	0xFF5
+  2348                           prodh	equ	0xFF4
+  2349                           prodl	equ	0xFF3
+  2350                           intcon	equ	0xFF2
+  2351                           postinc0	equ	0xFEE
+  2352                           fsr0h	equ	0xFEA
+  2353                           fsr0l	equ	0xFE9
+  2354                           wreg	equ	0xFE8
+  2355                           fsr1h	equ	0xFE2
+  2356                           fsr1l	equ	0xFE1
+  2357                           indf2	equ	0xFDF
+  2358                           postinc2	equ	0xFDE
+  2359                           fsr2h	equ	0xFDA
+  2360                           fsr2l	equ	0xFD9
+  2361                           status	equ	0xFD8
 
 
 Data Sizes:
@@ -2569,7 +2575,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V1.37 build -260352376 
-Symbol Table                                                                                   Mon Mar 28 22:22:18 2016
+Symbol Table                                                                                   Tue Mar 29 11:12:48 2016
 
                         u14 058C                          u15 0588                          u34 049C  
                         u35 0498                          u44 04BA                          u45 04B6  
@@ -2600,29 +2606,29 @@ Symbol Table                                                                    
                      i2l845 0458                       i2l863 030C                       i2l855 02E8  
                      i2l951 0060                       i2l943 003C                       i2l839 044C  
                      i2l865 0312                       i2l857 02F2                       i2l953 0064  
-                     i2l945 0050                       i2l937 002E                       i2l961 0088  
-                     i2l859 02F8                       i2l971 00A6                       i2l955 0068  
-                     i2l939 0032                       i2l947 0056                       i2l869 031C  
-                     i2l981 00D2                       i2l973 00AC                       i2l957 006E  
-                     i2l991 00FC                       i2l983 00D8                       i2l967 009A  
-                     i2l975 00C2                       i2l959 0082                       i2l993 0100  
-                     i2l985 00DE                       i2l969 00A0                       i2l995 0104  
-                     i2l979 00CC                       i2l987 00F4                       i2l997 0108  
-                     _PLLEN 007CDE                       _TRISA 000F92                       _TRISC 000F94  
-                     _TRISD 000F95               __CFG_PWRT$OFF 000000               __CFG_WRT0$OFF 000000  
-             __CFG_WRT1$OFF 000000               __CFG_WRT2$OFF 000000               __CFG_WRT3$OFF 000000  
-            __CFG_EBTR0$OFF 000000              __CFG_FCMEN$OFF 000000              __CFG_EBTR1$OFF 000000  
-            __CFG_EBTR2$OFF 000000              __CFG_EBTR3$OFF 000000               __CFG_WRTB$OFF 000000  
-             __CFG_WRTC$OFF 000000                       __ball 0021               __CFG_WRTD$OFF 000000  
-            __CFG_EBTRB$OFF 000000             __end_of_refresh 0286                       on@row 0001  
-            __CFG_BOREN$OFF 000000                       tablat 000FF5                       status 000FD8  
-           __initialization 04C4                __end_of_main 05BE             _getNextPosition 02E6  
-                    ??_main 0021               __activetblptr 000002                      _T08BIT 007EAE  
-                    i2l1001 010E                      i2l1003 0128                      i2l1201 040E  
-                    i2l1211 042E                      i2l1203 0412                      i2l1233 018A  
-                    i2l1171 050C                      i2l1227 0180                      i2l1181 0548  
-                    i2l1175 0514                      i2l1185 0550                      i2l1249 01D0  
-                    i2l1199 0406                      _TMR0IE 007F95                      _TMR0IF 007F92  
+                     i2l961 0082                       i2l945 0050                       i2l937 002E  
+                     i2l859 02F8                       i2l971 00A0                       i2l955 0068  
+                     i2l939 0032                       i2l947 0056                       i2l963 0088  
+                     i2l869 031C                       i2l973 00A6                       i2l983 00CC  
+                     i2l991 00DE                       i2l959 006E                       i2l985 00D2  
+                     i2l969 009A                       i2l977 00AC                       i2l993 00F4  
+                     i2l987 00D8                       i2l979 00C2                       i2l997 00FC  
+                     i2l999 0100                       _PLLEN 007CDE                       _TRISA 000F92  
+                     _TRISC 000F94                       _TRISD 000F95               __CFG_PWRT$OFF 000000  
+             __CFG_WRT0$OFF 000000               __CFG_WRT1$OFF 000000               __CFG_WRT2$OFF 000000  
+             __CFG_WRT3$OFF 000000              __CFG_EBTR0$OFF 000000              __CFG_FCMEN$OFF 000000  
+            __CFG_EBTR1$OFF 000000              __CFG_EBTR2$OFF 000000              __CFG_EBTR3$OFF 000000  
+             __CFG_WRTB$OFF 000000               __CFG_WRTC$OFF 000000                       __ball 0021  
+             __CFG_WRTD$OFF 000000              __CFG_EBTRB$OFF 000000             __end_of_refresh 0286  
+                     on@row 0001              __CFG_BOREN$OFF 000000                       tablat 000FF5  
+                     status 000FD8             __initialization 04C4                __end_of_main 05BE  
+           _getNextPosition 02E6                      ??_main 0021               __activetblptr 000002  
+                    _T08BIT 007EAE                      i2l1001 0104                      i2l1003 0108  
+                    i2l1007 010E                      i2l1009 0128                      i2l1205 0406  
+                    i2l1207 040E                      i2l1217 042E                      i2l1209 0412  
+                    i2l1233 0180                      i2l1181 0514                      i2l1191 0550  
+                    i2l1255 01D0                      i2l1239 018A                      i2l1177 050C  
+                    i2l1187 0548                      _TMR0IE 007F95                      _TMR0IF 007F92  
                     _TMR0ON 007EAF              __CFG_XINST$OFF 000000                      _allOff 05BE  
             __CFG_STVREN$ON 000000                      __speed 002E                   ??___lwdiv 0005  
                     clear_0 04CA                      clear_1 04D6                      _pixels 0080  

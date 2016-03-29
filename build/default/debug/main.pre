@@ -4201,7 +4201,7 @@ struct playerData _p1;
 struct playerData _p2;
 unsigned char _nextPos[2];
 
-unsigned int _speed = 60;
+unsigned int _speed = 200;
 unsigned int _timerCounter = 0;
 
 void writePong(void)
@@ -4233,7 +4233,7 @@ _nextPos[0] = _ball.bPos[0] + 1;
 _nextPos[1] = _ball.bPos[1] + 1;
 break;
 case 2:
-_nextPos[0] = _ball.bPos[0] + 1;
+_nextPos[0] = _ball.bPos[1] + 1;
 break;
 case 3:
 _nextPos[0] = _ball.bPos[0] - 1;
@@ -4244,7 +4244,7 @@ _nextPos[0] = _ball.bPos[0] - 1;
 _nextPos[1] = _ball.bPos[1] - 1;
 break;
 case 5:
-_nextPos[0] = _ball.bPos[0] - 1;
+_nextPos[0] = _ball.bPos[1] - 1;
 break;
 case 6:
 _nextPos[0] = _ball.bPos[0] + 1;
@@ -4256,7 +4256,7 @@ break;
 void checkNextPosition(void)
 {
 getNextPosition();
-if(_nextPos[0] == 0)
+if(_nextPos[1] == 0)
 {
 if(_p1.paddlePos[0] == _nextPos[1])
 {
@@ -4289,12 +4289,13 @@ _ball.bDirection = 3;
 break;
 case 6:
 _ball.bDirection = 1;
+break;
 }
 getNextPosition();
 }
 
 }
-else if(_nextPos[0] == 15)
+else if(_nextPos[1] == 15)
 {
 if(_p2.paddlePos[0] == _nextPos[1])
 {
@@ -4309,6 +4310,7 @@ _ball.bDirection = 6;
 break;
 case 3:
 _ball.bDirection = 4;
+break;
 }
 }
 else if( _p2.paddlePos[1] == _nextPos[1])
@@ -4325,6 +4327,7 @@ _ball.bDirection = 4;
 break;
 case 3:
 _ball.bDirection = 5;
+break;
 }
 }
 
@@ -4355,9 +4358,9 @@ getNextPosition();
 void initializePONG(void)
 {
 
-_ball.bDirection = 2;
-_ball.bPos[0] = 3;
-_ball.bPos[1] = 5;
+_ball.bDirection = 3;
+_ball.bPos[0] = 2;
+_ball.bPos[1] = 4;
 
 _nextPos[0] = _ball.bPos[0];
 _nextPos[1] = _ball.bPos[1];
@@ -4464,6 +4467,6 @@ const char TWO_SYMBOL;
 const char ONE_SYMBOL;
 const char GO_SYMBOL;
 
-# 311
+# 314
 while(1){ refresh(); };
 }

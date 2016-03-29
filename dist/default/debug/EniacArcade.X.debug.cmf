@@ -11,6 +11,11 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
+$C:\Users\nickd\AppData\Local\Temp\s3d8.obj
+idloc IDLOC 0 200000 200000 8 1
+reset_vec CODE 0 0 0 6 1
+end_init CODE 0 16 16 4 1
+config CONFIG 0 300000 300000 E 1
 $dist/default/debug\EniacArcade.X.debug.obj
 cinit CODE 0 4C4 4C4 3E 1
 intcode_body CODE 0 12E 12E EE 1
@@ -36,11 +41,6 @@ bssBANK0 BANK0 1 80 80 80 1
 intcode CODE 0 8 8 E 1
 dataCOMRAM COMRAM 1 2E 2E 2 1
 bssCOMRAM COMRAM 1 21 21 D 1
-$C:\Users\larsg\AppData\Local\Temp\saac.obj
-idloc IDLOC 0 200000 200000 8 1
-reset_vec CODE 0 0 0 6 1
-end_init CODE 0 16 16 4 1
-config CONFIG 0 300000 300000 E 1
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
 # is described on a single line as follows:
@@ -84,8 +84,8 @@ MEDIUMCONST 600-7CFF 1
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/debug\EniacArcade.X.debug.obj
-8 intcode CODE >246:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-8 intcode CODE >249:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
+8 intcode CODE >249:C:\Users\nickd\Documents\EniacArcade.X\main.c
+8 intcode CODE >252:C:\Users\nickd\Documents\EniacArcade.X\main.c
 3F0 text15 CODE >8:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lwdiv.c
 3F0 text15 CODE >14:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lwdiv.c
 3F8 text15 CODE >15:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lwdiv.c
@@ -103,230 +103,230 @@ $dist/default/debug\EniacArcade.X.debug.obj
 438 text15 CODE >29:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lwdiv.c
 438 text15 CODE >30:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lwdiv.c
 440 text15 CODE >31:C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lwdiv.c
-2E6 text14 CODE >67:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-2E6 text14 CODE >69:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-2E8 text14 CODE >72:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-2EC text14 CODE >73:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-2F0 text14 CODE >74:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-2F2 text14 CODE >76:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-2F6 text14 CODE >77:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-2F8 text14 CODE >79:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-2FC text14 CODE >80:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-300 text14 CODE >81:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-302 text14 CODE >83:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-306 text14 CODE >84:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-30A text14 CODE >85:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-30C text14 CODE >87:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-310 text14 CODE >88:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-312 text14 CODE >90:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-316 text14 CODE >91:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-31A text14 CODE >93:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-31C text14 CODE >69:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-1A text13 CODE >96:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-1A text13 CODE >98:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-1E text13 CODE >99:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-24 text13 CODE >101:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-2E text13 CODE >108:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-32 text13 CODE >111:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-36 text13 CODE >114:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-3A text13 CODE >115:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-3C text13 CODE >104:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-50 text13 CODE >116:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-54 text13 CODE >117:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-56 text13 CODE >118:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-60 text13 CODE >125:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-64 text13 CODE >128:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-68 text13 CODE >131:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-6C text13 CODE >132:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-6E text13 CODE >121:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-82 text13 CODE >133:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-86 text13 CODE >136:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-88 text13 CODE >137:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-90 text13 CODE >139:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-9A text13 CODE >145:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-9E text13 CODE >146:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-A0 text13 CODE >148:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-A4 text13 CODE >149:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-A6 text13 CODE >151:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-AA text13 CODE >152:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-AC text13 CODE >141:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-BE text13 CODE >153:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-C0 text13 CODE >141:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-C2 text13 CODE >154:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-CC text13 CODE >161:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-D0 text13 CODE >162:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-D2 text13 CODE >164:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-D6 text13 CODE >165:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-D8 text13 CODE >167:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-DC text13 CODE >168:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-DE text13 CODE >157:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-F0 text13 CODE >172:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-F2 text13 CODE >157:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-F4 text13 CODE >173:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-FC text13 CODE >178:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-100 text13 CODE >181:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-104 text13 CODE >184:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-108 text13 CODE >187:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-10C text13 CODE >189:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-10E text13 CODE >175:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-128 text13 CODE >190:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-12C text13 CODE >192:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-53E text12 CODE >68:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-540 text12 CODE >70:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-548 text12 CODE >72:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-550 text12 CODE >75:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-578 text12 CODE >76:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-502 text11 CODE >47:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-504 text11 CODE >49:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-50C text11 CODE >51:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-514 text11 CODE >54:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-53C text11 CODE >55:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-442 text10 CODE >78:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-444 text10 CODE >80:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-44C text10 CODE >83:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-458 text10 CODE >85:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-480 text10 CODE >83:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-39E text9 CODE >47:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-39E text9 CODE >52:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-3A8 text9 CODE >53:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-3AC text9 CODE >54:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-3B0 text9 CODE >55:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-3BA text9 CODE >58:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-3C0 text9 CODE >59:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-3C6 text9 CODE >60:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-3D0 text9 CODE >61:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-3DA text9 CODE >62:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-3E4 text9 CODE >63:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-3EE text9 CODE >65:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-12E intcode_body CODE >249:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-160 intcode_body CODE >251:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-166 intcode_body CODE >254:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-168 intcode_body CODE >256:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-174 intcode_body CODE >258:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-178 intcode_body CODE >259:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-180 intcode_body CODE >262:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-184 intcode_body CODE >263:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-188 intcode_body CODE >266:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-18A intcode_body CODE >270:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-190 intcode_body CODE >273:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-192 intcode_body CODE >275:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-19A intcode_body CODE >276:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-1B2 intcode_body CODE >279:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-1BE intcode_body CODE >281:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-1C6 intcode_body CODE >282:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-1CA intcode_body CODE >283:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-1CE intcode_body CODE >284:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-1D0 intcode_body CODE >287:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-1D8 intcode_body CODE >288:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-1DC intcode_body CODE >289:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-1E0 intcode_body CODE >292:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-344 text7 CODE >206:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-344 text7 CODE >209:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-346 text7 CODE >210:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-350 text7 CODE >212:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-354 text7 CODE >213:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-35A text7 CODE >215:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-35C text7 CODE >218:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-35E text7 CODE >219:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-360 text7 CODE >222:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-362 text7 CODE >223:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-364 text7 CODE >224:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-366 text7 CODE >225:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-36C text7 CODE >226:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-372 text7 CODE >227:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-374 text7 CODE >228:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-376 text7 CODE >229:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-37E text7 CODE >230:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-386 text7 CODE >231:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-388 text7 CODE >232:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-38A text7 CODE >235:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-38C text7 CODE >236:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-38E text7 CODE >237:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-390 text7 CODE >238:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-392 text7 CODE >239:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-394 text7 CODE >240:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-396 text7 CODE >241:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-398 text7 CODE >242:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-39A text7 CODE >244:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-39C text7 CODE >246:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-286 text6 CODE >31:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-286 text6 CODE >32:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-28A text6 CODE >33:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-28E text6 CODE >34:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-292 text6 CODE >35:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-296 text6 CODE >36:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-29A text6 CODE >37:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-29E text6 CODE >40:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-2AA text6 CODE >41:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-2B6 text6 CODE >42:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-2DE text6 CODE >41:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-2E2 text6 CODE >40:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-596 text5 CODE >195:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-596 text5 CODE >198:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-59A text5 CODE >199:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-59E text5 CODE >200:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-5A2 text5 CODE >202:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-5A6 text5 CODE >203:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-5AA text5 CODE >204:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-5BE text4 CODE >99:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-5BE text4 CODE >100:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-5C2 text4 CODE >101:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-5C6 text4 CODE >102:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-5CA text4 CODE >103:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-57A text3 CODE >20:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-57C text3 CODE >21:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-594 text3 CODE >22:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-484 text2 CODE >24:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-486 text2 CODE >25:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-48C text2 CODE >26:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-4A6 text2 CODE >28:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-21C text1 CODE >105:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-21C text1 CODE >107:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-228 text1 CODE >109:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-234 text1 CODE >111:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-25E text1 CODE >112:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-264 text1 CODE >109:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-268 text1 CODE >117:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-26E text1 CODE >118:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-27E text1 CODE >119:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-282 text1 CODE >107:C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
-5AC text0 CODE >294:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-5AC text0 CODE >296:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-5B0 text0 CODE >297:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-5B4 text0 CODE >298:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-5B8 text0 CODE >311:C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
-4C4 cinit CODE >857:C:\Users\larsg\AppData\Local\Temp\saac.
-4C4 cinit CODE >859:C:\Users\larsg\AppData\Local\Temp\saac.
-4C4 cinit CODE >862:C:\Users\larsg\AppData\Local\Temp\saac.
-4C4 cinit CODE >900:C:\Users\larsg\AppData\Local\Temp\saac.
-4C8 cinit CODE >901:C:\Users\larsg\AppData\Local\Temp\saac.
-4CA cinit CODE >902:C:\Users\larsg\AppData\Local\Temp\saac.
-4CA cinit CODE >903:C:\Users\larsg\AppData\Local\Temp\saac.
-4CC cinit CODE >904:C:\Users\larsg\AppData\Local\Temp\saac.
-4CE cinit CODE >905:C:\Users\larsg\AppData\Local\Temp\saac.
-4D0 cinit CODE >908:C:\Users\larsg\AppData\Local\Temp\saac.
-4D4 cinit CODE >909:C:\Users\larsg\AppData\Local\Temp\saac.
-4D6 cinit CODE >910:C:\Users\larsg\AppData\Local\Temp\saac.
-4D6 cinit CODE >911:C:\Users\larsg\AppData\Local\Temp\saac.
-4D8 cinit CODE >912:C:\Users\larsg\AppData\Local\Temp\saac.
-4DA cinit CODE >913:C:\Users\larsg\AppData\Local\Temp\saac.
-4DC cinit CODE >918:C:\Users\larsg\AppData\Local\Temp\saac.
-4DE cinit CODE >919:C:\Users\larsg\AppData\Local\Temp\saac.
-4E0 cinit CODE >920:C:\Users\larsg\AppData\Local\Temp\saac.
-4E2 cinit CODE >921:C:\Users\larsg\AppData\Local\Temp\saac.
-4E4 cinit CODE >922:C:\Users\larsg\AppData\Local\Temp\saac.
-4E6 cinit CODE >923:C:\Users\larsg\AppData\Local\Temp\saac.
-4E8 cinit CODE >924:C:\Users\larsg\AppData\Local\Temp\saac.
-4EA cinit CODE >925:C:\Users\larsg\AppData\Local\Temp\saac.
-4EE cinit CODE >926:C:\Users\larsg\AppData\Local\Temp\saac.
-4F0 cinit CODE >927:C:\Users\larsg\AppData\Local\Temp\saac.
-4F4 cinit CODE >933:C:\Users\larsg\AppData\Local\Temp\saac.
-4F4 cinit CODE >935:C:\Users\larsg\AppData\Local\Temp\saac.
-4F6 cinit CODE >936:C:\Users\larsg\AppData\Local\Temp\saac.
-4F8 cinit CODE >938:C:\Users\larsg\AppData\Local\Temp\saac.
-4FA cinit CODE >939:C:\Users\larsg\AppData\Local\Temp\saac.
-4FC cinit CODE >940:C:\Users\larsg\AppData\Local\Temp\saac.
-4FE cinit CODE >941:C:\Users\larsg\AppData\Local\Temp\saac.
+2E6 text14 CODE >67:C:\Users\nickd\Documents\EniacArcade.X\main.c
+2E6 text14 CODE >69:C:\Users\nickd\Documents\EniacArcade.X\main.c
+2E8 text14 CODE >72:C:\Users\nickd\Documents\EniacArcade.X\main.c
+2EC text14 CODE >73:C:\Users\nickd\Documents\EniacArcade.X\main.c
+2F0 text14 CODE >74:C:\Users\nickd\Documents\EniacArcade.X\main.c
+2F2 text14 CODE >76:C:\Users\nickd\Documents\EniacArcade.X\main.c
+2F6 text14 CODE >77:C:\Users\nickd\Documents\EniacArcade.X\main.c
+2F8 text14 CODE >79:C:\Users\nickd\Documents\EniacArcade.X\main.c
+2FC text14 CODE >80:C:\Users\nickd\Documents\EniacArcade.X\main.c
+300 text14 CODE >81:C:\Users\nickd\Documents\EniacArcade.X\main.c
+302 text14 CODE >83:C:\Users\nickd\Documents\EniacArcade.X\main.c
+306 text14 CODE >84:C:\Users\nickd\Documents\EniacArcade.X\main.c
+30A text14 CODE >85:C:\Users\nickd\Documents\EniacArcade.X\main.c
+30C text14 CODE >87:C:\Users\nickd\Documents\EniacArcade.X\main.c
+310 text14 CODE >88:C:\Users\nickd\Documents\EniacArcade.X\main.c
+312 text14 CODE >90:C:\Users\nickd\Documents\EniacArcade.X\main.c
+316 text14 CODE >91:C:\Users\nickd\Documents\EniacArcade.X\main.c
+31A text14 CODE >93:C:\Users\nickd\Documents\EniacArcade.X\main.c
+31C text14 CODE >69:C:\Users\nickd\Documents\EniacArcade.X\main.c
+1A text13 CODE >96:C:\Users\nickd\Documents\EniacArcade.X\main.c
+1A text13 CODE >98:C:\Users\nickd\Documents\EniacArcade.X\main.c
+1E text13 CODE >99:C:\Users\nickd\Documents\EniacArcade.X\main.c
+24 text13 CODE >101:C:\Users\nickd\Documents\EniacArcade.X\main.c
+2E text13 CODE >108:C:\Users\nickd\Documents\EniacArcade.X\main.c
+32 text13 CODE >111:C:\Users\nickd\Documents\EniacArcade.X\main.c
+36 text13 CODE >114:C:\Users\nickd\Documents\EniacArcade.X\main.c
+3A text13 CODE >115:C:\Users\nickd\Documents\EniacArcade.X\main.c
+3C text13 CODE >104:C:\Users\nickd\Documents\EniacArcade.X\main.c
+50 text13 CODE >116:C:\Users\nickd\Documents\EniacArcade.X\main.c
+54 text13 CODE >117:C:\Users\nickd\Documents\EniacArcade.X\main.c
+56 text13 CODE >118:C:\Users\nickd\Documents\EniacArcade.X\main.c
+60 text13 CODE >125:C:\Users\nickd\Documents\EniacArcade.X\main.c
+64 text13 CODE >128:C:\Users\nickd\Documents\EniacArcade.X\main.c
+68 text13 CODE >131:C:\Users\nickd\Documents\EniacArcade.X\main.c
+6C text13 CODE >133:C:\Users\nickd\Documents\EniacArcade.X\main.c
+6E text13 CODE >121:C:\Users\nickd\Documents\EniacArcade.X\main.c
+82 text13 CODE >134:C:\Users\nickd\Documents\EniacArcade.X\main.c
+86 text13 CODE >137:C:\Users\nickd\Documents\EniacArcade.X\main.c
+88 text13 CODE >138:C:\Users\nickd\Documents\EniacArcade.X\main.c
+90 text13 CODE >140:C:\Users\nickd\Documents\EniacArcade.X\main.c
+9A text13 CODE >146:C:\Users\nickd\Documents\EniacArcade.X\main.c
+9E text13 CODE >147:C:\Users\nickd\Documents\EniacArcade.X\main.c
+A0 text13 CODE >149:C:\Users\nickd\Documents\EniacArcade.X\main.c
+A4 text13 CODE >150:C:\Users\nickd\Documents\EniacArcade.X\main.c
+A6 text13 CODE >152:C:\Users\nickd\Documents\EniacArcade.X\main.c
+AA text13 CODE >154:C:\Users\nickd\Documents\EniacArcade.X\main.c
+AC text13 CODE >142:C:\Users\nickd\Documents\EniacArcade.X\main.c
+BE text13 CODE >155:C:\Users\nickd\Documents\EniacArcade.X\main.c
+C0 text13 CODE >142:C:\Users\nickd\Documents\EniacArcade.X\main.c
+C2 text13 CODE >156:C:\Users\nickd\Documents\EniacArcade.X\main.c
+CC text13 CODE >163:C:\Users\nickd\Documents\EniacArcade.X\main.c
+D0 text13 CODE >164:C:\Users\nickd\Documents\EniacArcade.X\main.c
+D2 text13 CODE >166:C:\Users\nickd\Documents\EniacArcade.X\main.c
+D6 text13 CODE >167:C:\Users\nickd\Documents\EniacArcade.X\main.c
+D8 text13 CODE >169:C:\Users\nickd\Documents\EniacArcade.X\main.c
+DC text13 CODE >171:C:\Users\nickd\Documents\EniacArcade.X\main.c
+DE text13 CODE >159:C:\Users\nickd\Documents\EniacArcade.X\main.c
+F0 text13 CODE >175:C:\Users\nickd\Documents\EniacArcade.X\main.c
+F2 text13 CODE >159:C:\Users\nickd\Documents\EniacArcade.X\main.c
+F4 text13 CODE >176:C:\Users\nickd\Documents\EniacArcade.X\main.c
+FC text13 CODE >181:C:\Users\nickd\Documents\EniacArcade.X\main.c
+100 text13 CODE >184:C:\Users\nickd\Documents\EniacArcade.X\main.c
+104 text13 CODE >187:C:\Users\nickd\Documents\EniacArcade.X\main.c
+108 text13 CODE >190:C:\Users\nickd\Documents\EniacArcade.X\main.c
+10C text13 CODE >192:C:\Users\nickd\Documents\EniacArcade.X\main.c
+10E text13 CODE >178:C:\Users\nickd\Documents\EniacArcade.X\main.c
+128 text13 CODE >193:C:\Users\nickd\Documents\EniacArcade.X\main.c
+12C text13 CODE >195:C:\Users\nickd\Documents\EniacArcade.X\main.c
+53E text12 CODE >68:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+540 text12 CODE >70:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+548 text12 CODE >72:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+550 text12 CODE >75:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+578 text12 CODE >76:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+502 text11 CODE >47:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+504 text11 CODE >49:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+50C text11 CODE >51:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+514 text11 CODE >54:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+53C text11 CODE >55:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+442 text10 CODE >78:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+444 text10 CODE >80:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+44C text10 CODE >83:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+458 text10 CODE >85:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+480 text10 CODE >83:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+39E text9 CODE >47:C:\Users\nickd\Documents\EniacArcade.X\main.c
+39E text9 CODE >52:C:\Users\nickd\Documents\EniacArcade.X\main.c
+3A8 text9 CODE >53:C:\Users\nickd\Documents\EniacArcade.X\main.c
+3AC text9 CODE >54:C:\Users\nickd\Documents\EniacArcade.X\main.c
+3B0 text9 CODE >55:C:\Users\nickd\Documents\EniacArcade.X\main.c
+3BA text9 CODE >58:C:\Users\nickd\Documents\EniacArcade.X\main.c
+3C0 text9 CODE >59:C:\Users\nickd\Documents\EniacArcade.X\main.c
+3C6 text9 CODE >60:C:\Users\nickd\Documents\EniacArcade.X\main.c
+3D0 text9 CODE >61:C:\Users\nickd\Documents\EniacArcade.X\main.c
+3DA text9 CODE >62:C:\Users\nickd\Documents\EniacArcade.X\main.c
+3E4 text9 CODE >63:C:\Users\nickd\Documents\EniacArcade.X\main.c
+3EE text9 CODE >65:C:\Users\nickd\Documents\EniacArcade.X\main.c
+12E intcode_body CODE >252:C:\Users\nickd\Documents\EniacArcade.X\main.c
+160 intcode_body CODE >254:C:\Users\nickd\Documents\EniacArcade.X\main.c
+166 intcode_body CODE >257:C:\Users\nickd\Documents\EniacArcade.X\main.c
+168 intcode_body CODE >259:C:\Users\nickd\Documents\EniacArcade.X\main.c
+174 intcode_body CODE >261:C:\Users\nickd\Documents\EniacArcade.X\main.c
+178 intcode_body CODE >262:C:\Users\nickd\Documents\EniacArcade.X\main.c
+180 intcode_body CODE >265:C:\Users\nickd\Documents\EniacArcade.X\main.c
+184 intcode_body CODE >266:C:\Users\nickd\Documents\EniacArcade.X\main.c
+188 intcode_body CODE >269:C:\Users\nickd\Documents\EniacArcade.X\main.c
+18A intcode_body CODE >273:C:\Users\nickd\Documents\EniacArcade.X\main.c
+190 intcode_body CODE >276:C:\Users\nickd\Documents\EniacArcade.X\main.c
+192 intcode_body CODE >278:C:\Users\nickd\Documents\EniacArcade.X\main.c
+19A intcode_body CODE >279:C:\Users\nickd\Documents\EniacArcade.X\main.c
+1B2 intcode_body CODE >282:C:\Users\nickd\Documents\EniacArcade.X\main.c
+1BE intcode_body CODE >284:C:\Users\nickd\Documents\EniacArcade.X\main.c
+1C6 intcode_body CODE >285:C:\Users\nickd\Documents\EniacArcade.X\main.c
+1CA intcode_body CODE >286:C:\Users\nickd\Documents\EniacArcade.X\main.c
+1CE intcode_body CODE >287:C:\Users\nickd\Documents\EniacArcade.X\main.c
+1D0 intcode_body CODE >290:C:\Users\nickd\Documents\EniacArcade.X\main.c
+1D8 intcode_body CODE >291:C:\Users\nickd\Documents\EniacArcade.X\main.c
+1DC intcode_body CODE >292:C:\Users\nickd\Documents\EniacArcade.X\main.c
+1E0 intcode_body CODE >295:C:\Users\nickd\Documents\EniacArcade.X\main.c
+344 text7 CODE >209:C:\Users\nickd\Documents\EniacArcade.X\main.c
+344 text7 CODE >212:C:\Users\nickd\Documents\EniacArcade.X\main.c
+346 text7 CODE >213:C:\Users\nickd\Documents\EniacArcade.X\main.c
+350 text7 CODE >215:C:\Users\nickd\Documents\EniacArcade.X\main.c
+354 text7 CODE >216:C:\Users\nickd\Documents\EniacArcade.X\main.c
+35A text7 CODE >218:C:\Users\nickd\Documents\EniacArcade.X\main.c
+35C text7 CODE >221:C:\Users\nickd\Documents\EniacArcade.X\main.c
+35E text7 CODE >222:C:\Users\nickd\Documents\EniacArcade.X\main.c
+360 text7 CODE >225:C:\Users\nickd\Documents\EniacArcade.X\main.c
+362 text7 CODE >226:C:\Users\nickd\Documents\EniacArcade.X\main.c
+364 text7 CODE >227:C:\Users\nickd\Documents\EniacArcade.X\main.c
+366 text7 CODE >228:C:\Users\nickd\Documents\EniacArcade.X\main.c
+36C text7 CODE >229:C:\Users\nickd\Documents\EniacArcade.X\main.c
+372 text7 CODE >230:C:\Users\nickd\Documents\EniacArcade.X\main.c
+374 text7 CODE >231:C:\Users\nickd\Documents\EniacArcade.X\main.c
+376 text7 CODE >232:C:\Users\nickd\Documents\EniacArcade.X\main.c
+37E text7 CODE >233:C:\Users\nickd\Documents\EniacArcade.X\main.c
+386 text7 CODE >234:C:\Users\nickd\Documents\EniacArcade.X\main.c
+388 text7 CODE >235:C:\Users\nickd\Documents\EniacArcade.X\main.c
+38A text7 CODE >238:C:\Users\nickd\Documents\EniacArcade.X\main.c
+38C text7 CODE >239:C:\Users\nickd\Documents\EniacArcade.X\main.c
+38E text7 CODE >240:C:\Users\nickd\Documents\EniacArcade.X\main.c
+390 text7 CODE >241:C:\Users\nickd\Documents\EniacArcade.X\main.c
+392 text7 CODE >242:C:\Users\nickd\Documents\EniacArcade.X\main.c
+394 text7 CODE >243:C:\Users\nickd\Documents\EniacArcade.X\main.c
+396 text7 CODE >244:C:\Users\nickd\Documents\EniacArcade.X\main.c
+398 text7 CODE >245:C:\Users\nickd\Documents\EniacArcade.X\main.c
+39A text7 CODE >247:C:\Users\nickd\Documents\EniacArcade.X\main.c
+39C text7 CODE >249:C:\Users\nickd\Documents\EniacArcade.X\main.c
+286 text6 CODE >31:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+286 text6 CODE >32:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+28A text6 CODE >33:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+28E text6 CODE >34:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+292 text6 CODE >35:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+296 text6 CODE >36:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+29A text6 CODE >37:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+29E text6 CODE >40:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+2AA text6 CODE >41:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+2B6 text6 CODE >42:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+2DE text6 CODE >41:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+2E2 text6 CODE >40:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+596 text5 CODE >198:C:\Users\nickd\Documents\EniacArcade.X\main.c
+596 text5 CODE >201:C:\Users\nickd\Documents\EniacArcade.X\main.c
+59A text5 CODE >202:C:\Users\nickd\Documents\EniacArcade.X\main.c
+59E text5 CODE >203:C:\Users\nickd\Documents\EniacArcade.X\main.c
+5A2 text5 CODE >205:C:\Users\nickd\Documents\EniacArcade.X\main.c
+5A6 text5 CODE >206:C:\Users\nickd\Documents\EniacArcade.X\main.c
+5AA text5 CODE >207:C:\Users\nickd\Documents\EniacArcade.X\main.c
+5BE text4 CODE >99:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+5BE text4 CODE >100:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+5C2 text4 CODE >101:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+5C6 text4 CODE >102:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+5CA text4 CODE >103:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+57A text3 CODE >20:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+57C text3 CODE >21:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+594 text3 CODE >22:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+484 text2 CODE >24:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+486 text2 CODE >25:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+48C text2 CODE >26:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+4A6 text2 CODE >28:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+21C text1 CODE >105:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+21C text1 CODE >107:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+228 text1 CODE >109:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+234 text1 CODE >111:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+25E text1 CODE >112:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+264 text1 CODE >109:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+268 text1 CODE >117:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+26E text1 CODE >118:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+27E text1 CODE >119:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+282 text1 CODE >107:C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+5AC text0 CODE >297:C:\Users\nickd\Documents\EniacArcade.X\main.c
+5AC text0 CODE >299:C:\Users\nickd\Documents\EniacArcade.X\main.c
+5B0 text0 CODE >300:C:\Users\nickd\Documents\EniacArcade.X\main.c
+5B4 text0 CODE >301:C:\Users\nickd\Documents\EniacArcade.X\main.c
+5B8 text0 CODE >314:C:\Users\nickd\Documents\EniacArcade.X\main.c
+4C4 cinit CODE >857:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4C4 cinit CODE >859:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4C4 cinit CODE >862:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4C4 cinit CODE >900:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4C8 cinit CODE >901:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4CA cinit CODE >902:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4CA cinit CODE >903:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4CC cinit CODE >904:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4CE cinit CODE >905:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4D0 cinit CODE >908:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4D4 cinit CODE >909:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4D6 cinit CODE >910:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4D6 cinit CODE >911:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4D8 cinit CODE >912:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4DA cinit CODE >913:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4DC cinit CODE >918:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4DE cinit CODE >919:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4E0 cinit CODE >920:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4E2 cinit CODE >921:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4E4 cinit CODE >922:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4E6 cinit CODE >923:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4E8 cinit CODE >924:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4EA cinit CODE >925:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4EE cinit CODE >926:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4F0 cinit CODE >927:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4F4 cinit CODE >933:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4F4 cinit CODE >935:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4F6 cinit CODE >936:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4F8 cinit CODE >938:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4FA cinit CODE >939:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4FC cinit CODE >940:C:\Users\nickd\AppData\Local\Temp\s3d8.
+4FE cinit CODE >941:C:\Users\nickd\AppData\Local\Temp\s3d8.
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -347,7 +347,7 @@ __CFG_IESO$OFF 0 0 ABS 0 - dist/default/debug\EniacArcade.X.debug.obj
 __end_of_initialize 39E 0 CODE 0 text7 dist/default/debug\EniacArcade.X.debug.obj
 __end_of_refresh 286 0 CODE 0 text1 dist/default/debug\EniacArcade.X.debug.obj
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/debug\EniacArcade.X.debug.obj
-__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\larsg\AppData\Local\Temp\saac.obj
+__mediumconst 0 0 MEDIUMCONST 0 mediumconst C:\Users\nickd\AppData\Local\Temp\s3d8.obj
 ISR@value 18 0 COMRAM 1 cstackCOMRAM dist/default/debug\EniacArcade.X.debug.obj
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/debug\EniacArcade.X.debug.obj
 __CFG_MCLRE$ON 0 0 ABS 0 - dist/default/debug\EniacArcade.X.debug.obj
@@ -362,10 +362,10 @@ _LATC F8B 0 ABS 0 - dist/default/debug\EniacArcade.X.debug.obj
 _LATD F8C 0 ABS 0 - dist/default/debug\EniacArcade.X.debug.obj
 _PEIE 7F96 0 ABS 0 - dist/default/debug\EniacArcade.X.debug.obj
 _T0CS 7EAD 0 ABS 0 - dist/default/debug\EniacArcade.X.debug.obj
-___sp 0 0 STACK 2 stack C:\Users\larsg\AppData\Local\Temp\saac.obj
+___sp 0 0 STACK 2 stack C:\Users\nickd\AppData\Local\Temp\s3d8.obj
 _main 5AC 0 CODE 0 text0 dist/default/debug\EniacArcade.X.debug.obj
 btemp 30 0 COMRAM 1 temp dist/default/debug\EniacArcade.X.debug.obj
-start 16 0 CODE 0 init C:\Users\larsg\AppData\Local\Temp\saac.obj
+start 16 0 CODE 0 init C:\Users\nickd\AppData\Local\Temp\s3d8.obj
 __CFG_BOREN$OFF 0 0 ABS 0 - dist/default/debug\EniacArcade.X.debug.obj
 __size_of_main 0 0 ABS 0 - dist/default/debug\EniacArcade.X.debug.obj
 __size_of___lwdiv 0 0 ABS 0 - dist/default/debug\EniacArcade.X.debug.obj
@@ -375,11 +375,11 @@ __HbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/debug\EniacArcade.X.debug.obj
 __Hpowerup 16 0 CODE 0 powerup dist/default/debug\EniacArcade.X.debug.obj
 __size_of_initializeLED 0 0 ABS 0 - dist/default/debug\EniacArcade.X.debug.obj
 __HdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/debug\EniacArcade.X.debug.obj
-__accesstop 80 0 ABS 0 - C:\Users\larsg\AppData\Local\Temp\saac.obj
-intlevel0 0 0 CODE 0 text C:\Users\larsg\AppData\Local\Temp\saac.obj
-intlevel1 0 0 CODE 0 text C:\Users\larsg\AppData\Local\Temp\saac.obj
-intlevel2 0 0 CODE 0 text C:\Users\larsg\AppData\Local\Temp\saac.obj
-intlevel3 0 0 CODE 0 text C:\Users\larsg\AppData\Local\Temp\saac.obj
+__accesstop 80 0 ABS 0 - C:\Users\nickd\AppData\Local\Temp\s3d8.obj
+intlevel0 0 0 CODE 0 text C:\Users\nickd\AppData\Local\Temp\s3d8.obj
+intlevel1 0 0 CODE 0 text C:\Users\nickd\AppData\Local\Temp\s3d8.obj
+intlevel2 0 0 CODE 0 text C:\Users\nickd\AppData\Local\Temp\s3d8.obj
+intlevel3 0 0 CODE 0 text C:\Users\nickd\AppData\Local\Temp\s3d8.obj
 __LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/debug\EniacArcade.X.debug.obj
 _OSCCONbits FD3 0 ABS 0 - dist/default/debug\EniacArcade.X.debug.obj
 __LnvFARRAM 0 0 FARRAM 0 nvFARRAM dist/default/debug\EniacArcade.X.debug.obj
@@ -394,8 +394,8 @@ __Hclrtext 0 0 ABS 0 clrtext dist/default/debug\EniacArcade.X.debug.obj
 rowOff@i 4 0 COMRAM 1 cstackCOMRAM dist/default/debug\EniacArcade.X.debug.obj
 __pidataCOMRAM 5CC 0 CODE 0 idataCOMRAM dist/default/debug\EniacArcade.X.debug.obj
 __end_of_initializeLED 2E6 0 CODE 0 text6 dist/default/debug\EniacArcade.X.debug.obj
-___inthi_sp 0 0 STACK 2 stack C:\Users\larsg\AppData\Local\Temp\saac.obj
-___intlo_sp 0 0 STACK 2 stack C:\Users\larsg\AppData\Local\Temp\saac.obj
+___inthi_sp 0 0 STACK 2 stack C:\Users\nickd\AppData\Local\Temp\s3d8.obj
+___intlo_sp 0 0 STACK 2 stack C:\Users\nickd\AppData\Local\Temp\s3d8.obj
 __LdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/debug\EniacArcade.X.debug.obj
 __Hintcode_body 0 0 ABS 0 intcode_body dist/default/debug\EniacArcade.X.debug.obj
 __Lintsave_regs 0 0 BIGRAM 1 intsave_regs dist/default/debug\EniacArcade.X.debug.obj
@@ -452,7 +452,7 @@ __Htext9 0 0 ABS 0 text9 dist/default/debug\EniacArcade.X.debug.obj
 ___lwdiv@counter 7 0 COMRAM 1 cstackCOMRAM dist/default/debug\EniacArcade.X.debug.obj
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/debug\EniacArcade.X.debug.obj
 __Hbigram 0 0 ABS 0 bigram dist/default/debug\EniacArcade.X.debug.obj
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\larsg\AppData\Local\Temp\saac.obj
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\nickd\AppData\Local\Temp\s3d8.obj
 _setColHigh 57A 0 CODE 0 text3 dist/default/debug\EniacArcade.X.debug.obj
 __Hcomram 0 0 ABS 0 comram dist/default/debug\EniacArcade.X.debug.obj
 __Hconfig 30000E 0 CONFIG 0 config dist/default/debug\EniacArcade.X.debug.obj
@@ -560,8 +560,8 @@ initializeLED@i 1B 0 COMRAM 1 cstackCOMRAM dist/default/debug\EniacArcade.X.debu
 initializeLED@j 1C 0 COMRAM 1 cstackCOMRAM dist/default/debug\EniacArcade.X.debug.obj
 __end_of_writePong 3F0 0 CODE 0 text9 dist/default/debug\EniacArcade.X.debug.obj
 __size_of_writePong 0 0 ABS 0 - dist/default/debug\EniacArcade.X.debug.obj
-stackhi 5EE 0 ABS 0 - C:\Users\larsg\AppData\Local\Temp\saac.obj
-stacklo 100 0 ABS 0 - C:\Users\larsg\AppData\Local\Temp\saac.obj
+stackhi 5EE 0 ABS 0 - C:\Users\nickd\AppData\Local\Temp\s3d8.obj
+stacklo 100 0 ABS 0 - C:\Users\nickd\AppData\Local\Temp\s3d8.obj
 __Lintcode 8 0 CODE 0 intcode dist/default/debug\EniacArcade.X.debug.obj
 __end_of_getNextPosition 344 0 CODE 0 text14 dist/default/debug\EniacArcade.X.debug.obj
 off@column 4 0 COMRAM 1 cstackCOMRAM dist/default/debug\EniacArcade.X.debug.obj
@@ -607,7 +607,7 @@ __Ltext12 0 0 ABS 0 text12 dist/default/debug\EniacArcade.X.debug.obj
 __Ltext13 0 0 ABS 0 text13 dist/default/debug\EniacArcade.X.debug.obj
 __Ltext14 0 0 ABS 0 text14 dist/default/debug\EniacArcade.X.debug.obj
 __Ltext15 0 0 ABS 0 text15 dist/default/debug\EniacArcade.X.debug.obj
-__ramtop 600 0 RAM 0 ramtop C:\Users\larsg\AppData\Local\Temp\saac.obj
+__ramtop 600 0 RAM 0 ramtop C:\Users\nickd\AppData\Local\Temp\s3d8.obj
 __Lpowerup 16 0 CODE 0 powerup dist/default/debug\EniacArcade.X.debug.obj
 _getNextPosition 2E6 0 CODE 0 text14 dist/default/debug\EniacArcade.X.debug.obj
 __Leeprom_data 0 0 EEDATA 0 eeprom_data dist/default/debug\EniacArcade.X.debug.obj

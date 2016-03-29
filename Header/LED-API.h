@@ -14,6 +14,7 @@ extern void on(unsigned char column, unsigned char row);
 extern void rowOn(unsigned char row);
 extern void off(unsigned char column, unsigned char row);
 extern void rowOff(unsigned char row);
+extern void drawSymbol(unsigned char chosenSymbol, unsigned char offSetX);
 extern void turnAllOff();
 extern void initializeLED();
 extern void refresh();

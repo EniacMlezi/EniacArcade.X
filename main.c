@@ -20,7 +20,7 @@
 //Structure of a ball
 struct ballData
 {
-    //position, bPos[0] = ROW bPos[1] = COL
+    //position, bPos[0] = ROW Y bPos[1] = COL X
     unsigned char bPos[2];
     //[1-6] 
     unsigned char bDirection;
@@ -28,7 +28,9 @@ struct ballData
 
 //Structure of a player
 struct playerData
-{
+{  
+    //0: lowest 1: highest
+    unsigned char paddlePosOld[2];
     //0: lowest 1: highest
     unsigned char paddlePos[2];
     //amount of lives of an player
@@ -44,156 +46,16 @@ unsigned char _nextPos[2];
 unsigned int _speed = 200;
 unsigned int _timerCounter = 0;
 
-void writePong(void)
-{  
-    //write all positions
-    
-    //write ball positions
-    off(_ball.bPos[1], _ball.bPos[0]);
-    _ball.bPos[0] = _nextPos[0];
-    _ball.bPos[1] = _nextPos[1];
-    on(_ball.bPos[1], _ball.bPos[0]);
-    
-    //write paddle positions
-    rowOff(0);
-    rowOff(15);  
-    on(_p1.paddlePos[0], 0);
-    on(_p1.paddlePos[1], 0);
-    on(_p2.paddlePos[0], 15);
-    on(_p2.paddlePos[1], 15);
-    
-}
-
-void getNextPosition(void)
-{   
-    switch(_ball.bDirection)
-    {
-        case 1:
-            _nextPos[0] = _ball.bPos[0] + 1;
-            _nextPos[1] = _ball.bPos[1] + 1;
-            break;
-        case 2:
-            _nextPos[0] = _ball.bPos[0] + 1;
-            break;
-        case 3:
-            _nextPos[0] = _ball.bPos[0] - 1;
-            _nextPos[1] = _ball.bPos[1] + 1;      
-            break;
-        case 4:
-            _nextPos[0] = _ball.bPos[0] - 1;
-            _nextPos[1] = _ball.bPos[1] - 1;
-            break;
-        case 5:
-            _nextPos[0] = _ball.bPos[0] - 1;
-            break;
-        case 6:
-            _nextPos[0] = _ball.bPos[0] + 1;
-            _nextPos[1] = _ball.bPos[1] - 1;
-            break;
-    }
-}
-
-void checkNextPosition(void)
-{
-    getNextPosition();
-    if(_nextPos[0] == 0)
-    {
-        if(_p1.paddlePos[0] == _nextPos[1])
-        {
-            //paddle collision           
-            switch(_ball.bDirection)
-            {
-                //process 6, 5, 4. redirect ball
-                case 4:
-                    _ball.bDirection = 3;
-                    break;
-                case 5:
-                    _ball.bDirection = 1;
-                    break;
-                case 6:
-                    _ball.bDirection = 2;
-            }
-            getNextPosition();
-        }
-        else if(_p1.paddlePos[1] == _nextPos[1])
-        {
-            //paddle collision
-            switch(_ball.bDirection)
-            {
-                //process 6, 5, 4. redirect ball
-                case 4:
-                    _ball.bDirection = 2;
-                    break;
-                case 5:
-                    _ball.bDirection = 3;
-                    break;
-                case 6:
-                    _ball.bDirection = 1;
-            }
-            getNextPosition();
-        }
-        //scored!!
-    }
-    else if(_nextPos[0] == 15)
-    {
-        if(_p2.paddlePos[0] == _nextPos[1])
-        {
-           switch(_ball.bDirection)
-            {
-                //process 6, 5, 4. redirect ball
-                case 1:
-                    _ball.bDirection = 5;
-                    break;
-                case 2:
-                    _ball.bDirection = 6;
-                    break;
-                case 3:
-                    _ball.bDirection = 4;
-            }
-        }
-        else if( _p2.paddlePos[1] == _nextPos[1])
-        {
-            //paddle collision
-            switch(_ball.bDirection)
-            {
-                //process 6, 5, 4. redirect ball
-                case 1:
-                    _ball.bDirection = 6;
-                    break;
-                case 2:
-                    _ball.bDirection = 4;
-                    break;
-                case 3:
-                    _ball.bDirection = 5;
-            }
-        }
-        
-        // scored!!
-    }
-    else if(_nextPos[0] < 0 || _nextPos[0] > 7)
-    {
-        switch(_ball.bDirection)
-        {
-            case 1:
-                _ball.bDirection = 3;
-                break;
-            case 3:
-                _ball.bDirection = 1;
-                break;
-            case 4:
-                _ball.bDirection = 6;
-                break;
-            case 6:
-                _ball.bDirection = 4;
-                break;
-        }
-        getNextPosition();
-    }
-}
-
 //Initializes structure values
-void initializePONG(void)
+void initializePong(void)
 {    
+    //Display player lives
+    turnAllOff();
+    drawSymbol(_p1.lives, 0);
+    drawSymbol(_p2.lives, 8);
+    __delay_us(500);
+    turnAllOff();
+    
     //random ball generation
     _ball.bDirection = 3;//should be random
     _ball.bPos[0] = 2;//should be random
@@ -211,7 +73,7 @@ void initialize()
     
     OSCCONbits.SCS = 00; // set primary oscillator(internal) as System Clock
     OSCCONbits.IRCF = 111; // set Internal Oscillator Frequency Select bits to 8MHz 
-    
+    //Get oscillator clock value as seed for the random gen
     PLLEN = 1; // Enable PLLx4 for 32MHz Clock Frequency    
     
     //setup interrupts
@@ -242,7 +104,171 @@ void initialize()
     TMR0IF = 0; // clear TIMER0 Interrupt Flag bit
     //start the timer
     TMR0ON = 1; // set Timer0 On/Off Control bit to on  
+}
+
+//Display the new paddle- and led positions
+void writePong(void)
+{  
+    //write all positions
     
+    //write ball positions
+    off(_ball.bPos[1], _ball.bPos[0]);
+    _ball.bPos[0] = _nextPos[0];
+    _ball.bPos[1] = _nextPos[1];
+    on(_ball.bPos[1], _ball.bPos[0]);
+    
+    //write paddle positions
+    off(_p1.paddlePosOld[0], 0);
+    off(_p1.paddlePosOld[1], 0);
+ 
+    off(_p2.paddlePosOld[0], 15);
+    off(_p2.paddlePosOld[1], 15);
+    
+    on(_p1.paddlePos[0], 0);
+    on(_p1.paddlePos[1], 0);
+    on(_p2.paddlePos[0], 15);
+    on(_p2.paddlePos[1], 15);
+    
+}
+
+//Works (Don't edit!!)
+void getNextPosition(void)
+{   
+    switch(_ball.bDirection)
+    {
+        case 1:
+            _nextPos[0] = _ball.bPos[0] + 1;
+            _nextPos[1] = _ball.bPos[1] + 1;
+            break;
+        case 2:
+            _nextPos[0] = _ball.bPos[0] + 1;
+            break;
+        case 3:
+            _nextPos[0] = _ball.bPos[0] + 1;
+            _nextPos[1] = _ball.bPos[1] - 1;      
+            break;
+        case 4:
+            _nextPos[0] = _ball.bPos[0] - 1;
+            _nextPos[1] = _ball.bPos[1] - 1;
+            break;
+        case 5:
+            _nextPos[0] = _ball.bPos[0] - 1;
+            break;
+        case 6:
+            _nextPos[0] = _ball.bPos[0] - 1;
+            _nextPos[1] = _ball.bPos[1] + 1;
+            break;
+    }
+}
+
+void checkNextPosition(void)
+{
+    getNextPosition();
+    if(_nextPos[0] == 0)
+    {
+        if(_p1.paddlePos[0] == _nextPos[1])
+        {
+            //paddle collision           
+            switch(_ball.bDirection)
+            {
+                //process 6, 5, 4. redirect ball
+                case 4:
+                    _ball.bDirection = 2;
+                    break;
+                case 5:
+                    _ball.bDirection = 1;
+                    break;
+                case 6:
+                    _ball.bDirection = 2;
+            }
+            getNextPosition();
+            return;
+        }
+        else if(_p1.paddlePos[1] == _nextPos[1])
+        {
+            //paddle collision
+            switch(_ball.bDirection)
+            {
+                //process 6, 5, 4. redirect ball
+                case 4:
+                    _ball.bDirection = 1;
+                    break;
+                case 5:
+                    _ball.bDirection = 3;
+                    break;
+                case 6:
+                    _ball.bDirection = 3;
+                    break;
+            }
+            getNextPosition();
+            return;
+        }
+        //scored
+        _p1.lives--;
+        initializePong();
+    }
+    else if(_nextPos[0] == 15)
+    {
+        if(_p2.paddlePos[0] == _nextPos[1])
+        {
+           switch(_ball.bDirection)
+            {
+                //process 6, 5, 4. redirect ball
+                case 1:
+                    _ball.bDirection = 4;
+                    break;
+                case 2:
+                    _ball.bDirection = 6;
+                    break;
+                case 3:
+                    _ball.bDirection = 5;
+                    break;
+            }
+           getNextPosition();
+           return;
+        }
+        else if( _p2.paddlePos[1] == _nextPos[1])
+        {
+            //paddle collision
+            switch(_ball.bDirection)
+            {
+                case 1:
+                    _ball.bDirection = 4;
+                    break;
+                case 2:
+                    _ball.bDirection = 4;
+                    break;
+                case 3:
+                    _ball.bDirection = 6;
+                    break;
+            }
+            getNextPosition();
+            return;
+        }
+        //scored
+        _p2.lives--;
+        initializePong();
+    }
+    else if(_nextPos[1] < 0 || _nextPos[1] > 7)
+    {
+        switch(_ball.bDirection)
+        {
+            case 1:
+                _ball.bDirection = 3;
+                break;
+            case 3:
+                _ball.bDirection = 1;
+                break;
+            case 4:
+                _ball.bDirection = 6;
+                break;
+            case 6:
+                _ball.bDirection = 4;
+                break;
+        }
+        getNextPosition();
+        return;
+    }
 }
 
 //Interrupt Service Routine
@@ -278,14 +304,24 @@ void interrupt ISR(void)
         // select which paddle needs to refresh
         if(ADCON0bits.CHS == 12)
         {       
-            ADCON0bits.CHS = 10; //next refresh will be on channel 10
+            ADCON0bits.CHS = 10; //next refresh will be on channel 10    
+            
+            //Write the current(old) position to the paddlePosOld variable
+            _p1.paddlePosOld[0] = _p1.paddlePos[0];
             _p1.paddlePos[0] = value;
+             //Write the current(old) position to the paddlePosOld variable           
+            _p1.paddlePosOld[1] = _p1.paddlePos[1];
             _p1.paddlePos[1] = value + 1;
         }
         else
         {
             ADCON0bits.CHS = 12; // next refresh will be on channel 12
+            
+            //Write the current(old) position to the paddlePosOld variable
+            _p2.paddlePosOld[0] = _p2.paddlePos[0];
             _p2.paddlePos[0] = value;
+            //Write the current(old) position to the paddlePosOld variable
+            _p2.paddlePosOld[1] = _p2.paddlePos[1];
             _p2.paddlePos[1] = value + 1;
         }
     }
@@ -294,7 +330,7 @@ void interrupt ISR(void)
 void main(void) 
 {
     initializeLED();
-    initializePONG();
+    initializePong();
     initialize();
     
     //LED symbols for displaying for the game start

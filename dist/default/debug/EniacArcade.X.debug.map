@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files (x86)\Microchip\xc8\v1.37\dat\en_msgs.txt -cs \
   -h+dist/default/debug\EniacArcade.X.debug.sym \
   --cmf=dist/default/debug\EniacArcade.X.debug.cmf -z -Q18F4520 \
-  -oC:\Users\larsg\AppData\Local\Temp\saac.2 \
+  -oC:\Users\nickd\AppData\Local\Temp\s3d8.2 \
   -Mdist/default/debug/EniacArcade.X.debug.map -E1 -ver=XC8 \
   -ASTACK=0100h-05eeh -pstack=STACK -ACODE=00h-07CFFh -ACONST=00h-07CFFh \
   -ASMALLCONST=0600h-06FFhx119 -AMEDIUMCONST=0600h-07CFFh -ACOMRAM=01h-07Fh \
@@ -23,7 +23,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\larsg\AppData\Local\Temp\saac.obj \
+  C:\Users\nickd\AppData\Local\Temp\s3d8.obj \
   dist/default/debug\EniacArcade.X.debug.obj 
 
 Object code version is 3.11
@@ -36,7 +36,7 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\larsg\AppData\Local\Temp\saac.obj
+C:\Users\nickd\AppData\Local\Temp\s3d8.obj
                 end_init                             16       16        4        4       0
                 reset_vec                             0        0        6        0       0
                 idloc                            200000   200000        8   200000       0
@@ -519,7 +519,7 @@ FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
-		line 294 in file "main.c"
+		line 297 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -678,7 +678,7 @@ Total ram usage:        0 bytes
 
  *************** function _initializePONG *****************
  Defined at:
-		line 195 in file "main.c"
+		line 198 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -739,7 +739,7 @@ Total ram usage:        4 bytes
 
  *************** function _initialize *****************
  Defined at:
-		line 206 in file "main.c"
+		line 209 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -769,7 +769,7 @@ Total ram usage:        0 bytes
 
  *************** function _ISR *****************
  Defined at:
-		line 249 in file "main.c"
+		line 252 in file "main.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
