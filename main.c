@@ -64,10 +64,15 @@ void startPong(void)
     while(!delaySeconds(2));
     turnAllOff();
     
+    //Seed random algorithm
+   //rndInit()
     //random ball generation
     _ball.bDirection = 3;//should be random
+    //_ball.bDirection = getRandom(0, 7);
     _ball.bPos[0] = 2;//should be random
+    //_ball.bPos[0] = getRandom(7, 10);
     _ball.bPos[1] = 4;//should be random
+    //_ball.bPos[1] = getRandom(1, 8);
     
     _nextPos[0] = _ball.bPos[0];
     _nextPos[1] = _ball.bPos[1];
