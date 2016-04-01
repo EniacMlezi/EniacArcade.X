@@ -102,6 +102,9 @@ void drawSymbol(unsigned char chosenSymbol, unsigned char offSetX)
     {6,6},{5,7},{4,7},{3,7},{2,6},{2,5},{2,4},{2,3},{2,2},{2,1},{3,0},{4,0},{5,0},{6,1},{5,2},{4,2}, /*G*/
     {9,6},{9,5},{9,4},{9,3},{9,2},{9,1},{10,0},{11,0},{12,0},{13,1},{13,2},{13,4},{13,5},{13,6},{12,7},{11,7},{10,7}};/*O*/
     
+    char symbolArrowRight[15][2] = {{0,3},{1,3},{2,3},{3,3},{4,3},{5,3},{6,3},{7,3},{8,3},{7,4},{6,5},{5,7},{6,2},{5,1},{4,0}}; //--->
+    char symbolArrowLeft[15][2] = {{0,3},{1,3},{2,3},{3,3},{4,3},{5,3}, {6,3},{7,3},{8,3}, {1,4},{2,5},{3,6},{1,2},{2,1},{3,0}}; // <---
+    
     switch(chosenSymbol)
     {
         //symbolOne
@@ -143,7 +146,21 @@ void drawSymbol(unsigned char chosenSymbol, unsigned char offSetX)
             turnAllOff();
             for(unsigned char i = 0; i < 34; i++)
             {
-                //on(symbolGo[i][0] + offSetX, symbolGo[i][1]);
+                on(symbolGo[i][0] + offSetX, symbolGo[i][1]);
+            }
+            break;
+        case 6:
+            turnAllOff();
+            for(unsigned char i = 0; i < 15; i++)
+            {
+                on(symbolGo[i][0] + offSetX, symbolGo[i][1]);
+            }
+            break;
+        case 7:
+            turnAllOff();
+            for(unsigned char i = 0; i < 15; i++)
+            {
+                on(symbolGo[i][0] + offSetX, symbolGo[i][1]);
             }
             break;
     }
