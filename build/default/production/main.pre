@@ -4226,9 +4226,14 @@ while(!delaySeconds(2));
 turnAllOff();
 
 
+
+
 _ball.bDirection = 3;
+
 _ball.bPos[0] = 2;
+
 _ball.bPos[1] = 4;
+
 
 _nextPos[0] = _ball.bPos[0];
 _nextPos[1] = _ball.bPos[1];
@@ -4521,6 +4526,6 @@ const char TWO_SYMBOL;
 const char ONE_SYMBOL;
 const char GO_SYMBOL;
 
-# 367
+# 372
 while(1){ refresh(); };
 }
