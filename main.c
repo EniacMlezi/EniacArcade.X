@@ -9,6 +9,8 @@
 #define _XTAL_FREQ 32000000
 #endif
 
+#define DEFAULTSPEED 200
+
 #include <p18f4520.h>
 #include <xc.h>
 #include <time.h>
@@ -43,31 +45,29 @@ struct playerData _p1;
 struct playerData _p2;
 unsigned char _nextPos[2];
 
-unsigned int _speed = 200;
+unsigned int _speed = DEFAULTSPEED;
 unsigned int _timerCounter = 0;
 
-bit delaySeconds(int numberOfSeconds)
+void delaySeconds(int numberOfSeconds)
 {
     for(int i = 0; i < numberOfSeconds * 100; i++)
-        __delay_ms(10);
-    
-    return 1;
+        __delay_ms(10);   
 }
 
 //shows player lives and resets ball structure values
 void startPong(void)
 {    
+    _speed = DEFAULTSPEED;
+    
     //Display player lives
     turnAllOff();
     drawSymbol(_p1.lives, 0);
     drawSymbol(_p2.lives, 8);
-    while(!delaySeconds(2))
+    for(unsigned int counter = 0; counter < 800; counter ++)
     {
         refresh();
     }
-    turnAllOff();
-    
-    //3, 2, 1, GO
+    turnAllOff();  
     
     //Seed random algorithm
    //rndInit()
@@ -160,8 +160,7 @@ void writePong(void)
     on(_p1.paddlePos[0], 0);
     on(_p1.paddlePos[1], 0);
     on(_p2.paddlePos[0], 15);
-    on(_p2.paddlePos[1], 15);
-    
+    on(_p2.paddlePos[1], 15);   
 }
 
 //Works (Don't edit!!)
@@ -201,7 +200,9 @@ void checkNextPosition(void)
     {
         if(_p1.paddlePos[0] == _nextPos[1])
         {
-            //paddle collision           
+            //paddle collision          
+            if(_speed > 50)
+                _speed = _speed - 3;
             switch(_ball.bDirection)
             {
                 //process 6, 5, 4. redirect ball
@@ -220,6 +221,9 @@ void checkNextPosition(void)
         else if(_p1.paddlePos[1] == _nextPos[1])
         {
             //paddle collision
+            
+            if(_speed > 50)
+                _speed = _speed - 3;
             switch(_ball.bDirection)
             {
                 //process 6, 5, 4. redirect ball
@@ -242,7 +246,13 @@ void checkNextPosition(void)
          if(_p1.lives == 0)
         {
             //drawsymbol
-            drawSymbol(7, 8);
+            turnAllOff();
+            drawSymbol(7, 8);           
+            for(unsigned int counter = 0; counter < 800; counter ++)
+            {
+                refresh();
+            }
+            turnAllOff(); 
             
             //restart
             initializePong();
@@ -256,6 +266,8 @@ void checkNextPosition(void)
     {
         if(_p2.paddlePos[0] == _nextPos[1])
         {
+            if(_speed > 50)
+                _speed = _speed - 3;
            switch(_ball.bDirection)
             {
                 //process 6, 5, 4. redirect ball
@@ -274,7 +286,9 @@ void checkNextPosition(void)
         }
         else if( _p2.paddlePos[1] == _nextPos[1])
         {
-            //paddle collision
+            //paddle collision           
+            if(_speed > 50)
+                _speed = _speed -3;
             switch(_ball.bDirection)
             {
                 case 1:
@@ -295,7 +309,13 @@ void checkNextPosition(void)
         if(_p2.lives == 0)
         {
             //drawsymbol
+            turnAllOff();
             drawSymbol(6, 0);
+            for(unsigned int counter = 0; counter < 800; counter ++)
+            {
+                refresh();
+            }
+            turnAllOff(); 
             
             //restart
             initializePong();
@@ -363,22 +383,22 @@ void interrupt ISR(void)
             ADCON0bits.CHS = 10; //next refresh will be on channel 10    
             
             //Write the current(old) position to the paddlePosOld variable
-            _p1.paddlePosOld[0] = _p1.paddlePos[0];
-            _p1.paddlePos[0] = value;
+            _p2.paddlePosOld[0] = _p2.paddlePos[0];
+            _p2.paddlePos[0] = value;
              //Write the current(old) position to the paddlePosOld variable           
-            _p1.paddlePosOld[1] = _p1.paddlePos[1];
-            _p1.paddlePos[1] = value + 1;
+            _p2.paddlePosOld[1] = _p2.paddlePos[1];
+            _p2.paddlePos[1] = value + 1;
         }
         else
         {
             ADCON0bits.CHS = 12; // next refresh will be on channel 12
             
             //Write the current(old) position to the paddlePosOld variable
-            _p2.paddlePosOld[0] = _p2.paddlePos[0];
-            _p2.paddlePos[0] = value;
+            _p1.paddlePosOld[0] = _p1.paddlePos[0];
+            _p1.paddlePos[0] = value;
             //Write the current(old) position to the paddlePosOld variable
-            _p2.paddlePosOld[1] = _p2.paddlePos[1];
-            _p2.paddlePos[1] = value + 1;
+            _p1.paddlePosOld[1] = _p1.paddlePos[1];
+            _p1.paddlePos[1] = value + 1;
         }
     }
 }

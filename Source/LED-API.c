@@ -37,11 +37,7 @@ void initializeLED() {
     LATD = 0b00000000; // write 0 to all pins
 
     //write 0 to the pixels array
-    for (unsigned char i = 0; i < COLUMNS; i++) {
-        for (unsigned char j = 0; j < ROWS; j++) {
-            pixels[i][j] = 0;
-        }
-    }
+    turnAllOff();
 }
 
 void on(unsigned char column, unsigned char row) {
@@ -134,7 +130,6 @@ void drawSymbol(unsigned char chosenSymbol, unsigned char offSetX)
         //symbolPlay
         case 4:                
             //draw symbol in with given x position
-            turnAllOff();
             for(unsigned char i = 0; i < 34; i++)
             {
                 on(symbolPlay[i][1], symbolPlay[i][0]  + offSetX);
@@ -143,21 +138,18 @@ void drawSymbol(unsigned char chosenSymbol, unsigned char offSetX)
         //symbolGo
         case 5:         
             //draw symbol in with given x position
-            turnAllOff();
             for(unsigned char i = 0; i < 34; i++)
             {
                 on(symbolGo[i][1], symbolGo[i][0]);
             }
             break;
         case 6:
-            turnAllOff();
             for(unsigned char i = 0; i < 15; i++)
             {
                 on(symbolArrowLeft[i][1], symbolGo[i][0] + offSetX);
             }
             break;
         case 7:
-            turnAllOff();
             for(unsigned char i = 0; i < 15; i++)
             {
                 on(symbolArrowRight[i][1], symbolGo[i][0]+ offSetX);

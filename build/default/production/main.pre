@@ -4178,7 +4178,7 @@ extern void turnAllOff();
 extern void initializeLED();
 extern void refresh();
 
-# 21 "main.c"
+# 23 "main.c"
 struct ballData
 {
 
@@ -4207,28 +4207,30 @@ unsigned char _nextPos[2];
 unsigned int _speed = 200;
 unsigned int _timerCounter = 0;
 
-bit delaySeconds(int numberOfSeconds)
+void delaySeconds(int numberOfSeconds)
 {
 for(int i = 0; i < numberOfSeconds * 100; i++)
 _delay((unsigned long)((10)*(32000000/4000.0)));
-
-return 1;
 }
 
 
 void startPong(void)
 {
+_speed = 200;
+
 
 turnAllOff();
 drawSymbol(_p1.lives, 0);
 drawSymbol(_p2.lives, 8);
-while(!delaySeconds(2))
+for(unsigned int counter = 0; counter < 800; counter ++)
 {
 refresh();
 }
 turnAllOff();
 
-# 75
+
+
+
 _ball.bDirection = 3;
 
 _ball.bPos[0] = 2;
@@ -4318,7 +4320,6 @@ on(_p1.paddlePos[0], 0);
 on(_p1.paddlePos[1], 0);
 on(_p2.paddlePos[0], 15);
 on(_p2.paddlePos[1], 15);
-
 }
 
 
@@ -4359,6 +4360,8 @@ if(_nextPos[0] == 0)
 if(_p1.paddlePos[0] == _nextPos[1])
 {
 
+if(_speed > 50)
+_speed = _speed - 3;
 switch(_ball.bDirection)
 {
 
@@ -4377,6 +4380,9 @@ return;
 else if(_p1.paddlePos[1] == _nextPos[1])
 {
 
+
+if(_speed > 50)
+_speed = _speed - 3;
 switch(_ball.bDirection)
 {
 
@@ -4399,7 +4405,13 @@ _p1.lives--;
 if(_p1.lives == 0)
 {
 
+turnAllOff();
 drawSymbol(7, 8);
+for(unsigned int counter = 0; counter < 800; counter ++)
+{
+refresh();
+}
+turnAllOff();
 
 
 initializePong();
@@ -4413,6 +4425,8 @@ else if(_nextPos[0] == 15)
 {
 if(_p2.paddlePos[0] == _nextPos[1])
 {
+if(_speed > 50)
+_speed = _speed - 3;
 switch(_ball.bDirection)
 {
 
@@ -4432,6 +4446,8 @@ return;
 else if( _p2.paddlePos[1] == _nextPos[1])
 {
 
+if(_speed > 50)
+_speed = _speed -3;
 switch(_ball.bDirection)
 {
 case 1:
@@ -4452,7 +4468,13 @@ _p2.lives--;
 if(_p2.lives == 0)
 {
 
+turnAllOff();
 drawSymbol(6, 0);
+for(unsigned int counter = 0; counter < 800; counter ++)
+{
+refresh();
+}
+turnAllOff();
 
 
 initializePong();
@@ -4520,22 +4542,22 @@ if(ADCON0bits.CHS == 12)
 ADCON0bits.CHS = 10;
 
 
-_p1.paddlePosOld[0] = _p1.paddlePos[0];
-_p1.paddlePos[0] = value;
+_p2.paddlePosOld[0] = _p2.paddlePos[0];
+_p2.paddlePos[0] = value;
 
-_p1.paddlePosOld[1] = _p1.paddlePos[1];
-_p1.paddlePos[1] = value + 1;
+_p2.paddlePosOld[1] = _p2.paddlePos[1];
+_p2.paddlePos[1] = value + 1;
 }
 else
 {
 ADCON0bits.CHS = 12;
 
 
-_p2.paddlePosOld[0] = _p2.paddlePos[0];
-_p2.paddlePos[0] = value;
+_p1.paddlePosOld[0] = _p1.paddlePos[0];
+_p1.paddlePos[0] = value;
 
-_p2.paddlePosOld[1] = _p2.paddlePos[1];
-_p2.paddlePos[1] = value + 1;
+_p1.paddlePosOld[1] = _p1.paddlePos[1];
+_p1.paddlePos[1] = value + 1;
 }
 }
 }

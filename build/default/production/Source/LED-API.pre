@@ -3984,11 +3984,7 @@ LATC = 0b00000000;
 LATD = 0b00000000;
 
 
-for (unsigned char i = 0; i < 8; i++) {
-for (unsigned char j = 0; j < 16; j++) {
-pixels[i][j] = 0;
-}
-}
+turnAllOff();
 }
 
 void on(unsigned char column, unsigned char row) {
@@ -4081,7 +4077,6 @@ break;
 
 case 4:
 
-turnAllOff();
 for(unsigned char i = 0; i < 34; i++)
 {
 on(symbolPlay[i][1], symbolPlay[i][0] + offSetX);
@@ -4090,21 +4085,18 @@ break;
 
 case 5:
 
-turnAllOff();
 for(unsigned char i = 0; i < 34; i++)
 {
 on(symbolGo[i][1], symbolGo[i][0]);
 }
 break;
 case 6:
-turnAllOff();
 for(unsigned char i = 0; i < 15; i++)
 {
 on(symbolArrowLeft[i][1], symbolGo[i][0] + offSetX);
 }
 break;
 case 7:
-turnAllOff();
 for(unsigned char i = 0; i < 15; i++)
 {
 on(symbolArrowRight[i][1], symbolGo[i][0]+ offSetX);
