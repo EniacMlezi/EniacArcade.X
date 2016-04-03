@@ -4222,12 +4222,13 @@ void startPong(void)
 turnAllOff();
 drawSymbol(_p1.lives, 0);
 drawSymbol(_p2.lives, 8);
-while(!delaySeconds(2));
+while(!delaySeconds(2))
+{
+refresh();
+}
 turnAllOff();
 
-
-
-
+# 75
 _ball.bDirection = 3;
 
 _ball.bPos[0] = 2;
@@ -4245,10 +4246,13 @@ void initializePong(void)
 
 
 
-_p1.lives = 2;
-_p2.lives = 2;
+_p1.lives = 3;
+_p2.lives = 3;
 
 startPong();
+
+
+TMR0ON = 1;
 }
 
 void initialize()
@@ -4289,7 +4293,7 @@ T08BIT = 1;
 TMR0IE = 1;
 TMR0IF = 0;
 
-TMR0ON = 1;
+TMR0ON = 0;
 }
 
 
@@ -4390,8 +4394,20 @@ getNextPosition();
 return;
 }
 
+
 _p1.lives--;
+if(_p1.lives == 0)
+{
+
+drawSymbol(7, 8);
+
+
+initializePong();
+}
+else
+{
 startPong();
+}
 }
 else if(_nextPos[0] == 15)
 {
@@ -4433,7 +4449,18 @@ return;
 }
 
 _p2.lives--;
+if(_p2.lives == 0)
+{
+
+drawSymbol(6, 0);
+
+
+initializePong();
+}
+else
+{
 startPong();
+}
 }
 else if(_nextPos[1] < 0 || _nextPos[1] > 7)
 {
@@ -4515,17 +4542,11 @@ _p2.paddlePos[1] = value + 1;
 
 void main(void)
 {
+initialize();
 initializeLED();
 initializePong();
-initialize();
 
 
-const char HELLO_SYMBOL;
-const char THREE_SYMBOL;
-const char TWO_SYMBOL;
-const char ONE_SYMBOL;
-const char GO_SYMBOL;
 
-# 372
 while(1){ refresh(); };
 }

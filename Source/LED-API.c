@@ -112,7 +112,7 @@ void drawSymbol(unsigned char chosenSymbol, unsigned char offSetX)
             //draw symbol in with given x position
             for(unsigned char i = 0; i < 12; i++)
             {
-                on(symbolOne[i][0] + offSetX, symbolOne[i][1]);
+                on(symbolOne[i][1], symbolOne[i][0] + offSetX);
             }
             break;
         //symbolTwo
@@ -120,7 +120,7 @@ void drawSymbol(unsigned char chosenSymbol, unsigned char offSetX)
             //draw symbol in with given x position
             for(unsigned char i = 0; i < 14; i++)
             {
-                on(symbolTwo[i][0] + offSetX, symbolTwo[i][1]);
+                on(symbolTwo[i][1], symbolTwo[i][0] + offSetX);
             }
             break;
         //symbolThree
@@ -128,7 +128,7 @@ void drawSymbol(unsigned char chosenSymbol, unsigned char offSetX)
             //draw symbol in with given x position
             for(unsigned char i = 0; i < 12; i++)
             {
-                on(symbolThree[i][0]  + offSetX, symbolThree[i][1]);
+                on(symbolThree[i][1], symbolThree[i][0] + offSetX);
             }
             break;
         //symbolPlay
@@ -137,7 +137,7 @@ void drawSymbol(unsigned char chosenSymbol, unsigned char offSetX)
             turnAllOff();
             for(unsigned char i = 0; i < 34; i++)
             {
-                on(symbolPlay[i][0]  + offSetX, symbolPlay[i][1]);
+                on(symbolPlay[i][1], symbolPlay[i][0]  + offSetX);
             }
             break;
         //symbolGo
@@ -146,21 +146,21 @@ void drawSymbol(unsigned char chosenSymbol, unsigned char offSetX)
             turnAllOff();
             for(unsigned char i = 0; i < 34; i++)
             {
-                on(symbolGo[i][0] + offSetX, symbolGo[i][1]);
+                on(symbolGo[i][1], symbolGo[i][0]);
             }
             break;
         case 6:
             turnAllOff();
             for(unsigned char i = 0; i < 15; i++)
             {
-                on(symbolGo[i][0] + offSetX, symbolGo[i][1]);
+                on(symbolArrowLeft[i][1], symbolGo[i][0] + offSetX);
             }
             break;
         case 7:
             turnAllOff();
             for(unsigned char i = 0; i < 15; i++)
             {
-                on(symbolGo[i][0] + offSetX, symbolGo[i][1]);
+                on(symbolArrowRight[i][1], symbolGo[i][0]+ offSetX);
             }
             break;
     }

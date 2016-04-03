@@ -28,30 +28,33 @@
 [v i2___wmul __wmul `(ui  1 e 2 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
-"49 C:\Users\nickd\Documents\EniacArcade.X\main.c
+"49 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
 [v _delaySeconds delaySeconds `(b  1 e 0 0 ]
 [v i2_delaySeconds delaySeconds `(b  1 e 0 0 ]
 "58
 [v _startPong startPong `(v  1 e 1 0 ]
 [v i2_startPong startPong `(v  1 e 1 0 ]
-"82
+"87
 [v _initializePong initializePong `(v  1 e 1 0 ]
-"93
+[v i2_initializePong initializePong `(v  1 e 1 0 ]
+"101
 [v _initialize initialize `(v  1 e 1 0 ]
-"135
+"143
 [v _writePong writePong `(v  1 e 1 0 ]
-"160
+"168
 [v _getNextPosition getNextPosition `(v  1 e 1 0 ]
-"189
+"197
 [v _checkNextPosition checkNextPosition `(v  1 e 1 0 ]
-"300
+"331
 [v _ISR ISR `II(v  1 e 1 0 ]
-"355
+"386
 [v _main main `(v  1 e 1 0 ]
-"20 C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+"20 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
 [v _setColHigh setColHigh `(v  1 e 1 0 ]
+[v i2_setColHigh setColHigh `(v  1 e 1 0 ]
 "24
 [v _setRowHigh setRowHigh `(v  1 e 1 0 ]
+[v i2_setRowHigh setRowHigh `(v  1 e 1 0 ]
 "31
 [v _initializeLED initializeLED `(v  1 e 1 0 ]
 "47
@@ -67,8 +70,10 @@
 [v i2_turnAllOff turnAllOff `(v  1 e 1 0 ]
 "179
 [v _allOff allOff `(v  1 e 1 0 ]
+[v i2_allOff allOff `(v  1 e 1 0 ]
 "185
 [v _refresh refresh `(v  1 e 1 0 ]
+[v i2_refresh refresh `(v  1 e 1 0 ]
 "992 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic18f4520.h
 [v _LATA LATA `VEuc  1 e 1 @3977 ]
 "1256
@@ -77,7 +82,7 @@
 [v _LATD LATD `VEuc  1 e 1 @3980 ]
 "1577
 [v _TRISA TRISA `VEuc  1 e 1 @3986 ]
-[s S172 . 1 `uc 1 TRISB0 1 0 :1:0 
+[s S174 . 1 `uc 1 TRISB0 1 0 :1:0 
 `uc 1 TRISB1 1 0 :1:1 
 `uc 1 TRISB2 1 0 :1:2 
 `uc 1 TRISB3 1 0 :1:3 
@@ -87,7 +92,7 @@
 `uc 1 TRISB7 1 0 :1:7 
 ]
 "1830
-[s S181 . 1 `uc 1 RB0 1 0 :1:0 
+[s S183 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -96,105 +101,105 @@
 `uc 1 RB6 1 0 :1:6 
 `uc 1 RB7 1 0 :1:7 
 ]
-[u S190 . 1 `S172 1 . 1 0 `S181 1 . 1 0 ]
-[v _TRISBbits TRISBbits `VES190  1 e 1 @3987 ]
+[u S192 . 1 `S174 1 . 1 0 `S183 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES192  1 e 1 @3987 ]
 "2019
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
 "2240
 [v _TRISD TRISD `VEuc  1 e 1 @3989 ]
-[s S111 . 1 `uc 1 TUN 1 0 :5:0 
+[s S113 . 1 `uc 1 TUN 1 0 :5:0 
 `uc 1 . 1 0 :1:5 
 `uc 1 PLLEN 1 0 :1:6 
 `uc 1 INTSRC 1 0 :1:7 
 ]
 "2644
-[s S116 . 1 `uc 1 TUN0 1 0 :1:0 
+[s S118 . 1 `uc 1 TUN0 1 0 :1:0 
 `uc 1 TUN1 1 0 :1:1 
 `uc 1 TUN2 1 0 :1:2 
 `uc 1 TUN3 1 0 :1:3 
 `uc 1 TUN4 1 0 :1:4 
 ]
-[u S122 . 1 `S111 1 . 1 0 `S116 1 . 1 0 ]
-[v _OSCTUNEbits OSCTUNEbits `VES122  1 e 1 @3995 ]
-[s S212 . 1 `uc 1 ADCS 1 0 :3:0 
+[u S124 . 1 `S113 1 . 1 0 `S118 1 . 1 0 ]
+[v _OSCTUNEbits OSCTUNEbits `VES124  1 e 1 @3995 ]
+[s S214 . 1 `uc 1 ADCS 1 0 :3:0 
 `uc 1 ACQT 1 0 :3:3 
 `uc 1 . 1 0 :1:6 
 `uc 1 ADFM 1 0 :1:7 
 ]
 "4760
-[s S217 . 1 `uc 1 ADCS0 1 0 :1:0 
+[s S219 . 1 `uc 1 ADCS0 1 0 :1:0 
 `uc 1 ADCS1 1 0 :1:1 
 `uc 1 ADCS2 1 0 :1:2 
 `uc 1 ACQT0 1 0 :1:3 
 `uc 1 ACQT1 1 0 :1:4 
 `uc 1 ACQT2 1 0 :1:5 
 ]
-[u S224 . 1 `S212 1 . 1 0 `S217 1 . 1 0 ]
-[v _ADCON2bits ADCON2bits `VES224  1 e 1 @4032 ]
-[s S240 . 1 `uc 1 PCFG 1 0 :4:0 
+[u S226 . 1 `S214 1 . 1 0 `S219 1 . 1 0 ]
+[v _ADCON2bits ADCON2bits `VES226  1 e 1 @4032 ]
+[s S242 . 1 `uc 1 PCFG 1 0 :4:0 
 `uc 1 VCFG 1 0 :2:4 
 ]
 "4840
-[s S243 . 1 `uc 1 PCFG0 1 0 :1:0 
+[s S245 . 1 `uc 1 PCFG0 1 0 :1:0 
 `uc 1 PCFG1 1 0 :1:1 
 `uc 1 PCFG2 1 0 :1:2 
 `uc 1 PCFG3 1 0 :1:3 
 `uc 1 VCFG0 1 0 :1:4 
 `uc 1 VCFG1 1 0 :1:5 
 ]
-[s S250 . 1 `uc 1 . 1 0 :3:0 
+[s S252 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 CHSN3 1 0 :1:3 
 ]
-[s S253 . 1 `uc 1 . 1 0 :4:0 
+[s S255 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 VCFG01 1 0 :1:4 
 ]
-[s S256 . 1 `uc 1 . 1 0 :5:0 
+[s S258 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 VCFG11 1 0 :1:5 
 ]
-[u S259 . 1 `S240 1 . 1 0 `S243 1 . 1 0 `S250 1 . 1 0 `S253 1 . 1 0 `S256 1 . 1 0 ]
-[v _ADCON1bits ADCON1bits `VES259  1 e 1 @4033 ]
-[s S285 . 1 `uc 1 . 1 0 :1:0 
+[u S261 . 1 `S242 1 . 1 0 `S245 1 . 1 0 `S252 1 . 1 0 `S255 1 . 1 0 `S258 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES261  1 e 1 @4033 ]
+[s S287 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_NOT_DONE 1 0 :1:1 
 ]
 "4943
-[s S288 . 1 `uc 1 ADON 1 0 :1:0 
+[s S290 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :4:2 
 ]
-[s S292 . 1 `uc 1 . 1 0 :1:0 
+[s S294 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
 `uc 1 CHS2 1 0 :1:4 
 `uc 1 CHS3 1 0 :1:5 
 ]
-[s S299 . 1 `uc 1 . 1 0 :1:0 
+[s S301 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 DONE 1 0 :1:1 
 ]
-[s S302 . 1 `uc 1 . 1 0 :1:0 
+[s S304 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 NOT_DONE 1 0 :1:1 
 ]
-[s S305 . 1 `uc 1 . 1 0 :1:0 
+[s S307 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S308 . 1 `uc 1 . 1 0 :1:0 
+[s S310 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 ]
-[s S311 . 1 `uc 1 . 1 0 :1:0 
+[s S313 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GODONE 1 0 :1:1 
 ]
-[u S314 . 1 `S285 1 . 1 0 `S288 1 . 1 0 `S292 1 . 1 0 `S299 1 . 1 0 `S302 1 . 1 0 `S305 1 . 1 0 `S308 1 . 1 0 `S311 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES314  1 e 1 @4034 ]
+[u S316 . 1 `S287 1 . 1 0 `S290 1 . 1 0 `S294 1 . 1 0 `S301 1 . 1 0 `S304 1 . 1 0 `S307 1 . 1 0 `S310 1 . 1 0 `S313 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES316  1 e 1 @4034 ]
 "5017
 [v _ADRES ADRES `VEus  1 e 2 @4035 ]
-[s S137 . 1 `uc 1 SCS 1 0 :2:0 
+[s S139 . 1 `uc 1 SCS 1 0 :2:0 
 `uc 1 IOFS 1 0 :1:2 
 `uc 1 OSTS 1 0 :1:3 
 `uc 1 IRCF 1 0 :3:4 
 `uc 1 IDLEN 1 0 :1:7 
 ]
 "6226
-[s S143 . 1 `uc 1 SCS0 1 0 :1:0 
+[s S145 . 1 `uc 1 SCS0 1 0 :1:0 
 `uc 1 SCS1 1 0 :1:1 
 `uc 1 FLTS 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -202,8 +207,8 @@
 `uc 1 IRCF1 1 0 :1:5 
 `uc 1 IRCF2 1 0 :1:6 
 ]
-[u S151 . 1 `S137 1 . 1 0 `S143 1 . 1 0 ]
-[v _OSCCONbits OSCCONbits `VES151  1 e 1 @4051 ]
+[u S153 . 1 `S139 1 . 1 0 `S145 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES153  1 e 1 @4051 ]
 "7114
 [v _ADIE ADIE `VEb  1 e 0 @31982 ]
 "7116
@@ -233,7 +238,7 @@
 "8080
 [v _TMR0ON TMR0ON `VEb  1 e 0 @32431 ]
 [s S100 ballData 3 `[2]uc 1 bPos 2 0 `uc 1 bDirection 1 2 ]
-"41 C:\Users\nickd\Documents\EniacArcade.X\main.c
+"41 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
 [v __ball _ball `S100  1 e 3 0 ]
 [s S103 playerData 5 `[2]uc 1 paddlePosOld 2 0 `[2]uc 1 paddlePos 2 2 `uc 1 lives 1 4 ]
 "42
@@ -246,20 +251,30 @@
 [v __speed _speed `ui  1 e 2 0 ]
 "47
 [v __timerCounter _timerCounter `ui  1 e 2 0 ]
-"18 C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+"18 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
 [v _pixels pixels `[8][16]uc  1 e 128 0 ]
-"355 C:\Users\nickd\Documents\EniacArcade.X\main.c
+"386 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"373
+"395
 } 0
-"185 C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+"87
+[v _initializePong initializePong `(v  1 e 1 0 ]
+{
+"99
+} 0
+"58
+[v _startPong startPong `(v  1 e 1 0 ]
+{
+"84
+} 0
+"185 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
 [v _refresh refresh `(v  1 e 1 0 ]
 {
 "189
-[v refresh@theRow theRow `uc  1 a 1 7 ]
+[v refresh@theRow theRow `uc  1 a 1 60 ]
 "187
-[v refresh@theCol theCol `uc  1 a 1 6 ]
+[v refresh@theCol theCol `uc  1 a 1 59 ]
 "201
 } 0
 "24
@@ -267,7 +282,7 @@
 {
 [v setRowHigh@row row `uc  1 a 1 wreg ]
 [v setRowHigh@row row `uc  1 a 1 wreg ]
-[v setRowHigh@row row `uc  1 a 1 2 ]
+[v setRowHigh@row row `uc  1 a 1 55 ]
 "29
 } 0
 "20
@@ -275,7 +290,7 @@
 {
 [v setColHigh@column column `uc  1 a 1 wreg ]
 [v setColHigh@column column `uc  1 a 1 wreg ]
-[v setColHigh@column column `uc  1 a 1 2 ]
+[v setColHigh@column column `uc  1 a 1 55 ]
 "22
 } 0
 "179
@@ -283,51 +298,41 @@
 {
 "183
 } 0
-"82 C:\Users\nickd\Documents\EniacArcade.X\main.c
-[v _initializePong initializePong `(v  1 e 1 0 ]
-{
-"91
-} 0
-"58
-[v _startPong startPong `(v  1 e 1 0 ]
-{
-"79
-} 0
-"89 C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+"89
 [v _drawSymbol drawSymbol `(v  1 e 1 0 ]
 {
 [v drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 wreg ]
 "161
-[v drawSymbol@i_89 i `uc  1 a 1 219 ]
+[v drawSymbol@i_89 i `uc  1 a 1 163 ]
 "154
-[v drawSymbol@i_88 i `uc  1 a 1 218 ]
+[v drawSymbol@i_88 i `uc  1 a 1 162 ]
 "147
-[v drawSymbol@i_87 i `uc  1 a 1 217 ]
+[v drawSymbol@i_87 i `uc  1 a 1 161 ]
 "138
-[v drawSymbol@i_86 i `uc  1 a 1 216 ]
+[v drawSymbol@i_86 i `uc  1 a 1 160 ]
 "129
-[v drawSymbol@i_85 i `uc  1 a 1 215 ]
+[v drawSymbol@i_85 i `uc  1 a 1 159 ]
 "121
-[v drawSymbol@i_84 i `uc  1 a 1 214 ]
+[v drawSymbol@i_84 i `uc  1 a 1 158 ]
 "113
-[v drawSymbol@i i `uc  1 a 1 213 ]
+[v drawSymbol@i i `uc  1 a 1 157 ]
 "101
-[v drawSymbol@symbolGo symbolGo `[34][2]uc  1 a 68 96 ]
+[v drawSymbol@symbolGo symbolGo `[34][2]uc  1 a 68 30 ]
 "95
-[v drawSymbol@symbolPlay symbolPlay `[34][2]uc  1 a 68 0 ]
+[v drawSymbol@symbolPlay symbolPlay `[34][2]uc  1 a 68 58 ]
 "106
-[v drawSymbol@symbolArrowLeft symbolArrowLeft `[15][2]uc  1 a 30 35 ]
+[v drawSymbol@symbolArrowLeft symbolArrowLeft `[15][2]uc  1 a 30 0 ]
 "105
-[v drawSymbol@symbolArrowRight symbolArrowRight `[15][2]uc  1 a 30 5 ]
+[v drawSymbol@symbolArrowRight symbolArrowRight `[15][2]uc  1 a 30 126 ]
 "92
-[v drawSymbol@symbolTwo symbolTwo `[14][2]uc  1 a 28 68 ]
+[v drawSymbol@symbolTwo symbolTwo `[14][2]uc  1 a 28 98 ]
 "93
-[v drawSymbol@symbolThree symbolThree `[12][2]uc  1 a 24 188 ]
+[v drawSymbol@symbolThree symbolThree `[12][2]uc  1 a 24 24 ]
 "91
-[v drawSymbol@symbolOne symbolOne `[12][2]uc  1 a 24 164 ]
+[v drawSymbol@symbolOne symbolOne `[12][2]uc  1 a 24 0 ]
 "89
 [v drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 wreg ]
-[v drawSymbol@offSetX offSetX `uc  1 p 1 4 ]
+[v drawSymbol@offSetX offSetX `uc  1 p 1 57 ]
 "90
 [v drawSymbol@F3226 F3226 `[12][2]uc  1 s 24 F3226 ]
 "91
@@ -343,16 +348,16 @@
 "105
 [v drawSymbol@F3244 F3244 `[15][2]uc  1 s 30 F3244 ]
 "91
-[v drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 212 ]
+[v drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 156 ]
 "167
 } 0
 "169
 [v _turnAllOff turnAllOff `(v  1 e 1 0 ]
 {
 "173
-[v turnAllOff@j j `uc  1 a 1 3 ]
+[v turnAllOff@j j `uc  1 a 1 56 ]
 "172
-[v turnAllOff@i i `uc  1 a 1 2 ]
+[v turnAllOff@i i `uc  1 a 1 55 ]
 "177
 } 0
 "47
@@ -360,59 +365,59 @@
 {
 [v on@column column `uc  1 a 1 wreg ]
 [v on@column column `uc  1 a 1 wreg ]
-[v on@row row `uc  1 p 1 0 ]
+[v on@row row `uc  1 p 1 53 ]
 "49
-[v on@column column `uc  1 a 1 3 ]
+[v on@column column `uc  1 a 1 56 ]
 "55
 } 0
-"49 C:\Users\nickd\Documents\EniacArcade.X\main.c
+"49 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
 [v _delaySeconds delaySeconds `(b  1 e 0 0 ]
 {
 "51
-[v delaySeconds@i i `i  1 a 2 9 ]
+[v delaySeconds@i i `i  1 a 2 62 ]
 "49
-[v delaySeconds@numberOfSeconds numberOfSeconds `i  1 p 2 6 ]
+[v delaySeconds@numberOfSeconds numberOfSeconds `i  1 p 2 59 ]
 "55
 } 0
 "15 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\Umul16.c
 [v ___wmul __wmul `(ui  1 e 2 0 ]
 {
 "17
-[v ___wmul@product product `ui  1 a 2 4 ]
+[v ___wmul@product product `ui  1 a 2 57 ]
 "15
-[v ___wmul@multiplier multiplier `ui  1 p 2 0 ]
-[v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
+[v ___wmul@multiplier multiplier `ui  1 p 2 53 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 55 ]
 "53
 } 0
-"31 C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+"31 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
 [v _initializeLED initializeLED `(v  1 e 1 0 ]
 {
 "41
-[v initializeLED@j j `uc  1 a 1 3 ]
+[v initializeLED@j j `uc  1 a 1 56 ]
 "40
-[v initializeLED@i i `uc  1 a 1 2 ]
+[v initializeLED@i i `uc  1 a 1 55 ]
 "45
 } 0
-"93 C:\Users\nickd\Documents\EniacArcade.X\main.c
+"101 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
 [v _initialize initialize `(v  1 e 1 0 ]
 {
-"132
+"140
 } 0
-"300
+"331
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"326
-[v ISR@ADvalue ADvalue `us  1 a 2 79 ]
-"327
-[v ISR@value value `uc  1 a 1 81 ]
-"353
+"357
+[v ISR@ADvalue ADvalue `us  1 a 2 118 ]
+"358
+[v ISR@value value `uc  1 a 1 120 ]
+"384
 } 0
-"135
+"143
 [v _writePong writePong `(v  1 e 1 0 ]
 {
-"157
+"165
 } 0
-"68 C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+"68 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
 [v _off off `(v  1 e 1 0 ]
 {
 [v off@column column `uc  1 a 1 wreg ]
@@ -422,38 +427,71 @@
 [v off@column column `uc  1 a 1 3 ]
 "76
 } 0
-"189 C:\Users\nickd\Documents\EniacArcade.X\main.c
+"197 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
 [v _checkNextPosition checkNextPosition `(v  1 e 1 0 ]
 {
-"297
+"328
+} 0
+"87
+[v i2_initializePong initializePong `(v  1 e 1 0 ]
+{
+"99
 } 0
 "58
 [v i2_startPong startPong `(v  1 e 1 0 ]
 {
-"79
+"84
 } 0
-"89 C:\Users\nickd\Documents\EniacArcade.X\Source/LED-API.c
+"185 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+[v i2_refresh refresh `(v  1 e 1 0 ]
+{
+[v i2refresh@theRow refresh `uc  1 a 1 7 ]
+[v i2refresh@theCol refresh `uc  1 a 1 6 ]
+"201
+} 0
+"24
+[v i2_setRowHigh setRowHigh `(v  1 e 1 0 ]
+{
+[v i2setRowHigh@row row `uc  1 a 1 wreg ]
+[v i2setRowHigh@row row `uc  1 a 1 wreg ]
+[v i2setRowHigh@row row `uc  1 a 1 2 ]
+"29
+} 0
+"20
+[v i2_setColHigh setColHigh `(v  1 e 1 0 ]
+{
+[v i2setColHigh@column column `uc  1 a 1 wreg ]
+[v i2setColHigh@column column `uc  1 a 1 wreg ]
+[v i2setColHigh@column column `uc  1 a 1 2 ]
+"22
+} 0
+"179
+[v i2_allOff allOff `(v  1 e 1 0 ]
+{
+"183
+} 0
+"89
 [v i2_drawSymbol drawSymbol `(v  1 e 1 0 ]
 {
 [v i2drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 wreg ]
-[v i2drawSymbol@symbolGo drawSymbol `[34][2]uc  1 a 68 68 ]
-[v i2drawSymbol@symbolPlay drawSymbol `[34][2]uc  1 a 68 0 ]
-[v i2drawSymbol@symbolArrowLeft drawSymbol `[15][2]uc  1 a 30 35 ]
-[v i2drawSymbol@symbolArrowRight drawSymbol `[15][2]uc  1 a 30 5 ]
-[v i2drawSymbol@symbolTwo drawSymbol `[14][2]uc  1 a 28 136 ]
-[v i2drawSymbol@symbolThree drawSymbol `[12][2]uc  1 a 24 188 ]
-[v i2drawSymbol@symbolOne drawSymbol `[12][2]uc  1 a 24 164 ]
-[v i2drawSymbol@i_89 drawSymbol `uc  1 a 1 219 ]
-[v i2drawSymbol@i_88 drawSymbol `uc  1 a 1 218 ]
-[v i2drawSymbol@i_87 drawSymbol `uc  1 a 1 217 ]
-[v i2drawSymbol@i_86 drawSymbol `uc  1 a 1 216 ]
-[v i2drawSymbol@i_85 drawSymbol `uc  1 a 1 215 ]
-[v i2drawSymbol@i_84 drawSymbol `uc  1 a 1 214 ]
-[v i2drawSymbol@i drawSymbol `uc  1 a 1 213 ]
+[v i2drawSymbol@symbolGo drawSymbol `[34][2]uc  1 a 68 30 ]
+[v i2drawSymbol@symbolPlay drawSymbol `[34][2]uc  1 a 68 5 ]
+[v i2drawSymbol@symbolArrowLeft drawSymbol `[15][2]uc  1 a 30 0 ]
+[v i2drawSymbol@symbolArrowRight drawSymbol `[15][2]uc  1 a 30 73 ]
+[v i2drawSymbol@symbolTwo drawSymbol `[14][2]uc  1 a 28 98 ]
+[v i2drawSymbol@symbolThree drawSymbol `[12][2]uc  1 a 24 24 ]
+[v i2drawSymbol@symbolOne drawSymbol `[12][2]uc  1 a 24 0 ]
+[v i2drawSymbol@i_89 drawSymbol `uc  1 a 1 52 ]
+[v i2drawSymbol@i_88 drawSymbol `uc  1 a 1 51 ]
+[v i2drawSymbol@i_87 drawSymbol `uc  1 a 1 50 ]
+[v i2drawSymbol@i_86 drawSymbol `uc  1 a 1 49 ]
+[v i2drawSymbol@i_85 drawSymbol `uc  1 a 1 48 ]
+[v i2drawSymbol@i_84 drawSymbol `uc  1 a 1 127 ]
+[v i2drawSymbol@i drawSymbol `uc  1 a 1 126 ]
 [v i2drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 wreg ]
 [v i2drawSymbol@offSetX offSetX `uc  1 p 1 4 ]
 "91
-[v i2drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 212 ]
+[v i2drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 103 ]
 "167
 } 0
 "169
@@ -473,7 +511,7 @@
 [v i2on@column column `uc  1 a 1 3 ]
 "55
 } 0
-"49 C:\Users\nickd\Documents\EniacArcade.X\main.c
+"49 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
 [v i2_delaySeconds delaySeconds `(b  1 e 0 0 ]
 {
 [v i2delaySeconds@i delaySeconds `i  1 a 2 9 ]
@@ -488,10 +526,10 @@
 [v i2___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
 "53
 } 0
-"160 C:\Users\nickd\Documents\EniacArcade.X\main.c
+"168 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
 [v _getNextPosition getNextPosition `(v  1 e 1 0 ]
 {
-"187
+"195
 } 0
 "8 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lwdiv.c
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]

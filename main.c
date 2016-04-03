@@ -61,8 +61,13 @@ void startPong(void)
     turnAllOff();
     drawSymbol(_p1.lives, 0);
     drawSymbol(_p2.lives, 8);
-    while(!delaySeconds(2));
+    while(!delaySeconds(2))
+    {
+        refresh();
+    }
     turnAllOff();
+    
+    //3, 2, 1, GO
     
     //Seed random algorithm
    //rndInit()
@@ -84,10 +89,13 @@ void initializePong(void)
     //main menu?
     
     //set player lives
-    _p1.lives = 2;
-    _p2.lives = 2;
+    _p1.lives = 3;
+    _p2.lives = 3;
     
     startPong();
+    
+    //start the timer
+    TMR0ON = 1; // set Timer0 On/Off Control bit to on  
 }
 
 void initialize()
@@ -126,9 +134,9 @@ void initialize()
     T0CS = 0; // set Timer0 clock to internal instruction cycle clock
     T08BIT = 1; // Timer0 is configured as an 8-bit timer/counter 
     TMR0IE = 1; // set TIMER0 Interrupt Enable bit to enabled   
-    TMR0IF = 0; // clear TIMER0 Interrupt Flag bit
-    //start the timer
-    TMR0ON = 1; // set Timer0 On/Off Control bit to on  
+    TMR0IF = 0; // clear TIMER0 Interrupt Flag bit  
+    //stop the timer
+    TMR0ON = 0; // set Timer0 On/Off Control bit to off  
 }
 
 //Display the new paddle- and led positions
@@ -229,8 +237,20 @@ void checkNextPosition(void)
             return;
         }
         //scored
+        
         _p1.lives--;
-        startPong();
+         if(_p1.lives == 0)
+        {
+            //drawsymbol
+            drawSymbol(7, 8);
+            
+            //restart
+            initializePong();
+        }
+        else
+        {
+            startPong();
+        }
     }
     else if(_nextPos[0] == 15)
     {
@@ -270,9 +290,20 @@ void checkNextPosition(void)
             getNextPosition();
             return;
         }
-        //scored
+        //scored       
         _p2.lives--;
-        startPong();
+        if(_p2.lives == 0)
+        {
+            //drawsymbol
+            drawSymbol(6, 0);
+            
+            //restart
+            initializePong();
+        }
+        else
+        {
+            startPong();
+        }
     }
     else if(_nextPos[1] < 0 || _nextPos[1] > 7)
     {
@@ -354,18 +385,9 @@ void interrupt ISR(void)
 
 void main(void) 
 {
+    initialize();
     initializeLED();
     initializePong();
-    initialize();
-    
-    //LED symbols for displaying for the game start
-    const char HELLO_SYMBOL; //{:AY drawn in LEDs
-    const char THREE_SYMBOL; //THREE drawn in LEDs
-    const char TWO_SYMBOL; //TWO drawn in LEDs
-    const char ONE_SYMBOL; //ONE drawn in LEDs
-    const char GO_SYMBOL; //GO drawn in LEDs   
-    
-    
     
     //this will work: if there's input, an interrupt is called which
     // will temporarily stop the refreshing.
