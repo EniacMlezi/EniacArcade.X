@@ -4178,52 +4178,49 @@ extern void turnAllOff();
 extern void initializeLED();
 extern void refresh();
 
-# 23 "main.c"
-struct ballData
-{
+# 24 "main.c"
+typedef struct ball {
 
 unsigned char bPos[2];
 
 unsigned char bDirection;
-};
+} ball;
 
 
-struct playerData
-{
+
+typedef struct player {
 
 unsigned char paddlePosOld[2];
 
 unsigned char paddlePos[2];
 
 unsigned char lives;
-};
+} player;
 
 
-struct ballData _ball;
-struct playerData _p1;
-struct playerData _p2;
+ball _ball;
+player _p1;
+player _p2;
 unsigned char _nextPos[2];
 
 unsigned int _speed = 200;
 unsigned int _timerCounter = 0;
 
-void delaySeconds(int numberOfSeconds)
-{
-for(int i = 0; i < numberOfSeconds * 100; i++)
+void delaySeconds(int numberOfSeconds) {
+for (int i = 0; i < numberOfSeconds * 100; i++)
 _delay((unsigned long)((10)*(32000000/4000.0)));
 }
 
 
-void startPong(void)
-{
+
+void startPong(void) {
 _speed = 200;
 
 
 turnAllOff();
 drawSymbol(_p1.lives, 0);
 drawSymbol(_p2.lives, 8);
-for(unsigned int counter = 0; counter < 800; counter ++)
-{
+for (unsigned int counter = 0; counter < 800; counter++) {
 refresh();
 }
 turnAllOff();
@@ -4242,9 +4239,7 @@ _nextPos[0] = _ball.bPos[0];
 _nextPos[1] = _ball.bPos[1];
 }
 
-
-void initializePong(void)
-{
+void initializePong(void) {
 
 
 
@@ -4257,8 +4252,7 @@ startPong();
 TMR0ON = 1;
 }
 
-void initialize()
-{
+void initialize() {
 
 OSCTUNEbits.PLLEN = 1;
 OSCTUNEbits.TUN = 011111;
@@ -4270,7 +4264,7 @@ PLLEN = 1;
 
 
 GIE = 1;
-PEIE=1;
+PEIE = 1;
 
 
 TRISBbits.TRISB0 = 1;
@@ -4299,8 +4293,8 @@ TMR0ON = 0;
 }
 
 
-void writePong(void)
-{
+
+void writePong(void) {
 
 
 
@@ -4323,10 +4317,9 @@ on(_p2.paddlePos[1], 15);
 }
 
 
-void getNextPosition(void)
-{
-switch(_ball.bDirection)
-{
+
+void getNextPosition(void) {
+switch (_ball.bDirection) {
 case 1:
 _nextPos[0] = _ball.bPos[0] + 1;
 _nextPos[1] = _ball.bPos[1] + 1;
@@ -4352,18 +4345,64 @@ break;
 }
 }
 
-void checkNextPosition(void)
-{
+void handleWallCollision(void) {
+switch (_ball.bDirection) {
+case 1:
+_ball.bDirection = 3;
+break;
+case 3:
+_ball.bDirection = 1;
+break;
+case 4:
+_ball.bDirection = 6;
+break;
+case 6:
+_ball.bDirection = 4;
+break;
+}
 getNextPosition();
-if(_nextPos[0] == 0)
-{
-if(_p1.paddlePos[0] == _nextPos[1])
-{
+}
 
-if(_speed > 50)
+void checkWallCollision(void) {
+if (_nextPos[1] < 0 || _nextPos[1] > 7) {
+handleWallCollision();
+}
+}
+
+void handlePaddleCollision(struct playerData* paddle) {
+
+
+getNextPosition();
+}
+
+void checkPaddleCollision(void) {
+
+if (_nextPos[0] == 1) {
+
+if (_p1.paddlePos[0] == _nextPos[1] || _p1.paddlePos[1] == _nextPos[1]) {
+
+}
+}
+
+else if (_nextPos[0] == 14) {
+
+if (_p2.paddlePos[0] == _nextPos[1] || _p2.paddlePos[1] == _nextPos[1]) {
+
+}
+}
+}
+
+void checkNextPosition(void) {
+getNextPosition();
+checkPaddleCollision();
+checkWallCollision();
+
+if (_nextPos[0] == 0) {
+if (_p1.paddlePos[0] == _nextPos[1]) {
+
+if (_speed > 50)
 _speed = _speed - 3;
-switch(_ball.bDirection)
-{
+switch (_ball.bDirection) {
 
 case 4:
 _ball.bDirection = 2;
@@ -4376,15 +4415,12 @@ _ball.bDirection = 2;
 }
 getNextPosition();
 return;
-}
-else if(_p1.paddlePos[1] == _nextPos[1])
-{
+} else if (_p1.paddlePos[1] == _nextPos[1]) {
 
 
-if(_speed > 50)
+if (_speed > 50)
 _speed = _speed - 3;
-switch(_ball.bDirection)
-{
+switch (_ball.bDirection) {
 
 case 4:
 _ball.bDirection = 1;
@@ -4402,33 +4438,25 @@ return;
 
 
 _p1.lives--;
-if(_p1.lives == 0)
-{
+if (_p1.lives == 0) {
 
 turnAllOff();
 drawSymbol(7, 8);
-for(unsigned int counter = 0; counter < 800; counter ++)
-{
+for (unsigned int counter = 0; counter < 800; counter++) {
 refresh();
 }
 turnAllOff();
 
 
 initializePong();
-}
-else
-{
+} else {
 startPong();
 }
-}
-else if(_nextPos[0] == 15)
-{
-if(_p2.paddlePos[0] == _nextPos[1])
-{
-if(_speed > 50)
+} else if (_nextPos[0] == 15) {
+if (_p2.paddlePos[0] == _nextPos[1]) {
+if (_speed > 50)
 _speed = _speed - 3;
-switch(_ball.bDirection)
-{
+switch (_ball.bDirection) {
 
 case 1:
 _ball.bDirection = 4;
@@ -4442,14 +4470,11 @@ break;
 }
 getNextPosition();
 return;
-}
-else if( _p2.paddlePos[1] == _nextPos[1])
-{
+} else if (_p2.paddlePos[1] == _nextPos[1]) {
 
-if(_speed > 50)
-_speed = _speed -3;
-switch(_ball.bDirection)
-{
+if (_speed > 50)
+_speed = _speed - 3;
+switch (_ball.bDirection) {
 case 1:
 _ball.bDirection = 4;
 break;
@@ -4465,29 +4490,22 @@ return;
 }
 
 _p2.lives--;
-if(_p2.lives == 0)
-{
+if (_p2.lives == 0) {
 
 turnAllOff();
 drawSymbol(6, 0);
-for(unsigned int counter = 0; counter < 800; counter ++)
-{
+for (unsigned int counter = 0; counter < 800; counter++) {
 refresh();
 }
 turnAllOff();
 
 
 initializePong();
-}
-else
-{
+} else {
 startPong();
 }
-}
-else if(_nextPos[1] < 0 || _nextPos[1] > 7)
-{
-switch(_ball.bDirection)
-{
+} else if (_nextPos[1] < 0 || _nextPos[1] > 7) {
+switch (_ball.bDirection) {
 case 1:
 _ball.bDirection = 3;
 break;
@@ -4507,15 +4525,13 @@ return;
 }
 
 
-void interrupt ISR(void)
-{
-if(TMR0IE && TMR0IF)
-{
+
+void interrupt ISR(void) {
+if (TMR0IE && TMR0IF) {
 
 TMR0IF = 0;
 
-if(_timerCounter > _speed)
-{
+if (_timerCounter > _speed) {
 checkNextPosition();
 _timerCounter = 0;
 }
@@ -4528,8 +4544,7 @@ ADCON0bits.GODONE = 1;
 
 }
 
-if(ADIE && ADIF)
-{
+if (ADIE && ADIF) {
 
 ADIF = 0;
 
@@ -4537,8 +4552,7 @@ unsigned short ADvalue = ADRES;
 unsigned char value = (ADvalue / 85);
 
 
-if(ADCON0bits.CHS == 12)
-{
+if (ADCON0bits.CHS == 12) {
 ADCON0bits.CHS = 10;
 
 
@@ -4547,9 +4561,7 @@ _p2.paddlePos[0] = value;
 
 _p2.paddlePosOld[1] = _p2.paddlePos[1];
 _p2.paddlePos[1] = value + 1;
-}
-else
-{
+} else {
 ADCON0bits.CHS = 12;
 
 
@@ -4562,13 +4574,14 @@ _p1.paddlePos[1] = value + 1;
 }
 }
 
-void main(void)
-{
+void main(void) {
 initialize();
 initializeLED();
 initializePong();
 
 
 
-while(1){ refresh(); };
+while (1) {
+refresh();
+};
 }
