@@ -3234,12 +3234,40 @@ Version 3.2 HI-TECH Software Intermediate Code
 "86
 [f ]
 [v F3223 `uc ~T0 @X0 -> 2 `i t ]
-[v F3224 `F3223 ~T0 @X0 -> 12 `i s ]
+[v F3224 `F3223 ~T0 @X0 -> 11 `i s ]
 [i F3224
 :U ..
 :U ..
 "87
 -> -> 2 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
+-> -> 3 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
+-> -> 4 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
+-> -> 3 `i `uc
+-> -> 1 `i `uc
+..
+:U ..
+-> -> 3 `i `uc
+-> -> 2 `i `uc
+..
+:U ..
+-> -> 3 `i `uc
+-> -> 3 `i `uc
+..
+:U ..
+-> -> 3 `i `uc
+-> -> 4 `i `uc
+..
+:U ..
+-> -> 3 `i `uc
 -> -> 5 `i `uc
 ..
 :U ..
@@ -3247,124 +3275,140 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 6 `i `uc
 ..
 :U ..
--> -> 4 `i `uc
+-> -> 3 `i `uc
 -> -> 7 `i `uc
 ..
 :U ..
 -> -> 4 `i `uc
 -> -> 6 `i `uc
 ..
-:U ..
--> -> 4 `i `uc
--> -> 5 `i `uc
-..
-:U ..
--> -> 4 `i `uc
--> -> 4 `i `uc
-..
-:U ..
--> -> 4 `i `uc
--> -> 3 `i `uc
-..
-:U ..
--> -> 4 `i `uc
--> -> 2 `i `uc
-..
-:U ..
--> -> 4 `i `uc
--> -> 1 `i `uc
-..
-:U ..
--> -> 4 `i `uc
--> -> 0 `i `uc
-..
-:U ..
--> -> 3 `i `uc
--> -> 0 `i `uc
-..
-:U ..
--> -> 5 `i `uc
--> -> 0 `i `uc
-..
 ..
 ]
-[v _symbolOne `F3223 ~T0 @X0 -> 12 `i a ]
-[; ;LED-API.c: 87: char symbolOne[12][2] = {{2,5},{3,6},{4,7},{4,6},{4,5},{4,4},{4,3},{4,2},{4,1},{4,0},{3,0},{5,0}};
+[v _symbolOne `F3223 ~T0 @X0 -> 11 `i a ]
+[; ;LED-API.c: 87: char symbolOne[11][2] = {{2,0},{3,0}, {4,0}, {3,1}, {3,2}, {3,3}, {3,4}, {3,5}, {3,6}, {3,7}, {4,6}};
 [e = _symbolOne F3224 ]
 [v F3226 `uc ~T0 @X0 -> 2 `i t ]
-[v F3227 `F3226 ~T0 @X0 -> 14 `i s ]
+[v F3227 `F3226 ~T0 @X0 -> 15 `i s ]
 [i F3227
 :U ..
 :U ..
 "88
+-> -> 1 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
 -> -> 2 `i `uc
--> -> 5 `i `uc
+-> -> 0 `i `uc
 ..
 :U ..
 -> -> 3 `i `uc
--> -> 6 `i `uc
+-> -> 0 `i `uc
 ..
 :U ..
 -> -> 4 `i `uc
--> -> 6 `i `uc
+-> -> 0 `i `uc
 ..
 :U ..
 -> -> 5 `i `uc
--> -> 6 `i `uc
-..
-:U ..
--> -> 6 `i `uc
--> -> 5 `i `uc
-..
-:U ..
--> -> 6 `i `uc
--> -> 4 `i `uc
+-> -> 0 `i `uc
 ..
 :U ..
 -> -> 5 `i `uc
--> -> 3 `i `uc
-..
-:U ..
--> -> 4 `i `uc
--> -> 2 `i `uc
-..
-:U ..
--> -> 3 `i `uc
 -> -> 1 `i `uc
 ..
 :U ..
+-> -> 4 `i `uc
 -> -> 2 `i `uc
--> -> 0 `i `uc
 ..
 :U ..
 -> -> 3 `i `uc
--> -> 0 `i `uc
+-> -> 3 `i `uc
 ..
 :U ..
+-> -> 2 `i `uc
 -> -> 4 `i `uc
--> -> 0 `i `uc
+..
+:U ..
+-> -> 1 `i `uc
+-> -> 5 `i `uc
+..
+:U ..
+-> -> 1 `i `uc
+-> -> 6 `i `uc
 ..
 :U ..
 -> -> 5 `i `uc
--> -> 0 `i `uc
+-> -> 6 `i `uc
 ..
 :U ..
--> -> 6 `i `uc
--> -> 0 `i `uc
+-> -> 2 `i `uc
+-> -> 7 `i `uc
+..
+:U ..
+-> -> 3 `i `uc
+-> -> 7 `i `uc
+..
+:U ..
+-> -> 4 `i `uc
+-> -> 7 `i `uc
 ..
 ..
 ]
-[v _symbolTwo `F3226 ~T0 @X0 -> 14 `i a ]
-[; ;LED-API.c: 88: char symbolTwo[14][2] = {{2,5},{3,6},{4,6},{5,6},{6,5},{6,4},{5,3},{4,2},{3,1},{2,0},{3,0},{4,0},{5,0},{6,0}};
+[v _symbolTwo `F3226 ~T0 @X0 -> 15 `i a ]
+[; ;LED-API.c: 88: char symbolTwo[15][2] = {{1,0}, {2,0}, {3,0}, {4,0}, {5,0}, {5,1}, {4,2}, {3,3}, {2,4}, {1,5}, {1,6}, {5,6}, {2,7}, {3,7}, {4,7}};
 [e = _symbolTwo F3227 ]
 [v F3229 `uc ~T0 @X0 -> 2 `i t ]
-[v F3230 `F3229 ~T0 @X0 -> 12 `i s ]
+[v F3230 `F3229 ~T0 @X0 -> 15 `i s ]
 [i F3230
 :U ..
 :U ..
 "89
 -> -> 2 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
+-> -> 3 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
+-> -> 4 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
+-> -> 5 `i `uc
+-> -> 1 `i `uc
+..
+:U ..
+-> -> 1 `i `uc
+-> -> 1 `i `uc
+..
+:U ..
+-> -> 1 `i `uc
+-> -> 2 `i `uc
+..
+:U ..
+-> -> 1 `i `uc
+-> -> 3 `i `uc
+..
+:U ..
+-> -> 2 `i `uc
+-> -> 4 `i `uc
+..
+:U ..
+-> -> 3 `i `uc
+-> -> 4 `i `uc
+..
+:U ..
+-> -> 1 `i `uc
+-> -> 5 `i `uc
+..
+:U ..
+-> -> 1 `i `uc
 -> -> 6 `i `uc
+..
+:U ..
+-> -> 2 `i `uc
+-> -> 7 `i `uc
 ..
 :U ..
 -> -> 3 `i `uc
@@ -3377,43 +3421,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 :U ..
 -> -> 5 `i `uc
 -> -> 6 `i `uc
-..
-:U ..
--> -> 5 `i `uc
--> -> 5 `i `uc
-..
-:U ..
--> -> 4 `i `uc
--> -> 4 `i `uc
-..
-:U ..
--> -> 5 `i `uc
--> -> 3 `i `uc
-..
-:U ..
--> -> 5 `i `uc
--> -> 2 `i `uc
-..
-:U ..
--> -> 5 `i `uc
--> -> 1 `i `uc
-..
-:U ..
--> -> 4 `i `uc
--> -> 0 `i `uc
-..
-:U ..
--> -> 3 `i `uc
--> -> 0 `i `uc
-..
-:U ..
--> -> 2 `i `uc
--> -> 1 `i `uc
 ..
 ..
 ]
-[v _symbolThree `F3229 ~T0 @X0 -> 12 `i a ]
-[; ;LED-API.c: 89: char symbolThree[12][2] = {{2,6},{3,7},{4,7},{5,6},{5,5},{4,4},{5,3},{5,2},{5,1},{4,0},{3,0},{2,1}};
+[v _symbolThree `F3229 ~T0 @X0 -> 15 `i a ]
+[; ;LED-API.c: 89: char symbolThree[15][2] = {{2,0}, {3,0}, {4,0}, {5,1}, {1,1}, {1,2}, {1,3}, {2,4}, {3,4}, {1,5}, {1,6}, {2,7}, {3,7}, {4,7}, {5,6}};
 [e = _symbolThree F3230 ]
 [v F3232 `uc ~T0 @X0 -> 2 `i t ]
 [v F3233 `F3232 ~T0 @X0 -> 34 `i s ]
@@ -3718,145 +3730,89 @@ Version 3.2 HI-TECH Software Intermediate Code
 "99
 [e = _symbolGo F3236 ]
 [v F3238 `uc ~T0 @X0 -> 2 `i t ]
-[v F3239 `F3238 ~T0 @X0 -> 15 `i s ]
+[v F3239 `F3238 ~T0 @X0 -> 8 `i s ]
 [i F3239
 :U ..
 :U ..
 "101
+-> -> 3 `i `uc
 -> -> 0 `i `uc
--> -> 3 `i `uc
-..
-:U ..
--> -> 1 `i `uc
--> -> 3 `i `uc
-..
-:U ..
--> -> 2 `i `uc
--> -> 3 `i `uc
 ..
 :U ..
 -> -> 3 `i `uc
--> -> 3 `i `uc
+-> -> 7 `i `uc
 ..
 :U ..
 -> -> 4 `i `uc
--> -> 3 `i `uc
-..
-:U ..
--> -> 5 `i `uc
--> -> 3 `i `uc
-..
-:U ..
--> -> 6 `i `uc
--> -> 3 `i `uc
-..
-:U ..
--> -> 7 `i `uc
--> -> 3 `i `uc
-..
-:U ..
--> -> 8 `i `uc
--> -> 3 `i `uc
-..
-:U ..
--> -> 7 `i `uc
--> -> 4 `i `uc
-..
-:U ..
--> -> 6 `i `uc
--> -> 5 `i `uc
-..
-:U ..
--> -> 5 `i `uc
--> -> 7 `i `uc
-..
-:U ..
--> -> 6 `i `uc
--> -> 2 `i `uc
-..
-:U ..
--> -> 5 `i `uc
 -> -> 1 `i `uc
 ..
 :U ..
 -> -> 4 `i `uc
--> -> 0 `i `uc
+-> -> 6 `i `uc
+..
+:U ..
+-> -> 5 `i `uc
+-> -> 2 `i `uc
+..
+:U ..
+-> -> 5 `i `uc
+-> -> 5 `i `uc
+..
+:U ..
+-> -> 6 `i `uc
+-> -> 3 `i `uc
+..
+:U ..
+-> -> 6 `i `uc
+-> -> 4 `i `uc
 ..
 ..
 ]
-[v _symbolArrowRight `F3238 ~T0 @X0 -> 15 `i a ]
-[; ;LED-API.c: 101: char symbolArrowRight[15][2] = {{0,3},{1,3},{2,3},{3,3},{4,3},{5,3},{6,3},{7,3},{8,3},{7,4},{6,5},{5,7},{6,2},{5,1},{4,0}};
-[e = _symbolArrowRight F3239 ]
+[v _symbolArrowLeft `F3238 ~T0 @X0 -> 8 `i a ]
+[; ;LED-API.c: 101: char symbolArrowLeft[8][2] = {{3,0}, {3,7}, {4,1}, {4,6}, {5,2}, {5,5}, {6,3}, {6,4}};
+[e = _symbolArrowLeft F3239 ]
 [v F3241 `uc ~T0 @X0 -> 2 `i t ]
-[v F3242 `F3241 ~T0 @X0 -> 15 `i s ]
+[v F3242 `F3241 ~T0 @X0 -> 8 `i s ]
 [i F3242
 :U ..
 :U ..
 "102
+-> -> 4 `i `uc
 -> -> 0 `i `uc
+..
+:U ..
 -> -> 3 `i `uc
+-> -> 1 `i `uc
+..
+:U ..
+-> -> 2 `i `uc
+-> -> 2 `i `uc
 ..
 :U ..
 -> -> 1 `i `uc
 -> -> 3 `i `uc
 ..
 :U ..
+-> -> 1 `i `uc
+-> -> 4 `i `uc
+..
+:U ..
 -> -> 2 `i `uc
--> -> 3 `i `uc
+-> -> 5 `i `uc
 ..
 :U ..
 -> -> 3 `i `uc
--> -> 3 `i `uc
+-> -> 6 `i `uc
 ..
 :U ..
 -> -> 4 `i `uc
--> -> 3 `i `uc
-..
-:U ..
--> -> 5 `i `uc
--> -> 3 `i `uc
-..
-:U ..
--> -> 6 `i `uc
--> -> 3 `i `uc
-..
-:U ..
 -> -> 7 `i `uc
--> -> 3 `i `uc
-..
-:U ..
--> -> 8 `i `uc
--> -> 3 `i `uc
-..
-:U ..
--> -> 1 `i `uc
--> -> 4 `i `uc
-..
-:U ..
--> -> 2 `i `uc
--> -> 5 `i `uc
-..
-:U ..
--> -> 3 `i `uc
--> -> 6 `i `uc
-..
-:U ..
--> -> 1 `i `uc
--> -> 2 `i `uc
-..
-:U ..
--> -> 2 `i `uc
--> -> 1 `i `uc
-..
-:U ..
--> -> 3 `i `uc
--> -> 0 `i `uc
 ..
 ..
 ]
-[v _symbolArrowLeft `F3241 ~T0 @X0 -> 15 `i a ]
-[; ;LED-API.c: 102: char symbolArrowLeft[15][2] = {{0,3},{1,3},{2,3},{3,3},{4,3},{5,3}, {6,3},{7,3},{8,3}, {1,4},{2,5},{3,6},{1,2},{2,1},{3,0}};
-[e = _symbolArrowLeft F3242 ]
+[v _symbolArrowRight `F3241 ~T0 @X0 -> 8 `i a ]
+[; ;LED-API.c: 102: char symbolArrowRight[8][2] = {{4,0}, {3,1}, {2,2}, {1,3}, {1,4}, {2,5}, {3,6}, {4,7}};
+[e = _symbolArrowRight F3242 ]
 [; ;LED-API.c: 104: switch(chosenSymbol)
 "104
 [e $U 367  ]
@@ -3866,12 +3822,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;LED-API.c: 107: case 1:
 "107
 [e :U 368 ]
-[; ;LED-API.c: 109: for(unsigned char i = 0; i < 12; i++)
+[; ;LED-API.c: 109: for(unsigned char i = 0; i < 11; i++)
 "109
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 12 `i 369  ]
+[e $ < -> _i `i -> 11 `i 369  ]
 [e $U 370  ]
 "110
 [e :U 369 ]
@@ -3884,7 +3840,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 "109
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 12 `i 369  ]
+[e $ < -> _i `i -> 11 `i 369  ]
 [e :U 370 ]
 "112
 }
@@ -3895,12 +3851,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;LED-API.c: 115: case 2:
 "115
 [e :U 372 ]
-[; ;LED-API.c: 117: for(unsigned char i = 0; i < 14; i++)
+[; ;LED-API.c: 117: for(unsigned char i = 0; i < 15; i++)
 "117
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 14 `i 373  ]
+[e $ < -> _i `i -> 15 `i 373  ]
 [e $U 374  ]
 "118
 [e :U 373 ]
@@ -3913,7 +3869,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 "117
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 14 `i 373  ]
+[e $ < -> _i `i -> 15 `i 373  ]
 [e :U 374 ]
 "120
 }
@@ -3924,12 +3880,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;LED-API.c: 123: case 3:
 "123
 [e :U 376 ]
-[; ;LED-API.c: 125: for(unsigned char i = 0; i < 12; i++)
+[; ;LED-API.c: 125: for(unsigned char i = 0; i < 15; i++)
 "125
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 12 `i 377  ]
+[e $ < -> _i `i -> 15 `i 377  ]
 [e $U 378  ]
 "126
 [e :U 377 ]
@@ -3942,7 +3898,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 }
 "125
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 12 `i 377  ]
+[e $ < -> _i `i -> 15 `i 377  ]
 [e :U 378 ]
 "128
 }
@@ -4011,25 +3967,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;LED-API.c: 146: case 6:
 "146
 [e :U 388 ]
-[; ;LED-API.c: 147: for(unsigned char i = 0; i < 15; i++)
+[; ;LED-API.c: 147: for(unsigned char i = 0; i < 8; i++)
 "147
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 15 `i 389  ]
+[e $ < -> _i `i -> 8 `i 389  ]
 [e $U 390  ]
 "148
 [e :U 389 ]
 [; ;LED-API.c: 148: {
 {
-[; ;LED-API.c: 149: on(symbolArrowLeft[i][1], symbolGo[i][0] + offSetX);
+[; ;LED-API.c: 149: on(symbolArrowLeft[i][1], symbolArrowLeft[i][0] + offSetX);
 "149
-[e ( _on (2 , *U + &U *U + &U _symbolArrowLeft * -> _i `ux -> * -> # *U &U *U &U _symbolArrowLeft `ui -> -> 2 `i `ui `ux * -> -> -> 1 `i `ui `ux -> -> # *U &U *U + &U _symbolArrowLeft * -> _i `ux -> * -> # *U &U *U &U _symbolArrowLeft `ui -> -> 2 `i `ui `ux `ui `ux -> + -> *U + &U *U + &U _symbolGo * -> _i `ux -> * -> # *U &U *U &U _symbolGo `ui -> -> 2 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _symbolGo * -> _i `ux -> * -> # *U &U *U &U _symbolGo `ui -> -> 2 `i `ui `ux `ui `ux `i -> _offSetX `i `uc ]
+[e ( _on (2 , *U + &U *U + &U _symbolArrowLeft * -> _i `ux -> * -> # *U &U *U &U _symbolArrowLeft `ui -> -> 2 `i `ui `ux * -> -> -> 1 `i `ui `ux -> -> # *U &U *U + &U _symbolArrowLeft * -> _i `ux -> * -> # *U &U *U &U _symbolArrowLeft `ui -> -> 2 `i `ui `ux `ui `ux -> + -> *U + &U *U + &U _symbolArrowLeft * -> _i `ux -> * -> # *U &U *U &U _symbolArrowLeft `ui -> -> 2 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _symbolArrowLeft * -> _i `ux -> * -> # *U &U *U &U _symbolArrowLeft `ui -> -> 2 `i `ui `ux `ui `ux `i -> _offSetX `i `uc ]
 "150
 }
 "147
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 15 `i 389  ]
+[e $ < -> _i `i -> 8 `i 389  ]
 [e :U 390 ]
 "150
 }
@@ -4040,25 +3996,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;LED-API.c: 152: case 7:
 "152
 [e :U 392 ]
-[; ;LED-API.c: 153: for(unsigned char i = 0; i < 15; i++)
+[; ;LED-API.c: 153: for(unsigned char i = 0; i < 8; i++)
 "153
 {
 [v _i `uc ~T0 @X0 1 a ]
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 15 `i 393  ]
+[e $ < -> _i `i -> 8 `i 393  ]
 [e $U 394  ]
 "154
 [e :U 393 ]
 [; ;LED-API.c: 154: {
 {
-[; ;LED-API.c: 155: on(symbolArrowRight[i][1], symbolGo[i][0]+ offSetX);
+[; ;LED-API.c: 155: on(symbolArrowRight[i][1], symbolArrowRight[i][0]+ offSetX);
 "155
-[e ( _on (2 , *U + &U *U + &U _symbolArrowRight * -> _i `ux -> * -> # *U &U *U &U _symbolArrowRight `ui -> -> 2 `i `ui `ux * -> -> -> 1 `i `ui `ux -> -> # *U &U *U + &U _symbolArrowRight * -> _i `ux -> * -> # *U &U *U &U _symbolArrowRight `ui -> -> 2 `i `ui `ux `ui `ux -> + -> *U + &U *U + &U _symbolGo * -> _i `ux -> * -> # *U &U *U &U _symbolGo `ui -> -> 2 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _symbolGo * -> _i `ux -> * -> # *U &U *U &U _symbolGo `ui -> -> 2 `i `ui `ux `ui `ux `i -> _offSetX `i `uc ]
+[e ( _on (2 , *U + &U *U + &U _symbolArrowRight * -> _i `ux -> * -> # *U &U *U &U _symbolArrowRight `ui -> -> 2 `i `ui `ux * -> -> -> 1 `i `ui `ux -> -> # *U &U *U + &U _symbolArrowRight * -> _i `ux -> * -> # *U &U *U &U _symbolArrowRight `ui -> -> 2 `i `ui `ux `ui `ux -> + -> *U + &U *U + &U _symbolArrowRight * -> _i `ux -> * -> # *U &U *U &U _symbolArrowRight `ui -> -> 2 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _symbolArrowRight * -> _i `ux -> * -> # *U &U *U &U _symbolArrowRight `ui -> -> 2 `i `ui `ux `ui `ux `i -> _offSetX `i `uc ]
 "156
 }
 "153
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 15 `i 393  ]
+[e $ < -> _i `i -> 8 `i 393  ]
 [e :U 394 ]
 "156
 }

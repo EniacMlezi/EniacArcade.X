@@ -4178,7 +4178,7 @@ extern void turnAllOff();
 extern void initializeLED();
 extern void refresh();
 
-# 23 "main.c"
+# 24 "main.c"
 struct ballData
 {
 
@@ -4204,7 +4204,7 @@ struct playerData _p1;
 struct playerData _p2;
 unsigned char _nextPos[2];
 
-unsigned int _speed = 200;
+unsigned int _speed = 150;
 unsigned int _timerCounter = 0;
 
 void delaySeconds(int numberOfSeconds)
@@ -4216,7 +4216,7 @@ _delay((unsigned long)((10)*(32000000/4000.0)));
 
 void startPong(void)
 {
-_speed = 200;
+_speed = 150;
 
 
 turnAllOff();
@@ -4360,8 +4360,8 @@ if(_nextPos[0] == 0)
 if(_p1.paddlePos[0] == _nextPos[1])
 {
 
-if(_speed > 50)
-_speed = _speed - 3;
+if(_speed > 30)
+_speed = _speed - 10;
 switch(_ball.bDirection)
 {
 
@@ -4381,8 +4381,8 @@ else if(_p1.paddlePos[1] == _nextPos[1])
 {
 
 
-if(_speed > 50)
-_speed = _speed - 3;
+if(_speed > 30)
+_speed = _speed - 10;
 switch(_ball.bDirection)
 {
 
@@ -4406,7 +4406,8 @@ if(_p1.lives == 0)
 {
 
 turnAllOff();
-drawSymbol(7, 8);
+drawSymbol(6, 0);
+drawSymbol(6, 8);
 for(unsigned int counter = 0; counter < 800; counter ++)
 {
 refresh();
@@ -4425,8 +4426,8 @@ else if(_nextPos[0] == 15)
 {
 if(_p2.paddlePos[0] == _nextPos[1])
 {
-if(_speed > 50)
-_speed = _speed - 3;
+if(_speed > 30)
+_speed = _speed - 10;
 switch(_ball.bDirection)
 {
 
@@ -4446,8 +4447,8 @@ return;
 else if( _p2.paddlePos[1] == _nextPos[1])
 {
 
-if(_speed > 50)
-_speed = _speed -3;
+if(_speed > 30)
+_speed = _speed - 10;
 switch(_ball.bDirection)
 {
 case 1:
@@ -4469,7 +4470,8 @@ if(_p2.lives == 0)
 {
 
 turnAllOff();
-drawSymbol(6, 0);
+drawSymbol(7, 0);
+drawSymbol(7, 8);
 for(unsigned int counter = 0; counter < 800; counter ++)
 {
 refresh();

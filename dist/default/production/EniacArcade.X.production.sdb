@@ -27,23 +27,23 @@
 [v ___wmul __wmul `(ui  1 e 2 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
-"58 C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
+"59 C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
 [v _startPong startPong `(v  1 e 1 0 ]
 [v i2_startPong startPong `(v  1 e 1 0 ]
-"87
+"88
 [v _initializePong initializePong `(v  1 e 1 0 ]
 [v i2_initializePong initializePong `(v  1 e 1 0 ]
-"101
+"102
 [v _initialize initialize `(v  1 e 1 0 ]
-"143
+"144
 [v _writePong writePong `(v  1 e 1 0 ]
-"167
+"168
 [v _getNextPosition getNextPosition `(v  1 e 1 0 ]
-"196
+"197
 [v _checkNextPosition checkNextPosition `(v  1 e 1 0 ]
-"351
+"354
 [v _ISR ISR `II(v  1 e 1 0 ]
-"406
+"409
 [v _main main `(v  1 e 1 0 ]
 "20 C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
 [v _setColHigh setColHigh `(v  1 e 1 0 ]
@@ -234,45 +234,45 @@
 "8080
 [v _TMR0ON TMR0ON `VEb  1 e 0 @32431 ]
 [s S98 ballData 3 `[2]uc 1 bPos 2 0 `uc 1 bDirection 1 2 ]
-"43 C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
+"44 C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
 [v __ball _ball `S98  1 e 3 0 ]
 [s S101 playerData 5 `[2]uc 1 paddlePosOld 2 0 `[2]uc 1 paddlePos 2 2 `uc 1 lives 1 4 ]
-"44
-[v __p1 _p1 `S101  1 e 5 0 ]
 "45
-[v __p2 _p2 `S101  1 e 5 0 ]
+[v __p1 _p1 `S101  1 e 5 0 ]
 "46
+[v __p2 _p2 `S101  1 e 5 0 ]
+"47
 [v __nextPos _nextPos `[2]uc  1 e 2 0 ]
-"48
-[v __speed _speed `ui  1 e 2 0 ]
 "49
+[v __speed _speed `ui  1 e 2 0 ]
+"50
 [v __timerCounter _timerCounter `ui  1 e 2 0 ]
 "18 C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
 [v _pixels pixels `[8][16]uc  1 e 128 0 ]
-"406 C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
+"409 C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"415
+"418
 } 0
-"87
+"88
 [v _initializePong initializePong `(v  1 e 1 0 ]
 {
-"99
+"100
 } 0
-"58
+"59
 [v _startPong startPong `(v  1 e 1 0 ]
 {
-"66
-[v startPong@counter counter `ui  1 a 2 134 ]
-"84
+"67
+[v startPong@counter counter `ui  1 a 2 177 ]
+"85
 } 0
 "177 C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
 [v _refresh refresh `(v  1 e 1 0 ]
 {
 "181
-[v refresh@theRow theRow `uc  1 a 1 63 ]
+[v refresh@theRow theRow `uc  1 a 1 40 ]
 "179
-[v refresh@theCol theCol `uc  1 a 1 62 ]
+[v refresh@theCol theCol `uc  1 a 1 39 ]
 "193
 } 0
 "24
@@ -280,7 +280,7 @@
 {
 [v setRowHigh@row row `uc  1 a 1 wreg ]
 [v setRowHigh@row row `uc  1 a 1 wreg ]
-[v setRowHigh@row row `uc  1 a 1 58 ]
+[v setRowHigh@row row `uc  1 a 1 35 ]
 "29
 } 0
 "20
@@ -288,7 +288,7 @@
 {
 [v setColHigh@column column `uc  1 a 1 wreg ]
 [v setColHigh@column column `uc  1 a 1 wreg ]
-[v setColHigh@column column `uc  1 a 1 58 ]
+[v setColHigh@column column `uc  1 a 1 35 ]
 "22
 } 0
 "171
@@ -301,52 +301,52 @@
 {
 [v drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 wreg ]
 "153
-[v drawSymbol@i_87 i `uc  1 a 1 133 ]
+[v drawSymbol@i_87 i `uc  1 a 1 86 ]
 "147
-[v drawSymbol@i_86 i `uc  1 a 1 132 ]
+[v drawSymbol@i_86 i `uc  1 a 1 85 ]
 "141
-[v drawSymbol@i_85 i `uc  1 a 1 131 ]
+[v drawSymbol@i_85 i `uc  1 a 1 84 ]
 "133
-[v drawSymbol@i_84 i `uc  1 a 1 130 ]
+[v drawSymbol@i_84 i `uc  1 a 1 83 ]
 "125
-[v drawSymbol@i_83 i `uc  1 a 1 129 ]
+[v drawSymbol@i_83 i `uc  1 a 1 82 ]
 "117
-[v drawSymbol@i_82 i `uc  1 a 1 128 ]
+[v drawSymbol@i_82 i `uc  1 a 1 176 ]
 "109
-[v drawSymbol@i i `uc  1 a 1 127 ]
+[v drawSymbol@i i `uc  1 a 1 175 ]
 "97
-[v drawSymbol@symbolGo symbolGo `[34][2]uc  1 a 68 30 ]
+[v drawSymbol@symbolGo symbolGo `[34][2]uc  1 a 68 106 ]
 "91
-[v drawSymbol@symbolPlay symbolPlay `[34][2]uc  1 a 68 61 ]
-"102
-[v drawSymbol@symbolArrowLeft symbolArrowLeft `[15][2]uc  1 a 30 0 ]
-"101
-[v drawSymbol@symbolArrowRight symbolArrowRight `[15][2]uc  1 a 30 129 ]
-"88
-[v drawSymbol@symbolTwo symbolTwo `[14][2]uc  1 a 28 98 ]
+[v drawSymbol@symbolPlay symbolPlay `[34][2]uc  1 a 68 38 ]
 "89
-[v drawSymbol@symbolThree symbolThree `[12][2]uc  1 a 24 24 ]
+[v drawSymbol@symbolThree symbolThree `[15][2]uc  1 a 30 30 ]
+"88
+[v drawSymbol@symbolTwo symbolTwo `[15][2]uc  1 a 30 0 ]
 "87
-[v drawSymbol@symbolOne symbolOne `[12][2]uc  1 a 24 0 ]
+[v drawSymbol@symbolOne symbolOne `[11][2]uc  1 a 22 60 ]
+"102
+[v drawSymbol@symbolArrowRight symbolArrowRight `[8][2]uc  1 a 16 16 ]
+"101
+[v drawSymbol@symbolArrowLeft symbolArrowLeft `[8][2]uc  1 a 16 0 ]
 "85
 [v drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 wreg ]
-[v drawSymbol@offSetX offSetX `uc  1 p 1 60 ]
+[v drawSymbol@offSetX offSetX `uc  1 p 1 37 ]
 "86
-[v drawSymbol@F3224 F3224 `[12][2]uc  1 s 24 F3224 ]
+[v drawSymbol@F3224 F3224 `[11][2]uc  1 s 22 F3224 ]
 "87
-[v drawSymbol@F3227 F3227 `[14][2]uc  1 s 28 F3227 ]
+[v drawSymbol@F3227 F3227 `[15][2]uc  1 s 30 F3227 ]
 "88
-[v drawSymbol@F3230 F3230 `[12][2]uc  1 s 24 F3230 ]
+[v drawSymbol@F3230 F3230 `[15][2]uc  1 s 30 F3230 ]
 "89
 [v drawSymbol@F3233 F3233 `[34][2]uc  1 s 68 F3233 ]
 "95
 [v drawSymbol@F3236 F3236 `[34][2]uc  1 s 68 F3236 ]
 "99
-[v drawSymbol@F3239 F3239 `[15][2]uc  1 s 30 F3239 ]
+[v drawSymbol@F3239 F3239 `[8][2]uc  1 s 16 F3239 ]
 "101
-[v drawSymbol@F3242 F3242 `[15][2]uc  1 s 30 F3242 ]
+[v drawSymbol@F3242 F3242 `[8][2]uc  1 s 16 F3242 ]
 "87
-[v drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 126 ]
+[v drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 174 ]
 "159
 } 0
 "43
@@ -354,9 +354,9 @@
 {
 [v on@column column `uc  1 a 1 wreg ]
 [v on@column column `uc  1 a 1 wreg ]
-[v on@row row `uc  1 p 1 56 ]
+[v on@row row `uc  1 p 1 33 ]
 "45
-[v on@column column `uc  1 a 1 59 ]
+[v on@column column `uc  1 a 1 36 ]
 "51
 } 0
 "31
@@ -368,29 +368,29 @@
 [v _turnAllOff turnAllOff `(v  1 e 1 0 ]
 {
 "165
-[v turnAllOff@j j `uc  1 a 1 59 ]
+[v turnAllOff@j j `uc  1 a 1 36 ]
 "164
-[v turnAllOff@i i `uc  1 a 1 58 ]
+[v turnAllOff@i i `uc  1 a 1 35 ]
 "169
 } 0
-"101 C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
+"102 C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
 [v _initialize initialize `(v  1 e 1 0 ]
 {
-"140
+"141
 } 0
-"351
+"354
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"377
-[v ISR@ADvalue ADvalue `us  1 a 2 53 ]
-"378
-[v ISR@value value `uc  1 a 1 55 ]
-"404
+"380
+[v ISR@ADvalue ADvalue `us  1 a 2 30 ]
+"381
+[v ISR@value value `uc  1 a 1 32 ]
+"407
 } 0
-"143
+"144
 [v _writePong writePong `(v  1 e 1 0 ]
 {
-"164
+"165
 } 0
 "64 C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
 [v _off off `(v  1 e 1 0 ]
@@ -402,25 +402,25 @@
 [v off@column column `uc  1 a 1 3 ]
 "72
 } 0
-"196 C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
+"197 C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
 [v _checkNextPosition checkNextPosition `(v  1 e 1 0 ]
 {
-"314
-[v checkNextPosition@counter_430 counter `ui  1 a 2 108 ]
-"251
-[v checkNextPosition@counter counter `ui  1 a 2 106 ]
-"348
+"317
+[v checkNextPosition@counter_430 counter `ui  1 a 2 125 ]
+"253
+[v checkNextPosition@counter counter `ui  1 a 2 123 ]
+"351
 } 0
-"87
+"88
 [v i2_initializePong initializePong `(v  1 e 1 0 ]
 {
-"99
+"100
 } 0
-"58
+"59
 [v i2_startPong startPong `(v  1 e 1 0 ]
 {
-[v i2startPong@counter startPong `ui  1 a 2 104 ]
-"84
+[v i2startPong@counter startPong `ui  1 a 2 121 ]
+"85
 } 0
 "161 C:\Users\larsg\MPLABXProjects\EniacArcade.X\Source/LED-API.c
 [v i2_turnAllOff turnAllOff `(v  1 e 1 0 ]
@@ -461,24 +461,24 @@
 [v i2_drawSymbol drawSymbol `(v  1 e 1 0 ]
 {
 [v i2drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 wreg ]
-[v i2drawSymbol@symbolGo drawSymbol `[34][2]uc  1 a 68 30 ]
+[v i2drawSymbol@symbolGo drawSymbol `[34][2]uc  1 a 68 0 ]
 [v i2drawSymbol@symbolPlay drawSymbol `[34][2]uc  1 a 68 5 ]
-[v i2drawSymbol@symbolArrowLeft drawSymbol `[15][2]uc  1 a 30 0 ]
-[v i2drawSymbol@symbolArrowRight drawSymbol `[15][2]uc  1 a 30 73 ]
-[v i2drawSymbol@symbolTwo drawSymbol `[14][2]uc  1 a 28 98 ]
-[v i2drawSymbol@symbolThree drawSymbol `[12][2]uc  1 a 24 24 ]
-[v i2drawSymbol@symbolOne drawSymbol `[12][2]uc  1 a 24 0 ]
-[v i2drawSymbol@i_87 drawSymbol `uc  1 a 1 52 ]
-[v i2drawSymbol@i_86 drawSymbol `uc  1 a 1 51 ]
-[v i2drawSymbol@i_85 drawSymbol `uc  1 a 1 50 ]
-[v i2drawSymbol@i_84 drawSymbol `uc  1 a 1 49 ]
-[v i2drawSymbol@i_83 drawSymbol `uc  1 a 1 48 ]
-[v i2drawSymbol@i_82 drawSymbol `uc  1 a 1 127 ]
-[v i2drawSymbol@i drawSymbol `uc  1 a 1 126 ]
+[v i2drawSymbol@symbolThree drawSymbol `[15][2]uc  1 a 30 68 ]
+[v i2drawSymbol@symbolTwo drawSymbol `[15][2]uc  1 a 30 73 ]
+[v i2drawSymbol@symbolOne drawSymbol `[11][2]uc  1 a 22 103 ]
+[v i2drawSymbol@symbolArrowRight drawSymbol `[8][2]uc  1 a 16 0 ]
+[v i2drawSymbol@symbolArrowLeft drawSymbol `[8][2]uc  1 a 16 98 ]
+[v i2drawSymbol@i_87 drawSymbol `uc  1 a 1 120 ]
+[v i2drawSymbol@i_86 drawSymbol `uc  1 a 1 119 ]
+[v i2drawSymbol@i_85 drawSymbol `uc  1 a 1 118 ]
+[v i2drawSymbol@i_84 drawSymbol `uc  1 a 1 117 ]
+[v i2drawSymbol@i_83 drawSymbol `uc  1 a 1 116 ]
+[v i2drawSymbol@i_82 drawSymbol `uc  1 a 1 115 ]
+[v i2drawSymbol@i drawSymbol `uc  1 a 1 114 ]
 [v i2drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 wreg ]
 [v i2drawSymbol@offSetX offSetX `uc  1 p 1 4 ]
 "87
-[v i2drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 103 ]
+[v i2drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 125 ]
 "159
 } 0
 "43
@@ -491,10 +491,10 @@
 [v i2on@column column `uc  1 a 1 3 ]
 "51
 } 0
-"167 C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
+"168 C:\Users\larsg\MPLABXProjects\EniacArcade.X\main.c
 [v _getNextPosition getNextPosition `(v  1 e 1 0 ]
 {
-"194
+"195
 } 0
 "8 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lwdiv.c
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]

@@ -9,7 +9,8 @@
 #define _XTAL_FREQ 32000000
 #endif
 
-#define DEFAULTSPEED 200
+#define DEFAULTSPEED 150
+#define MAXSPEED 30 // smaller is faster
 
 #include <p18f4520.h>
 #include <xc.h>
@@ -201,8 +202,8 @@ void checkNextPosition(void)
         if(_p1.paddlePos[0] == _nextPos[1])
         {
             //paddle collision          
-            if(_speed > 50)
-                _speed = _speed - 3;
+            if(_speed > MAXSPEED)
+                _speed = _speed - 10;
             switch(_ball.bDirection)
             {
                 //process 6, 5, 4. redirect ball
@@ -222,8 +223,8 @@ void checkNextPosition(void)
         {
             //paddle collision
             
-            if(_speed > 50)
-                _speed = _speed - 3;
+            if(_speed > MAXSPEED)
+                _speed = _speed - 10;
             switch(_ball.bDirection)
             {
                 //process 6, 5, 4. redirect ball
@@ -247,7 +248,8 @@ void checkNextPosition(void)
         {
             //drawsymbol
             turnAllOff();
-            drawSymbol(7, 8);           
+            drawSymbol(6, 0);
+            drawSymbol(6, 8);           
             for(unsigned int counter = 0; counter < 800; counter ++)
             {
                 refresh();
@@ -266,8 +268,8 @@ void checkNextPosition(void)
     {
         if(_p2.paddlePos[0] == _nextPos[1])
         {
-            if(_speed > 50)
-                _speed = _speed - 3;
+            if(_speed > MAXSPEED)
+                _speed = _speed - 10;
            switch(_ball.bDirection)
             {
                 //process 6, 5, 4. redirect ball
@@ -287,8 +289,8 @@ void checkNextPosition(void)
         else if( _p2.paddlePos[1] == _nextPos[1])
         {
             //paddle collision           
-            if(_speed > 50)
-                _speed = _speed -3;
+            if(_speed > MAXSPEED)
+                _speed = _speed - 10;
             switch(_ball.bDirection)
             {
                 case 1:
@@ -310,7 +312,8 @@ void checkNextPosition(void)
         {
             //drawsymbol
             turnAllOff();
-            drawSymbol(6, 0);
+            drawSymbol(7, 0);
+            drawSymbol(7, 8);
             for(unsigned int counter = 0; counter < 800; counter ++)
             {
                 refresh();
