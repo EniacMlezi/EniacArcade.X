@@ -9,7 +9,8 @@
 #define _XTAL_FREQ 32000000
 #endif
 
-#define DEFAULTSPEED 200
+#define DEFAULTSPEED 150
+#define MAXSPEED 30 // smaller is faster
 
 #include <p18f4520.h>
 #include <xc.h>
@@ -35,7 +36,7 @@ typedef struct player {
     unsigned char paddlePosOld[2];
     //0: lowest 1: highest
     unsigned char paddlePos[2];
-    //amount of lives of an player
+    //amount of lives of a player
     unsigned char lives;
 } player;
 
@@ -56,8 +57,6 @@ void delaySeconds(int numberOfSeconds) {
 //shows player lives and resets ball structure values
 
 void startPong(void) {
-    _speed = DEFAULTSPEED;
-
     //Display player lives
     turnAllOff();
     drawSymbol(_p1.lives, 0);
@@ -222,14 +221,14 @@ void checkPaddleCollision(void) {
     if (_nextPos[0] == 1) {
         //if next ball position column is equal to on of the paddle position columns
         if (_p1.paddlePos[0] == _nextPos[1] || _p1.paddlePos[1] == _nextPos[1]) {
-            handlePaddleCollision();
+            //handlePaddleCollision();
         }
     }        
     //if next ball position is one row in front of paddle row
     else if (_nextPos[0] == 14) {
         //if next ball position column is equal to on of the paddle position columns
         if (_p2.paddlePos[0] == _nextPos[1] || _p2.paddlePos[1] == _nextPos[1]) {
-            handlePaddleCollision();
+            //handlePaddleCollision();
         }
     }
 }
@@ -242,10 +241,11 @@ void checkNextPosition(void) {
     if (_nextPos[0] == 0) {
         if (_p1.paddlePos[0] == _nextPos[1]) {
             //paddle collision          
-            if (_speed > 50)
-                _speed = _speed - 3;
-            switch (_ball.bDirection) {
-                    //process 6, 5, 4. redirect ball
+            if(_speed > MAXSPEED)
+                _speed = _speed - 10;
+            switch(_ball.bDirection)
+            {
+                //process 6, 5, 4. redirect ball
                 case 4:
                     _ball.bDirection = 2;
                     break;
@@ -259,11 +259,12 @@ void checkNextPosition(void) {
             return;
         } else if (_p1.paddlePos[1] == _nextPos[1]) {
             //paddle collision
-
-            if (_speed > 50)
-                _speed = _speed - 3;
-            switch (_ball.bDirection) {
-                    //process 6, 5, 4. redirect ball
+            
+            if(_speed > MAXSPEED)
+                _speed = _speed - 10;
+            switch(_ball.bDirection)
+            {
+                //process 6, 5, 4. redirect ball
                 case 4:
                     _ball.bDirection = 1;
                     break;
@@ -283,8 +284,10 @@ void checkNextPosition(void) {
         if (_p1.lives == 0) {
             //drawsymbol
             turnAllOff();
-            drawSymbol(7, 8);
-            for (unsigned int counter = 0; counter < 800; counter++) {
+            drawSymbol(6, 0);
+            drawSymbol(6, 8);           
+            for(unsigned int counter = 0; counter < 800; counter ++)
+            {
                 refresh();
             }
             turnAllOff();
@@ -314,9 +317,10 @@ void checkNextPosition(void) {
             return;
         } else if (_p2.paddlePos[1] == _nextPos[1]) {
             //paddle collision           
-            if (_speed > 50)
-                _speed = _speed - 3;
-            switch (_ball.bDirection) {
+            if(_speed > MAXSPEED)
+                _speed = _speed - 10;
+            switch(_ball.bDirection)
+            {
                 case 1:
                     _ball.bDirection = 4;
                     break;
@@ -335,8 +339,10 @@ void checkNextPosition(void) {
         if (_p2.lives == 0) {
             //drawsymbol
             turnAllOff();
-            drawSymbol(6, 0);
-            for (unsigned int counter = 0; counter < 800; counter++) {
+            drawSymbol(7, 0);
+            drawSymbol(7, 8);
+            for(unsigned int counter = 0; counter < 800; counter ++)
+            {
                 refresh();
             }
             turnAllOff();

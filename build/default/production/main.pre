@@ -4178,7 +4178,7 @@ extern void turnAllOff();
 extern void initializeLED();
 extern void refresh();
 
-# 24 "main.c"
+# 25 "main.c"
 typedef struct ball {
 
 unsigned char bPos[2];
@@ -4203,7 +4203,7 @@ player _p1;
 player _p2;
 unsigned char _nextPos[2];
 
-unsigned int _speed = 200;
+unsigned int _speed = 150;
 unsigned int _timerCounter = 0;
 
 void delaySeconds(int numberOfSeconds) {
@@ -4214,8 +4214,6 @@ _delay((unsigned long)((10)*(32000000/4000.0)));
 
 
 void startPong(void) {
-_speed = 200;
-
 
 turnAllOff();
 drawSymbol(_p1.lives, 0);
@@ -4400,9 +4398,10 @@ checkWallCollision();
 if (_nextPos[0] == 0) {
 if (_p1.paddlePos[0] == _nextPos[1]) {
 
-if (_speed > 50)
-_speed = _speed - 3;
-switch (_ball.bDirection) {
+if(_speed > 30)
+_speed = _speed - 10;
+switch(_ball.bDirection)
+{
 
 case 4:
 _ball.bDirection = 2;
@@ -4418,9 +4417,10 @@ return;
 } else if (_p1.paddlePos[1] == _nextPos[1]) {
 
 
-if (_speed > 50)
-_speed = _speed - 3;
-switch (_ball.bDirection) {
+if(_speed > 30)
+_speed = _speed - 10;
+switch(_ball.bDirection)
+{
 
 case 4:
 _ball.bDirection = 1;
@@ -4441,8 +4441,10 @@ _p1.lives--;
 if (_p1.lives == 0) {
 
 turnAllOff();
-drawSymbol(7, 8);
-for (unsigned int counter = 0; counter < 800; counter++) {
+drawSymbol(6, 0);
+drawSymbol(6, 8);
+for(unsigned int counter = 0; counter < 800; counter ++)
+{
 refresh();
 }
 turnAllOff();
@@ -4472,9 +4474,10 @@ getNextPosition();
 return;
 } else if (_p2.paddlePos[1] == _nextPos[1]) {
 
-if (_speed > 50)
-_speed = _speed - 3;
-switch (_ball.bDirection) {
+if(_speed > 30)
+_speed = _speed - 10;
+switch(_ball.bDirection)
+{
 case 1:
 _ball.bDirection = 4;
 break;
@@ -4493,8 +4496,10 @@ _p2.lives--;
 if (_p2.lives == 0) {
 
 turnAllOff();
-drawSymbol(6, 0);
-for (unsigned int counter = 0; counter < 800; counter++) {
+drawSymbol(7, 0);
+drawSymbol(7, 8);
+for(unsigned int counter = 0; counter < 800; counter ++)
+{
 refresh();
 }
 turnAllOff();
