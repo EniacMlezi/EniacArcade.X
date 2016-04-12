@@ -83,78 +83,87 @@ void rowOff(unsigned char row)
 }
 
 void drawSymbol(unsigned char chosenSymbol, unsigned char offSetX)
-{
-    char symbolOne[11][2] = {{2,0},{3,0}, {4,0}, {3,1}, {3,2}, {3,3}, {3,4}, {3,5}, {3,6}, {3,7}, {4,6}};
-    char symbolTwo[15][2] = {{1,0}, {2,0}, {3,0}, {4,0}, {5,0}, {5,1}, {4,2}, {3,3}, {2,4}, {1,5}, {1,6}, {5,6}, {2,7}, {3,7}, {4,7}};
-    char symbolThree[15][2] = {{2,0}, {3,0}, {4,0}, {5,1}, {1,1}, {1,2}, {1,3}, {2,4}, {3,4}, {1,5}, {1,6}, {2,7}, {3,7}, {4,7}, {5,6}};
-    
-    char symbolPlay[34][2] = {
-    {1,1},{1,2},{1,3},{1,4},{1,5},{1,6},{2,6},{3,6},{3,5},{3,4},{2,4}, /*P*/
-    {5,6},{5,5},{5,4},{5,3},{5,2},{5,1},{6,1}, /*L*/
-    {8,1},{8,2},{8,3},{9,4},{10,4},{11,3},{11,2},{11,1}, /*A*/
-    {13,1},{13,2},{13,3},{13,4},{12,5},{11,6},{14,5},{14,6}}; /*Y*/
-   
-    char symbolGo[34][2] = {
-    {6,6},{5,7},{4,7},{3,7},{2,6},{2,5},{2,4},{2,3},{2,2},{2,1},{3,0},{4,0},{5,0},{6,1},{5,2},{4,2}, /*G*/
-    {9,6},{9,5},{9,4},{9,3},{9,2},{9,1},{10,0},{11,0},{12,0},{13,1},{13,2},{13,4},{13,5},{13,6},{12,7},{11,7},{10,7}};/*O*/
-    
-    char symbolArrowLeft[8][2] = {{3,0}, {3,7}, {4,1}, {4,6}, {5,2}, {5,5}, {6,3}, {6,4}};
-    char symbolArrowRight[8][2] = {{4,0}, {3,1}, {2,2}, {1,3}, {1,4}, {2,5}, {3,6}, {4,7}};
-    
+{    
     switch(chosenSymbol)
     {
         //symbolOne
         case 1:
-            //draw symbol in with given x position
+        {
+            char symbolOne[11][2] = {{2,0},{3,0}, {4,0}, {3,1}, {3,2}, {3,3}, {3,4}, {3,5}, {3,6}, {3,7}, {4,6}};
             for(unsigned char i = 0; i < 11; i++)
             {
                 on(symbolOne[i][1], symbolOne[i][0] + offSetX);
             }
             break;
+        }
         //symbolTwo
         case 2:
+        {
+            char symbolTwo[15][2] = {{1,0}, {2,0}, {3,0}, {4,0}, {5,0}, {5,1}, {4,2}, {3,3}, {2,4}, {1,5}, {1,6}, {5,6}, {2,7}, {3,7}, {4,7}};   
             //draw symbol in with given x position
             for(unsigned char i = 0; i < 15; i++)
             {
                 on(symbolTwo[i][1], symbolTwo[i][0] + offSetX);
             }
             break;
+        }
         //symbolThree
-        case 3:          
+        case 3:
+        {
+            char symbolThree[15][2] = {{2,0}, {3,0}, {4,0}, {5,1}, {1,1}, {1,2}, {1,3}, {2,4}, {3,4}, {1,5}, {1,6}, {2,7}, {3,7}, {4,7}, {5,6}};  
             //draw symbol in with given x position
             for(unsigned char i = 0; i < 15; i++)
             {
                 on(symbolThree[i][1], symbolThree[i][0] + offSetX);
             }
             break;
+        }
         //symbolPlay
         case 4:
+        {          
+            char symbolPlay[34][2] = {
+            {1,1},{1,2},{1,3},{1,4},{1,5},{1,6},{2,6},{3,6},{3,5},{3,4},{2,4}, /*P*/
+            {5,6},{5,5},{5,4},{5,3},{5,2},{5,1},{6,1}, /*L*/
+            {8,1},{8,2},{8,3},{9,4},{10,4},{11,3},{11,2},{11,1}, /*A*/
+            {13,1},{13,2},{13,3},{13,4},{12,5},{11,6},{14,5},{14,6}}; /*Y*/
             //draw symbol in with given x position
             for(unsigned char i = 0; i < 34; i++)
             {
                 on(symbolPlay[i][1], symbolPlay[i][0]  + offSetX);
             }
             break;
+        }
         //symbolGo
-        case 5:         
+        case 5: 
+        {
+            char symbolGo[34][2] = {
+            {6,6},{5,7},{4,7},{3,7},{2,6},{2,5},{2,4},{2,3},{2,2},{2,1},{3,0},{4,0},{5,0},{6,1},{5,2},{4,2}, /*G*/
+            {9,6},{9,5},{9,4},{9,3},{9,2},{9,1},{10,0},{11,0},{12,0},{13,1},{13,2},{13,4},{13,5},{13,6},{12,7},{11,7},{10,7}};/*O*/
             //draw symbol in with given x position
             for(unsigned char i = 0; i < 34; i++)
             {
                 on(symbolGo[i][1], symbolGo[i][0]);
             }
             break;
+        }
         case 6:
+        {         
+            char symbolArrowLeft[8][2] = {{3,0}, {3,7}, {4,1}, {4,6}, {5,2}, {5,5}, {6,3}, {6,4}};
             for(unsigned char i = 0; i < 8; i++)
             {
                 on(symbolArrowLeft[i][1], symbolArrowLeft[i][0] + offSetX);
             }
             break;
+        }
         case 7:
+        {
+            char symbolArrowRight[8][2] = {{4,0}, {3,1}, {2,2}, {1,3}, {1,4}, {2,5}, {3,6}, {4,7}};
             for(unsigned char i = 0; i < 8; i++)
             {
                 on(symbolArrowRight[i][1], symbolArrowRight[i][0]+ offSetX);
             }
             break;
+        }
     }
 }
 

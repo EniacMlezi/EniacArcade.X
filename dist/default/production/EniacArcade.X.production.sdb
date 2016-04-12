@@ -1,0 +1,462 @@
+[p LITE_MODE AUTOSTATIC LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F4520 ]
+[d frameptr 4065 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"54 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 3 0 ]
+"62 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 3 0 ]
+"20 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\ftsub.c
+[v ___ftsub __ftsub `(f  1 e 3 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"10 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 3 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 3 0 ]
+"11 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 3 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 3 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"15 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"63 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
+[v _startPong startPong `(v  1 e 1 0 ]
+"87
+[v _initializePong initializePong `(v  1 e 1 0 ]
+"104
+[v _initialize initialize `(v  1 e 1 0 ]
+"146
+[v _writePong writePong `(v  1 e 1 0 ]
+"170
+[v _getNextPosition getNextPosition `(i  1 e 2 0 ]
+"197
+[v _handleWallCollision handleWallCollision `(v  1 e 1 0 ]
+"215
+[v _checkWallCollision checkWallCollision `(v  1 e 1 0 ]
+"221
+[v _handlePaddleLeftCollision handlePaddleLeftCollision `(v  1 e 1 0 ]
+"255
+[v _handlePaddleRightCollision handlePaddleRightCollision `(v  1 e 1 0 ]
+"288
+[v _checkPaddleCollision checkPaddleCollision `(b  1 e 0 0 ]
+"307
+[v _checkNextPosition checkNextPosition `(v  1 e 1 0 ]
+"317
+[v _ISR ISR `II(v  1 e 1 0 ]
+"364
+[v _main main `(v  1 e 1 0 ]
+"20 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+[v _setColHigh setColHigh `(v  1 e 1 0 ]
+"24
+[v _setRowHigh setRowHigh `(v  1 e 1 0 ]
+"31
+[v _initializeLED initializeLED `(v  1 e 1 0 ]
+"43
+[v _on on `(v  1 e 1 0 ]
+[v i2_on on `(v  1 e 1 0 ]
+"64
+[v _off off `(v  1 e 1 0 ]
+"85
+[v _drawSymbol drawSymbol `(v  1 e 1 0 ]
+"170
+[v _turnAllOff turnAllOff `(v  1 e 1 0 ]
+"180
+[v _allOff allOff `(v  1 e 1 0 ]
+"186
+[v _refresh refresh `(v  1 e 1 0 ]
+"992 C:\Program Files (x86)\Microchip\xc8\v1.37\include\pic18f4520.h
+[v _LATA LATA `VEuc  1 e 1 @3977 ]
+"1256
+[v _LATC LATC `VEuc  1 e 1 @3979 ]
+"1388
+[v _LATD LATD `VEuc  1 e 1 @3980 ]
+"1577
+[v _TRISA TRISA `VEuc  1 e 1 @3986 ]
+[s S197 . 1 `uc 1 TRISB0 1 0 :1:0 
+`uc 1 TRISB1 1 0 :1:1 
+`uc 1 TRISB2 1 0 :1:2 
+`uc 1 TRISB3 1 0 :1:3 
+`uc 1 TRISB4 1 0 :1:4 
+`uc 1 TRISB5 1 0 :1:5 
+`uc 1 TRISB6 1 0 :1:6 
+`uc 1 TRISB7 1 0 :1:7 
+]
+"1830
+[s S206 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+[u S215 . 1 `S197 1 . 1 0 `S206 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES215  1 e 1 @3987 ]
+"2019
+[v _TRISC TRISC `VEuc  1 e 1 @3988 ]
+"2240
+[v _TRISD TRISD `VEuc  1 e 1 @3989 ]
+[s S136 . 1 `uc 1 TUN 1 0 :5:0 
+`uc 1 . 1 0 :1:5 
+`uc 1 PLLEN 1 0 :1:6 
+`uc 1 INTSRC 1 0 :1:7 
+]
+"2644
+[s S141 . 1 `uc 1 TUN0 1 0 :1:0 
+`uc 1 TUN1 1 0 :1:1 
+`uc 1 TUN2 1 0 :1:2 
+`uc 1 TUN3 1 0 :1:3 
+`uc 1 TUN4 1 0 :1:4 
+]
+[u S147 . 1 `S136 1 . 1 0 `S141 1 . 1 0 ]
+[v _OSCTUNEbits OSCTUNEbits `VES147  1 e 1 @3995 ]
+[s S237 . 1 `uc 1 ADCS 1 0 :3:0 
+`uc 1 ACQT 1 0 :3:3 
+`uc 1 . 1 0 :1:6 
+`uc 1 ADFM 1 0 :1:7 
+]
+"4760
+[s S242 . 1 `uc 1 ADCS0 1 0 :1:0 
+`uc 1 ADCS1 1 0 :1:1 
+`uc 1 ADCS2 1 0 :1:2 
+`uc 1 ACQT0 1 0 :1:3 
+`uc 1 ACQT1 1 0 :1:4 
+`uc 1 ACQT2 1 0 :1:5 
+]
+[u S249 . 1 `S237 1 . 1 0 `S242 1 . 1 0 ]
+[v _ADCON2bits ADCON2bits `VES249  1 e 1 @4032 ]
+[s S265 . 1 `uc 1 PCFG 1 0 :4:0 
+`uc 1 VCFG 1 0 :2:4 
+]
+"4840
+[s S268 . 1 `uc 1 PCFG0 1 0 :1:0 
+`uc 1 PCFG1 1 0 :1:1 
+`uc 1 PCFG2 1 0 :1:2 
+`uc 1 PCFG3 1 0 :1:3 
+`uc 1 VCFG0 1 0 :1:4 
+`uc 1 VCFG1 1 0 :1:5 
+]
+[s S275 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 CHSN3 1 0 :1:3 
+]
+[s S278 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 VCFG01 1 0 :1:4 
+]
+[s S281 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 VCFG11 1 0 :1:5 
+]
+[u S284 . 1 `S265 1 . 1 0 `S268 1 . 1 0 `S275 1 . 1 0 `S278 1 . 1 0 `S281 1 . 1 0 ]
+[v _ADCON1bits ADCON1bits `VES284  1 e 1 @4033 ]
+[s S310 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_NOT_DONE 1 0 :1:1 
+]
+"4943
+[s S313 . 1 `uc 1 ADON 1 0 :1:0 
+`uc 1 GO_nDONE 1 0 :1:1 
+`uc 1 CHS 1 0 :4:2 
+]
+[s S317 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO 1 0 :1:1 
+`uc 1 CHS0 1 0 :1:2 
+`uc 1 CHS1 1 0 :1:3 
+`uc 1 CHS2 1 0 :1:4 
+`uc 1 CHS3 1 0 :1:5 
+]
+[s S324 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 DONE 1 0 :1:1 
+]
+[s S327 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_DONE 1 0 :1:1 
+]
+[s S330 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 nDONE 1 0 :1:1 
+]
+[s S333 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GO_DONE 1 0 :1:1 
+]
+[s S336 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 GODONE 1 0 :1:1 
+]
+[u S339 . 1 `S310 1 . 1 0 `S313 1 . 1 0 `S317 1 . 1 0 `S324 1 . 1 0 `S327 1 . 1 0 `S330 1 . 1 0 `S333 1 . 1 0 `S336 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES339  1 e 1 @4034 ]
+"5017
+[v _ADRES ADRES `VEus  1 e 2 @4035 ]
+[s S162 . 1 `uc 1 SCS 1 0 :2:0 
+`uc 1 IOFS 1 0 :1:2 
+`uc 1 OSTS 1 0 :1:3 
+`uc 1 IRCF 1 0 :3:4 
+`uc 1 IDLEN 1 0 :1:7 
+]
+"6226
+[s S168 . 1 `uc 1 SCS0 1 0 :1:0 
+`uc 1 SCS1 1 0 :1:1 
+`uc 1 FLTS 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 IRCF0 1 0 :1:4 
+`uc 1 IRCF1 1 0 :1:5 
+`uc 1 IRCF2 1 0 :1:6 
+]
+[u S176 . 1 `S162 1 . 1 0 `S168 1 . 1 0 ]
+[v _OSCCONbits OSCCONbits `VES176  1 e 1 @4051 ]
+"7114
+[v _ADIE ADIE `VEb  1 e 0 @31982 ]
+"7116
+[v _ADIF ADIF `VEb  1 e 0 @31990 ]
+"7352
+[v _GIE GIE `VEb  1 e 0 @32663 ]
+"7736
+[v _PEIE PEIE `VEb  1 e 0 @32662 ]
+"7748
+[v _PLLEN PLLEN `VEb  1 e 0 @31966 ]
+"7754
+[v _PSA PSA `VEb  1 e 0 @32427 ]
+"8010
+[v _T08BIT T08BIT `VEb  1 e 0 @32430 ]
+"8014
+[v _T0CS T0CS `VEb  1 e 0 @32429 ]
+"8020
+[v _T0PS0 T0PS0 `VEb  1 e 0 @32424 ]
+"8022
+[v _T0PS1 T0PS1 `VEb  1 e 0 @32425 ]
+"8024
+[v _T0PS2 T0PS2 `VEb  1 e 0 @32426 ]
+"8074
+[v _TMR0IE TMR0IE `VEb  1 e 0 @32661 ]
+"8076
+[v _TMR0IF TMR0IF `VEb  1 e 0 @32658 ]
+"8080
+[v _TMR0ON TMR0ON `VEb  1 e 0 @32431 ]
+[s S107 ball 3 `[2]uc 1 bPos 2 0 `uc 1 bDirection 1 2 ]
+"48 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
+[v __ball _ball `S107  1 e 3 0 ]
+[s S111 player 7 `[2]uc 1 paddlePosOld 2 0 `[2]uc 1 paddlePos 2 2 `uc 1 lives 1 4 `*.37(v 1 handleCollision 2 5 ]
+"49
+[v __p1 _p1 `*.2S111  1 e 2 0 ]
+"50
+[v __p2 _p2 `*.2S111  1 e 2 0 ]
+"51
+[v __nextPos _nextPos `[2]uc  1 e 2 0 ]
+"53
+[v __speed _speed `ui  1 e 2 0 ]
+"54
+[v __timerCounter _timerCounter `ui  1 e 2 0 ]
+"18 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+[v _pixels pixels `[8][16]uc  1 e 128 0 ]
+"17 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/Random-Algorithm.c
+[v __lcg _lcg `uc  1 s 1 _lcg ]
+"18
+[v __glfsr _glfsr `uc  1 s 1 _glfsr ]
+"364 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"374
+} 0
+"87
+[v _initializePong initializePong `(v  1 e 1 0 ]
+{
+"102
+} 0
+"63
+[v _startPong startPong `(v  1 e 1 0 ]
+{
+"68
+[v startPong@counter counter `ui  1 a 2 34 ]
+"85
+} 0
+"186 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+[v _refresh refresh `(v  1 e 1 0 ]
+{
+"190
+[v refresh@theRow theRow `uc  1 a 1 31 ]
+"188
+[v refresh@theCol theCol `uc  1 a 1 30 ]
+"202
+} 0
+"24
+[v _setRowHigh setRowHigh `(v  1 e 1 0 ]
+{
+[v setRowHigh@row row `uc  1 a 1 wreg ]
+[v setRowHigh@row row `uc  1 a 1 wreg ]
+[v setRowHigh@row row `uc  1 a 1 26 ]
+"29
+} 0
+"20
+[v _setColHigh setColHigh `(v  1 e 1 0 ]
+{
+[v setColHigh@column column `uc  1 a 1 wreg ]
+[v setColHigh@column column `uc  1 a 1 wreg ]
+[v setColHigh@column column `uc  1 a 1 26 ]
+"22
+} 0
+"180
+[v _allOff allOff `(v  1 e 1 0 ]
+{
+"184
+} 0
+"85
+[v _drawSymbol drawSymbol `(v  1 e 1 0 ]
+{
+[v drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 wreg ]
+"161
+[v drawSymbol@i_87 i `uc  1 a 1 70 ]
+"152
+[v drawSymbol@i_83 i `uc  1 a 1 69 ]
+"143
+[v drawSymbol@i_79 i `uc  1 a 1 68 ]
+"130
+[v drawSymbol@i_75 i `uc  1 a 1 33 ]
+"115
+[v drawSymbol@i_71 i `uc  1 a 1 32 ]
+"104
+[v drawSymbol@i_67 i `uc  1 a 1 31 ]
+"93
+[v drawSymbol@i i `uc  1 a 1 30 ]
+"160
+[v drawSymbol@symbolArrowRight symbolArrowRight `[8][2]uc  1 a 16 38 ]
+"151
+[v drawSymbol@symbolArrowLeft symbolArrowLeft `[8][2]uc  1 a 16 22 ]
+"139
+[v drawSymbol@symbolGo symbolGo `[34][2]uc  1 a 68 0 ]
+"124
+[v drawSymbol@symbolPlay symbolPlay `[34][2]uc  1 a 68 0 ]
+"113
+[v drawSymbol@symbolThree symbolThree `[15][2]uc  1 a 30 98 ]
+"102
+[v drawSymbol@symbolTwo symbolTwo `[15][2]uc  1 a 30 68 ]
+"92
+[v drawSymbol@symbolOne symbolOne `[11][2]uc  1 a 22 0 ]
+"85
+[v drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 wreg ]
+[v drawSymbol@offSetX offSetX `uc  1 p 1 28 ]
+"91
+[v drawSymbol@F3224 F3224 `[11][2]uc  1 s 22 F3224 ]
+"101
+[v drawSymbol@F3228 F3228 `[15][2]uc  1 s 30 F3228 ]
+"112
+[v drawSymbol@F3232 F3232 `[15][2]uc  1 s 30 F3232 ]
+"123
+[v drawSymbol@F3236 F3236 `[34][2]uc  1 s 68 F3236 ]
+"138
+[v drawSymbol@F3240 F3240 `[34][2]uc  1 s 68 F3240 ]
+"150
+[v drawSymbol@F3244 F3244 `[8][2]uc  1 s 16 F3244 ]
+"159
+[v drawSymbol@F3248 F3248 `[8][2]uc  1 s 16 F3248 ]
+"85
+[v drawSymbol@chosenSymbol chosenSymbol `uc  1 a 1 29 ]
+"168
+} 0
+"43
+[v _on on `(v  1 e 1 0 ]
+{
+[v on@column column `uc  1 a 1 wreg ]
+[v on@column column `uc  1 a 1 wreg ]
+[v on@row row `uc  1 p 1 24 ]
+"45
+[v on@column column `uc  1 a 1 27 ]
+"51
+} 0
+"31
+[v _initializeLED initializeLED `(v  1 e 1 0 ]
+{
+"41
+} 0
+"170
+[v _turnAllOff turnAllOff `(v  1 e 1 0 ]
+{
+"174
+[v turnAllOff@j j `uc  1 a 1 27 ]
+"173
+[v turnAllOff@i i `uc  1 a 1 26 ]
+"178
+} 0
+"104 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
+[v _initialize initialize `(v  1 e 1 0 ]
+{
+"142
+} 0
+"317
+[v _ISR ISR `II(v  1 e 1 0 ]
+{
+"338
+[v ISR@ADvalue ADvalue `us  1 a 2 21 ]
+"339
+[v ISR@value value `uc  1 a 1 23 ]
+"362
+} 0
+"146
+[v _writePong writePong `(v  1 e 1 0 ]
+{
+"166
+} 0
+"43 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\Source/LED-API.c
+[v i2_on on `(v  1 e 1 0 ]
+{
+[v i2on@column column `uc  1 a 1 wreg ]
+[v i2on@column column `uc  1 a 1 wreg ]
+[v i2on@row row `uc  1 p 1 0 ]
+"45
+[v i2on@column column `uc  1 a 1 3 ]
+"51
+} 0
+"64
+[v _off off `(v  1 e 1 0 ]
+{
+[v off@column column `uc  1 a 1 wreg ]
+[v off@column column `uc  1 a 1 wreg ]
+[v off@row row `uc  1 p 1 0 ]
+"66
+[v off@column column `uc  1 a 1 3 ]
+"72
+} 0
+"307 C:\Users\larsg\Desktop\PIC projects\EniacArcade.X\main.c
+[v _checkNextPosition checkNextPosition `(v  1 e 1 0 ]
+{
+"313
+} 0
+"215
+[v _checkWallCollision checkWallCollision `(v  1 e 1 0 ]
+{
+"219
+} 0
+"197
+[v _handleWallCollision handleWallCollision `(v  1 e 1 0 ]
+{
+"213
+} 0
+"170
+[v _getNextPosition getNextPosition `(i  1 e 2 0 ]
+{
+"195
+} 0
+"288
+[v _checkPaddleCollision checkPaddleCollision `(b  1 e 0 0 ]
+{
+"291
+[v checkPaddleCollision@i i `i  1 a 2 3 ]
+[s S111 player 7 `[2]uc 1 paddlePosOld 2 0 `[2]uc 1 paddlePos 2 2 `uc 1 lives 1 4 `*.37(v 1 handleCollision 2 5 ]
+"288
+[v checkPaddleCollision@paddle paddle `*.2S111  1 p 2 0 ]
+"305
+} 0
+"8 C:\Program Files (x86)\Microchip\xc8\v1.37\sources\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+{
+"11
+[v ___lwdiv@quotient quotient `ui  1 a 2 4 ]
+"12
+[v ___lwdiv@counter counter `uc  1 a 1 6 ]
+"8
+[v ___lwdiv@dividend dividend `ui  1 p 2 0 ]
+[v ___lwdiv@divisor divisor `ui  1 p 2 2 ]
+"31
+} 0

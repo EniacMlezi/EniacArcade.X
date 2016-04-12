@@ -20,8 +20,10 @@
 #include "Header/config.h"
 #include "Header/LED-API.h"
 
-//Structure of a ball
+void handlePaddleLeftCollision(char pixel);
+void handlePaddleRightCollision(char pixel);
 
+//Structure of a ball
 typedef struct ball {
     //position, bPos[0] = ROW Y bPos[1] = COL X
     unsigned char bPos[2];
@@ -38,12 +40,14 @@ typedef struct player {
     unsigned char paddlePos[2];
     //amount of lives of a player
     unsigned char lives;
+    // collision handler
+    void (*handleCollision)(char pixel);
 } player;
 
 //Structure instances
 ball _ball;
-player _p1;
-player _p2;
+player *_p1;
+player *_p2;
 unsigned char _nextPos[2];
 
 unsigned int _speed = DEFAULTSPEED;
@@ -59,8 +63,8 @@ void delaySeconds(int numberOfSeconds) {
 void startPong(void) {
     //Display player lives
     turnAllOff();
-    drawSymbol(_p1.lives, 0);
-    drawSymbol(_p2.lives, 8);
+    drawSymbol(_p1->lives, 0);
+    drawSymbol(_p2->lives, 8);
     for (unsigned int counter = 0; counter < 800; counter++) {
         refresh();
     }
@@ -82,11 +86,15 @@ void startPong(void) {
 
 void initializePong(void) {
     //main menu?
-
+    
     //set player lives
-    _p1.lives = 3;
-    _p2.lives = 3;
+    _p1->lives = 3;
+    _p2->lives = 3;
 
+    //set collision handlers
+    _p1->handleCollision = handlePaddleLeftCollision;
+    _p2->handleCollision = handlePaddleRightCollision;
+    
     startPong();
 
     //start the timer
@@ -145,21 +153,21 @@ void writePong(void) {
     on(_ball.bPos[1], _ball.bPos[0]);
 
     //write paddle positions
-    off(_p1.paddlePosOld[0], 0);
-    off(_p1.paddlePosOld[1], 0);
+    off(_p1->paddlePosOld[0], 0);
+    off(_p1->paddlePosOld[1], 0);
 
-    off(_p2.paddlePosOld[0], 15);
-    off(_p2.paddlePosOld[1], 15);
+    off(_p2->paddlePosOld[0], 15);
+    off(_p2->paddlePosOld[1], 15);
 
-    on(_p1.paddlePos[0], 0);
-    on(_p1.paddlePos[1], 0);
-    on(_p2.paddlePos[0], 15);
-    on(_p2.paddlePos[1], 15);
+    on(_p1->paddlePos[0], 0);
+    on(_p1->paddlePos[1], 0);
+    on(_p2->paddlePos[0], 15);
+    on(_p2->paddlePos[1], 15);
 }
 
 //Works (Don't edit!!)
 
-void getNextPosition(void) {
+getNextPosition(void) { 
     switch (_ball.bDirection) {
         case 1:
             _nextPos[0] = _ball.bPos[0] + 1;
@@ -210,166 +218,98 @@ void checkWallCollision(void) {
     }
 }
 
-void handlePaddleCollision(struct playerData* paddle) {
+void handlePaddleLeftCollision(char pixel) {
+    //increase game speed
+    if (_speed > MAXSPEED)
+        _speed = _speed - 10;
 
-    
+    if (pixel) { // top pixel hit
+        switch (_ball.bDirection) {
+                //process 6, 5, 4. redirect ball
+            case 4:
+                _ball.bDirection = 1;
+                break;
+            case 5:
+                _ball.bDirection = 3;
+                break;
+            case 6:
+                _ball.bDirection = 3;
+                break;
+        }
+    } else { // bottom pixel hit
+        switch (_ball.bDirection) {
+                //process 6, 5, 4. redirect ball
+            case 4:
+                _ball.bDirection = 2;
+                break;
+            case 5:
+                _ball.bDirection = 1;
+                break;
+            case 6:
+                _ball.bDirection = 2;
+        }
+    }
     getNextPosition();
 }
 
-void checkPaddleCollision(void) {
-    //if next ball position is one row in front of paddle row
-    if (_nextPos[0] == 1) {
-        //if next ball position column is equal to on of the paddle position columns
-        if (_p1.paddlePos[0] == _nextPos[1] || _p1.paddlePos[1] == _nextPos[1]) {
-            //handlePaddleCollision();
+void handlePaddleRightCollision(char pixel) {
+    //increase game speed
+    if (_speed > MAXSPEED)
+        _speed = _speed - 10;
+
+    if (pixel) { // top pixel hit
+        switch (_ball.bDirection) {
+            case 1:
+                _ball.bDirection = 4;
+                break;
+            case 2:
+                _ball.bDirection = 4;
+                break;
+            case 3:
+                _ball.bDirection = 6;
+                break;
         }
-    }        
-    //if next ball position is one row in front of paddle row
-    else if (_nextPos[0] == 14) {
-        //if next ball position column is equal to on of the paddle position columns
-        if (_p2.paddlePos[0] == _nextPos[1] || _p2.paddlePos[1] == _nextPos[1]) {
-            //handlePaddleCollision();
+    } else { // bottom pixel hit
+        switch (_ball.bDirection) {
+            case 1:
+                _ball.bDirection = 4;
+                break;
+            case 2:
+                _ball.bDirection = 6;
+                break;
+            case 3:
+                _ball.bDirection = 5;
+                break;
         }
     }
+    getNextPosition();
+}
+
+bit checkPaddleCollision(player *paddle) {
+    //if next ball position is one row in front of paddle row
+    if (_nextPos[0] == 1 || _nextPos[0] == 14) {
+        int i = 0;
+        //if next ball position column is equal to on of the paddle position columns
+        if (paddle->paddlePos[0] == _nextPos[1]) {
+            //handle paddle collision         
+            paddle->handleCollision(0);          
+            return 1; // paddle collision occured
+        } else if (paddle->paddlePos[1] == _nextPos[1]) {
+            //handle paddle collision         
+            paddle->handleCollision(1);
+            return 1; // paddle collision occured
+        }       
+        //scored
+    }
+    return 0; // paddle collision did not occur
 }
 
 void checkNextPosition(void) {
     getNextPosition();
-    checkPaddleCollision();
-    checkWallCollision();
-
-    if (_nextPos[0] == 0) {
-        if (_p1.paddlePos[0] == _nextPos[1]) {
-            //paddle collision          
-            if(_speed > MAXSPEED)
-                _speed = _speed - 10;
-            switch(_ball.bDirection)
-            {
-                //process 6, 5, 4. redirect ball
-                case 4:
-                    _ball.bDirection = 2;
-                    break;
-                case 5:
-                    _ball.bDirection = 1;
-                    break;
-                case 6:
-                    _ball.bDirection = 2;
-            }
-            getNextPosition();
-            return;
-        } else if (_p1.paddlePos[1] == _nextPos[1]) {
-            //paddle collision
-            
-            if(_speed > MAXSPEED)
-                _speed = _speed - 10;
-            switch(_ball.bDirection)
-            {
-                //process 6, 5, 4. redirect ball
-                case 4:
-                    _ball.bDirection = 1;
-                    break;
-                case 5:
-                    _ball.bDirection = 3;
-                    break;
-                case 6:
-                    _ball.bDirection = 3;
-                    break;
-            }
-            getNextPosition();
-            return;
-        }
-        //scored
-
-        _p1.lives--;
-        if (_p1.lives == 0) {
-            //drawsymbol
-            turnAllOff();
-            drawSymbol(6, 0);
-            drawSymbol(6, 8);           
-            for(unsigned int counter = 0; counter < 800; counter ++)
-            {
-                refresh();
-            }
-            turnAllOff();
-
-            //restart
-            initializePong();
-        } else {
-            startPong();
-        }
-    } else if (_nextPos[0] == 15) {
-        if (_p2.paddlePos[0] == _nextPos[1]) {
-            if (_speed > 50)
-                _speed = _speed - 3;
-            switch (_ball.bDirection) {
-                    //process 6, 5, 4. redirect ball
-                case 1:
-                    _ball.bDirection = 4;
-                    break;
-                case 2:
-                    _ball.bDirection = 6;
-                    break;
-                case 3:
-                    _ball.bDirection = 5;
-                    break;
-            }
-            getNextPosition();
-            return;
-        } else if (_p2.paddlePos[1] == _nextPos[1]) {
-            //paddle collision           
-            if(_speed > MAXSPEED)
-                _speed = _speed - 10;
-            switch(_ball.bDirection)
-            {
-                case 1:
-                    _ball.bDirection = 4;
-                    break;
-                case 2:
-                    _ball.bDirection = 4;
-                    break;
-                case 3:
-                    _ball.bDirection = 6;
-                    break;
-            }
-            getNextPosition();
-            return;
-        }
-        //scored       
-        _p2.lives--;
-        if (_p2.lives == 0) {
-            //drawsymbol
-            turnAllOff();
-            drawSymbol(7, 0);
-            drawSymbol(7, 8);
-            for(unsigned int counter = 0; counter < 800; counter ++)
-            {
-                refresh();
-            }
-            turnAllOff();
-
-            //restart
-            initializePong();
-        } else {
-            startPong();
-        }
-    } else if (_nextPos[1] < 0 || _nextPos[1] > 7) {
-        switch (_ball.bDirection) {
-            case 1:
-                _ball.bDirection = 3;
-                break;
-            case 3:
-                _ball.bDirection = 1;
-                break;
-            case 4:
-                _ball.bDirection = 6;
-                break;
-            case 6:
-                _ball.bDirection = 4;
-                break;
-        }
-        getNextPosition();
-        return;
-    }
+    //only check wall collision if a paddle collision did not occur
+    if (!checkPaddleCollision(_p1) && !checkPaddleCollision(_p2)) {
+        checkWallCollision();
+    }      
 }
 
 //Interrupt Service Routine
@@ -389,7 +329,6 @@ void interrupt ISR(void) {
 
         //start receiving input
         ADCON0bits.GODONE = 1; //start
-
     }
 
     if (ADIE && ADIF) {
@@ -404,20 +343,20 @@ void interrupt ISR(void) {
             ADCON0bits.CHS = 10; //next refresh will be on channel 10    
 
             //Write the current(old) position to the paddlePosOld variable
-            _p2.paddlePosOld[0] = _p2.paddlePos[0];
-            _p2.paddlePos[0] = value;
+            _p2->paddlePosOld[0] = _p2->paddlePos[0];
+            _p2->paddlePos[0] = value;
             //Write the current(old) position to the paddlePosOld variable           
-            _p2.paddlePosOld[1] = _p2.paddlePos[1];
-            _p2.paddlePos[1] = value + 1;
+            _p2->paddlePosOld[1] = _p2->paddlePos[1];
+            _p2->paddlePos[1] = value + 1;
         } else {
             ADCON0bits.CHS = 12; // next refresh will be on channel 12
 
             //Write the current(old) position to the paddlePosOld variable
-            _p1.paddlePosOld[0] = _p1.paddlePos[0];
-            _p1.paddlePos[0] = value;
+            _p1->paddlePosOld[0] = _p1->paddlePos[0];
+            _p1->paddlePos[0] = value;
             //Write the current(old) position to the paddlePosOld variable
-            _p1.paddlePosOld[1] = _p1.paddlePos[1];
-            _p1.paddlePos[1] = value + 1;
+            _p1->paddlePosOld[1] = _p1->paddlePos[1];
+            _p1->paddlePos[1] = value + 1;
         }
     }
 }
